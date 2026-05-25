@@ -1,36 +1,73 @@
-from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi import FastAPI, HTTPException, Depends, Request, Security
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pydantic import BaseModel
+from fastapi.security.api_key import APIKeyHeader
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
 import os, random, uuid
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen
 from database import get_db, create_tables, Highscore
 
-app = FastAPI(title="IQ Quiz API")
+# ── Rate Limiter ───────────────────────────────────────────
+limiter = Limiter(key_func=get_remote_address)
 
+app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# ── CORS – nur erlaubte Domains ────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=[
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "https://enesdoudouzi-sys.github.io",
+        "https://iq-quiz-v2.onrender.com",
+    ],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
+# ── Frontend ───────────────────────────────────────────────
 FRONTEND = os.path.join(os.path.dirname(__file__), "..", "frontend")
-app.mount("/static", StaticFiles(directory=FRONTEND), name="static")
+if os.path.exists(FRONTEND):
+    app.mount("/static", StaticFiles(directory=FRONTEND), name="static")
 
 create_tables()
 sessions = {}
 
+# ── Models ─────────────────────────────────────────────────
 class StartRequest(BaseModel):
     name: str
+
+    @validator('name')
+    def name_valid(cls, v):
+        v = v.strip()
+        if len(v) < 1 or len(v) > 20:
+            raise ValueError('Name muss 1-20 Zeichen lang sein')
+        return v
 
 class AntwortRequest(BaseModel):
     session_id: str
     level: int
     antwort: str
+
+    @validator('antwort')
+    def antwort_valid(cls, v):
+        if v.upper() not in ['A','B','C','D','X']:
+            raise ValueError('Ungueltige Antwort')
+        return v.upper()
+
+    @validator('level')
+    def level_valid(cls, v):
+        if v < 1 or v > 50:
+            raise ValueError('Ungueltiges Level')
+        return v
 
 class JokerRequest(BaseModel):
     session_id: str
@@ -38,10 +75,26 @@ class JokerRequest(BaseModel):
     typ: str
     gesperrte: list = []
 
+    @validator('typ')
+    def typ_valid(cls, v):
+        if v not in ['5050','telefon','publikum']:
+            raise ValueError('Ungueltiger Joker')
+        return v
+
 class HighscoreRequest(BaseModel):
     name: str
     iq: int
     level: int
+
+    @validator('name')
+    def name_valid(cls, v):
+        return v.strip()[:20]
+
+    @validator('iq')
+    def iq_valid(cls, v):
+        if v < 0 or v > 200:
+            raise ValueError('Ungueltiger IQ')
+        return v
 
 def iq_bezeichnung(iq: int) -> str:
     for bereich, bez in IQ_BEZEICHNUNG.items():
@@ -49,14 +102,33 @@ def iq_bezeichnung(iq: int) -> str:
             return bez
     return "Ausnahmetalent"
 
+def get_session(session_id: str):
+    if not session_id or session_id not in sessions:
+        raise HTTPException(404, "Session nicht gefunden")
+    return sessions[session_id]
+
+# ── Routes ─────────────────────────────────────────────────
 @app.get("/")
 def root():
-    return FileResponse(os.path.join(FRONTEND, "index.html"))
+    index = os.path.join(FRONTEND, "index.html")
+    if os.path.exists(index):
+        return FileResponse(index)
+    return {"status": "IQ Quiz API"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "sessions": len(sessions)}
 
 @app.post("/api/start")
-def start_game(req: StartRequest):
+@limiter.limit("10/minute")
+def start_game(request: Request, req: StartRequest):
+    # Alte Sessions aufräumen (max 1000)
+    if len(sessions) > 1000:
+        oldest = list(sessions.keys())[:100]
+        for k in oldest:
+            del sessions[k]
     session_id = str(uuid.uuid4())
-    fragen = get_random_fragen(50)
+    fragen = get_random_fragen(15)
     sessions[session_id] = {
         "name": req.name,
         "fragen": fragen,
@@ -66,10 +138,10 @@ def start_game(req: StartRequest):
     return {"session_id": session_id, "total": len(fragen)}
 
 @app.get("/api/frage/{session_id}/{level}")
-def get_frage(session_id: str, level: int):
-    if session_id not in sessions:
-        raise HTTPException(404, "Session nicht gefunden")
-    fragen = sessions[session_id]["fragen"]
+@limiter.limit("60/minute")
+def get_frage(request: Request, session_id: str, level: int):
+    session = get_session(session_id)
+    fragen = session["fragen"]
     frage = next((f for f in fragen if f["level"] == level), None)
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
@@ -85,15 +157,14 @@ def get_frage(session_id: str, level: int):
     }
 
 @app.post("/api/antwort")
-def pruefe_antwort(req: AntwortRequest):
-    if req.session_id not in sessions:
-        raise HTTPException(404, "Session nicht gefunden")
-    session = sessions[req.session_id]
+@limiter.limit("60/minute")
+def pruefe_antwort(request: Request, req: AntwortRequest):
+    session = get_session(req.session_id)
     fragen = session["fragen"]
     frage = next((f for f in fragen if f["level"] == req.level), None)
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
-    richtig = req.antwort.upper() == frage["richtig"]
+    richtig = req.antwort == frage["richtig"]
     if richtig and req.level in SICHERHEITSSTUFEN:
         session["sicher_level"] = req.level
     sicher = session["sicher_level"]
@@ -109,10 +180,9 @@ def pruefe_antwort(req: AntwortRequest):
     }
 
 @app.post("/api/joker")
-def joker(req: JokerRequest):
-    if req.session_id not in sessions:
-        raise HTTPException(404, "Session nicht gefunden")
-    session = sessions[req.session_id]
+@limiter.limit("20/minute")
+def joker(request: Request, req: JokerRequest):
+    session = get_session(req.session_id)
     if not session["joker"].get(req.typ):
         raise HTTPException(400, "Joker bereits verwendet")
     fragen = session["fragen"]
@@ -128,34 +198,29 @@ def joker(req: JokerRequest):
     elif req.typ == "telefon":
         if random.random() < 0.80:
             tipp = richtig
-            text = random.choice(["Ich bin mir sicher, es ist","Ohne zu zoegern:","Ich glaube es ist"])
+            text = random.choice(["Ich bin mir sicher:", "Ohne Zweifel:", "Ich glaube es ist"])
         else:
             falsche = [k for k in ["A","B","C","D"] if k != richtig]
             tipp = random.choice(falsche)
-            text = "Bin nicht sicher, aber ich glaube..."
+            text = "Bin nicht sicher, aber..."
         return {"typ": "telefon", "tipp": tipp, "text": text}
     elif req.typ == "publikum":
         verfuegbar = [k for k in ["A","B","C","D"] if k not in req.gesperrte]
-        stimmen = {}
-        for k in verfuegbar:
-            stimmen[k] = random.randint(45,70) if k==richtig else random.randint(5,20)
+        stimmen = {k: random.randint(45,70) if k==richtig else random.randint(5,20) for k in verfuegbar}
         total = sum(stimmen.values())
         stimmen = {k: round(v/total*100) for k,v in stimmen.items()}
         return {"typ": "publikum", "stimmen": stimmen}
-    raise HTTPException(400, "Unbekannter Joker")
 
 @app.get("/api/highscores")
-def get_highscores(db: Session = Depends(get_db)):
+@limiter.limit("30/minute")
+def get_highscores(request: Request, db: Session = Depends(get_db)):
     scores = db.query(Highscore).order_by(Highscore.iq.desc()).limit(10).all()
     return [{"name": s.name, "iq": s.iq, "level": s.level} for s in scores]
 
 @app.post("/api/highscores")
-def post_highscore(req: HighscoreRequest, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def post_highscore(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
     score = Highscore(name=req.name, iq=req.iq, level=req.level)
     db.add(score)
     db.commit()
     return {"ok": True}
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
