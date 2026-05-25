@@ -1,4 +1,4 @@
-// ── SOUNDS ────────────────────────────────────────────────
+const API = 'https://iq-quiz-v2.onrender.com   
 function playSound(type){
   var ctx = new (window.AudioContext || window.webkitAudioContext)();
   var o = ctx.createOscillator();
