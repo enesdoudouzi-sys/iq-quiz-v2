@@ -1,42 +1,4 @@
-const API = 'https://iq-quiz-v2.onrender.com   
-function playSound(type){
-  var ctx = new (window.AudioContext || window.webkitAudioContext)();
-  var o = ctx.createOscillator();
-  var g = ctx.createGain();
-  o.connect(g); g.connect(ctx.destination);
-  if(type==='richtig'){
-    o.frequency.setValueAtTime(523, ctx.currentTime);
-    o.frequency.setValueAtTime(659, ctx.currentTime+0.1);
-    o.frequency.setValueAtTime(784, ctx.currentTime+0.2);
-    g.gain.setValueAtTime(0.3, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.5);
-    o.start(ctx.currentTime); o.stop(ctx.currentTime+0.5);
-  } else if(type==='falsch'){
-    o.frequency.setValueAtTime(200, ctx.currentTime);
-    o.frequency.setValueAtTime(150, ctx.currentTime+0.2);
-    g.gain.setValueAtTime(0.3, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.4);
-    o.start(ctx.currentTime); o.stop(ctx.currentTime+0.4);
-  } else if(type==='tick'){
-    o.frequency.setValueAtTime(800, ctx.currentTime);
-    g.gain.setValueAtTime(0.1, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.05);
-    o.start(ctx.currentTime); o.stop(ctx.currentTime+0.05);
-  } else if(type==='gewonnen'){
-    var freqs=[523,659,784,1047];
-    freqs.forEach(function(f,i){
-      var o2=ctx.createOscillator();
-      var g2=ctx.createGain();
-      o2.connect(g2); g2.connect(ctx.destination);
-      o2.frequency.setValueAtTime(f, ctx.currentTime+i*0.15);
-      g2.gain.setValueAtTime(0.3, ctx.currentTime+i*0.15);
-      g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+i*0.15+0.3);
-      o2.start(ctx.currentTime+i*0.15);
-      o2.stop(ctx.currentTime+i*0.15+0.3);
-    });
-  }
-}
-const API = 'http://localhost:8000';
+const API = 'https://iq-quiz-v2.onrender.com';
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4'};
 const CK = function(p){ return p.indexOf('Allgemein')>=0?'aw':p.indexOf('Logik')>=0?'log':'kz'; };
@@ -53,6 +15,78 @@ for(var i=0;i<=50;i++){
 const PREISE_ARR=['100','200','300','500','1.000','2.000','4.000','8.000','16.000','32.000','64.000','125.000','250.000','500.000','1.000.000'];
 function getPreis(lvl){return PREISE_ARR[Math.min(lvl-1,PREISE_ARR.length-1)]+' EUR';}
 const SICHER=[5,10,15];
+
+// ── SPRACHEN ──────────────────────────────────────────────
+var currentLang='de';
+const LANG={
+  de:{title:'IQ Test',sub:'Unbegrenzte Fragen - 3 Joker - WWM Format',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage'},
+  en:{title:'IQ Test',sub:'Unlimited Questions - 3 Lifelines - WWM Format',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question'},
+  tr:{title:'IQ Testi',sub:'Sonsuz Sorular - 3 Joker - WWM Formati',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel - tum sorular dogru!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
+  fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers - Format WWM',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule! Elimine!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait - toutes correctes!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres cette question'},
+  es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines - Formato WWM',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado! Eliminado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto - todas correctas!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues de esta pregunta'},
+  ar:{title:'اختبار الذكاء',sub:'اسئلة غير محدودة - 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز - جميع الإجابات صحيحة!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
+};
+
+function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
+
+function setLang(lang,btn){
+  currentLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  document.body.style.direction=lang==='ar'?'rtl':'ltr';
+  var t=LANG[lang];
+  document.querySelector('.s-title').textContent=t.title;
+  document.querySelector('.s-sub').textContent=t.sub;
+  document.getElementById('ni').placeholder=t.placeholder;
+  document.querySelector('.s-btn').textContent=t.start;
+  document.querySelector('.s-hs').textContent=t.highscores;
+  document.querySelector('.t-lbl').textContent=t.sekunden;
+  document.querySelector('.iq-live-lbl').textContent=t.iqLabel;
+  document.querySelector('.joker-title').textContent=t.joker;
+  document.querySelector('.leiter-lbl').textContent=t.leiter;
+  document.getElementById('nb').textContent=t.naechste;
+  document.querySelector('.jo-close').textContent=t.schliessen;
+  document.querySelector('.rv-lbl').textContent=t.ergebnis;
+  document.querySelector('.save-btn').textContent=t.speichern;
+  document.querySelector('.iq-fb-lbl').textContent=t.iqNach;
+}
+
+// ── SOUNDS ────────────────────────────────────────────────
+function playSound(type){
+  try{
+    var ctx=new(window.AudioContext||window.webkitAudioContext)();
+    var o=ctx.createOscillator();
+    var g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    if(type==='richtig'){
+      o.frequency.setValueAtTime(523,ctx.currentTime);
+      o.frequency.setValueAtTime(659,ctx.currentTime+0.1);
+      o.frequency.setValueAtTime(784,ctx.currentTime+0.2);
+      g.gain.setValueAtTime(0.3,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+0.5);
+    }else if(type==='falsch'){
+      o.frequency.setValueAtTime(200,ctx.currentTime);
+      o.frequency.setValueAtTime(150,ctx.currentTime+0.2);
+      g.gain.setValueAtTime(0.3,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.4);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+0.4);
+    }else if(type==='gewonnen'){
+      var freqs=[523,659,784,1047];
+      freqs.forEach(function(f,i){
+        var o2=ctx.createOscillator();
+        var g2=ctx.createGain();
+        o2.connect(g2);g2.connect(ctx.destination);
+        o2.frequency.setValueAtTime(f,ctx.currentTime+i*0.15);
+        g2.gain.setValueAtTime(0.3,ctx.currentTime+i*0.15);
+        g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.15+0.3);
+        o2.start(ctx.currentTime+i*0.15);
+        o2.stop(ctx.currentTime+i*0.15+0.3);
+      });
+    }
+  }catch(e){}
+}
+
 function getBez(iq){
   if(iq>=145)return 'Genie';
   if(iq>=130)return 'Hochbegabt';
@@ -62,6 +96,7 @@ function getBez(iq){
   if(iq>=94)return 'Leicht unterdurchschnittlich';
   return 'Unterdurchschnittlich';
 }
+
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={aw:0,log:0,kz:0},cm={aw:0,log:0,kz:0},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
@@ -196,7 +231,7 @@ function loadAndShowQ(level){
     var sec=level<=5?20:level<=10?25:30;
     st=Date.now();tick(sec,sec);
     ti=setInterval(function(){tl--;tick(tl,sec);if(tl<=0){clearInterval(ti);tout();}},1000);
-  }).catch(function(e){alert('Fehler beim Laden: '+e.message);});
+  }).catch(function(e){alert('Fehler: '+e.message);});
 }
 
 function tick(l,t){
@@ -220,8 +255,9 @@ function tout(){
     if(b.getAttribute('data-key')===q.richtig)b.classList.add('ok');
     b.disabled=true;
   });
-  document.getElementById('fb').textContent='Zeit abgelaufen! Ausgeschieden!';
+  document.getElementById('fb').textContent=T('zeit');
   document.getElementById('fb').className='fb to';
+  playSound('falsch');
   showIQFb(false,cur);
   setTimeout(function(){calcResult();},2500);
 }
@@ -246,17 +282,19 @@ function pick(key){
     });
     if(d.richtig){
       sc++;cs[k]++;
-      fb.textContent='Richtig!';fb.className='fb ok';
+      fb.textContent=T('richtig');fb.className='fb ok';
+      playSound(cur>=MAX_FRAGEN?'gewonnen':'richtig');
       showIQFb(true,cur);
       if(cur>=MAX_FRAGEN){
         setTimeout(function(){calcResult();},2000);
-      } else {
+      }else{
         document.getElementById('nb').style.display='block';
       }
-    } else {
+    }else{
       errs.push({q:q,ch:key,to:false,ri:d.richtige_antwort});
-      fb.textContent='Falsch! Ausgeschieden! Richtig war: '+d.richtige_antwort+' - '+d.richtige_antwort_text;
+      fb.textContent=T('falsch')+' '+d.richtige_antwort+' - '+d.richtige_antwort_text;
       fb.className='fb no';
+      playSound('falsch');
       showIQFb(false,cur);
       setTimeout(function(){calcResult();},2500);
     }
@@ -288,15 +326,15 @@ function useJoker(typ){
           if(b.getAttribute('data-key')===key)b.classList.add('gesperrt');
         });
       });
-    } else if(d.typ==='telefon'){
-      document.getElementById('jo-title').textContent='Telefon-Joker';
+    }else if(d.typ==='telefon'){
+      document.getElementById('jo-title').textContent=T('telefon');
       var content=document.getElementById('jo-content');content.innerHTML='';
       var p1=document.createElement('div');p1.className='jo-text';p1.textContent='"'+d.text+'"';
       var p2=document.createElement('div');p2.className='jo-tipp';p2.textContent='Antwort: '+d.tipp;
       content.appendChild(p1);content.appendChild(p2);
       document.getElementById('joker-overlay').classList.add('show');
-    } else if(d.typ==='publikum'){
-      document.getElementById('jo-title').textContent='Publikums-Joker';
+    }else if(d.typ==='publikum'){
+      document.getElementById('jo-title').textContent=T('publikum');
       var content=document.getElementById('jo-content');content.innerHTML='';
       ['A','B','C','D'].forEach(function(key){
         if(gesperrte.indexOf(key)>=0)return;
@@ -324,9 +362,9 @@ function calcResult(){
   var sum=0;for(var i=0;i<times.length;i++)sum+=times[i];
   var avg=times.length?Math.round(sum/times.length*10)/10:0;
   var iq=finalIQ;
-  document.getElementById('rv-emoji').textContent=iq>=130?'Sehr gut':iq>=115?'Gut':iq>=100?'OK':'Weiter';
+  document.getElementById('rv-emoji').textContent=iq>=130?'🏆':iq>=115?'⭐':iq>=100?'👍':'💪';
   document.getElementById('rv-iq').textContent='IQ '+iq;
-  document.getElementById('rv-chip').textContent=sc+' von '+MAX_FRAGEN+' richtig';
+  document.getElementById('rv-chip').textContent=sc+' / '+MAX_FRAGEN;
   document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
   document.getElementById('baw').textContent=cs.aw+' / '+cm.aw;
   document.getElementById('blog').textContent=cs.log+' / '+cm.log;
@@ -334,29 +372,28 @@ function calcResult(){
   document.getElementById('bt').textContent=avg+' Sek.';
   document.getElementById('sn').value=playerName;
   document.getElementById('ml').innerHTML='';
-  document.getElementById('err-lbl').textContent=errs.length?'FEHLERAUSWERTUNG: '+errs.length+' Fehler':'Fehlerauswertung';
+  document.getElementById('err-lbl').textContent=errs.length?T('fehler')+': '+errs.length:T('fehler');
   if(!errs.length){
-    var d=document.createElement('div');d.className='none';d.textContent='Perfekt - alle Fragen richtig!';
+    var d=document.createElement('div');d.className='none';d.textContent=T('perfekt');
     document.getElementById('ml').appendChild(d);
-  } else {
+  }else{
     for(var i=0;i<errs.length;i++){
       var e=errs[i];
       var card=document.createElement('div');card.className='err-card';
-      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=e.q.kategorie;
-      card.appendChild(cat);
-      if(e.to){var tob=document.createElement('span');tob.className='tob';tob.textContent='Zeit abgelaufen';card.appendChild(tob);}
+      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=e.q.kategorie;card.appendChild(cat);
+      if(e.to){var tob=document.createElement('span');tob.className='tob';tob.textContent=T('zeit');card.appendChild(tob);}
       var qd=document.createElement('div');qd.className='err-q';qd.textContent=e.q.frage;card.appendChild(qd);
       if(e.q.seq){var sd=document.createElement('div');sd.className='err-seq';sd.textContent=e.q.seq;card.appendChild(sd);}
       var row=document.createElement('div');row.className='err-row';
       if(!e.to&&e.ch){
         var col1=document.createElement('div');col1.className='err-col';
-        var lbl1=document.createElement('span');lbl1.className='err-clbl';lbl1.textContent='Deine Antwort';
-        var p1=document.createElement('span');p1.className='pill pno';p1.textContent=e.ch+' - '+e.q.antworten[e.ch];
+        var lbl1=document.createElement('span');lbl1.className='err-clbl';lbl1.textContent=T('deine');
+        var p1=document.createElement('span');p1.className='pill pno';p1.textContent=e.ch+' - '+(e.q.antworten?e.q.antworten[e.ch]:'');
         col1.appendChild(lbl1);col1.appendChild(p1);row.appendChild(col1);
       }
       var col2=document.createElement('div');col2.className='err-col';
-      var lbl2=document.createElement('span');lbl2.className='err-clbl';lbl2.textContent='Richtige Antwort';
-      var p2=document.createElement('span');p2.className='pill pok';p2.textContent=e.ri+' - '+e.q.antworten[e.ri];
+      var lbl2=document.createElement('span');lbl2.className='err-clbl';lbl2.textContent=T('richtige');
+      var p2=document.createElement('span');p2.className='pill pok';p2.textContent=e.ri+' - '+(e.q.antworten?e.q.antworten[e.ri]:'');
       col2.appendChild(lbl2);col2.appendChild(p2);row.appendChild(col2);
       card.appendChild(row);
       document.getElementById('ml').appendChild(card);
@@ -372,7 +409,7 @@ function saveHS(){
     body:JSON.stringify({name:name,iq:finalIQ,level:sc})
   }).then(function(){
     var btn=document.querySelector('.save-btn');
-    btn.textContent='Gespeichert!';
-    setTimeout(function(){btn.textContent='Speichern';},2000);
+    btn.textContent=T('gespeichert');
+    setTimeout(function(){btn.textContent=T('speichern');},2000);
   });
 }
