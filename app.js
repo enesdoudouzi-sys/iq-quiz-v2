@@ -1,4 +1,10 @@
 const API = 'https://iq-quiz-v2.onrender.com';
+function showLoader(txt,pct){var s=document.getElementById('loading-screen');var b=document.getElementById('load-bar');var t=document.getElementById('load-txt');if(s)s.style.display='flex';if(b)b.style.width=pct+'%';if(t)t.textContent=txt;}
+function hideLoader(){var s=document.getElementById('loading-screen');if(s){s.style.opacity='0';s.style.transition='opacity .5s';setTimeout(function(){s.style.display='none';},500);}}
+fetch(API+'/health').then(function(){hideLoader();}).catch(function(){hideLoader();});
+showLoader('Verbinde mit Server...',30);
+setTimeout(function(){showLoader('Server startet...',60);},3000);
+setTimeout(function(){showLoader('Fast fertig...',90);},8000);
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4'};
 const CK = function(p){ return p.indexOf('Allgemein')>=0?'aw':p.indexOf('Logik')>=0?'log':'kz'; };
