@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQ Test</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+--bg:#060614;--bg2:#0a0f1e;--bg3:#0f1628;--bg4:#141d32;
+--border:#1a2540;--accent:#4a90e2;--purple:#7c5fff;
+--gold:#ffd700;--green:#22c55e;--red:#ef4444;--orange:#f59e0b;
+--text:#f1f5f9;--text2:#94a3b8;--text3:#475569;
+}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.lang-bar{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:.5rem;}
+.lang-btn{padding:.4rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--bg3);cursor:pointer;font-size:18px;transition:all .2s;}
+.lang-btn.active{border-color:var(--accent);background:rgba(74,144,226,0.15);}
+.lang-btn:hover{border-color:var(--accent);}
+#sv{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.4rem;max-width:460px;margin:0 auto;padding:2rem;}
+.s-brain{font-size:72px;text-align:center;}
+.s-title{font-size:52px;font-weight:800;background:linear-gradient(135deg,#4a90e2,#7c5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;}
+.s-sub{color:var(--text3);font-size:14px;text-align:center;line-height:1.7;}
+.s-input{width:100%;padding:16px 20px;border-radius:14px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:16px;outline:none;}
+.s-btn{width:100%;padding:17px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;}
+.s-hs{width:100%;padding:14px;font-size:14px;font-weight:600;border-radius:14px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;}
+#qv{display:none;grid-template-columns:160px 1fr 160px;gap:1rem;min-height:100vh;padding:1rem;max-width:1200px;margin:0 auto;}
+#qv.active{display:grid;}
+.ql{display:flex;flex-direction:column;align-items:center;gap:1rem;padding-top:1rem;}
+.timer-ring{position:relative;width:110px;height:110px;}
+.timer-ring svg{position:absolute;top:0;left:0;}
+.t-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:38px;font-weight:800;}
+.t-lbl{font-size:10px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;}
+.urgent{animation:urg .5s ease infinite alternate;}
+@keyframes urg{from{transform:scale(1);}to{transform:scale(1.07);}}
+.iq-live{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1rem;text-align:center;width:100%;}
+.iq-live-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:6px;}
+.iq-live-num{font-size:38px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.iq-live-txt{font-size:10px;color:var(--accent);margin-top:4px;font-weight:600;}
+.phase-row{display:flex;align-items:center;gap:7px;}
+.phase-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.phase-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.joker-section{width:100%;margin-top:.5rem;}
+.joker-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.6rem;}
+.joker-btn{width:100%;padding:.8rem;margin-bottom:.5rem;border-radius:12px;border:1.5px solid var(--accent);background:var(--bg3);color:var(--accent);cursor:pointer;font-size:13px;font-weight:700;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.joker-btn:hover:not(:disabled){background:rgba(74,144,226,0.15);}
+.joker-btn:disabled{opacity:.3;cursor:not-allowed;border-color:var(--border);color:var(--text3);}
+.qm{display:flex;flex-direction:column;gap:.8rem;padding:.5rem 0;}
+.qm-top{display:flex;justify-content:space-between;align-items:center;}
+.qm-logo{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;}
+.qm-ctr{font-size:12px;color:var(--text3);font-weight:600;}
+.prog{height:2px;background:var(--border);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:99px;transition:width .6s ease;}
+.preis{text-align:center;font-size:24px;font-weight:800;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,0.3);}
+.seq{font-size:20px;font-weight:700;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:14px 20px;text-align:center;color:var(--text2);}
+.fbox{background:var(--bg3);border:1.5px solid var(--border);border-radius:18px;padding:1.8rem;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center;}
+.qtext{font-size:20px;font-weight:700;color:var(--text);line-height:1.45;white-space:pre-line;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.opt{background:var(--bg3);border:1.5px solid var(--border);border-radius:13px;padding:15px 17px;font-size:15px;font-weight:600;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .18s;}
+.opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-2px);background:var(--bg4);}
+.opt .badge{width:30px;height:30px;border-radius:8px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0;transition:all .18s;}
+.opt:hover:not(:disabled) .badge{background:var(--accent);color:#fff;}
+.opt.ok{background:#081a10;border-color:var(--green);color:#86efac;animation:correct .4s ease;}
+.opt.ok .badge{background:var(--green);color:#081a10;}
+.opt.no{background:#1a0808;border-color:var(--red);color:#fca5a5;animation:wrong .4s ease;}
+.opt.no .badge{background:var(--red);color:#fff;}
+.opt.gesperrt{opacity:.15;pointer-events:none;}
+.opt:disabled{cursor:default;transform:none !important;}
+@keyframes correct{0%{transform:scale(1);}50%{transform:scale(1.03);}100%{transform:scale(1);}}
+@keyframes wrong{0%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-8px);}80%{transform:translateX(8px);}100%{transform:translateX(0);}}
+.fb{min-height:26px;font-size:14px;font-weight:700;text-align:center;}
+.fb.ok{color:var(--green);}.fb.no{color:var(--red);}.fb.to{color:var(--orange);}
+.joker-overlay{display:none;background:var(--bg3);border:1.5px solid var(--accent);border-radius:16px;padding:1.2rem;text-align:center;margin-top:.5rem;}
+.joker-overlay.show{display:block;}
+.jo-title{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;}
+.jo-text{font-size:15px;color:var(--text);margin-bottom:.5rem;font-style:italic;}
+.jo-tipp{font-size:22px;font-weight:800;color:var(--gold);margin:.5rem 0;}
+.pub-bar-row{display:flex;align-items:center;gap:.8rem;margin:.4rem 0;}
+.pub-bar-lbl{font-size:12px;font-weight:800;color:var(--gold);width:20px;}
+.pub-bar-outer{flex:1;background:var(--border);border-radius:6px;height:26px;overflow:hidden;}
+.pub-bar-inner{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:6px;transition:width .8s ease;}
+.pub-bar-pct{font-size:12px;font-weight:700;color:var(--accent);width:35px;text-align:right;}
+.jo-close{margin-top:.8rem;padding:.6rem 1.5rem;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;}
+.iq-fb{background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.3);border-radius:14px;padding:1rem;text-align:center;display:none;animation:iqpop .5s ease;}
+@keyframes iqpop{0%{transform:scale(0.5);opacity:0;}70%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+.iq-fb-lbl{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;}
+.iq-fb-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
+.iq-fb-bez{font-size:13px;color:var(--text2);margin-top:4px;}
+.nxt{display:none;padding:13px 32px;font-size:14px;font-weight:700;border-radius:11px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;float:right;}
+.qr{padding-top:.5rem;}
+.leiter-lbl{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:.8rem;}
+.li{display:flex;justify-content:space-between;align-items:center;padding:5px 7px;border-radius:7px;font-size:10px;margin-bottom:2px;color:var(--text3);transition:all .2s;}
+.li.aktiv{background:rgba(255,215,0,0.1);color:var(--gold);font-weight:700;border-left:2px solid var(--gold);padding-left:9px;}
+.li.done{color:var(--green);opacity:.65;}
+.li.sicher{color:var(--purple);}
+.li-iq{font-size:9px;opacity:.6;}
+.li-preis{font-weight:600;font-size:9px;}
+#rv{display:none;max-width:780px;margin:0 auto;padding:2.5rem 1.5rem;}
+.rv-hero{text-align:center;margin-bottom:2rem;}
+.rv-emoji{font-size:60px;margin-bottom:.5rem;}
+.rv-lbl{font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--text3);text-transform:uppercase;margin-bottom:.8rem;}
+.rv-iq{font-size:80px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.rv-sub{font-size:15px;color:var(--text2);margin-top:10px;line-height:1.6;}
+.rv-chip{display:inline-block;font-size:12px;font-weight:700;padding:5px 16px;border-radius:99px;background:var(--bg3);color:var(--text2);margin-top:8px;}
+.rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem;}
+.rv-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;}
+.rv-ct{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.rv-cv{font-size:22px;font-weight:800;color:var(--text);}
+.divider{height:1px;background:var(--border);margin-bottom:1.2rem;}
+.err-lbl{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;margin-bottom:.8rem;}
+.err-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px;}
+.err-cat{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:6px;}
+.err-q{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;white-space:pre-line;}
+.err-seq{font-size:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 12px;margin-bottom:10px;text-align:center;color:var(--text2);}
+.err-row{display:flex;gap:10px;flex-wrap:wrap;}
+.err-col{display:flex;flex-direction:column;gap:4px;}
+.err-clbl{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;}
+.pill{font-size:12px;font-weight:700;padding:6px 14px;border-radius:8px;}
+.pno{background:#1a0808;color:#fca5a5;border:1px solid var(--red);}
+.pok{background:#081a10;color:#86efac;border:1px solid var(--green);}
+.tob{font-size:11px;font-weight:700;background:#1c1207;color:var(--orange);border:1px solid var(--orange);border-radius:99px;padding:4px 12px;display:inline-block;margin-bottom:8px;}
+.none{text-align:center;padding:2rem;color:var(--text3);}
+.save-row{display:flex;gap:10px;margin-top:1.2rem;}
+.save-in{flex:1;padding:13px 16px;border-radius:11px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:14px;outline:none;}
+.save-btn{padding:13px 20px;font-size:14px;font-weight:700;border-radius:11px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;}
+.rbtn{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;margin-top:.8rem;}
+#hv{display:none;max-width:580px;margin:0 auto;padding:2.5rem 1.5rem;}
+#hv h2{font-size:22px;font-weight:800;color:var(--text);margin-bottom:1.2rem;}
+.hs-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.hs-rang{font-size:20px;min-width:30px;}
+.hs-name{flex:1;font-size:15px;font-weight:700;color:var(--text);}
+.hs-lv{font-size:12px;color:var(--text3);}
+.hs-iq{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@media(max-width:800px){
+#qv.active{display:flex;flex-direction:column;}
+.ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
+.qr{display:none;}
+.opts{grid-template-columns:1fr;}
+.rv-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div id="sv">
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('de',this)">&#127465;&#127466;</button>
+    <button class="lang-btn" onclick="setLang('en',this)">&#127468;&#127463;</button>
+    <button class="lang-btn" onclick="setLang('tr',this)">&#127481;&#127479;</button>
+    <button class="lang-btn" onclick="setLang('fr',this)">&#127467;&#127479;</button>
+    <button class="lang-btn" onclick="setLang('es',this)">&#127466;&#127480;</button>
+    <button class="lang-btn" onclick="setLang('ar',this)">&#127480;&#127462;</button>
+  </div>
+  <div class="s-brain">&#129504;</div>
+  <div class="s-title">IQ Test</div>
+  <div class="s-sub">Unbegrenzte Fragen - 3 Joker - WWM Format</div>
+  <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
+  <button class="s-btn" onclick="startGame()">Jetzt starten</button>
+  <button class="s-hs" onclick="showHS()">Highscores</button>
+</div>
+<div id="qv">
+  <div class="ql">
+    <div class="timer-ring" id="trw">
+      <svg width="110" height="110" viewBox="0 0 110 110">
+        <circle cx="55" cy="55" r="46" fill="none" stroke="#1a2540" stroke-width="7"/>
+        <circle id="ta" cx="55" cy="55" r="46" fill="none" stroke="#4a90e2" stroke-width="7"
+          stroke-dasharray="289.03" stroke-dashoffset="0" stroke-linecap="round"
+          transform="rotate(-90 55 55)" style="transition:stroke-dashoffset 1s linear,stroke .4s;"/>
+      </svg>
+      <span class="t-num" id="tn">20</span>
+    </div>
+    <div class="t-lbl">Sekunden</div>
+    <div class="iq-live">
+      <div class="iq-live-lbl">Aktueller IQ</div>
+      <div class="iq-live-num" id="iq-live">85</div>
+      <div class="iq-live-txt" id="iq-live-txt">Unterdurchschnittlich</div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-dot" id="pdot"></div>
+      <span class="phase-lbl" id="pb">Phase</span>
+    </div>
+    <div class="joker-section">
+      <div class="joker-title">Joker</div>
+      <button class="joker-btn" id="j-5050" onclick="useJoker('5050')">50 : 50</button>
+      <button class="joker-btn" id="j-telefon" onclick="useJoker('telefon')">&#128222; Telefon</button>
+      <button class="joker-btn" id="j-publikum" onclick="useJoker('publikum')">&#128101; Publikum</button>
+    </div>
+  </div>
+  <div class="qm">
+    <div class="qm-top">
+      <span class="qm-logo">IQ TEST</span>
+      <span class="qm-ctr" id="qc">1 / 15</span>
+    </div>
+    <div class="prog"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+    <div class="preis" id="preis">100 EUR</div>
+    <div id="sb" class="seq" style="display:none;"></div>
+    <div class="fbox"><div class="qtext" id="qt">Lade...</div></div>
+    <div class="opts" id="op"></div>
+    <div class="fb" id="fb"></div>
+    <div class="joker-overlay" id="joker-overlay">
+      <div class="jo-title" id="jo-title"></div>
+      <div id="jo-content"></div>
+      <button class="jo-close" onclick="closeJoker()">Schliessen</button>
+    </div>
+    <div class="iq-fb" id="iq-fb">
+      <div class="iq-fb-lbl">Dein IQ nach dieser Frage</div>
+      <div class="iq-fb-num" id="iq-fb-num">-</div>
+      <div class="iq-fb-bez" id="iq-fb-bez">-</div>
+    </div>
+    <div style="overflow:hidden;margin-top:.8rem;">
+      <button class="nxt" id="nb">Naechste Frage</button>
+    </div>
+  </div>
+  <div class="qr">
+    <div class="leiter-lbl">IQ Leiter</div>
+    <div id="leiter"></div>
+  </div>
+</div>
+<div id="rv">
+  <div class="rv-hero">
+    <div class="rv-emoji" id="rv-emoji"></div>
+    <div class="rv-lbl">Dein Ergebnis</div>
+    <div class="rv-iq" id="rv-iq"></div>
+    <div class="rv-sub" id="rv-sub"></div>
+    <span class="rv-chip" id="rv-chip"></span>
+  </div>
+  <div class="rv-grid">
+    <div class="rv-card"><div class="rv-ct">Allgemeinwissen</div><div class="rv-cv" id="baw"></div></div>
+    <div class="rv-card"><div class="rv-ct">Logik</div><div class="rv-cv" id="blog"></div></div>
+    <div class="rv-card"><div class="rv-ct">Konzentration</div><div class="rv-cv" id="bkz"></div></div>
+    <div class="rv-card"><div class="rv-ct">Reaktion</div><div class="rv-cv" id="bt"></div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="err-lbl" id="err-lbl"></div>
+  <div id="ml"></div>
+  <div class="save-row">
+    <input class="save-in" id="sn" placeholder="Name fuer Highscore..."/>
+    <button class="save-btn" onclick="saveHS()">Speichern</button>
+  </div>
+  <button class="rbtn" onclick="showStart()">Nochmal starten</button>
+</div>
+<div id="hv">
+  <h2>Highscores</h2>
+  <div id="hl"></div>
+  <button class="rbtn" onclick="showStart()">Zurueck</button>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

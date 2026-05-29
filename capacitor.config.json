@@ -1,0 +1,8 @@
+{
+  "appId": "com.enesdoudouzi.iqtest",
+  "appName": "IQ Test",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
