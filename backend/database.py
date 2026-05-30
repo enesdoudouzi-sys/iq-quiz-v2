@@ -17,6 +17,15 @@ class Highscore(Base):
     level    = Column(Integer)
     datum    = Column(DateTime, default=datetime.now)
 
+class DailyScore(Base):
+    __tablename__ = "daily_scores"
+    id       = Column(Integer, primary_key=True, index=True)
+    datum    = Column(String, index=True)
+    name     = Column(String)
+    iq       = Column(Integer)
+    level    = Column(Integer)
+    erstellt = Column(Float)
+
 class User(Base):
     __tablename__ = "users"
     id           = Column(Integer, primary_key=True, index=True)

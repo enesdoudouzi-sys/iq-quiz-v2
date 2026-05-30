@@ -142,24 +142,29 @@ var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={aw:0,log:0,kz:0},cm={aw:0,log:0,kz:0},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var jokerStatus={'5050':true,'telefon':true,'publikum':true};
+var isDailyMode=false,_dvTimer=null;
 
 function showStart(){
   document.getElementById('sv').style.display='flex';
   document.getElementById('qv').classList.remove('active');
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
+  clearInterval(_dvTimer);
 }
 function showQuiz(){
   document.getElementById('sv').style.display='none';
   document.getElementById('qv').classList.add('active');
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
 }
 function showResult(){
   document.getElementById('sv').style.display='none';
   document.getElementById('qv').classList.remove('active');
   document.getElementById('rv').style.display='block';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
 }
 
 function buildLeiter(){
@@ -218,6 +223,7 @@ function showHS(){
 }
 
 function startGame(){
+  isDailyMode=false;
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
@@ -425,6 +431,13 @@ function calcResult(){
   document.getElementById('bkz').textContent=cs.kz+' / '+cm.kz;
   document.getElementById('bt').textContent=avg+' Sek.';
   document.getElementById('sn').value=playerName;
+  if(isDailyMode){
+    var _today=new Date().toISOString().split('T')[0];
+    localStorage.setItem('daily_'+_today,JSON.stringify({iq:finalIQ,level:sc}));
+    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
+    document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
+    isDailyMode=false;
+  }
   document.getElementById('ml').innerHTML='';
   document.getElementById('err-lbl').textContent=errs.length?'FEHLERAUSWERTUNG: '+errs.length+' Fehler':'Fehlerauswertung';
   if(!errs.length){
@@ -454,6 +467,80 @@ function calcResult(){
       document.getElementById('ml').appendChild(card);
     }
   }
+}
+
+function showDailyInfo(){
+  document.getElementById('sv').style.display='none';
+  document.getElementById('dv').style.display='flex';
+  document.getElementById('hv').style.display='none';
+  document.getElementById('rv').style.display='none';
+  document.getElementById('qv').classList.remove('active');
+  var today=new Date();
+  var todayStr=today.toISOString().split('T')[0];
+  var opts={weekday:'long',day:'numeric',month:'long'};
+  document.getElementById('dv-date').textContent=today.toLocaleDateString('de-DE',opts);
+  clearInterval(_dvTimer);
+  function updCountdown(){
+    var now=new Date(),mid=new Date(now);
+    mid.setHours(24,0,0,0);
+    var d=mid-now;
+    var h=Math.floor(d/3600000),m=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);
+    document.getElementById('dv-countdown').textContent='Neue Challenge in '+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+  updCountdown();
+  _dvTimer=setInterval(updCountdown,1000);
+  var playedData=localStorage.getItem('daily_'+todayStr);
+  if(playedData){
+    var pd=JSON.parse(playedData);
+    document.getElementById('dv-already').style.display='block';
+    document.getElementById('dv-play').style.display='none';
+    document.getElementById('dv-score-info').textContent='Dein Ergebnis heute: IQ '+pd.iq+' · '+pd.level+'/15 richtig';
+  } else {
+    document.getElementById('dv-already').style.display='none';
+    document.getElementById('dv-play').style.display='flex';
+    var ni=document.getElementById('ni');
+    if(ni&&ni.value)document.getElementById('dni').value=ni.value;
+  }
+  loadDailyHS();
+}
+
+function loadDailyHS(){
+  fetch(API+'/api/daily/highscores').then(function(r){return r.json();}).then(function(scores){
+    var hl=document.getElementById('dv-hs');hl.innerHTML='';
+    if(!scores.length){
+      var d=document.createElement('div');d.className='none';d.textContent='Noch keine Eintraege heute.';hl.appendChild(d);return;
+    }
+    for(var i=0;i<scores.length;i++){
+      var c=document.createElement('div');c.className='hs-card';
+      var r=document.createElement('span');r.className='hs-rang';r.textContent=(i+1)+'.';
+      var n=document.createElement('span');n.className='hs-name';n.textContent=scores[i].name;
+      var lv=document.createElement('span');lv.className='hs-lv';lv.textContent=scores[i].level+'/15';
+      var iq=document.createElement('span');iq.className='hs-iq';iq.textContent='IQ '+scores[i].iq;
+      c.appendChild(r);c.appendChild(n);c.appendChild(lv);c.appendChild(iq);
+      hl.appendChild(c);
+    }
+  });
+}
+
+function startDailyGame(){
+  playerName=document.getElementById('dni').value||'Spieler';
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
+  cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
+  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  updJoker();
+  isDailyMode=true;
+  clearInterval(_dvTimer);
+  fetch(API+'/api/daily/start',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:playerName})
+  }).then(function(r){return r.json();}).then(function(d){
+    sessionId=d.session_id;
+    buildLeiter();
+    updIQ(85);
+    showQuiz();
+    loadAndShowQ(1);
+  }).catch(function(e){alert('Fehler: '+e.message);});
 }
 
 function saveHS(){

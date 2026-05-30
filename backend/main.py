@@ -9,8 +9,9 @@ from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
 import os, random, uuid, time
 
-from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen
-from database import get_db, create_tables, Highscore
+from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
+from database import get_db, create_tables, Highscore, DailyScore
+from datetime import date as dt_date
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
@@ -201,6 +202,44 @@ def joker(request: Request, req: JokerRequest):
         total = sum(stimmen.values())
         stimmen = {k: round(v/total*100) for k,v in stimmen.items()}
         return {"typ": "publikum", "stimmen": stimmen}
+
+@app.post("/api/daily/start")
+@limiter.limit("5/minute")
+def start_daily(request: Request, req: StartRequest):
+    if len(sessions) > 1000:
+        oldest = list(sessions.keys())[:100]
+        for k in oldest:
+            del sessions[k]
+    today = dt_date.today().isoformat()
+    session_id = str(uuid.uuid4())
+    fragen = get_daily_fragen(today, 15)
+    sessions[session_id] = {
+        "name":            req.name,
+        "fragen":          fragen,
+        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "sicher_level":    0,
+        "aktuelles_level": 1,
+        "erstellt":        time.time(),
+        "daily":           True,
+        "datum":           today,
+    }
+    return {"session_id": session_id, "total": 15, "datum": today}
+
+@app.get("/api/daily/highscores")
+@limiter.limit("30/minute")
+def get_daily_highscores(request: Request, db: Session = Depends(get_db)):
+    today = dt_date.today().isoformat()
+    scores = db.query(DailyScore).filter(DailyScore.datum == today).order_by(DailyScore.iq.desc()).limit(10).all()
+    return [{"name": s.name, "iq": s.iq, "level": s.level} for s in scores]
+
+@app.post("/api/daily/submit")
+@limiter.limit("3/minute")
+def submit_daily(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
+    today = dt_date.today().isoformat()
+    score = DailyScore(datum=today, name=req.name, iq=req.iq, level=req.level, erstellt=time.time())
+    db.add(score)
+    db.commit()
+    return {"ok": True}
 
 @app.get("/api/highscores")
 @limiter.limit("30/minute")

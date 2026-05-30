@@ -170,6 +170,18 @@ IQ_BEZEICHNUNG = {
     range(135,200): "Ausnahmetalent",
 }
 
+def get_daily_fragen(date_str, anzahl=15):
+    import random as _r
+    rng = _r.Random(date_str)
+    pool = ALLE_FRAGEN.copy()
+    rng.shuffle(pool)
+    fragen = []
+    for i, f in enumerate(pool[:anzahl]):
+        frage = f.copy()
+        frage['level'] = i + 1
+        fragen.append(frage)
+    return fragen
+
 def get_random_fragen(anzahl=15, kategorie='alle'):
     if kategorie == 'alle':
         pool = ALLE_FRAGEN.copy()
