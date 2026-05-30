@@ -131,7 +131,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .hs-name{flex:1;font-size:15px;font-weight:700;color:var(--text);}
 .hs-lv{font-size:12px;color:var(--text3);}
 .hs-iq{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-@media(max-width:800px){
+@media(max-width:800px
+).kat-section{width:100%;}
+.kat-title{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;}
+.kat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.kat-btn{padding:.7rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s;}
+.kat-btn.active{border-color:var(--accent);background:rgba(74,144,226,0.15);color:var(--accent);}
+.kat-btn:hover{border-color:var(--accent);color:var(--accent);}{
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
 .qr{display:none;}
@@ -161,7 +167,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="s-brain">&#129504;</div>
   <div class="s-title">IQ Test</div>
   <div class="s-sub">Unbegrenzte Fragen - 3 Joker - WWM Format</div>
-  <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
+  <input class="s-input" id="ni" type="text" placeholder="Dein Name..."
+<div class="kat-section">
+  <div class="kat-title">Kategorie wählen</div>
+  <div class="kat-grid">
+    <button class="kat-btn active" onclick="toggleKat(this,'alle')">🎯 Alle</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Allgemeinwissen')">🌍 Allgemeinwissen</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Geschichte')">📜 Geschichte</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Wissenschaft')">🔬 Wissenschaft</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Sport')">⚽ Sport</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Mathematik')">🔢 Mathematik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Logik & Zahlenfolgen')">🧩 Logik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Konzentration')">🎯 Konzentration</button>
+  </div>
+</div> maxlength="20"/>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
   <button class="s-hs" onclick="showHS()">Highscores</button>
 </div>

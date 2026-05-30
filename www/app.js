@@ -1,12 +1,6 @@
 const API = 'https://iq-quiz-v2.onrender.com';
-function showLoader(txt,pct){var s=document.getElementById('loading-screen');var b=document.getElementById('load-bar');var t=document.getElementById('load-txt');if(s)s.style.display='flex';if(b)b.style.width=pct+'%';if(t)t.textContent=txt;}
-function hideLoader(){var s=document.getElementById('loading-screen');if(s){s.style.opacity='0';s.style.transition='opacity .5s';s.style.pointerEvents='none';setTimeout(function(){s.style.display='none';},500);}}
-fetch(API+'/health').then(function(){hideLoader();}).catch(function(){hideLoader();});
-showLoader('Verbinde mit Server...',30);
-setTimeout(function(){showLoader('Server startet...',60);},3000);
-setTimeout(function(){showLoader('Fast fertig...',90);},8000);
 const L = ['A','B','C','D'];
-const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4'};
+const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7'};
 const CK = function(p){ return p.indexOf('Allgemein')>=0?'aw':p.indexOf('Logik')>=0?'log':'kz'; };
 const MAX_FRAGEN = 15;
 const IQ_TBL = {};
@@ -22,15 +16,14 @@ const PREISE_ARR=['100','200','300','500','1.000','2.000','4.000','8.000','16.00
 function getPreis(lvl){return PREISE_ARR[Math.min(lvl-1,PREISE_ARR.length-1)]+' EUR';}
 const SICHER=[5,10,15];
 
-// ── SPRACHEN ──────────────────────────────────────────────
 var currentLang='de';
 const LANG={
   de:{title:'IQ Test',sub:'Unbegrenzte Fragen - 3 Joker - WWM Format',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage'},
   en:{title:'IQ Test',sub:'Unlimited Questions - 3 Lifelines - WWM Format',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question'},
-  tr:{title:'IQ Testi',sub:'Sonsuz Sorular - 3 Joker - WWM Formati',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel - tum sorular dogru!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
-  fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers - Format WWM',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule! Elimine!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait - toutes correctes!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres cette question'},
-  es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines - Formato WWM',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado! Eliminado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto - todas correctas!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues de esta pregunta'},
-  ar:{title:'اختبار الذكاء',sub:'اسئلة غير محدودة - 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز - جميع الإجابات صحيحة!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
+  tr:{title:'IQ Testi',sub:'Sonsuz Sorular - 3 Joker - WWM Formati',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
+  fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
+  es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
+  ar:{title:'اختبار الذكاء',sub:'اسئلة غير محدودة - 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
 };
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
@@ -57,7 +50,6 @@ function setLang(lang,btn){
   document.querySelector('.iq-fb-lbl').textContent=t.iqNach;
 }
 
-// ── SOUNDS ────────────────────────────────────────────────
 function playSound(type){
   try{
     var ctx=new(window.AudioContext||window.webkitAudioContext)();
@@ -93,6 +85,28 @@ function playSound(type){
   }catch(e){}
 }
 
+function showLoader(txt,pct){
+  var s=document.getElementById('loading-screen');
+  var b=document.getElementById('load-bar');
+  var t=document.getElementById('load-txt');
+  if(s)s.style.display='flex';
+  if(b)b.style.width=pct+'%';
+  if(t)t.textContent=txt;
+}
+function hideLoader(){
+  var s=document.getElementById('loading-screen');
+  if(s){
+    s.style.opacity='0';
+    s.style.transition='opacity .5s';
+    s.style.pointerEvents='none';
+    setTimeout(function(){s.style.display='none';},500);
+  }
+}
+fetch(API+'/health').then(function(){hideLoader();}).catch(function(){hideLoader();});
+showLoader('Verbinde mit Server...',30);
+setTimeout(function(){showLoader('Server startet...',60);},3000);
+setTimeout(function(){showLoader('Fast fertig...',90);},8000);
+
 function getBez(iq){
   if(iq>=145)return 'Genie';
   if(iq>=130)return 'Hochbegabt';
@@ -107,6 +121,13 @@ var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={aw:0,log:0,kz:0},cm={aw:0,log:0,kz:0},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var jokerStatus={'5050':true,'telefon':true,'publikum':true};
+var selectedKat='alle';
+
+function toggleKat(btn,kat){
+  document.querySelectorAll('.kat-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  selectedKat=kat;
+}
 
 function showStart(){
   document.getElementById('sv').style.display='flex';
@@ -188,7 +209,7 @@ function startGame(){
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName})
+    body:JSON.stringify({name:playerName,kategorie:selectedKat})
   }).then(function(r){return r.json();}).then(function(d){
     sessionId=d.session_id;
     buildLeiter();
