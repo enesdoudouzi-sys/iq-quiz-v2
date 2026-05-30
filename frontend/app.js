@@ -150,6 +150,7 @@ function showStart(){
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
   document.getElementById('dv').style.display='none';
+  document.getElementById('stv').style.display='none';
   clearInterval(_dvTimer);
 }
 function showQuiz(){
@@ -158,6 +159,7 @@ function showQuiz(){
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
   document.getElementById('dv').style.display='none';
+  document.getElementById('stv').style.display='none';
 }
 function showResult(){
   document.getElementById('sv').style.display='none';
@@ -165,6 +167,7 @@ function showResult(){
   document.getElementById('rv').style.display='block';
   document.getElementById('hv').style.display='none';
   document.getElementById('dv').style.display='none';
+  document.getElementById('stv').style.display='none';
 }
 
 function buildLeiter(){
@@ -414,6 +417,7 @@ function useJoker(typ){
 function closeJoker(){document.getElementById('joker-overlay').classList.remove('show');}
 
 function calcResult(){
+  saveStats();
   showResult();
   document.getElementById('pf').style.width='100%';
   var sum=0;for(var i=0;i<times.length;i++)sum+=times[i];
@@ -562,5 +566,77 @@ function saveHS(){
     var btn=document.querySelector('.save-btn');
     btn.textContent='Gespeichert!';
     setTimeout(function(){btn.textContent='Speichern';},2000);
+  });
+}
+
+// ── STATISTIKEN ────────────────────────────────────────────
+function saveStats(){
+  var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
+  s.games=(s.games||0)+1;
+  s.bestIQ=Math.max(s.bestIQ||0,finalIQ);
+  s.totalIQ=(s.totalIQ||0)+finalIQ;
+  s.totalCorrect=(s.totalCorrect||0)+sc;
+  s.totalQuestions=(s.totalQuestions||0)+MAX_FRAGEN;
+  s.catCorrect=s.catCorrect||{aw:0,log:0,kz:0};
+  s.catTotal=s.catTotal||{aw:0,log:0,kz:0};
+  ['aw','log','kz'].forEach(function(k){
+    s.catCorrect[k]=(s.catCorrect[k]||0)+cs[k];
+    s.catTotal[k]=(s.catTotal[k]||0)+cm[k];
+  });
+  s.history=s.history||[];
+  var today=new Date().toISOString().split('T')[0];
+  s.history.unshift({iq:finalIQ,level:sc,date:today,daily:isDailyMode});
+  if(s.history.length>10)s.history.pop();
+  if(isDailyMode){
+    var yest=new Date(Date.now()-86400000).toISOString().split('T')[0];
+    if(s.lastDaily===yest)s.dailyStreak=(s.dailyStreak||0)+1;
+    else if(s.lastDaily!==today)s.dailyStreak=1;
+    s.lastDaily=today;
+  }
+  localStorage.setItem('iq_stats',JSON.stringify(s));
+}
+
+function showStats(){
+  document.getElementById('sv').style.display='none';
+  document.getElementById('stv').style.display='block';
+  document.getElementById('qv').classList.remove('active');
+  document.getElementById('rv').style.display='none';
+  document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
+  var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
+  var g=s.games||0;
+  document.getElementById('st-games').textContent=g;
+  document.getElementById('st-best').textContent=g?s.bestIQ:'–';
+  document.getElementById('st-avg').textContent=g?Math.round(s.totalIQ/g):'–';
+  document.getElementById('st-acc').textContent=g&&s.totalQuestions?Math.round(s.totalCorrect/s.totalQuestions*100)+'%':'–';
+  document.getElementById('st-streak').textContent=(s.dailyStreak||0)+' 🔥';
+  var chart=document.getElementById('st-chart');chart.innerHTML='';
+  if(s.history&&s.history.length){
+    var maxIQ=Math.max.apply(null,s.history.map(function(h){return h.iq;}));
+    s.history.slice().reverse().forEach(function(h){
+      var pct=maxIQ>0?Math.round(h.iq/maxIQ*90):10;
+      var col=h.iq>=130?'var(--gold)':h.iq>=115?'var(--accent)':h.iq>=100?'var(--purple)':'var(--text3)';
+      var wrap=document.createElement('div');
+      wrap.style.cssText='flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;';
+      var bar=document.createElement('div');
+      bar.style.cssText='width:100%;border-radius:4px 4px 0 0;background:'+col+';height:'+pct+'%;min-height:4px;';
+      var lbl=document.createElement('div');
+      lbl.style.cssText='font-size:8px;color:var(--text3);margin-top:2px;text-align:center;';
+      lbl.textContent=h.iq;
+      wrap.appendChild(bar);wrap.appendChild(lbl);chart.appendChild(wrap);
+    });
+  }
+  var cats=document.getElementById('st-cats');cats.innerHTML='';
+  [{key:'aw',name:'Allgemeinwissen',col:'#4a90e2'},{key:'log',name:'Logik',col:'#7c5fff'},{key:'kz',name:'Konzentration',col:'#06b6d4'}].forEach(function(c){
+    var pct=s.catTotal&&s.catTotal[c.key]?Math.round((s.catCorrect[c.key]||0)/s.catTotal[c.key]*100):0;
+    var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:.6rem;';
+    var nm=document.createElement('span');nm.style.cssText='font-size:12px;color:var(--text2);width:130px;flex-shrink:0;';nm.textContent=c.name;
+    var out=document.createElement('div');out.style.cssText='flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden;';
+    var inn=document.createElement('div');inn.style.cssText='height:100%;border-radius:99px;background:'+c.col+';width:0%;transition:width .8s ease;';
+    out.appendChild(inn);
+    var pe=document.createElement('span');pe.style.cssText='font-size:12px;font-weight:700;color:var(--text2);width:35px;text-align:right;';
+    pe.textContent=s.catTotal&&s.catTotal[c.key]?pct+'%':'–';
+    row.appendChild(nm);row.appendChild(out);row.appendChild(pe);cats.appendChild(row);
+    setTimeout(function(){inn.style.width=pct+'%';},100);
   });
 }

@@ -160,6 +160,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .hs-name{flex:1;font-size:15px;font-weight:700;color:var(--text);}
 .hs-lv{font-size:12px;color:var(--text3);}
 .hs-iq{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s-stats{width:100%;padding:14px;font-size:14px;font-weight:600;border-radius:14px;border:1.5px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;}
+#stv{display:none;max-width:580px;margin:0 auto;padding:2.5rem 1.5rem;}
+.st-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:1.2rem;}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem;}
+.st-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.st-ct{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.st-cv{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.st-chart-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
+.st-chart-lbl{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;}
+#st-chart{display:flex;align-items:flex-end;gap:4px;height:80px;}
+.st-streak{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;text-align:center;}
+.st-streak-num{font-size:32px;font-weight:800;color:var(--gold);}
+.st-streak-lbl{font-size:12px;color:var(--text3);margin-top:2px;}
+.st-cats-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
 @media(max-width:800px
 ).kat-section{width:100%;}
 .kat-title{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;}
@@ -213,6 +227,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
   <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
   <button class="s-hs" onclick="showHS()">Highscores</button>
+  <button class="s-stats" onclick="showStats()">&#128202; Statistiken</button>
 </div>
 <div id="dv">
   <div style="font-size:58px;text-align:center;">&#128197;</div>
@@ -329,6 +344,28 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="cert-hr"></div>
     <div class="cert-footer" id="cert-footer"></div>
   </div>
+</div>
+<div id="stv">
+  <div class="st-title">&#128202; Statistiken</div>
+  <div class="st-grid">
+    <div class="st-card"><div class="st-ct">Spiele</div><div class="st-cv" id="st-games">0</div></div>
+    <div class="st-card"><div class="st-ct">Bester IQ</div><div class="st-cv" id="st-best">&#8211;</div></div>
+    <div class="st-card"><div class="st-ct">&#216; IQ</div><div class="st-cv" id="st-avg">&#8211;</div></div>
+    <div class="st-card"><div class="st-ct">Genauigkeit</div><div class="st-cv" id="st-acc">&#8211;</div></div>
+  </div>
+  <div class="st-chart-wrap">
+    <div class="st-chart-lbl">Letzte 10 Spiele &#8211; IQ Verlauf</div>
+    <div id="st-chart"></div>
+  </div>
+  <div class="st-streak">
+    <div class="st-streak-num" id="st-streak">0 &#128293;</div>
+    <div class="st-streak-lbl">Tages-Challenge Streak</div>
+  </div>
+  <div class="st-cats-wrap">
+    <div class="st-chart-lbl">Kategorien Genauigkeit</div>
+    <div id="st-cats"></div>
+  </div>
+  <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
 <div id="hv">
   <h2>Highscores</h2>
