@@ -1,0 +1,139 @@
+═══════════════════════════════════════════════════════════════
+  IQ TEST – BUILD & STORE GUIDE
+  Version 1.1 | com.enesdoudouzi.iqtest
+═══════════════════════════════════════════════════════════════
+
+Keystore-Daten (SICHER AUFBEWAHREN!):
+  Datei:     iqtest-release.keystore
+  Passwort:  iqtest2024
+  Alias:     iqtest
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 1 – VOR JEDEM BUILD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Im Terminal (im iq-quiz-web Ordner):
+
+  node_modules/.bin/cap sync android
+
+Das kopiert die neueste Web-Version in den Android Bundle.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 2A – AAB BAUEN (Google Play Store)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Android Studio:
+  Build → Generate Signed Bundle / APK
+  → Android App Bundle → Next
+  → Key store path: iqtest-release.keystore
+  → Store password: iqtest2024
+  → Key alias: iqtest
+  → Key password: iqtest2024
+  → Next → release → Finish
+
+Output-Datei:
+  android/app/release/app-release.aab
+
+Verwendet fuer: Google Play Store
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 2B – APK BAUEN (Amazon + Samsung)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Android Studio:
+  Build → Generate Signed Bundle / APK
+  → APK → Next
+  → Key store path: iqtest-release.keystore
+  → Store password: iqtest2024
+  → Key alias: iqtest
+  → Key password: iqtest2024
+  → Next → release → Finish
+
+Output-Datei:
+  android/app/release/IQ-Test-v1.1.apk
+
+Verwendet fuer: Amazon Appstore, Samsung Galaxy Store,
+                direkte APK-Verteilung
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 3A – AMAZON APPSTORE (KOSTENLOS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Registrierung: developer.amazon.com (kostenlos)
+
+Was du brauchst:
+  ✅ IQ-Test-v1.1.apk
+  ✅ Icon 512x512: assets/icon-1024.png (auf 512px skalieren)
+  ✅ Screenshots (3-10 Stueck)
+  ✅ Kurzbeschreibung (aus store-listing.txt)
+  ✅ Lange Beschreibung (aus store-listing.txt)
+  ✅ Datenschutz-URL: https://iq-quiz-v2.onrender.com/datenschutz
+
+Kategorie: Games > Trivia ODER Education
+
+Besonderheit Amazon:
+  - Kein Entwicklergebuehr
+  - Review dauert ca. 1-3 Werktage
+  - App erscheint auf Fire Tablets + Amazon App auf Android-Handys
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 3B – SAMSUNG GALAXY STORE (KOSTENLOS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Registrierung: seller.samsungapps.com (kostenlos)
+
+Was du brauchst:
+  ✅ IQ-Test-v1.1.apk
+  ✅ Icon 512x512
+  ✅ Screenshots (4+ Stueck, 1080x1920 empfohlen)
+  ✅ Feature Graphic: assets/feature-graphic.png
+  ✅ Beschreibungen (aus store-listing.txt)
+  ✅ Datenschutz-URL
+
+Kategorie: Education ODER Entertainment > Trivia
+
+Besonderheit Samsung:
+  - Kein Entwicklergebuehr
+  - Vorinstalliert auf allen Samsung Galaxy Handys
+  - Review dauert ca. 3-5 Werktage
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCHRITT 3C – GOOGLE PLAY (25$ einmalig)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Registrierung: play.google.com/console (25$ einmalig)
+
+Was du brauchst:
+  ✅ app-release.aab
+  ✅ Icon 512x512: assets/icon-1024.png
+  ✅ Feature Graphic 1024x500: assets/feature-graphic.png
+  ✅ Screenshots (2-8 Stueck)
+  ✅ Beschreibungen (aus store-listing.txt)
+  ✅ Datenschutz-URL: https://iq-quiz-v2.onrender.com/datenschutz
+
+Kategorie: Education
+Content Rating: Everyone / PEGI 3
+
+Besonderheit Google Play:
+  - Groesste Reichweite (3+ Milliarden Nutzer)
+  - Review dauert ca. 1-3 Werktage (manchmal laenger)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMPFOHLENE REIHENFOLGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ZUERST: Amazon Appstore → kostenlos, schnell, gute Testmoeglichkeit
+2. DANN:   Samsung Galaxy Store → kostenlos, grosse Samsung-Nutzerbasis
+3. SPAETER: Google Play → wenn Budget vorhanden (25$)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  NAECHSTE VERSION VEROEFFENTLICHEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In android/app/build.gradle erhoehen:
+  versionCode 3          (immer +1)
+  versionName "1.2"      (sichtbare Version)
+
+Dann: cap sync → neu bauen → hochladen
+
+═══════════════════════════════════════════════════════════════

@@ -31,6 +31,15 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    // Output-Dateien sauber benennen
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (variant.buildType.name == "release") {
+                outputFileName = "IQ-Test-v${defaultConfig.versionName}.apk"
+            }
+        }
+    }
 }
 
 repositories {
