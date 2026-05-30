@@ -38,6 +38,7 @@ sessions = {}
 
 class StartRequest(BaseModel):
     name: str
+    kategorie: str = "alle"
     @validator('name')
     def name_valid(cls, v):
         v = v.strip()
@@ -114,7 +115,7 @@ def start_game(request: Request, req: StartRequest):
         for k in oldest:
             del sessions[k]
     session_id = str(uuid.uuid4())
-    fragen = get_random_fragen(15)
+    fragen = get_random_fragen(15, req.kategorie)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
@@ -147,23 +148,16 @@ def get_frage(request: Request, session_id: str, level: int):
 @limiter.limit("60/minute")
 def pruefe_antwort(request: Request, req: AntwortRequest):
     session = get_session(req.session_id)
-
-    # Anti-Cheat: Level muss stimmen
     if req.level != session.get("aktuelles_level", 1):
         raise HTTPException(400, "Ungueltige Level-Reihenfolge")
-
     fragen = session["fragen"]
     frage = next((f for f in fragen if f["level"] == req.level), None)
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
-
     richtig = req.antwort == frage["richtig"]
     if richtig and req.level in SICHERHEITSSTUFEN:
         session["sicher_level"] = req.level
-
-    # Naechstes Level setzen
     session["aktuelles_level"] = req.level + 1
-
     sicher = session["sicher_level"]
     iq_level = req.level if richtig else sicher
     iq = IQ_TABELLE.get(iq_level, 85)
@@ -195,7 +189,7 @@ def joker(request: Request, req: JokerRequest):
     elif req.typ == "telefon":
         if random.random() < 0.80:
             tipp = richtig
-            text = random.choice(["Ich bin mir sicher:", "Ohne Zweifel:", "Ich glaube es ist"])
+            text = random.choice(["Ich bin mir sicher:","Ohne Zweifel:","Ich glaube es ist"])
         else:
             falsche = [k for k in ["A","B","C","D"] if k != richtig]
             tipp = random.choice(falsche)
