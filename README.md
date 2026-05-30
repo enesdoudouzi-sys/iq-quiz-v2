@@ -1,9 +1,11 @@
-# 🧠 IQ Quiz – Wer wird Millionär Format
+# 🧠 IQ Quiz
 
-> Ein vollständiges Full-Stack Web-Projekt von **Enes Doudouzi**
+> **Wer wird Millionär** – als IQ-Test. Entwickelt von Enes Doudouzi.
 
-🌐 **Live:** https://enesdoudouzi-sys.github.io/iq-quiz-v2  
-⚙️ **API:** https://iq-quiz-v2.onrender.com
+[![Live](https://img.shields.io/badge/Live-GitHub%20Pages-blue?style=flat-square)](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
+[![API](https://img.shields.io/badge/API-Render.com-green?style=flat-square)](https://iq-quiz-v2.onrender.com)
+[![Python](https://img.shields.io/badge/Python-3.13-yellow?style=flat-square)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-teal?style=flat-square)](https://fastapi.tiangolo.com)
 
 ---
 
@@ -11,68 +13,89 @@
 
 | Feature | Beschreibung |
 |---|---|
-| 🎯 105 Fragen | Zufällig gemischt aus 3 Kategorien |
-| ⏱️ Timer | 20 / 25 / 30 Sekunden pro Frage |
-| 🧠 Live IQ | Wird nach jeder Frage aktualisiert |
-| 💰 Preisleiter | Wie bei Wer wird Millionär |
-| ☠️ Game Over | Falsche Antwort = sofort ausgeschieden |
+| ✅ 105 Fragen | Zufällig aus 3 Kategorien |
+| ⏱️ Timer | 20 / 25 / 30 Sek pro Level |
+| 🧠 Live IQ | Aktualisiert nach jeder Frage |
+| 💰 Preisleiter | WWM-Style mit Sicherheitsstufen |
+| ☠️ Game Over | Falsche Antwort = ausgeschieden |
 | 🃏 3 Joker | 50:50 · Telefon · Publikum |
-| 🏆 Highscores | Top 10 gespeichert in Datenbank |
-| 🔊 Sounds | Effekte bei richtig / falsch / Gewonnen |
-| ✨ Animationen | Smooth Übergänge und Feedback |
+| 🌍 6 Sprachen | DE · EN · TR · FR · ES · AR |
+| 🏆 Highscores | Top 10 in SQLite Datenbank |
+| 🔊 Sounds | Richtig / Falsch / Gewonnen |
+| 📱 Mobile | Responsive + PWA ready |
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Backend
-- **Python 3.13** – Programmiersprache
-- **FastAPI** – REST API Framework
-- **SQLite + SQLAlchemy** – Datenbank
-- **JWT Authentication** – Login System
-- **Rate Limiting** – Sicherheit gegen Spam
-- **CORS** – Nur erlaubte Domains
-
-### Frontend
-- **HTML5** – Struktur
-- **CSS3** – Design (Dark Mode, Animationen)
-- **JavaScript** – Spiellogik, API-Calls
-
-### Deployment
-- **Render.com** – Backend Hosting (Free Tier)
-- **GitHub Pages** – Frontend Hosting
+| Backend | Frontend | Hosting |
+|---|---|---|
+| Python 3.13 | HTML5 | Render.com |
+| FastAPI | CSS3 | GitHub Pages |
+| SQLite | JavaScript | |
+| SQLAlchemy | PWA / Service Worker | |
+| JWT Auth | | |
+| Rate Limiting | | |
 
 ---
 
 ## 🚀 Lokal starten
 
 ```bash
-# Repository klonen
 git clone https://github.com/enesdoudouzi-sys/iq-quiz-v2.git
 cd iq-quiz-v2/backend
-
-# Virtual Environment
 python3 -m venv venv
 source venv/bin/activate
-
-# Pakete installieren
 pip install -r requirements.txt
-
-# Server starten
 python3 -m uvicorn main:app --reload
 ```
 
-Browser öffnen: **http://localhost:8000**
+Browser: http://localhost:8000
 
 ---
 
+## 📁 Struktur
 
+iq-quiz-v2/
+├── backend/
+│   ├── main.py
+│   ├── fragen.py
+│   ├── database.py
+│   ├── auth.py
+│   └── requirements.txt
+├── frontend/
+│   ├── index.html
+│   └── app.js
+└── www/
+
+## 🔒 Sicherheit
+
+| | |
+|---|---|
+| ✅ CORS | Nur GitHub Pages erlaubt |
+| ✅ Rate Limiting | 10 Starts / 60 Antworten pro Minute |
+| ✅ Input Check | Alle Eingaben validiert |
+| ✅ HTTPS | Automatisch via Render.com |
+| ✅ Session Limit | Max 1000 gleichzeitig |
+
+---
+
+## 📱 Mobile App
+
+Gebaut mit **Capacitor** für Android & iOS.
+
+```bash
+npx cap sync android
+npx cap open android
+```
+
+---
 
 ## 👨‍💻 Entwickler
 
-**Enes Doudouzi**  
+**Enes Doudouzi**
 GitHub: [@enesdoudouzi-sys](https://github.com/enesdoudouzi-sys)
 
 ---
 
-*Entwickelt mit Python, FastAPI und JavaScript*
+*Entwickelt mit Python · FastAPI · JavaScript · Capacitor*
