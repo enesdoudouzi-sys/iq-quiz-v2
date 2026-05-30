@@ -56,9 +56,9 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-2px);background:var(--bg4);}
 .opt .badge{width:30px;height:30px;border-radius:8px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0;transition:all .18s;}
 .opt:hover:not(:disabled) .badge{background:var(--accent);color:#fff;}
-.opt.ok{background:#081a10;border-color:var(--green);color:#86efac;}
+.opt.ok{background:#081a10;border-color:var(--green);color:#86efac;animation:pop .35s ease;}
 .opt.ok .badge{background:var(--green);color:#081a10;}
-.opt.no{background:#1a0808;border-color:var(--red);color:#fca5a5;}
+.opt.no{background:#1a0808;border-color:var(--red);color:#fca5a5;animation:shake .4s ease;}
 .opt.no .badge{background:var(--red);color:#fff;}
 .opt.gesperrt{opacity:.15;pointer-events:none;}
 .opt:disabled{cursor:default;transform:none !important;}
@@ -124,6 +124,12 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .hs-name{flex:1;font-size:15px;font-weight:700;color:var(--text);}
 .hs-lv{font-size:12px;color:var(--text3);}
 .hs-iq{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.07);}100%{transform:scale(1);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes iqPop{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
+.opt.appear{animation:fadeUp .28s ease both;}
+.li.sicher.aktiv{box-shadow:0 0 18px rgba(124,95,255,0.4);}
 @media(max-width:800px){
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
@@ -228,6 +234,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div id="hl"></div>
   <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
+<canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 <script src="/static/app.js"></script>
 </body>
 </html>
