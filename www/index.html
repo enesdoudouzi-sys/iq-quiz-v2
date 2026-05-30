@@ -60,14 +60,25 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-2px);background:var(--bg4);}
 .opt .badge{width:30px;height:30px;border-radius:8px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0;transition:all .18s;}
 .opt:hover:not(:disabled) .badge{background:var(--accent);color:#fff;}
-.opt.ok{background:#081a10;border-color:var(--green);color:#86efac;animation:correct .4s ease;}
+.opt.ok{background:#081a10;border-color:var(--green);color:#86efac;animation:pop .35s ease;}
 .opt.ok .badge{background:var(--green);color:#081a10;}
-.opt.no{background:#1a0808;border-color:var(--red);color:#fca5a5;animation:wrong .4s ease;}
+.opt.no{background:#1a0808;border-color:var(--red);color:#fca5a5;animation:shake .4s ease;}
 .opt.no .badge{background:var(--red);color:#fff;}
 .opt.gesperrt{opacity:.15;pointer-events:none;}
 .opt:disabled{cursor:default;transform:none !important;}
-@keyframes correct{0%{transform:scale(1);}50%{transform:scale(1.03);}100%{transform:scale(1);}}
-@keyframes wrong{0%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-8px);}80%{transform:translateX(8px);}100%{transform:translateX(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.07);}100%{transform:scale(1);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes iqPop{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
+.opt.appear{animation:fadeUp .28s ease both;}
+.li.sicher.aktiv{box-shadow:0 0 18px rgba(124,95,255,0.4);}
+.s-daily{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:14px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;}
+#dv{display:none;flex-direction:column;align-items:center;gap:1.2rem;max-width:460px;margin:0 auto;padding:2rem 2rem 3rem;}
+.dv-date{font-size:13px;color:var(--text3);text-align:center;}
+.dv-countdown{font-size:15px;font-weight:700;color:var(--text2);text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.5rem;width:100%;}
+.dv-done{font-size:15px;font-weight:700;color:var(--green);text-align:center;padding:1rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:12px;}
+.dv-score{font-size:13px;color:var(--text2);text-align:center;margin-top:.5rem;}
+.dv-desc{font-size:13px;color:var(--text3);text-align:center;line-height:1.7;}
 .fb{min-height:26px;font-size:14px;font-weight:700;text-align:center;}
 .fb.ok{color:var(--green);}.fb.no{color:var(--red);}.fb.to{color:var(--orange);}
 .joker-overlay{display:none;background:var(--bg3);border:1.5px solid var(--accent);border-radius:16px;padding:1.2rem;text-align:center;margin-top:.5rem;}
@@ -182,7 +193,26 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   </div>
 </div>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
+  <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
   <button class="s-hs" onclick="showHS()">Highscores</button>
+</div>
+<div id="dv">
+  <div style="font-size:58px;text-align:center;">&#128197;</div>
+  <div class="s-title" style="font-size:32px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;background-clip:text;">Taegliche Challenge</div>
+  <div class="dv-date" id="dv-date"></div>
+  <div class="dv-countdown" id="dv-countdown">--:--:--</div>
+  <div id="dv-already" style="display:none;width:100%;">
+    <div class="dv-done">&#9989; Heute bereits gespielt!</div>
+    <div class="dv-score" id="dv-score-info"></div>
+  </div>
+  <div id="dv-play" style="width:100%;display:flex;flex-direction:column;gap:.9rem;">
+    <div class="dv-desc">15 Fragen &middot; gleiche Fragen fuer alle &middot; 1x pro Tag</div>
+    <input class="s-input" id="dni" type="text" placeholder="Dein Name..." maxlength="20"/>
+    <button class="s-btn" onclick="startDailyGame()">Challenge starten</button>
+  </div>
+  <div class="leiter-lbl" style="width:100%;margin-top:.5rem;">Tages-Bestenliste</div>
+  <div id="dv-hs" style="width:100%;"></div>
+  <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
 <div id="qv">
   <div class="ql">
@@ -271,6 +301,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
 <a href="datenschutz.html" style="position:fixed;bottom:10px;right:10px;font-size:11px;color:#475569;text-decoration:none;">Datenschutz</a>
+<canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 <script src="app.js"></script>
 </body>
 </html>
