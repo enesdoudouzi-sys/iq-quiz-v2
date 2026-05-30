@@ -4,3 +4,5 @@ __pycache__/
 venv/
 nano
 index_backup.html
+*.keystore
+*.jks
