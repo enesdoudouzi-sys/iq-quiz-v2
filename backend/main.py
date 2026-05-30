@@ -1,26 +1,22 @@
-from fastapi import FastAPI, HTTPException, Depends, Request, Security
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from fastapi.security.api_key import APIKeyHeader
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
-import os, random, uuid
+import os, random, uuid, time
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen
 from database import get_db, create_tables, Highscore
 
-# ── Rate Limiter ───────────────────────────────────────────
 limiter = Limiter(key_func=get_remote_address)
-
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# ── CORS – nur erlaubte Domains ────────────────────────────
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -33,7 +29,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Frontend ───────────────────────────────────────────────
 FRONTEND = os.path.join(os.path.dirname(__file__), "..", "frontend")
 if os.path.exists(FRONTEND):
     app.mount("/static", StaticFiles(directory=FRONTEND), name="static")
@@ -41,10 +36,8 @@ if os.path.exists(FRONTEND):
 create_tables()
 sessions = {}
 
-# ── Models ─────────────────────────────────────────────────
 class StartRequest(BaseModel):
     name: str
-
     @validator('name')
     def name_valid(cls, v):
         v = v.strip()
@@ -56,13 +49,11 @@ class AntwortRequest(BaseModel):
     session_id: str
     level: int
     antwort: str
-
     @validator('antwort')
     def antwort_valid(cls, v):
         if v.upper() not in ['A','B','C','D','X']:
             raise ValueError('Ungueltige Antwort')
         return v.upper()
-
     @validator('level')
     def level_valid(cls, v):
         if v < 1 or v > 50:
@@ -74,7 +65,6 @@ class JokerRequest(BaseModel):
     level: int
     typ: str
     gesperrte: list = []
-
     @validator('typ')
     def typ_valid(cls, v):
         if v not in ['5050','telefon','publikum']:
@@ -85,11 +75,9 @@ class HighscoreRequest(BaseModel):
     name: str
     iq: int
     level: int
-
     @validator('name')
     def name_valid(cls, v):
         return v.strip()[:20]
-
     @validator('iq')
     def iq_valid(cls, v):
         if v < 0 or v > 200:
@@ -107,7 +95,6 @@ def get_session(session_id: str):
         raise HTTPException(404, "Session nicht gefunden")
     return sessions[session_id]
 
-# ── Routes ─────────────────────────────────────────────────
 @app.get("/")
 def root():
     index = os.path.join(FRONTEND, "index.html")
@@ -122,7 +109,6 @@ def health():
 @app.post("/api/start")
 @limiter.limit("10/minute")
 def start_game(request: Request, req: StartRequest):
-    # Alte Sessions aufräumen (max 1000)
     if len(sessions) > 1000:
         oldest = list(sessions.keys())[:100]
         for k in oldest:
@@ -130,10 +116,12 @@ def start_game(request: Request, req: StartRequest):
     session_id = str(uuid.uuid4())
     fragen = get_random_fragen(15)
     sessions[session_id] = {
-        "name": req.name,
-        "fragen": fragen,
-        "joker": {"5050": True, "telefon": True, "publikum": True},
-        "sicher_level": 0,
+        "name":            req.name,
+        "fragen":          fragen,
+        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "sicher_level":    0,
+        "aktuelles_level": 1,
+        "erstellt":        time.time(),
     }
     return {"session_id": session_id, "total": len(fragen)}
 
@@ -153,20 +141,29 @@ def get_frage(request: Request, session_id: str, level: int):
         "preis":     PREISSTUFEN.get(level, "1.000.000 EUR"),
         "sicher":    level in SICHERHEITSSTUFEN,
         "seq":       frage.get("seq"),
-        "richtig":   frage["richtig"],
     }
 
 @app.post("/api/antwort")
 @limiter.limit("60/minute")
 def pruefe_antwort(request: Request, req: AntwortRequest):
     session = get_session(req.session_id)
+
+    # Anti-Cheat: Level muss stimmen
+    if req.level != session.get("aktuelles_level", 1):
+        raise HTTPException(400, "Ungueltige Level-Reihenfolge")
+
     fragen = session["fragen"]
     frage = next((f for f in fragen if f["level"] == req.level), None)
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
+
     richtig = req.antwort == frage["richtig"]
     if richtig and req.level in SICHERHEITSSTUFEN:
         session["sicher_level"] = req.level
+
+    # Naechstes Level setzen
+    session["aktuelles_level"] = req.level + 1
+
     sicher = session["sicher_level"]
     iq_level = req.level if richtig else sicher
     iq = IQ_TABELLE.get(iq_level, 85)
