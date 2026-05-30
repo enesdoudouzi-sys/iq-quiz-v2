@@ -548,6 +548,16 @@ function saveHS(){
   });
 }
 
+// ── ZERTIFIKAT ─────────────────────────────────────────────
+function downloadCert(){
+  document.getElementById('cert-name').textContent=playerName;
+  document.getElementById('cert-iq').textContent='IQ '+finalIQ;
+  document.getElementById('cert-class').textContent=getBez(finalIQ);
+  document.getElementById('cert-detail').textContent=sc+' von 15 Fragen richtig · '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('cert-footer').textContent='IQ-Quiz · iq-quiz-v2.onrender.com · '+new Date().toLocaleDateString('de-DE');
+  window.print();
+}
+
 // ── TAEGLICHE CHALLENGE ────────────────────────────────────
 function showDailyInfo(){
   document.getElementById('sv').style.display='none';

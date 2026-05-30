@@ -124,6 +124,24 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .save-in{flex:1;padding:13px 16px;border-radius:11px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:14px;outline:none;}
 .save-btn{padding:13px 20px;font-size:14px;font-weight:700;border-radius:11px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;}
 .rbtn{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;margin-top:.8rem;}
+.cert-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;margin-top:.5rem;}
+.cert-btn:hover{background:rgba(255,215,0,0.1);}
+#cert{display:none;}
+@media print{
+  body>*{display:none!important;}
+  #cert{display:flex!important;position:fixed!important;inset:0!important;margin:0!important;padding:32px!important;background:#fff!important;justify-content:center!important;align-items:center!important;font-family:Georgia,serif!important;}
+  .cert-inner{border:3px double #c9a227;border-radius:6px;padding:50px 60px;text-align:center;width:100%;max-width:700px;background:#fffef7;display:flex;flex-direction:column;gap:16px;}
+  .cert-logo{font-size:56px;}
+  .cert-title{font-size:28px;font-weight:bold;color:#1a1a2e;letter-spacing:4px;text-transform:uppercase;}
+  .cert-sub{font-size:11px;color:#888;letter-spacing:5px;text-transform:uppercase;}
+  .cert-hr{height:1px;background:#c9a227;opacity:.5;margin:4px 0;}
+  .cert-lbl{font-size:13px;color:#777;font-style:italic;}
+  .cert-name{font-size:36px;font-weight:bold;color:#1a1a2e;font-style:italic;}
+  .cert-iq{font-size:80px;font-weight:bold;color:#c9a227;line-height:1;}
+  .cert-class{font-size:18px;color:#4a4a8a;font-weight:600;letter-spacing:2px;text-transform:uppercase;}
+  .cert-detail{font-size:12px;color:#aaa;}
+  .cert-footer{font-size:11px;color:#bbb;letter-spacing:2px;border-top:1px solid #e8e0c8;padding-top:12px;margin-top:8px;}
+}
 #hv{display:none;max-width:580px;margin:0 auto;padding:2.5rem 1.5rem;}
 #hv h2{font-size:22px;font-weight:800;color:var(--text);margin-bottom:1.2rem;}
 .hs-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;}
@@ -253,7 +271,24 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <input class="save-in" id="sn" placeholder="Name fuer Highscore..."/>
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
+  <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
   <button class="rbtn" onclick="showStart()">Nochmal starten</button>
+</div>
+<div id="cert">
+  <div class="cert-inner">
+    <div class="cert-logo">&#129504;</div>
+    <div class="cert-title">IQ Test Zertifikat</div>
+    <div class="cert-sub">Offizieller Nachweis</div>
+    <div class="cert-hr"></div>
+    <div class="cert-lbl">Hiermit wird bestätigt, dass</div>
+    <div class="cert-name" id="cert-name"></div>
+    <div class="cert-lbl">einen IQ von</div>
+    <div class="cert-iq" id="cert-iq"></div>
+    <div class="cert-class" id="cert-class"></div>
+    <div class="cert-detail" id="cert-detail"></div>
+    <div class="cert-hr"></div>
+    <div class="cert-footer" id="cert-footer"></div>
+  </div>
 </div>
 <div id="hv">
   <h2>Highscores</h2>
