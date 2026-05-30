@@ -1,0 +1,157 @@
+═══════════════════════════════════════════════════════════════
+  GOOGLE PLAY STORE – APP LISTING TEXTE
+  App: IQ Test | com.enesdoudouzi.iqtest
+═══════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DEUTSCH (DE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+APP NAME (max 30 Zeichen):
+IQ Test – Teste dein Wissen
+
+KURZBESCHREIBUNG (max 80 Zeichen):
+Teste deinen IQ mit 160 Fragen, 3 Jokern & täglichen Challenges!
+
+LANGE BESCHREIBUNG (max 4000 Zeichen):
+Wie hoch ist dein IQ wirklich? Finde es heraus mit dem ultimativen IQ Test!
+
+Stell dich 15 anspruchsvollen Fragen aus 7 verschiedenen Kategorien und ermittle deinen persönlichen IQ-Wert. Mit 3 mächtigen Jokern, einem Live-IQ-Anzeiger und spannenden Animationen macht das Testen deiner Intelligenz mehr Spaß denn je.
+
+🧠 FEATURES:
+
+▶ 160 Fragen aus 7 Kategorien
+   • Allgemeinwissen
+   • Geschichte
+   • Wissenschaft & Natur
+   • Sport
+   • Mathematik
+   • Logik & Zahlenfolgen
+   • Konzentration
+
+🃏 3 JOKER wie im TV:
+   • 50:50 – Eliminiert 2 falsche Antworten
+   • Telefon-Joker – Ein Experte gibt einen Tipp
+   • Publikums-Joker – Die Crowd hilft dir
+
+📅 TÄGLICHE CHALLENGE:
+   Jeden Tag neue Fragen – dieselben für alle Spieler weltweit. Vergleiche dich in der Tages-Bestenliste!
+
+📊 DETAILLIERTE STATISTIKEN:
+   Verfolge deinen IQ-Verlauf, deine Kategorie-Genauigkeit und deinen Challenge-Streak über Zeit.
+
+🏆 HIGHSCORES & ZERTIFIKAT:
+   Speichere deinen Score in der globalen Bestenliste und lade dein persönliches IQ-Zertifikat als PDF herunter.
+
+🎉 MOTIVIERENDE EFFEKTE:
+   Konfetti, Sounds und Animationen machen jede richtige Antwort zum Erlebnis.
+
+🌍 6 SPRACHEN:
+   Deutsch, Englisch, Türkisch, Französisch, Spanisch, Arabisch
+
+📱 Für alle geeignet – ob Schüler, Student oder Erwachsener. Trainiere dein Gehirn täglich und verbessere deinen IQ!
+
+Datenschutzerklärung: https://iq-quiz-v2.onrender.com/datenschutz
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ENGLISH (EN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+APP NAME (max 30 chars):
+IQ Test – Test Your Intelligence
+
+SHORT DESCRIPTION (max 80 chars):
+Test your IQ with 160 questions, 3 lifelines & daily challenges!
+
+LONG DESCRIPTION (max 4000 chars):
+How high is your IQ really? Find out with the ultimate IQ Test!
+
+Answer 15 challenging questions from 7 different categories and discover your personal IQ score. With 3 powerful lifelines, a live IQ tracker and exciting animations, testing your intelligence has never been more fun.
+
+🧠 FEATURES:
+
+▶ 160 Questions across 7 Categories
+   • General Knowledge
+   • History
+   • Science & Nature
+   • Sports
+   • Mathematics
+   • Logic & Number Sequences
+   • Concentration
+
+🃏 3 LIFELINES:
+   • 50:50 – Eliminates 2 wrong answers
+   • Phone Lifeline – An expert gives you a hint
+   • Audience Lifeline – The crowd helps you out
+
+📅 DAILY CHALLENGE:
+   New questions every day – the same for all players worldwide. Compete in the daily leaderboard!
+
+📊 DETAILED STATISTICS:
+   Track your IQ progress, category accuracy and daily challenge streak over time.
+
+🏆 HIGHSCORES & CERTIFICATE:
+   Save your score on the global leaderboard and download your personal IQ certificate as PDF.
+
+🎉 MOTIVATING EFFECTS:
+   Confetti, sounds and animations make every correct answer a celebration.
+
+🌍 6 LANGUAGES:
+   German, English, Turkish, French, Spanish, Arabic
+
+📱 Suitable for everyone – students, professionals and adults alike. Train your brain daily and improve your IQ!
+
+Privacy Policy: https://iq-quiz-v2.onrender.com/datenschutz
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STORE EINSTELLUNGEN (Play Console)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Kategorie:         Bildung  (Education)
+Content Rating:    Alle (Everyone / PEGI 3)
+Datenschutz-URL:   https://iq-quiz-v2.onrender.com/datenschutz
+Support-E-Mail:    enesdoudouzi@googlemail.com
+Website:           https://iq-quiz-v2.onrender.com
+
+Tags / Keywords:
+IQ Test, IQ Quiz, Intelligenztest, Quiz, Allgemeinwissen,
+Gehirn trainieren, Brain Test, Wissenstest, Trivia, Logik
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCREENSHOTS – Was du aufnehmen solltest
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Mindestens 2, empfohlen 6-8 Screenshots (Hochformat):
+
+1. Startscreen mit IQ Test Titel + Buttons
+2. Frage-Screen mit Timer, Antworten und IQ-Leiter
+3. Joker-Popup (z.B. Publikums-Joker mit Balkengrafik)
+4. Ergebnis-Screen mit grossem IQ-Wert + Konfetti
+5. Statistiken-Screen
+6. Tägliche Challenge / Bestenliste
+7. Zertifikat (vor dem Drucken)
+
+Feature Graphic (1024x500 px):
+→ Dunkler Hintergrund, grosses Gehirn-Logo, "IQ Test" Text
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  RELEASE NOTES (Was ist neu in Version 1.1)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DE:
+• Konfetti, Sounds und Animationen
+• Tägliche Challenge mit Bestenliste
+• IQ-Zertifikat als PDF
+• Statistiken und IQ-Verlauf
+• Neues App-Icon und Splash Screen
+• 7 Kategorien wählbar
+
+EN:
+• Confetti, sounds and animations
+• Daily Challenge with leaderboard
+• IQ Certificate as PDF
+• Statistics and IQ history
+• New app icon and splash screen
+• 7 selectable categories
+
+═══════════════════════════════════════════════════════════════
