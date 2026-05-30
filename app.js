@@ -50,11 +50,17 @@ function setLang(lang,btn){
   document.querySelector('.iq-fb-lbl').textContent=t.iqNach;
 }
 
+// ── SOUNDS ────────────────────────────────────────────────
+var _ac=null;
+function _ctx(){
+  if(!_ac||_ac.state==='closed')_ac=new(window.AudioContext||window.webkitAudioContext)();
+  if(_ac.state==='suspended')_ac.resume();
+  return _ac;
+}
 function playSound(type){
   try{
-    var ctx=new(window.AudioContext||window.webkitAudioContext)();
-    var o=ctx.createOscillator();
-    var g=ctx.createGain();
+    var ctx=_ctx();
+    var o=ctx.createOscillator(),g=ctx.createGain();
     o.connect(g);g.connect(ctx.destination);
     if(type==='richtig'){
       o.frequency.setValueAtTime(523,ctx.currentTime);
@@ -69,22 +75,96 @@ function playSound(type){
       g.gain.setValueAtTime(0.3,ctx.currentTime);
       g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.4);
       o.start(ctx.currentTime);o.stop(ctx.currentTime+0.4);
+    }else if(type==='tick'){
+      o.frequency.setValueAtTime(900,ctx.currentTime);
+      g.gain.setValueAtTime(0.12,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.06);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+0.06);
     }else if(type==='gewonnen'){
-      var freqs=[523,659,784,1047];
-      freqs.forEach(function(f,i){
-        var o2=ctx.createOscillator();
-        var g2=ctx.createGain();
+      [523,659,784,1047].forEach(function(f,i){
+        var o2=ctx.createOscillator(),g2=ctx.createGain();
         o2.connect(g2);g2.connect(ctx.destination);
         o2.frequency.setValueAtTime(f,ctx.currentTime+i*0.15);
         g2.gain.setValueAtTime(0.3,ctx.currentTime+i*0.15);
         g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.15+0.3);
-        o2.start(ctx.currentTime+i*0.15);
-        o2.stop(ctx.currentTime+i*0.15+0.3);
+        o2.start(ctx.currentTime+i*0.15);o2.stop(ctx.currentTime+i*0.15+0.3);
       });
+    }else if(type==='sicher'){
+      [523,784,1047,784,1047].forEach(function(f,i){
+        var o2=ctx.createOscillator(),g2=ctx.createGain();
+        o2.connect(g2);g2.connect(ctx.destination);
+        o2.frequency.setValueAtTime(f,ctx.currentTime+i*0.1);
+        g2.gain.setValueAtTime(0.28,ctx.currentTime+i*0.1);
+        g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.1+0.18);
+        o2.start(ctx.currentTime+i*0.1);o2.stop(ctx.currentTime+i*0.1+0.18);
+      });
+    }else if(type==='joker'){
+      o.frequency.setValueAtTime(440,ctx.currentTime);
+      o.frequency.setValueAtTime(550,ctx.currentTime+0.08);
+      g.gain.setValueAtTime(0.18,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.2);
+      o.start(ctx.currentTime);o.stop(ctx.currentTime+0.2);
     }
   }catch(e){}
 }
 
+// ── KONFETTI & ANIMATIONEN ─────────────────────────────────
+function animateCount(el,from,to,ms){
+  var s=Date.now();
+  (function step(){
+    var p=Math.min((Date.now()-s)/ms,1),e=1-Math.pow(1-p,3);
+    el.textContent='IQ '+Math.round(from+(to-from)*e);
+    if(p<1)requestAnimationFrame(step);
+  })();
+}
+var _caf=null;
+function launchConfetti(intensity){
+  var cv=document.getElementById('cc');
+  if(!cv)return;
+  var ctx2=cv.getContext('2d');
+  cv.width=window.innerWidth;cv.height=window.innerHeight;
+  cv.style.display='block';
+  if(_caf)cancelAnimationFrame(_caf);
+  ctx2.clearRect(0,0,cv.width,cv.height);
+  var cols=['#4a90e2','#7c5fff','#ffd700','#22c55e','#f59e0b','#ef4444','#06b6d4','#fff'];
+  var n=intensity==='big'?220:intensity==='medium'?90:40;
+  var ps=[];
+  for(var i=0;i<n;i++){
+    var big=intensity==='big';
+    ps.push({
+      x:big?Math.random()*cv.width:cv.width/2+(Math.random()-.5)*400,
+      y:big?Math.random()*-cv.height*.7:-60,
+      w:Math.random()*10+4,h:Math.random()*6+3,
+      c:cols[Math.floor(Math.random()*cols.length)],
+      rot:Math.random()*360,
+      vx:(Math.random()-.5)*(big?6:9),
+      vy:big?Math.random()*4+1:Math.random()*-9-2,
+      vr:(Math.random()-.5)*14,
+      grav:big?.13:.3
+    });
+  }
+  var dur=intensity==='big'?3500:intensity==='medium'?2200:1200;
+  var end=Date.now()+dur;
+  function draw(){
+    var now=Date.now();
+    ctx2.clearRect(0,0,cv.width,cv.height);
+    var alive=false;
+    ps.forEach(function(p){
+      p.vy+=p.grav;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;
+      var life=Math.max(0,(end-now)/dur);
+      if(p.y<cv.height+30)alive=true;
+      ctx2.save();ctx2.globalAlpha=Math.min(1,life*1.5);
+      ctx2.translate(p.x,p.y);ctx2.rotate(p.rot*Math.PI/180);
+      ctx2.fillStyle=p.c;ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx2.restore();
+    });
+    if(alive&&now<end+1500){_caf=requestAnimationFrame(draw);}
+    else{cv.style.display='none';}
+  }
+  draw();
+}
+
+// ── LOADING ────────────────────────────────────────────────
 function showLoader(txt,pct){
   var s=document.getElementById('loading-screen');
   var b=document.getElementById('load-bar');
@@ -122,6 +202,7 @@ var cs={aw:0,log:0,kz:0},cm={aw:0,log:0,kz:0},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var jokerStatus={'5050':true,'telefon':true,'publikum':true};
 var selectedKat='alle';
+var isDailyMode=false,_dvTimer=null;
 
 function toggleKat(btn,kat){
   document.querySelectorAll('.kat-btn').forEach(function(b){b.classList.remove('active');});
@@ -134,18 +215,22 @@ function showStart(){
   document.getElementById('qv').classList.remove('active');
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
+  clearInterval(_dvTimer);
 }
 function showQuiz(){
   document.getElementById('sv').style.display='none';
   document.getElementById('qv').classList.add('active');
   document.getElementById('rv').style.display='none';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
 }
 function showResult(){
   document.getElementById('sv').style.display='none';
   document.getElementById('qv').classList.remove('active');
   document.getElementById('rv').style.display='block';
   document.getElementById('hv').style.display='none';
+  document.getElementById('dv').style.display='none';
 }
 
 function buildLeiter(){
@@ -171,7 +256,10 @@ function updLeiter(lvl){
 }
 function updIQ(iq){
   finalIQ=iq;
-  document.getElementById('iq-live').textContent=iq;
+  var el=document.getElementById('iq-live');
+  el.textContent=iq;
+  el.style.animation='none';
+  requestAnimationFrame(function(){el.style.animation='iqPop .4s ease';});
   document.getElementById('iq-live-txt').textContent=getBez(iq);
 }
 function updJoker(){
@@ -201,6 +289,7 @@ function showHS(){
 }
 
 function startGame(){
+  isDailyMode=false;
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
@@ -242,11 +331,15 @@ function loadAndShowQ(level){
     document.getElementById('pf').style.width=((level-1)/MAX_FRAGEN*100)+'%';
     var sb=document.getElementById('sb');
     if(q.seq){sb.textContent=q.seq;sb.style.display='block';}else sb.style.display='none';
+    var fbox=document.querySelector('.fbox');
+    fbox.style.animation='none';
+    requestAnimationFrame(function(){fbox.style.animation='fadeUp .35s ease';});
     var op=document.getElementById('op');op.innerHTML='';
     var opts=['A','B','C','D'];
     for(var i=0;i<opts.length;i++){
       var b=document.createElement('button');
-      b.className='opt';
+      b.className='opt appear';
+      b.style.animationDelay=(i*.08)+'s';
       var badge=document.createElement('span');badge.className='badge';badge.textContent=opts[i];
       var txt=document.createElement('span');txt.textContent=q.antworten[opts[i]];
       b.appendChild(badge);b.appendChild(txt);
@@ -271,6 +364,7 @@ function tick(l,t){
   document.getElementById('tn').style.color=u?'#ef4444':w?'#f59e0b':'#f1f5f9';
   var trw=document.getElementById('trw');
   if(u)trw.classList.add('urgent');else trw.classList.remove('urgent');
+  if(l<=5&&l>0)playSound('tick');
 }
 
 function tout(){
@@ -310,7 +404,9 @@ function pick(key){
     if(d.richtig){
       sc++;cs[k]++;
       fb.textContent=T('richtig');fb.className='fb ok';
-      playSound(cur>=MAX_FRAGEN?'gewonnen':'richtig');
+      var isSich=SICHER.indexOf(cur)>=0;
+      playSound(isSich?'sicher':'richtig');
+      launchConfetti(isSich?'medium':'small');
       showIQFb(true,cur);
       if(cur>=MAX_FRAGEN){
         setTimeout(function(){calcResult();},2000);
@@ -345,7 +441,7 @@ function useJoker(typ){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({session_id:sessionId,level:cur,typ:typ,gesperrte:gesperrte})
   }).then(function(r){return r.json();}).then(function(d){
-    jokerStatus[typ]=false;updJoker();
+    jokerStatus[typ]=false;updJoker();playSound('joker');
     if(d.typ==='5050'){
       d.entfernte.forEach(function(key){
         gesperrte.push(key);
@@ -389,15 +485,26 @@ function calcResult(){
   var sum=0;for(var i=0;i<times.length;i++)sum+=times[i];
   var avg=times.length?Math.round(sum/times.length*10)/10:0;
   var iq=finalIQ;
-  document.getElementById('rv-emoji').textContent=iq>=130?'🏆':iq>=115?'⭐':iq>=100?'👍':'💪';
-  document.getElementById('rv-iq').textContent='IQ '+iq;
-  document.getElementById('rv-chip').textContent=sc+' / '+MAX_FRAGEN;
+  playSound('gewonnen');
+  launchConfetti(iq>=130?'big':iq>=115?'medium':'small');
+  var emoji=iq>=145?'🧠':iq>=130?'✨':iq>=115?'⭐':iq>=100?'👍':'💪';
+  document.getElementById('rv-emoji').textContent=emoji;
+  animateCount(document.getElementById('rv-iq'),85,iq,1500);
   document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
   document.getElementById('baw').textContent=cs.aw+' / '+cm.aw;
   document.getElementById('blog').textContent=cs.log+' / '+cm.log;
   document.getElementById('bkz').textContent=cs.kz+' / '+cm.kz;
   document.getElementById('bt').textContent=avg+' Sek.';
   document.getElementById('sn').value=playerName;
+  if(isDailyMode){
+    var _today=new Date().toISOString().split('T')[0];
+    localStorage.setItem('daily_'+_today,JSON.stringify({iq:finalIQ,level:sc}));
+    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
+    document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
+    isDailyMode=false;
+  } else {
+    document.getElementById('rv-chip').textContent=sc+' / '+MAX_FRAGEN;
+  }
   document.getElementById('ml').innerHTML='';
   document.getElementById('err-lbl').textContent=errs.length?T('fehler')+': '+errs.length:T('fehler');
   if(!errs.length){
@@ -439,4 +546,79 @@ function saveHS(){
     btn.textContent=T('gespeichert');
     setTimeout(function(){btn.textContent=T('speichern');},2000);
   });
+}
+
+// ── TAEGLICHE CHALLENGE ────────────────────────────────────
+function showDailyInfo(){
+  document.getElementById('sv').style.display='none';
+  document.getElementById('dv').style.display='flex';
+  document.getElementById('hv').style.display='none';
+  document.getElementById('rv').style.display='none';
+  document.getElementById('qv').classList.remove('active');
+  var today=new Date();
+  var todayStr=today.toISOString().split('T')[0];
+  var opts={weekday:'long',day:'numeric',month:'long'};
+  document.getElementById('dv-date').textContent=today.toLocaleDateString('de-DE',opts);
+  clearInterval(_dvTimer);
+  function updCountdown(){
+    var now=new Date(),mid=new Date(now);
+    mid.setHours(24,0,0,0);
+    var d=mid-now;
+    var h=Math.floor(d/3600000),m=Math.floor((d%3600000)/60000),s=Math.floor((d%60000)/1000);
+    document.getElementById('dv-countdown').textContent='Neue Challenge in '+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+  updCountdown();
+  _dvTimer=setInterval(updCountdown,1000);
+  var playedData=localStorage.getItem('daily_'+todayStr);
+  if(playedData){
+    var pd=JSON.parse(playedData);
+    document.getElementById('dv-already').style.display='block';
+    document.getElementById('dv-play').style.display='none';
+    document.getElementById('dv-score-info').textContent='Dein Ergebnis heute: IQ '+pd.iq+' · '+pd.level+'/15 richtig';
+  }else{
+    document.getElementById('dv-already').style.display='none';
+    document.getElementById('dv-play').style.display='flex';
+    var ni=document.getElementById('ni');
+    if(ni&&ni.value)document.getElementById('dni').value=ni.value;
+  }
+  loadDailyHS();
+}
+
+function loadDailyHS(){
+  fetch(API+'/api/daily/highscores').then(function(r){return r.json();}).then(function(scores){
+    var hl=document.getElementById('dv-hs');hl.innerHTML='';
+    if(!scores.length){
+      var d=document.createElement('div');d.className='none';d.textContent='Noch keine Eintraege heute.';hl.appendChild(d);return;
+    }
+    for(var i=0;i<scores.length;i++){
+      var c=document.createElement('div');c.className='hs-card';
+      var r=document.createElement('span');r.className='hs-rang';r.textContent=(i+1)+'.';
+      var n=document.createElement('span');n.className='hs-name';n.textContent=scores[i].name;
+      var lv=document.createElement('span');lv.className='hs-lv';lv.textContent=scores[i].level+'/15';
+      var iq=document.createElement('span');iq.className='hs-iq';iq.textContent='IQ '+scores[i].iq;
+      c.appendChild(r);c.appendChild(n);c.appendChild(lv);c.appendChild(iq);
+      hl.appendChild(c);
+    }
+  });
+}
+
+function startDailyGame(){
+  playerName=document.getElementById('dni').value||'Spieler';
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
+  cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
+  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  updJoker();
+  isDailyMode=true;
+  clearInterval(_dvTimer);
+  fetch(API+'/api/daily/start',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:playerName})
+  }).then(function(r){return r.json();}).then(function(d){
+    sessionId=d.session_id;
+    buildLeiter();
+    updIQ(85);
+    showQuiz();
+    loadAndShowQ(1);
+  }).catch(function(e){alert('Fehler: '+e.message);});
 }

@@ -112,7 +112,7 @@ function launchConfetti(intensity){
   draw();
 }
 
-const API = 'http://localhost:8000';
+const API = 'https://iq-quiz-v2.onrender.com';
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4'};
 const CK = function(p){ return p.indexOf('Allgemein')>=0?'aw':p.indexOf('Logik')>=0?'log':'kz'; };
