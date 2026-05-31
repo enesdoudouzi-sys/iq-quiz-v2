@@ -182,10 +182,26 @@ function hideLoader(){
     setTimeout(function(){s.style.display='none';},500);
   }
 }
-fetch(API+'/health').then(function(){hideLoader();}).catch(function(){hideLoader();});
-showLoader('Verbinde mit Server...',30);
-setTimeout(function(){showLoader('Server startet...',60);},3000);
-setTimeout(function(){showLoader('Fast fertig...',90);},8000);
+// Render free tier braucht bis zu 30s zum Starten — mehrfach versuchen
+showLoader('Verbinde mit Server...',10);
+(function pingServer(attempt){
+  var msgs=[
+    ['Verbinde mit Server...',10],
+    ['Server startet auf (kann 30s dauern)...',30],
+    ['Server wacht auf...',50],
+    ['Fast da...',70],
+    ['Noch einen Moment...',85],
+    ['Fast fertig...',95]
+  ];
+  var m=msgs[Math.min(attempt,msgs.length-1)];
+  showLoader(m[0],m[1]);
+  fetch(API+'/health',{signal:AbortSignal.timeout?AbortSignal.timeout(8000):undefined})
+    .then(function(){hideLoader();})
+    .catch(function(){
+      if(attempt<6){setTimeout(function(){pingServer(attempt+1);},5000);}
+      else{hideLoader();}
+    });
+})(0);
 
 function getBez(iq){
   if(iq>=145)return 'Genie';
@@ -309,18 +325,35 @@ function startGame(){
   cs={};cm={};times=[];errs=[];qs=[];
   jokerStatus={'5050':true,'telefon':true,'publikum':true};
   updJoker();
+  var startBtn=document.querySelector('.s-btn');
+  if(startBtn){startBtn.disabled=true;startBtn.textContent='Verbinde...';}
+  apiStartWithRetry(0);
+}
+function apiStartWithRetry(attempt){
+  var startBtn=document.querySelector('.s-btn');
+  var msgs=['Verbinde...','Server startet... (10s)','Noch einen Moment... (20s)','Fast fertig... (30s)'];
+  if(startBtn)startBtn.textContent=msgs[Math.min(attempt,msgs.length-1)];
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
-  }).then(function(r){return r.json();}).then(function(d){
+  }).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.json();
+  }).then(function(d){
+    if(startBtn){startBtn.disabled=false;startBtn.textContent='Jetzt starten';}
     sessionId=d.session_id;
     buildLeiter();updIQ(85);showQuiz();
     setOfflineBadge(false);
     loadAndShowQ(1);
   }).catch(function(){
-    if(offlineQs.length>=MAX_FRAGEN){startOfflineGame();}
-    else{alert('Kein Internet und kein Offline-Cache verfuegbar.');}
+    if(attempt<3){
+      setTimeout(function(){apiStartWithRetry(attempt+1);},8000);
+    }else{
+      if(startBtn){startBtn.disabled=false;startBtn.textContent='Jetzt starten';}
+      if(offlineQs.length>=MAX_FRAGEN){startOfflineGame();}
+      else{alert('Server nicht erreichbar. Bitte kurz warten und nochmal versuchen.');}
+    }
   });
 }
 
@@ -932,15 +965,33 @@ function startDailyGame(){
   updJoker();
   isDailyMode=true;
   clearInterval(_dvTimer);
+  var btn=document.querySelector('#dv .s-btn');
+  if(btn){btn.disabled=true;btn.textContent='Verbinde...';}
+  apiDailyStartWithRetry(0);
+}
+function apiDailyStartWithRetry(attempt){
+  var btn=document.querySelector('#dv .s-btn');
+  var msgs=['Verbinde...','Server startet...','Noch einen Moment...','Fast fertig...'];
+  if(btn)btn.textContent=msgs[Math.min(attempt,msgs.length-1)];
   fetch(API+'/api/daily/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name:playerName})
-  }).then(function(r){return r.json();}).then(function(d){
+  }).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.json();
+  }).then(function(d){
+    if(btn){btn.disabled=false;btn.textContent='Challenge starten';}
     sessionId=d.session_id;
     buildLeiter();updIQ(85);showQuiz();setOfflineBadge(false);
     loadAndShowQ(1);
-  }).catch(function(e){alert('Fehler: '+e.message);});
+  }).catch(function(){
+    if(attempt<3){setTimeout(function(){apiDailyStartWithRetry(attempt+1);},8000);}
+    else{
+      if(btn){btn.disabled=false;btn.textContent='Challenge starten';}
+      alert('Server nicht erreichbar. Bitte kurz warten und nochmal versuchen.');
+    }
+  });
 }
 
 // ── OFFLINE MODUS ──────────────────────────────────────────
