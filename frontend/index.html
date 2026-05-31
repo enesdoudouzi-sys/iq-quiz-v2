@@ -41,16 +41,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .phase-row{display:flex;align-items:center;gap:7px;}
 .phase-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .phase-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.kat-icon-q{font-size:14px;line-height:1;}
 .joker-section{width:100%;margin-top:.5rem;}
 .joker-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.6rem;}
 .joker-btn{width:100%;padding:.8rem;margin-bottom:.5rem;border-radius:12px;border:1.5px solid var(--accent);background:var(--bg3);color:var(--accent);cursor:pointer;font-size:13px;font-weight:700;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
 .joker-btn:hover:not(:disabled){background:rgba(74,144,226,0.15);}
 .joker-btn:disabled{opacity:.3;cursor:not-allowed;border-color:var(--border);color:var(--text3);}
+.extra-joker-btn{display:none;border-color:var(--gold) !important;color:var(--gold) !important;}
 .qm{display:flex;flex-direction:column;gap:.8rem;padding:.5rem 0;}
 .qm-top{display:flex;justify-content:space-between;align-items:center;}
 .qm-logo{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;}
+.qm-ctr-wrap{display:flex;align-items:center;gap:.4rem;}
 .qm-ctr{font-size:12px;color:var(--text3);font-weight:600;}
-.prog{height:2px;background:var(--border);border-radius:99px;overflow:hidden;}
+.schw-stars{font-size:10px;letter-spacing:-1px;opacity:.7;}
+.prog{height:3px;background:var(--border);border-radius:99px;overflow:hidden;}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:99px;transition:width .6s ease;}
 .preis{text-align:center;font-size:24px;font-weight:800;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,0.3);}
 .seq{font-size:20px;font-weight:700;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:14px 20px;text-align:center;color:var(--text2);}
@@ -101,8 +105,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .nxt{display:none;padding:13px 32px;font-size:14px;font-weight:700;border-radius:11px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;float:right;}
 .qr{padding-top:.5rem;}
 .leiter-lbl{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:.8rem;}
-.li{display:flex;justify-content:space-between;align-items:center;padding:5px 7px;border-radius:7px;font-size:10px;margin-bottom:2px;color:var(--text3);transition:all .2s;}
-.li.aktiv{background:rgba(255,215,0,0.1);color:var(--gold);font-weight:700;border-left:2px solid var(--gold);padding-left:9px;}
+.li{display:flex;justify-content:space-between;align-items:center;padding:5px 7px;border-radius:7px;font-size:10px;margin-bottom:2px;color:var(--text3);transition:all .25s;}
+.li.aktiv{background:rgba(255,215,0,0.1);color:var(--gold);font-weight:700;border-left:2px solid var(--gold);padding-left:9px;transform:scale(1.03);}
 .li.done{color:var(--green);opacity:.65;}
 .li.sicher{color:var(--purple);}
 .li-iq{font-size:9px;opacity:.6;}
@@ -138,6 +142,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .rbtn{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;margin-top:.8rem;}
 .cert-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;margin-top:.5rem;}
 .cert-btn:hover{background:rgba(255,215,0,0.1);}
+.img-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;margin-top:.5rem;}
+.img-btn:hover{background:rgba(74,144,226,0.1);}
+.chal-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;margin-top:.5rem;}
+.chal-btn:hover{background:rgba(124,95,255,0.1);}
+.share-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer;margin-top:.5rem;}
+.share-btn:hover{background:rgba(34,197,94,0.1);}
+.challenge-banner{background:rgba(255,215,0,0.1);border:1px solid var(--gold);border-radius:12px;padding:.9rem 1rem;text-align:center;margin-bottom:1.2rem;display:none;}
+.challenge-banner-title{font-size:13px;font-weight:800;color:var(--gold);}
+.challenge-banner-sub{font-size:12px;color:var(--text2);margin-top:4px;}
+.challenge-won{font-size:13px;font-weight:800;color:var(--green);margin-top:6px;}
+.challenge-lost{font-size:13px;font-weight:800;color:var(--red);margin-top:6px;}
+.s-notif{width:100%;padding:11px;font-size:13px;font-weight:600;border-radius:14px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .2s;}
+.s-notif.active{border-color:var(--green);color:var(--green);}
+.s-stats{width:100%;padding:14px;font-size:14px;font-weight:600;border-radius:14px;border:1.5px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;}
 #cert{display:none;}
 @media print{
   body>*{display:none!important;}
@@ -161,7 +179,6 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .hs-name{flex:1;font-size:15px;font-weight:700;color:var(--text);}
 .hs-lv{font-size:12px;color:var(--text3);}
 .hs-iq{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.s-stats{width:100%;padding:14px;font-size:14px;font-weight:600;border-radius:14px;border:1.5px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;}
 #stv{display:none;max-width:580px;margin:0 auto;padding:2.5rem 1.5rem;}
 .st-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:1.2rem;}
 .st-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem;}
@@ -170,7 +187,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .st-cv{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .st-chart-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
 .st-chart-lbl{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;}
-#st-chart{display:flex;align-items:flex-end;gap:4px;height:80px;}
+#st-chart{display:flex;align-items:flex-end;gap:4px;height:90px;}
 .st-streak{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;text-align:center;}
 .st-streak-num{font-size:32px;font-weight:800;color:var(--gold);}
 .st-streak-lbl{font-size:12px;color:var(--text3);margin-top:2px;}
@@ -186,9 +203,19 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .schw-btn.active{border-color:var(--purple);background:rgba(124,95,255,0.15);color:var(--purple);}
 .schw-btn:hover{border-color:var(--purple);color:var(--purple);}
 .err-erkl{font-size:12px;color:var(--text2);background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.2);border-radius:8px;padding:8px 12px;margin-top:8px;line-height:1.6;}
-.share-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer;margin-top:.5rem;}
-.share-btn:hover{background:rgba(34,197,94,0.1);}
 .offline-badge{display:none;background:rgba(245,158,11,0.15);border:1px solid var(--orange);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--orange);text-align:center;margin-bottom:.5rem;}
+/* Rating Modal */
+#rating-modal{display:none;position:fixed;inset:0;background:rgba(6,6,20,0.97);z-index:10002;flex-direction:column;align-items:center;justify-content:center;padding:2rem;gap:1.4rem;}
+.rating-stars{font-size:48px;text-align:center;animation:iqpop .6s ease;}
+.rating-title{font-size:22px;font-weight:800;color:var(--text);text-align:center;}
+.rating-sub{font-size:13px;color:var(--text3);text-align:center;max-width:280px;line-height:1.8;}
+.rating-btn{width:100%;max-width:300px;padding:16px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#1a1a1a;cursor:pointer;}
+.rating-later{background:transparent;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:.5rem;}
+/* Splash animation */
+@keyframes brainBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-14px);}60%{transform:translateY(-7px);}}
+.load-brain-anim{animation:brainBounce 1.8s ease infinite;}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.load-bar-shine{background:linear-gradient(90deg,#4a90e2,#7c5fff,#4a90e2) !important;background-size:200% 100% !important;animation:shimmer 1.4s linear infinite;}
 @media(max-width:800px){
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
@@ -212,12 +239,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button onclick="closeOnboarding()" style="padding:15px 40px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,#4a90e2,#7c5fff);color:#fff;cursor:pointer;margin-top:.5rem;">Verstanden &ndash; Los geht&apos;s!</button>
 </div>
 <div id="loading-screen" style="position:fixed;inset:0;background:#060614;display:flex;pointer-events:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:1rem;">
-  <div style="font-size:64px">&#129504;</div>
+  <div class="load-brain-anim" style="font-size:68px">&#129504;</div>
   <div style="font-size:18px;font-weight:700;color:#4a90e2;">IQ Test wird geladen...</div>
   <div style="width:200px;height:4px;background:#1a2540;border-radius:99px;overflow:hidden;">
-    <div id="load-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#4a90e2,#7c5fff);border-radius:99px;transition:width .3s;"></div>
+    <div id="load-bar" class="load-bar-shine" style="height:100%;width:0%;border-radius:99px;transition:width .3s;"></div>
   </div>
   <div style="font-size:12px;color:#475569;" id="load-txt">Verbinde mit Server...</div>
+</div>
+<!-- Rating Modal -->
+<div id="rating-modal">
+  <div class="rating-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+  <div class="rating-title">Gefaellt dir der IQ Test?</div>
+  <div class="rating-sub">Wenn dir die App Spass macht, hinterlasse eine Bewertung &ndash; das hilft uns sehr!</div>
+  <button class="rating-btn" onclick="rateApp()">&#11088; Jetzt bewerten</button>
+  <button class="rating-later" onclick="document.getElementById('rating-modal').style.display='none'">Spaeter</button>
 </div>
 <div id="sv">
   <div class="lang-bar">
@@ -260,6 +295,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
   <button class="s-hs" onclick="showHS()">Highscores</button>
   <button class="s-stats" onclick="showStats()">&#128202; Statistiken</button>
+  <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; Taegl. Erinnerung</button>
 </div>
 <div id="dv">
   <div style="font-size:58px;text-align:center;">&#128197;</div>
@@ -299,6 +335,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     </div>
     <div class="phase-row">
       <div class="phase-dot" id="pdot"></div>
+      <span class="kat-icon-q" id="kat-icon-q"></span>
       <span class="phase-lbl" id="pb">Phase</span>
     </div>
     <div class="joker-section">
@@ -306,12 +343,16 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <button class="joker-btn" id="j-5050" onclick="useJoker('5050')">50 : 50</button>
       <button class="joker-btn" id="j-telefon" onclick="useJoker('telefon')">&#128222; Telefon</button>
       <button class="joker-btn" id="j-publikum" onclick="useJoker('publikum')">&#128101; Publikum</button>
+      <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zurueckholen</button>
     </div>
   </div>
   <div class="qm">
     <div class="qm-top">
       <span class="qm-logo">IQ TEST</span>
-      <span class="qm-ctr" id="qc">1 / 15</span>
+      <div class="qm-ctr-wrap">
+        <span class="schw-stars" id="schw-stars"></span>
+        <span class="qm-ctr" id="qc">1 / 15</span>
+      </div>
     </div>
     <div class="prog"><div class="prog-fill" id="pf" style="width:0%"></div></div>
     <div class="preis" id="preis">100 EUR</div>
@@ -339,6 +380,11 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   </div>
 </div>
 <div id="rv">
+  <div class="challenge-banner" id="challenge-banner">
+    <div class="challenge-banner-title">&#127919; Du wurdest herausgefordert!</div>
+    <div class="challenge-banner-sub">Ziel: <span id="challenge-target">IQ 120</span></div>
+    <div id="challenge-result"></div>
+  </div>
   <div class="rv-hero">
     <div class="rv-emoji" id="rv-emoji"></div>
     <div class="rv-lbl">Dein Ergebnis</div>
@@ -360,6 +406,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
   <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
+  <button class="img-btn" onclick="shareImage()">&#128247; Als Bild teilen</button>
+  <button class="chal-btn" onclick="shareChallenge()">&#127919; Freund herausfordern</button>
   <button class="share-btn" onclick="shareResult()">&#128228; Ergebnis teilen</button>
   <button class="rbtn" onclick="showStart()">Nochmal starten</button>
 </div>
@@ -408,6 +456,6 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 </div>
 <a href="datenschutz.html" style="position:fixed;bottom:10px;right:10px;font-size:11px;color:#475569;text-decoration:none;">Datenschutz</a>
 <canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
-<script src="/static/app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
