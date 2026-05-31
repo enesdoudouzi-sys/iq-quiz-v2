@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IQ Test</title>
 <style>
@@ -174,13 +175,21 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .st-streak-num{font-size:32px;font-weight:800;color:var(--gold);}
 .st-streak-lbl{font-size:12px;color:var(--text3);margin-top:2px;}
 .st-cats-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
-@media(max-width:800px
-).kat-section{width:100%;}
+.kat-section{width:100%;}
 .kat-title{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;}
 .kat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
 .kat-btn{padding:.7rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s;}
 .kat-btn.active{border-color:var(--accent);background:rgba(74,144,226,0.15);color:var(--accent);}
-.kat-btn:hover{border-color:var(--accent);color:var(--accent);}{
+.kat-btn:hover{border-color:var(--accent);color:var(--accent);}
+.schw-row{display:flex;gap:.5rem;width:100%;}
+.schw-btn{flex:1;padding:.6rem .4rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;}
+.schw-btn.active{border-color:var(--purple);background:rgba(124,95,255,0.15);color:var(--purple);}
+.schw-btn:hover{border-color:var(--purple);color:var(--purple);}
+.err-erkl{font-size:12px;color:var(--text2);background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.2);border-radius:8px;padding:8px 12px;margin-top:8px;line-height:1.6;}
+.share-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer;margin-top:.5rem;}
+.share-btn:hover{background:rgba(34,197,94,0.1);}
+.offline-badge{display:none;background:rgba(245,158,11,0.15);border:1px solid var(--orange);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--orange);text-align:center;margin-bottom:.5rem;}
+@media(max-width:800px){
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
 .qr{display:none;}
@@ -190,6 +199,18 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 </style>
 </head>
 <body>
+<div id="onb" style="display:none;position:fixed;inset:0;background:rgba(6,6,20,0.97);z-index:10001;flex-direction:column;align-items:center;justify-content:center;padding:2rem;gap:1.2rem;">
+  <div style="font-size:64px;text-align:center;">&#129504;</div>
+  <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#4a90e2,#7c5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;">Willkommen beim IQ Test!</div>
+  <div style="font-size:14px;color:#94a3b8;text-align:center;max-width:320px;line-height:2;">
+    ✅ 15 Fragen aus verschiedenen Kategorien<br>
+    &#128200; Dein IQ steigt mit jeder richtigen Antwort<br>
+    &#127183; 3 Joker helfen bei schwierigen Fragen<br>
+    &#9200; Beantworte jede Frage rechtzeitig<br>
+    &#128202; Verfolge deinen Fortschritt in Statistiken
+  </div>
+  <button onclick="closeOnboarding()" style="padding:15px 40px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,#4a90e2,#7c5fff);color:#fff;cursor:pointer;margin-top:.5rem;">Verstanden &ndash; Los geht&apos;s!</button>
+</div>
 <div id="loading-screen" style="position:fixed;inset:0;background:#060614;display:flex;pointer-events:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:1rem;">
   <div style="font-size:64px">&#129504;</div>
   <div style="font-size:18px;font-weight:700;color:#4a90e2;">IQ Test wird geladen...</div>
@@ -221,7 +242,18 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <button class="kat-btn" onclick="toggleKat(this,'Sport')">⚽ Sport</button>
     <button class="kat-btn" onclick="toggleKat(this,'Mathematik')">🔢 Mathematik</button>
     <button class="kat-btn" onclick="toggleKat(this,'Logik & Zahlenfolgen')">🧩 Logik</button>
-    <button class="kat-btn" onclick="toggleKat(this,'Konzentration')">🎯 Konzentration</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Konzentration')">&#127919; Konzentration</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Musik')">&#127925; Musik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Geographie')">&#128506; Geographie</button>
+  </div>
+</div>
+<div class="kat-section">
+  <div class="kat-title">Schwierigkeit</div>
+  <div class="schw-row">
+    <button class="schw-btn active" onclick="toggleSchw(this,'alle')">Alle</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'1')">&#128994; Leicht</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'2')">&#128993; Mittel</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'3')">&#128308; Schwer</button>
   </div>
 </div>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
@@ -248,6 +280,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
 <div id="qv">
+  <div id="offline-badge" class="offline-badge" style="grid-column:1/-1;">&#128268; Offline-Modus &ndash; kein Highscore</div>
   <div class="ql">
     <div class="timer-ring" id="trw">
       <svg width="110" height="110" viewBox="0 0 110 110">
@@ -314,10 +347,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <span class="rv-chip" id="rv-chip"></span>
   </div>
   <div class="rv-grid">
-    <div class="rv-card"><div class="rv-ct">Allgemeinwissen</div><div class="rv-cv" id="baw"></div></div>
-    <div class="rv-card"><div class="rv-ct">Logik</div><div class="rv-cv" id="blog"></div></div>
-    <div class="rv-card"><div class="rv-ct">Konzentration</div><div class="rv-cv" id="bkz"></div></div>
-    <div class="rv-card"><div class="rv-ct">Reaktion</div><div class="rv-cv" id="bt"></div></div>
+    <div class="rv-card"><div class="rv-ct">Richtige</div><div class="rv-cv" id="baw"></div></div>
+    <div class="rv-card"><div class="rv-ct">Kategorie</div><div class="rv-cv" id="blog" style="font-size:14px;"></div></div>
+    <div class="rv-card"><div class="rv-ct">Schwierigkeit</div><div class="rv-cv" id="bkz" style="font-size:14px;"></div></div>
+    <div class="rv-card"><div class="rv-ct">&#216; Zeit</div><div class="rv-cv" id="bt"></div></div>
   </div>
   <div class="divider"></div>
   <div class="err-lbl" id="err-lbl"></div>
@@ -327,6 +360,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
   <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
+  <button class="share-btn" onclick="shareResult()">&#128228; Ergebnis teilen</button>
   <button class="rbtn" onclick="showStart()">Nochmal starten</button>
 </div>
 <div id="cert">

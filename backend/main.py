@@ -40,6 +40,7 @@ sessions = {}
 class StartRequest(BaseModel):
     name: str
     kategorie: str = "alle"
+    schwierigkeit: str = "alle"
     @validator('name')
     def name_valid(cls, v):
         v = v.strip()
@@ -116,7 +117,7 @@ def start_game(request: Request, req: StartRequest):
         for k in oldest:
             del sessions[k]
     session_id = str(uuid.uuid4())
-    fragen = get_random_fragen(15, req.kategorie)
+    fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
@@ -166,6 +167,7 @@ def pruefe_antwort(request: Request, req: AntwortRequest):
         "richtig":               richtig,
         "richtige_antwort":      frage["richtig"],
         "richtige_antwort_text": frage["antworten"][frage["richtig"]],
+        "erklaerung":            frage.get("erklaerung", ""),
         "iq":                    iq,
         "iq_text":               iq_bezeichnung(iq),
         "sicher_level":          sicher,
@@ -240,6 +242,14 @@ def submit_daily(request: Request, req: HighscoreRequest, db: Session = Depends(
     db.add(score)
     db.commit()
     return {"ok": True}
+
+@app.get("/api/offline")
+@limiter.limit("10/minute")
+def get_offline_fragen(request: Request):
+    fragen = get_random_fragen(15)
+    return [{"level": f["level"], "frage": f["frage"], "antworten": f["antworten"],
+             "richtig": f["richtig"], "kategorie": f["kategorie"],
+             "seq": f.get("seq"), "erklaerung": f.get("erklaerung", "")} for f in fragen]
 
 @app.get("/api/highscores")
 @limiter.limit("30/minute")

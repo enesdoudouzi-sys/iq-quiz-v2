@@ -1,7 +1,6 @@
 const API = 'https://iq-quiz-v2.onrender.com';
 const L = ['A','B','C','D'];
-const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7'};
-const CK = function(p){ return p.indexOf('Allgemein')>=0?'aw':p.indexOf('Logik')>=0?'log':'kz'; };
+const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6'};
 const MAX_FRAGEN = 15;
 const IQ_TBL = {};
 for(var i=0;i<=50;i++){
@@ -18,8 +17,8 @@ const SICHER=[5,10,15];
 
 var currentLang='de';
 const LANG={
-  de:{title:'IQ Test',sub:'Teste deinen IQ · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage'},
-  en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question'},
+  de:{title:'IQ Test',sub:'Teste deinen IQ · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
+  en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question',teilen:'Share Result'},
   tr:{title:'IQ Testi',sub:'IQ\'nunu Test Et · 15 Soru · 3 Joker',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
   fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
   es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
@@ -198,16 +197,22 @@ function getBez(iq){
 }
 
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
-var cs={aw:0,log:0,kz:0},cm={aw:0,log:0,kz:0},times=[],errs=[];
+var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var jokerStatus={'5050':true,'telefon':true,'publikum':true};
-var selectedKat='alle';
+var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
+var isOfflineMode=false,offlineQs=[];
 
 function toggleKat(btn,kat){
   document.querySelectorAll('.kat-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   selectedKat=kat;
+}
+function toggleSchw(btn,level){
+  document.querySelectorAll('.schw-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  selectedSchw=level;
 }
 
 function showStart(){
@@ -292,23 +297,25 @@ function showHS(){
 }
 
 function startGame(){
-  isDailyMode=false;
+  isDailyMode=false;isOfflineMode=false;
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
-  cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
+  cs={};cm={};times=[];errs=[];qs=[];
   jokerStatus={'5050':true,'telefon':true,'publikum':true};
   updJoker();
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName,kategorie:selectedKat})
+    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
   }).then(function(r){return r.json();}).then(function(d){
     sessionId=d.session_id;
-    buildLeiter();
-    updIQ(85);
-    showQuiz();
+    buildLeiter();updIQ(85);showQuiz();
+    setOfflineBadge(false);
     loadAndShowQ(1);
-  }).catch(function(e){alert('Fehler: '+e.message);});
+  }).catch(function(){
+    if(offlineQs.length>=MAX_FRAGEN){startOfflineGame();}
+    else{alert('Kein Internet und kein Offline-Cache verfuegbar.');}
+  });
 }
 
 function loadAndShowQ(level){
@@ -319,42 +326,45 @@ function loadAndShowQ(level){
   document.getElementById('fb').textContent='';
   document.getElementById('fb').className='fb';
   document.getElementById('joker-overlay').classList.remove('show');
+  if(isOfflineMode&&qs[level]){showQuestion(qs[level]);return;}
   fetch(API+'/api/frage/'+sessionId+'/'+level)
   .then(function(r){return r.json();})
-  .then(function(q){
-    qs[level]=q;
-    document.getElementById('qc').textContent=level+' / '+MAX_FRAGEN;
-    document.getElementById('pb').textContent=q.kategorie.toUpperCase();
-    document.getElementById('preis').textContent=q.preis;
-    var col=COL[q.kategorie]||'#4a90e2';
-    document.getElementById('pdot').style.background=col;
-    document.getElementById('pb').style.color=col;
-    document.getElementById('ta').style.stroke=col;
-    document.getElementById('qt').textContent=q.frage;
-    document.getElementById('pf').style.width=((level-1)/MAX_FRAGEN*100)+'%';
-    var sb=document.getElementById('sb');
-    if(q.seq){sb.textContent=q.seq;sb.style.display='block';}else sb.style.display='none';
-    var fbox=document.querySelector('.fbox');
-    fbox.style.animation='none';
-    requestAnimationFrame(function(){fbox.style.animation='fadeUp .35s ease';});
-    var op=document.getElementById('op');op.innerHTML='';
-    var opts=['A','B','C','D'];
-    for(var i=0;i<opts.length;i++){
-      var b=document.createElement('button');
-      b.className='opt appear';
-      b.style.animationDelay=(i*.08)+'s';
-      var badge=document.createElement('span');badge.className='badge';badge.textContent=opts[i];
-      var txt=document.createElement('span');txt.textContent=q.antworten[opts[i]];
-      b.appendChild(badge);b.appendChild(txt);
-      b.setAttribute('data-key',opts[i]);
-      b.onclick=function(){pick(this.getAttribute('data-key'));};
-      op.appendChild(b);
-    }
-    updLeiter(level);
-    var sec=level<=5?20:level<=10?25:30;
-    st=Date.now();tick(sec,sec);
-    ti=setInterval(function(){tl--;tick(tl,sec);if(tl<=0){clearInterval(ti);tout();}},1000);
-  }).catch(function(e){alert('Fehler: '+e.message);});
+  .then(function(q){qs[level]=q;showQuestion(q);})
+  .catch(function(e){alert('Fehler: '+e.message);});
+}
+function showQuestion(q){
+  var level=q.level;
+  document.getElementById('qc').textContent=level+' / '+MAX_FRAGEN;
+  document.getElementById('pb').textContent=q.kategorie.toUpperCase();
+  document.getElementById('preis').textContent=q.preis||getPreis(level);
+  var col=COL[q.kategorie]||'#4a90e2';
+  document.getElementById('pdot').style.background=col;
+  document.getElementById('pb').style.color=col;
+  document.getElementById('ta').style.stroke=col;
+  document.getElementById('qt').textContent=q.frage;
+  document.getElementById('pf').style.width=((level-1)/MAX_FRAGEN*100)+'%';
+  var sb=document.getElementById('sb');
+  if(q.seq){sb.textContent=q.seq;sb.style.display='block';}else sb.style.display='none';
+  var fbox=document.querySelector('.fbox');
+  fbox.style.animation='none';
+  requestAnimationFrame(function(){fbox.style.animation='fadeUp .35s ease';});
+  var op=document.getElementById('op');op.innerHTML='';
+  var opts=['A','B','C','D'];
+  for(var i=0;i<opts.length;i++){
+    var b=document.createElement('button');
+    b.className='opt appear';
+    b.style.animationDelay=(i*.08)+'s';
+    var badge=document.createElement('span');badge.className='badge';badge.textContent=opts[i];
+    var txt=document.createElement('span');txt.textContent=q.antworten[opts[i]];
+    b.appendChild(badge);b.appendChild(txt);
+    b.setAttribute('data-key',opts[i]);
+    b.onclick=function(){pick(this.getAttribute('data-key'));};
+    op.appendChild(b);
+  }
+  updLeiter(level);
+  var sec=level<=5?20:level<=10?25:30;
+  st=Date.now();tick(sec,sec);
+  ti=setInterval(function(){tl--;tick(tl,sec);if(tl<=0){clearInterval(ti);tout();}},1000);
 }
 
 function tick(l,t){
@@ -373,8 +383,8 @@ function tick(l,t){
 function tout(){
   if(done)return;done=true;
   var q=qs[cur];if(!q)return;
-  cm[CK(q.kategorie)]++;times.push(30);
-  errs.push({q:q,ch:null,to:true,ri:q.richtig||'A'});
+  var k=q.kategorie;cm[k]=(cm[k]||0)+1;times.push(30);
+  errs.push({q:q,ch:null,to:true,ri:q.richtig||'A',erklaerung:q.erklaerung||''});
   document.querySelectorAll('.opt').forEach(function(b){
     if(b.getAttribute('data-key')===q.richtig)b.classList.add('ok');
     b.disabled=true;
@@ -391,40 +401,46 @@ function pick(key){
   var elapsed=Math.min((Date.now()-st)/1000,30);
   times.push(elapsed);
   var q=qs[cur];
-  var k=CK(q?q.kategorie:'');cm[k]++;
+  var k=q?q.kategorie:'';cm[k]=(cm[k]||0)+1;
+  if(isOfflineMode){
+    var richtig=(key===q.richtig);
+    var iq=IQ_TBL[richtig?cur:Math.max(0,cur-1)]||85;
+    handleAnswer(key,{richtig:richtig,richtige_antwort:q.richtig,richtige_antwort_text:q.antworten[q.richtig],erklaerung:q.erklaerung||'',iq:iq,sicher_level:0},k);
+    return;
+  }
   fetch(API+'/api/antwort',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({session_id:sessionId,level:cur,antwort:key})
-  }).then(function(r){return r.json();}).then(function(d){
-    var bs=document.querySelectorAll('.opt');
-    var fb=document.getElementById('fb');
-    bs.forEach(function(b){
-      if(b.getAttribute('data-key')===key)b.classList.add(d.richtig?'ok':'no');
-      if(!d.richtig&&b.getAttribute('data-key')===d.richtige_antwort)b.classList.add('ok');
-      b.disabled=true;
-    });
-    if(d.richtig){
-      sc++;cs[k]++;
-      fb.textContent=T('richtig');fb.className='fb ok';
-      var isSich=SICHER.indexOf(cur)>=0;
-      playSound(isSich?'sicher':'richtig');
-      launchConfetti(isSich?'medium':'small');
-      showIQFb(true,cur);
-      if(cur>=MAX_FRAGEN){
-        setTimeout(function(){calcResult();},2000);
-      }else{
-        document.getElementById('nb').style.display='block';
-      }
-    }else{
-      errs.push({q:q,ch:key,to:false,ri:d.richtige_antwort});
-      fb.textContent=T('falsch')+' '+d.richtige_antwort+' - '+d.richtige_antwort_text;
-      fb.className='fb no';
-      playSound('falsch');
-      showIQFb(false,cur);
-      setTimeout(function(){calcResult();},2500);
-    }
+  }).then(function(r){return r.json();}).then(function(d){handleAnswer(key,d,k);});
+}
+function handleAnswer(key,d,k){
+  var q=qs[cur];
+  var bs=document.querySelectorAll('.opt');
+  var fb=document.getElementById('fb');
+  bs.forEach(function(b){
+    if(b.getAttribute('data-key')===key)b.classList.add(d.richtig?'ok':'no');
+    if(!d.richtig&&b.getAttribute('data-key')===d.richtige_antwort)b.classList.add('ok');
+    b.disabled=true;
   });
+  if(d.richtig){
+    sc++;cs[k]=(cs[k]||0)+1;
+    fb.textContent=T('richtig');fb.className='fb ok';
+    var isSich=SICHER.indexOf(cur)>=0;
+    playSound(isSich?'sicher':'richtig');
+    launchConfetti(isSich?'medium':'small');
+    showIQFb(true,cur);
+    if(cur>=MAX_FRAGEN){setTimeout(function(){calcResult();},2000);}
+    else{document.getElementById('nb').style.display='block';}
+  }else{
+    errs.push({q:q,ch:key,to:false,ri:d.richtige_antwort,erklaerung:d.erklaerung||''});
+    fb.textContent=T('falsch')+' '+d.richtige_antwort+' - '+d.richtige_antwort_text;
+    fb.className='fb no';
+    playSound('falsch');
+    showIQFb(false,cur);
+    setTimeout(function(){calcResult();},2500);
+  }
+  updIQ(d.iq||finalIQ);
 }
 
 function showIQFb(richtig,level){
@@ -495,9 +511,11 @@ function calcResult(){
   document.getElementById('rv-emoji').textContent=emoji;
   animateCount(document.getElementById('rv-iq'),85,iq,1500);
   document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
-  document.getElementById('baw').textContent=cs.aw+' / '+cm.aw;
-  document.getElementById('blog').textContent=cs.log+' / '+cm.log;
-  document.getElementById('bkz').textContent=cs.kz+' / '+cm.kz;
+  var totalCm=0;Object.keys(cm).forEach(function(k){totalCm+=cm[k];});
+  var totalCs=0;Object.keys(cs).forEach(function(k){totalCs+=cs[k];});
+  document.getElementById('baw').textContent=totalCs+' / '+totalCm;
+  document.getElementById('blog').textContent=selectedKat==='alle'?'Alle':selectedKat;
+  document.getElementById('bkz').textContent=selectedSchw==='alle'?'Alle':selectedSchw==='1'?'Leicht':selectedSchw==='2'?'Mittel':'Schwer';
   document.getElementById('bt').textContent=avg+' Sek.';
   document.getElementById('sn').value=playerName;
   if(isDailyMode){
@@ -534,6 +552,10 @@ function calcResult(){
       var p2=document.createElement('span');p2.className='pill pok';p2.textContent=e.ri+' - '+(e.q.antworten?e.q.antworten[e.ri]:'');
       col2.appendChild(lbl2);col2.appendChild(p2);row.appendChild(col2);
       card.appendChild(row);
+      if(e.erklaerung){
+        var exp=document.createElement('div');exp.className='err-erkl';
+        exp.textContent='💡 '+e.erklaerung;card.appendChild(exp);
+      }
       document.getElementById('ml').appendChild(card);
     }
   }
@@ -552,6 +574,19 @@ function saveHS(){
   });
 }
 
+function shareResult(){
+  var text=playerName+' hat beim IQ Test IQ '+finalIQ+' erreicht ('+sc+'/'+MAX_FRAGEN+' richtig)! Teste auch du deinen IQ!';
+  var url='https://iq-quiz-v2.onrender.com';
+  if(navigator.share){
+    navigator.share({title:'IQ Test Ergebnis',text:text,url:url}).catch(function(){});
+  }else{
+    navigator.clipboard&&navigator.clipboard.writeText(text+' '+url).then(function(){
+      var btn=document.querySelector('.share-btn');
+      if(btn){btn.textContent='✅ Kopiert!';setTimeout(function(){btn.textContent='📤 '+T('teilen');},2000);}
+    }).catch(function(){alert(text);});
+  }
+}
+
 // ── STATISTIKEN ────────────────────────────────────────────
 function saveStats(){
   var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
@@ -560,11 +595,12 @@ function saveStats(){
   s.totalIQ=(s.totalIQ||0)+finalIQ;
   s.totalCorrect=(s.totalCorrect||0)+sc;
   s.totalQuestions=(s.totalQuestions||0)+MAX_FRAGEN;
-  s.catCorrect=s.catCorrect||{aw:0,log:0,kz:0};
-  s.catTotal=s.catTotal||{aw:0,log:0,kz:0};
-  ['aw','log','kz'].forEach(function(k){
-    s.catCorrect[k]=(s.catCorrect[k]||0)+cs[k];
-    s.catTotal[k]=(s.catTotal[k]||0)+cm[k];
+  s.catCorrect=s.catCorrect||{};
+  s.catTotal=s.catTotal||{};
+  Object.keys(cm).forEach(function(k){
+    if(!k)return;
+    s.catCorrect[k]=(s.catCorrect[k]||0)+(cs[k]||0);
+    s.catTotal[k]=(s.catTotal[k]||0)+(cm[k]||0);
   });
   s.history=s.history||[];
   var today=new Date().toISOString().split('T')[0];
@@ -613,15 +649,18 @@ function showStats(){
     });
   }
   var cats=document.getElementById('st-cats');cats.innerHTML='';
-  [{key:'aw',name:'Allgemeinwissen',col:'#4a90e2'},{key:'log',name:'Logik',col:'#7c5fff'},{key:'kz',name:'Konzentration',col:'#06b6d4'}].forEach(function(c){
-    var pct=s.catTotal&&s.catTotal[c.key]?Math.round((s.catCorrect[c.key]||0)/s.catTotal[c.key]*100):0;
+  var catKeys=Object.keys((s.catTotal)||{}).filter(function(k){return s.catTotal[k]>0;});
+  if(!catKeys.length){cats.innerHTML='<div style="color:var(--text3);font-size:13px;text-align:center;padding:1rem;">Noch keine Daten</div>';}
+  catKeys.forEach(function(k){
+    var pct=s.catTotal[k]?Math.round((s.catCorrect[k]||0)/s.catTotal[k]*100):0;
+    var col=COL[k]||'#4a90e2';
     var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:.6rem;';
-    var nm=document.createElement('span');nm.style.cssText='font-size:12px;color:var(--text2);width:130px;flex-shrink:0;';nm.textContent=c.name;
+    var nm=document.createElement('span');nm.style.cssText='font-size:12px;color:var(--text2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';nm.textContent=k;
     var out=document.createElement('div');out.style.cssText='flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden;';
-    var inn=document.createElement('div');inn.style.cssText='height:100%;border-radius:99px;background:'+c.col+';width:0%;transition:width .8s ease;';
+    var inn=document.createElement('div');inn.style.cssText='height:100%;border-radius:99px;background:'+col+';width:0%;transition:width .8s ease;';
     out.appendChild(inn);
     var pe=document.createElement('span');pe.style.cssText='font-size:12px;font-weight:700;color:var(--text2);width:35px;text-align:right;';
-    pe.textContent=s.catTotal&&s.catTotal[c.key]?pct+'%':'–';
+    pe.textContent=pct+'%';
     row.appendChild(nm);row.appendChild(out);row.appendChild(pe);cats.appendChild(row);
     setTimeout(function(){inn.style.width=pct+'%';},100);
   });
@@ -693,8 +732,8 @@ function loadDailyHS(){
 
 function startDailyGame(){
   playerName=document.getElementById('dni').value||'Spieler';
-  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
-  cs={aw:0,log:0,kz:0};cm={aw:0,log:0,kz:0};times=[];errs=[];qs=[];
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;
+  cs={};cm={};times=[];errs=[];qs=[];
   jokerStatus={'5050':true,'telefon':true,'publikum':true};
   updJoker();
   isDailyMode=true;
@@ -705,9 +744,52 @@ function startDailyGame(){
     body:JSON.stringify({name:playerName})
   }).then(function(r){return r.json();}).then(function(d){
     sessionId=d.session_id;
-    buildLeiter();
-    updIQ(85);
-    showQuiz();
+    buildLeiter();updIQ(85);showQuiz();setOfflineBadge(false);
     loadAndShowQ(1);
   }).catch(function(e){alert('Fehler: '+e.message);});
 }
+
+// ── OFFLINE MODUS ──────────────────────────────────────────
+function setOfflineBadge(show){
+  var b=document.getElementById('offline-badge');
+  if(b)b.style.display=show?'block':'none';
+}
+function loadOfflineCache(){
+  var cached=localStorage.getItem('iq_offline_cache');
+  if(cached){try{offlineQs=JSON.parse(cached);}catch(e){}}
+  fetch(API+'/api/offline')
+    .then(function(r){return r.json();})
+    .then(function(fragen){
+      localStorage.setItem('iq_offline_cache',JSON.stringify(fragen));
+      offlineQs=fragen;
+    }).catch(function(){});
+}
+function startOfflineGame(){
+  isOfflineMode=true;
+  var shuffled=offlineQs.slice().sort(function(){return Math.random()-.5;});
+  qs=[];
+  for(var i=0;i<MAX_FRAGEN&&i<shuffled.length;i++){
+    var q=Object.assign({},shuffled[i]);q.level=i+1;
+    qs[i+1]=q;
+  }
+  sessionId='offline';
+  buildLeiter();updIQ(85);showQuiz();setOfflineBadge(true);
+  loadAndShowQ(1);
+}
+
+// ── ONBOARDING ─────────────────────────────────────────────
+function checkOnboarding(){
+  if(!localStorage.getItem('iq_onboarding_done')){
+    var ob=document.getElementById('onb');
+    if(ob)ob.style.display='flex';
+  }
+}
+function closeOnboarding(){
+  localStorage.setItem('iq_onboarding_done','1');
+  var ob=document.getElementById('onb');
+  if(ob)ob.style.display='none';
+}
+
+// ── INIT ───────────────────────────────────────────────────
+loadOfflineCache();
+checkOnboarding();
