@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IQ Test</title>
 <style>
@@ -13,6 +14,10 @@
 --text:#f1f5f9;--text2:#94a3b8;--text3:#475569;
 }
 body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.lang-bar{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:.5rem;}
+.lang-btn{padding:.4rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--bg3);cursor:pointer;font-size:18px;transition:all .2s;}
+.lang-btn.active{border-color:var(--accent);background:rgba(74,144,226,0.15);}
+.lang-btn:hover{border-color:var(--accent);}
 #sv{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.4rem;max-width:460px;margin:0 auto;padding:2rem;}
 .s-brain{font-size:72px;text-align:center;}
 .s-title{font-size:52px;font-weight:800;background:linear-gradient(135deg,#4a90e2,#7c5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;}
@@ -20,13 +25,6 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .s-input{width:100%;padding:16px 20px;border-radius:14px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:16px;outline:none;}
 .s-btn{width:100%;padding:17px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;cursor:pointer;}
 .s-hs{width:100%;padding:14px;font-size:14px;font-weight:600;border-radius:14px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;}
-.s-daily{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:14px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;}
-#dv{display:none;flex-direction:column;align-items:center;gap:1.2rem;max-width:460px;margin:0 auto;padding:2rem 2rem 3rem;}
-.dv-date{font-size:13px;color:var(--text3);text-align:center;}
-.dv-countdown{font-size:15px;font-weight:700;color:var(--text2);text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.5rem;width:100%;}
-.dv-done{font-size:15px;font-weight:700;color:var(--green);text-align:center;padding:1rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:12px;}
-.dv-score{font-size:13px;color:var(--text2);text-align:center;margin-top:.5rem;}
-.dv-desc{font-size:13px;color:var(--text3);text-align:center;line-height:1.7;}
 #qv{display:none;grid-template-columns:160px 1fr 160px;gap:1rem;min-height:100vh;padding:1rem;max-width:1200px;margin:0 auto;}
 #qv.active{display:grid;}
 .ql{display:flex;flex-direction:column;align-items:center;gap:1rem;padding-top:1rem;}
@@ -69,6 +67,19 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .opt.no .badge{background:var(--red);color:#fff;}
 .opt.gesperrt{opacity:.15;pointer-events:none;}
 .opt:disabled{cursor:default;transform:none !important;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.07);}100%{transform:scale(1);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes iqPop{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
+.opt.appear{animation:fadeUp .28s ease both;}
+.li.sicher.aktiv{box-shadow:0 0 18px rgba(124,95,255,0.4);}
+.s-daily{width:100%;padding:14px;font-size:14px;font-weight:700;border-radius:14px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;}
+#dv{display:none;flex-direction:column;align-items:center;gap:1.2rem;max-width:460px;margin:0 auto;padding:2rem 2rem 3rem;}
+.dv-date{font-size:13px;color:var(--text3);text-align:center;}
+.dv-countdown{font-size:15px;font-weight:700;color:var(--text2);text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.5rem;width:100%;}
+.dv-done{font-size:15px;font-weight:700;color:var(--green);text-align:center;padding:1rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:12px;}
+.dv-score{font-size:13px;color:var(--text2);text-align:center;margin-top:.5rem;}
+.dv-desc{font-size:13px;color:var(--text3);text-align:center;line-height:1.7;}
 .fb{min-height:26px;font-size:14px;font-weight:700;text-align:center;}
 .fb.ok{color:var(--green);}.fb.no{color:var(--red);}.fb.to{color:var(--orange);}
 .joker-overlay{display:none;background:var(--bg3);border:1.5px solid var(--accent);border-radius:16px;padding:1.2rem;text-align:center;margin-top:.5rem;}
@@ -82,7 +93,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .pub-bar-inner{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:6px;transition:width .8s ease;}
 .pub-bar-pct{font-size:12px;font-weight:700;color:var(--accent);width:35px;text-align:right;}
 .jo-close{margin-top:.8rem;padding:.6rem 1.5rem;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;}
-.iq-fb{background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.3);border-radius:14px;padding:1rem;text-align:center;display:none;}
+.iq-fb{background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.3);border-radius:14px;padding:1rem;text-align:center;display:none;animation:iqpop .5s ease;}
+@keyframes iqpop{0%{transform:scale(0.5);opacity:0;}70%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
 .iq-fb-lbl{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;}
 .iq-fb-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
 .iq-fb-bez{font-size:13px;color:var(--text2);margin-top:4px;}
@@ -163,12 +175,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .st-streak-num{font-size:32px;font-weight:800;color:var(--gold);}
 .st-streak-lbl{font-size:12px;color:var(--text3);margin-top:2px;}
 .st-cats-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
-@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
-@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.07);}100%{transform:scale(1);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-@keyframes iqPop{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
-.opt.appear{animation:fadeUp .28s ease both;}
-.li.sicher.aktiv{box-shadow:0 0 18px rgba(124,95,255,0.4);}
+.kat-section{width:100%;}
+.kat-title{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;}
+.kat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.kat-btn{padding:.7rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s;}
+.kat-btn.active{border-color:var(--accent);background:rgba(74,144,226,0.15);color:var(--accent);}
+.kat-btn:hover{border-color:var(--accent);color:var(--accent);}
+.schw-row{display:flex;gap:.5rem;width:100%;}
+.schw-btn{flex:1;padding:.6rem .4rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;}
+.schw-btn.active{border-color:var(--purple);background:rgba(124,95,255,0.15);color:var(--purple);}
+.schw-btn:hover{border-color:var(--purple);color:var(--purple);}
+.err-erkl{font-size:12px;color:var(--text2);background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.2);border-radius:8px;padding:8px 12px;margin-top:8px;line-height:1.6;}
+.share-btn{width:100%;padding:13px;font-size:14px;font-weight:700;border-radius:11px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer;margin-top:.5rem;}
+.share-btn:hover{background:rgba(34,197,94,0.1);}
+.offline-badge{display:none;background:rgba(245,158,11,0.15);border:1px solid var(--orange);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--orange);text-align:center;margin-bottom:.5rem;}
 @media(max-width:800px){
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
@@ -179,11 +199,63 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 </style>
 </head>
 <body>
+<div id="onb" style="display:none;position:fixed;inset:0;background:rgba(6,6,20,0.97);z-index:10001;flex-direction:column;align-items:center;justify-content:center;padding:2rem;gap:1.2rem;">
+  <div style="font-size:64px;text-align:center;">&#129504;</div>
+  <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#4a90e2,#7c5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;">Willkommen beim IQ Test!</div>
+  <div style="font-size:14px;color:#94a3b8;text-align:center;max-width:320px;line-height:2;">
+    ✅ 15 Fragen aus verschiedenen Kategorien<br>
+    &#128200; Dein IQ steigt mit jeder richtigen Antwort<br>
+    &#127183; 3 Joker helfen bei schwierigen Fragen<br>
+    &#9200; Beantworte jede Frage rechtzeitig<br>
+    &#128202; Verfolge deinen Fortschritt in Statistiken
+  </div>
+  <button onclick="closeOnboarding()" style="padding:15px 40px;font-size:16px;font-weight:700;border-radius:14px;border:none;background:linear-gradient(135deg,#4a90e2,#7c5fff);color:#fff;cursor:pointer;margin-top:.5rem;">Verstanden &ndash; Los geht&apos;s!</button>
+</div>
+<div id="loading-screen" style="position:fixed;inset:0;background:#060614;display:flex;pointer-events:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:1rem;">
+  <div style="font-size:64px">&#129504;</div>
+  <div style="font-size:18px;font-weight:700;color:#4a90e2;">IQ Test wird geladen...</div>
+  <div style="width:200px;height:4px;background:#1a2540;border-radius:99px;overflow:hidden;">
+    <div id="load-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#4a90e2,#7c5fff);border-radius:99px;transition:width .3s;"></div>
+  </div>
+  <div style="font-size:12px;color:#475569;" id="load-txt">Verbinde mit Server...</div>
+</div>
 <div id="sv">
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('de',this)">&#127465;&#127466;</button>
+    <button class="lang-btn" onclick="setLang('en',this)">&#127468;&#127463;</button>
+    <button class="lang-btn" onclick="setLang('tr',this)">&#127481;&#127479;</button>
+    <button class="lang-btn" onclick="setLang('fr',this)">&#127467;&#127479;</button>
+    <button class="lang-btn" onclick="setLang('es',this)">&#127466;&#127480;</button>
+    <button class="lang-btn" onclick="setLang('ar',this)">&#127480;&#127462;</button>
+  </div>
   <div class="s-brain">&#129504;</div>
   <div class="s-title">IQ Test</div>
   <div class="s-sub">Teste deinen IQ · 15 Fragen · 3 Joker</div>
   <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
+<div class="kat-section">
+  <div class="kat-title">Kategorie wählen</div>
+  <div class="kat-grid">
+    <button class="kat-btn active" onclick="toggleKat(this,'alle')">🎯 Alle</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Allgemeinwissen')">🌍 Allgemeinwissen</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Geschichte')">📜 Geschichte</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Wissenschaft')">🔬 Wissenschaft</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Sport')">⚽ Sport</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Mathematik')">🔢 Mathematik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Logik & Zahlenfolgen')">🧩 Logik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Konzentration')">&#127919; Konzentration</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Musik')">&#127925; Musik</button>
+    <button class="kat-btn" onclick="toggleKat(this,'Geographie')">&#128506; Geographie</button>
+  </div>
+</div>
+<div class="kat-section">
+  <div class="kat-title">Schwierigkeit</div>
+  <div class="schw-row">
+    <button class="schw-btn active" onclick="toggleSchw(this,'alle')">Alle</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'1')">&#128994; Leicht</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'2')">&#128993; Mittel</button>
+    <button class="schw-btn" onclick="toggleSchw(this,'3')">&#128308; Schwer</button>
+  </div>
+</div>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
   <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
   <button class="s-hs" onclick="showHS()">Highscores</button>
@@ -208,6 +280,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
 <div id="qv">
+  <div id="offline-badge" class="offline-badge" style="grid-column:1/-1;">&#128268; Offline-Modus &ndash; kein Highscore</div>
   <div class="ql">
     <div class="timer-ring" id="trw">
       <svg width="110" height="110" viewBox="0 0 110 110">
@@ -238,7 +311,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="qm">
     <div class="qm-top">
       <span class="qm-logo">IQ TEST</span>
-      <span class="qm-ctr" id="qc">1 / ?</span>
+      <span class="qm-ctr" id="qc">1 / 15</span>
     </div>
     <div class="prog"><div class="prog-fill" id="pf" style="width:0%"></div></div>
     <div class="preis" id="preis">100 EUR</div>
@@ -274,10 +347,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <span class="rv-chip" id="rv-chip"></span>
   </div>
   <div class="rv-grid">
-    <div class="rv-card"><div class="rv-ct">Allgemeinwissen</div><div class="rv-cv" id="baw"></div></div>
-    <div class="rv-card"><div class="rv-ct">Logik</div><div class="rv-cv" id="blog"></div></div>
-    <div class="rv-card"><div class="rv-ct">Konzentration</div><div class="rv-cv" id="bkz"></div></div>
-    <div class="rv-card"><div class="rv-ct">Reaktion</div><div class="rv-cv" id="bt"></div></div>
+    <div class="rv-card"><div class="rv-ct">Richtige</div><div class="rv-cv" id="baw"></div></div>
+    <div class="rv-card"><div class="rv-ct">Kategorie</div><div class="rv-cv" id="blog" style="font-size:14px;"></div></div>
+    <div class="rv-card"><div class="rv-ct">Schwierigkeit</div><div class="rv-cv" id="bkz" style="font-size:14px;"></div></div>
+    <div class="rv-card"><div class="rv-ct">&#216; Zeit</div><div class="rv-cv" id="bt"></div></div>
   </div>
   <div class="divider"></div>
   <div class="err-lbl" id="err-lbl"></div>
@@ -287,6 +360,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
   <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
+  <button class="share-btn" onclick="shareResult()">&#128228; Ergebnis teilen</button>
   <button class="rbtn" onclick="showStart()">Nochmal starten</button>
 </div>
 <div id="cert">
@@ -332,6 +406,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div id="hl"></div>
   <button class="rbtn" onclick="showStart()">Zurueck</button>
 </div>
+<a href="datenschutz.html" style="position:fixed;bottom:10px;right:10px;font-size:11px;color:#475569;text-decoration:none;">Datenschutz</a>
 <canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 <script src="/static/app.js"></script>
 </body>
