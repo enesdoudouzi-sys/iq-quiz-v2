@@ -380,6 +380,7 @@ function showQuestion(q){
   document.getElementById('pdot').style.background=col;
   document.getElementById('pb').style.color=col;
   document.getElementById('ta').style.stroke=col;
+  document.documentElement.style.setProperty('--cat-col',col);
   document.getElementById('qt').textContent=q.frage;
   document.getElementById('pf').style.width=((level-1)/MAX_FRAGEN*100)+'%';
   // Kategorie-Icon
@@ -556,6 +557,8 @@ function calcResult(){
   document.getElementById('rv-emoji').textContent=emoji;
   animateCount(document.getElementById('rv-iq'),85,iq,1500);
   document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
+  var rb=document.getElementById('rank-badge');
+  if(rb){var rank=getRankBadge(iq);rb.textContent=rank.text;rb.style.background=rank.bg;rb.style.color=rank.col;rb.style.borderColor=rank.border;rb.style.boxShadow='0 0 16px '+rank.border+'44';}
   var totalCm=0;Object.keys(cm).forEach(function(k){totalCm+=cm[k];});
   var totalCs=0;Object.keys(cs).forEach(function(k){totalCs+=cs[k];});
   document.getElementById('baw').textContent=totalCs+' / '+totalCm;
@@ -1035,7 +1038,67 @@ function closeOnboarding(){
   if(ob)ob.style.display='none';
 }
 
+// ── STERNENHINTERGRUND ─────────────────────────────────────
+function initStarfield(){
+  var cv=document.getElementById('starfield');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  function resize(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  var stars=[];
+  for(var i=0;i<160;i++){
+    stars.push({
+      x:Math.random(),y:Math.random(),
+      r:Math.random()*1.4+0.2,
+      o:Math.random()*0.6+0.1,
+      s:Math.random()*0.3+0.05,
+      t:Math.random()*Math.PI*2
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    var now=Date.now()/1000;
+    stars.forEach(function(s){
+      var pulse=s.o*(0.6+0.4*Math.sin(now*s.s+s.t));
+      ctx.beginPath();
+      ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+pulse+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── RANG BADGE ─────────────────────────────────────────────
+function getRankBadge(iq){
+  if(iq>=145)return{text:'GENIE',bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
+  if(iq>=130)return{text:'HOCHBEGABT',bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
+  if(iq>=120)return{text:'SEHR INTELLIGENT',bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
+  if(iq>=115)return{text:'ÜBERDURCHSCHNITTLICH',bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
+  if(iq>=100)return{text:'DURCHSCHNITTLICH',bg:'transparent',col:'#94a3b8',border:'#475569'};
+  return{text:'WEITER ÜBEN',bg:'transparent',col:'#475569',border:'#1a2540'};
+}
+
+// ── ONBOARDING SLIDES ──────────────────────────────────────
+var _onbSlide=0;
+function onbNext(){
+  var total=4;
+  _onbSlide++;
+  if(_onbSlide>=total){closeOnboarding();return;}
+  for(var i=0;i<total;i++){
+    var s=document.getElementById('onb-'+i);
+    var d=document.getElementById('odot-'+i);
+    if(s)s.classList.toggle('active',i===_onbSlide);
+    if(d)d.classList.toggle('active',i===_onbSlide);
+  }
+  var btn=document.getElementById('onb-next-btn');
+  if(btn)btn.textContent=_onbSlide===total-1?'Los geht\'s!':'Weiter';
+}
+
 // ── INIT ───────────────────────────────────────────────────
+initStarfield();
 loadOfflineCache();
 checkOnboarding();
 checkChallenge();
