@@ -173,7 +173,10 @@ function showLoader(txt,pct){
   if(b)b.style.width=pct+'%';
   if(t)t.textContent=txt;
 }
+var _loaderDone=false;
 function hideLoader(){
+  if(_loaderDone)return;
+  _loaderDone=true;
   var s=document.getElementById('loading-screen');
   if(s){
     s.style.opacity='0';
@@ -182,26 +185,11 @@ function hideLoader(){
     setTimeout(function(){s.style.display='none';},500);
   }
 }
-// Render free tier braucht bis zu 30s zum Starten — mehrfach versuchen
-showLoader('Verbinde mit Server...',10);
-(function pingServer(attempt){
-  var msgs=[
-    ['Verbinde mit Server...',10],
-    ['Server startet auf (kann 30s dauern)...',30],
-    ['Server wacht auf...',50],
-    ['Fast da...',70],
-    ['Noch einen Moment...',85],
-    ['Fast fertig...',95]
-  ];
-  var m=msgs[Math.min(attempt,msgs.length-1)];
-  showLoader(m[0],m[1]);
-  fetch(API+'/health',{signal:AbortSignal.timeout?AbortSignal.timeout(8000):undefined})
-    .then(function(){hideLoader();})
-    .catch(function(){
-      if(attempt<6){setTimeout(function(){pingServer(attempt+1);},5000);}
-      else{hideLoader();}
-    });
-})(0);
+// Nach max 8s Ladescreen immer ausblenden — Server-Ping läuft im Hintergrund weiter
+showLoader('Verbinde mit Server...',20);
+setTimeout(function(){hideLoader();},8000);
+setTimeout(function(){if(!_loaderDone)showLoader('Server startet...',60);},3000);
+fetch(API+'/health').then(function(){hideLoader();}).catch(function(){});
 
 function getBez(iq){
   if(iq>=145)return 'Genie';
