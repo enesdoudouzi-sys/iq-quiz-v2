@@ -1,6 +1,7 @@
 const API = 'https://iq-quiz-v2.onrender.com';
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6'};
+const KAT_ICONS = {'Allgemeinwissen':'🌍','Logik & Zahlenfolgen':'🧩','Konzentration':'🎯','Geschichte':'📜','Wissenschaft & Natur':'🔬','Wissenschaft':'🔬','Sport':'⚽','Mathematik':'🔢','Musik':'🎵','Geographie':'🗺️'};
 const MAX_FRAGEN = 15;
 const IQ_TBL = {};
 for(var i=0;i<=50;i++){
@@ -172,7 +173,10 @@ function showLoader(txt,pct){
   if(b)b.style.width=pct+'%';
   if(t)t.textContent=txt;
 }
+var _loaderDone=false;
 function hideLoader(){
+  if(_loaderDone)return;
+  _loaderDone=true;
   var s=document.getElementById('loading-screen');
   if(s){
     s.style.opacity='0';
@@ -181,10 +185,11 @@ function hideLoader(){
     setTimeout(function(){s.style.display='none';},500);
   }
 }
-fetch(API+'/health').then(function(){hideLoader();}).catch(function(){hideLoader();});
-showLoader('Verbinde mit Server...',30);
-setTimeout(function(){showLoader('Server startet...',60);},3000);
-setTimeout(function(){showLoader('Fast fertig...',90);},8000);
+// Nach max 8s Ladescreen immer ausblenden — Server-Ping läuft im Hintergrund weiter
+showLoader('Verbinde mit Server...',20);
+setTimeout(function(){hideLoader();},8000);
+setTimeout(function(){if(!_loaderDone)showLoader('Server startet...',60);},3000);
+fetch(API+'/health').then(function(){hideLoader();}).catch(function(){});
 
 function getBez(iq){
   if(iq>=145)return 'Genie';
@@ -203,6 +208,8 @@ var jokerStatus={'5050':true,'telefon':true,'publikum':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
 var isOfflineMode=false,offlineQs=[];
+var extraJokerUsed=false;
+var challengeTarget=0;
 
 function toggleKat(btn,kat){
   document.querySelectorAll('.kat-btn').forEach(function(b){b.classList.remove('active');});
@@ -274,6 +281,9 @@ function updJoker(){
   document.getElementById('j-5050').disabled=!jokerStatus['5050'];
   document.getElementById('j-telefon').disabled=!jokerStatus['telefon'];
   document.getElementById('j-publikum').disabled=!jokerStatus['publikum'];
+  var allUsed=!jokerStatus['5050']&&!jokerStatus['telefon']&&!jokerStatus['publikum'];
+  var extraBtn=document.getElementById('extra-joker-btn');
+  if(extraBtn)extraBtn.style.display=(allUsed&&!extraJokerUsed)?'flex':'none';
 }
 
 function showHS(){
@@ -297,24 +307,41 @@ function showHS(){
 }
 
 function startGame(){
-  isDailyMode=false;isOfflineMode=false;
+  isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={};cm={};times=[];errs=[];qs=[];
   jokerStatus={'5050':true,'telefon':true,'publikum':true};
   updJoker();
+  var startBtn=document.querySelector('.s-btn');
+  if(startBtn){startBtn.disabled=true;startBtn.textContent='Verbinde...';}
+  apiStartWithRetry(0);
+}
+function apiStartWithRetry(attempt){
+  var startBtn=document.querySelector('.s-btn');
+  var msgs=['Verbinde...','Server startet... (10s)','Noch einen Moment... (20s)','Fast fertig... (30s)'];
+  if(startBtn)startBtn.textContent=msgs[Math.min(attempt,msgs.length-1)];
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
-  }).then(function(r){return r.json();}).then(function(d){
+  }).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.json();
+  }).then(function(d){
+    if(startBtn){startBtn.disabled=false;startBtn.textContent='Jetzt starten';}
     sessionId=d.session_id;
     buildLeiter();updIQ(85);showQuiz();
     setOfflineBadge(false);
     loadAndShowQ(1);
   }).catch(function(){
-    if(offlineQs.length>=MAX_FRAGEN){startOfflineGame();}
-    else{alert('Kein Internet und kein Offline-Cache verfuegbar.');}
+    if(attempt<3){
+      setTimeout(function(){apiStartWithRetry(attempt+1);},8000);
+    }else{
+      if(startBtn){startBtn.disabled=false;startBtn.textContent='Jetzt starten';}
+      if(offlineQs.length>=MAX_FRAGEN){startOfflineGame();}
+      else{alert('Server nicht erreichbar. Bitte kurz warten und nochmal versuchen.');}
+    }
   });
 }
 
@@ -341,8 +368,15 @@ function showQuestion(q){
   document.getElementById('pdot').style.background=col;
   document.getElementById('pb').style.color=col;
   document.getElementById('ta').style.stroke=col;
+  document.documentElement.style.setProperty('--cat-col',col);
   document.getElementById('qt').textContent=q.frage;
   document.getElementById('pf').style.width=((level-1)/MAX_FRAGEN*100)+'%';
+  // Kategorie-Icon
+  var iconEl=document.getElementById('kat-icon-q');
+  if(iconEl)iconEl.textContent=KAT_ICONS[q.kategorie]||'';
+  // Schwierigkeit Sterne
+  var stars=document.getElementById('schw-stars');
+  if(stars){var sw=q.schwierigkeit||1;stars.textContent=sw===3?'🔴🔴🔴':sw===2?'🟡🟡':'🟢';}
   var sb=document.getElementById('sb');
   if(q.seq){sb.textContent=q.seq;sb.style.display='block';}else sb.style.display='none';
   var fbox=document.querySelector('.fbox');
@@ -511,6 +545,8 @@ function calcResult(){
   document.getElementById('rv-emoji').textContent=emoji;
   animateCount(document.getElementById('rv-iq'),85,iq,1500);
   document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
+  var rb=document.getElementById('rank-badge');
+  if(rb){var rank=getRankBadge(iq);rb.textContent=rank.text;rb.style.background=rank.bg;rb.style.color=rank.col;rb.style.borderColor=rank.border;rb.style.boxShadow='0 0 16px '+rank.border+'44';}
   var totalCm=0;Object.keys(cm).forEach(function(k){totalCm+=cm[k];});
   var totalCs=0;Object.keys(cs).forEach(function(k){totalCs+=cs[k];});
   document.getElementById('baw').textContent=totalCs+' / '+totalCm;
@@ -526,6 +562,20 @@ function calcResult(){
     isDailyMode=false;
   } else {
     document.getElementById('rv-chip').textContent=sc+' / '+MAX_FRAGEN;
+  }
+  // Challenge-Ergebnis anzeigen
+  if(challengeTarget>0){
+    var banner=document.getElementById('challenge-banner');
+    var res=document.getElementById('challenge-result');
+    if(banner)banner.style.display='block';
+    if(res){
+      if(finalIQ>=challengeTarget){
+        res.innerHTML='<div class="challenge-won">🏆 Herausforderung geschlagen! (IQ '+finalIQ+' vs. '+challengeTarget+')</div>';
+        launchConfetti('big');
+      }else{
+        res.innerHTML='<div class="challenge-lost">😤 Knapp daneben! IQ '+finalIQ+' vs. Ziel '+challengeTarget+'</div>';
+      }
+    }
   }
   document.getElementById('ml').innerHTML='';
   document.getElementById('err-lbl').textContent=errs.length?T('fehler')+': '+errs.length:T('fehler');
@@ -559,6 +609,7 @@ function calcResult(){
       document.getElementById('ml').appendChild(card);
     }
   }
+  checkRatingPrompt();
 }
 
 function saveHS(){
@@ -629,7 +680,7 @@ function showStats(){
   document.getElementById('st-avg').textContent=g?'IQ '+Math.round(s.totalIQ/g):'–';
   var acc=s.totalQuestions?Math.round(s.totalCorrect/s.totalQuestions*100):0;
   document.getElementById('st-acc').textContent=g?acc+'%':'–';
-  document.getElementById('st-streak').textContent=s.dailyStreak||0;
+  document.getElementById('st-streak').textContent=(s.dailyStreak||0)+' 🔥';
   var chart=document.getElementById('st-chart');chart.innerHTML='';
   var hist=s.history||[];
   if(!hist.length){
@@ -638,14 +689,20 @@ function showStats(){
     hist.slice().reverse().forEach(function(h){
       var pct=Math.max(5,Math.round((h.iq-85)/(145-85)*100));
       var col=h.iq>=130?'var(--gold)':h.iq>=115?'var(--accent)':h.iq>=100?'var(--purple)':'var(--text3)';
+      var isDaily=h.daily;
       var wrap=document.createElement('div');
-      wrap.style.cssText='flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;';
+      wrap.style.cssText='flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;cursor:default;';
+      wrap.title='IQ '+h.iq+' · '+h.date+(isDaily?' 📅':'');
       var bar=document.createElement('div');
-      bar.style.cssText='width:100%;border-radius:4px 4px 0 0;background:'+col+';height:'+pct+'%;min-height:4px;';
-      var lbl=document.createElement('div');
-      lbl.style.cssText='font-size:8px;color:var(--text3);margin-top:2px;text-align:center;';
-      lbl.textContent=h.iq;
-      wrap.appendChild(bar);wrap.appendChild(lbl);chart.appendChild(wrap);
+      bar.style.cssText='width:100%;border-radius:4px 4px 0 0;background:'+col+';height:'+pct+'%;min-height:4px;position:relative;'+(isDaily?'border-top:2px solid var(--gold);':'');
+      var iqLbl=document.createElement('div');
+      iqLbl.style.cssText='font-size:8px;font-weight:700;color:var(--text3);margin-top:2px;text-align:center;';
+      iqLbl.textContent=h.iq;
+      var dateLbl=document.createElement('div');
+      dateLbl.style.cssText='font-size:7px;color:var(--text3);opacity:.7;text-align:center;white-space:nowrap;overflow:hidden;';
+      var d=h.date?h.date.slice(5).replace('-','/'):'-';
+      dateLbl.textContent=d+(isDaily?' 📅':'');
+      wrap.appendChild(bar);wrap.appendChild(iqLbl);wrap.appendChild(dateLbl);chart.appendChild(wrap);
     });
   }
   var cats=document.getElementById('st-cats');cats.innerHTML='';
@@ -654,8 +711,9 @@ function showStats(){
   catKeys.forEach(function(k){
     var pct=s.catTotal[k]?Math.round((s.catCorrect[k]||0)/s.catTotal[k]*100):0;
     var col=COL[k]||'#4a90e2';
+    var icon=KAT_ICONS[k]||'';
     var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:.6rem;';
-    var nm=document.createElement('span');nm.style.cssText='font-size:12px;color:var(--text2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';nm.textContent=k;
+    var nm=document.createElement('span');nm.style.cssText='font-size:12px;color:var(--text2);width:140px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';nm.textContent=icon+' '+k;
     var out=document.createElement('div');out.style.cssText='flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden;';
     var inn=document.createElement('div');inn.style.cssText='height:100%;border-radius:99px;background:'+col+';width:0%;transition:width .8s ease;';
     out.appendChild(inn);
@@ -674,6 +732,166 @@ function downloadCert(){
   document.getElementById('cert-detail').textContent=sc+' von 15 Fragen richtig · '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('cert-footer').textContent='IQ-Quiz · iq-quiz-v2.onrender.com · '+new Date().toLocaleDateString('de-DE');
   window.print();
+}
+
+// ── BILD TEILEN ────────────────────────────────────────────
+function shareImage(){
+  var cv=document.createElement('canvas');
+  cv.width=800;cv.height=450;
+  var ctx=cv.getContext('2d');
+  // Hintergrund
+  var grd=ctx.createLinearGradient(0,0,800,450);
+  grd.addColorStop(0,'#060614');grd.addColorStop(1,'#0f1628');
+  ctx.fillStyle=grd;ctx.fillRect(0,0,800,450);
+  // Dekorationsstreifen
+  var acc=ctx.createLinearGradient(0,0,800,0);
+  acc.addColorStop(0,'#4a90e2');acc.addColorStop(1,'#7c5fff');
+  ctx.fillStyle=acc;ctx.fillRect(0,0,800,5);
+  // Brain emoji
+  ctx.font='72px Arial';ctx.textAlign='center';
+  ctx.fillText('🧠',400,100);
+  // IQ Test
+  ctx.font='bold 22px Arial';ctx.fillStyle='#94a3b8';ctx.letterSpacing='4px';
+  ctx.fillText('IQ TEST',400,140);
+  // Name
+  ctx.font='bold 28px Arial';ctx.fillStyle='#f1f5f9';
+  ctx.fillText(playerName,400,195);
+  // IQ Score
+  ctx.font='bold 110px Arial';
+  var grd2=ctx.createLinearGradient(250,200,550,200);
+  grd2.addColorStop(0,'#4a90e2');grd2.addColorStop(1,'#7c5fff');
+  ctx.fillStyle=grd2;
+  ctx.fillText('IQ '+finalIQ,400,320);
+  // Bezeichnung
+  ctx.font='bold 20px Arial';ctx.fillStyle='#94a3b8';
+  ctx.fillText(getBez(finalIQ),400,360);
+  // Score
+  ctx.font='16px Arial';ctx.fillStyle='#475569';
+  ctx.fillText(sc+'/15 Fragen richtig · '+new Date().toLocaleDateString('de-DE'),400,400);
+  // URL
+  ctx.font='13px Arial';ctx.fillStyle='#1a2540';
+  ctx.fillText('iq-quiz-v2.onrender.com',400,435);
+  cv.toBlob(function(blob){
+    if(!blob)return;
+    var file=new File([blob],'iq-ergebnis.png',{type:'image/png'});
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:'Mein IQ Ergebnis'}).catch(function(){downloadBlob(blob);});
+    }else{downloadBlob(blob);}
+  },'image/png');
+}
+function downloadBlob(blob){
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='iq-ergebnis.png';a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);},2000);
+}
+
+// ── FREUND HERAUSFORDERN ───────────────────────────────────
+function shareChallenge(){
+  var url=window.location.origin+window.location.pathname+'?challenge='+finalIQ;
+  var text='Kannst du meinen IQ von '+finalIQ+' beim IQ Test schlagen? Probier es!';
+  if(navigator.share){
+    navigator.share({title:'IQ Challenge',text:text,url:url}).catch(function(){});
+  }else{
+    navigator.clipboard&&navigator.clipboard.writeText(text+' '+url).then(function(){
+      var btn=document.querySelector('.chal-btn');
+      if(btn){btn.textContent='✅ Link kopiert!';setTimeout(function(){btn.textContent='🎯 Freund herausfordern';},2500);}
+    }).catch(function(){alert(text+'\n\n'+url);});
+  }
+}
+function checkChallenge(){
+  try{
+    var params=new URLSearchParams(window.location.search);
+    var ciq=parseInt(params.get('challenge'));
+    if(ciq>0){
+      challengeTarget=ciq;
+      var banner=document.getElementById('challenge-banner');
+      var target=document.getElementById('challenge-target');
+      if(banner){banner.style.display='block';}
+      if(target){target.textContent='IQ '+ciq;}
+    }
+  }catch(e){}
+}
+
+// ── PUSH-BENACHRICHTIGUNGEN ────────────────────────────────
+function toggleNotifications(){
+  if(!('Notification' in window)){alert('Benachrichtigungen werden nicht unterstuetzt.');return;}
+  var btn=document.getElementById('notif-btn');
+  if(localStorage.getItem('notifications_enabled')==='1'){
+    localStorage.removeItem('notifications_enabled');
+    if(btn){btn.textContent='🔔 Taegl. Erinnerung';btn.classList.remove('active');}
+    return;
+  }
+  Notification.requestPermission().then(function(perm){
+    if(perm==='granted'){
+      localStorage.setItem('notifications_enabled','1');
+      if(btn){btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');}
+      new Notification('IQ Test',{body:'Du bekommst jetzt taeglich eine Erinnerung fuer die Challenge!',icon:'favicon.ico'});
+    }else{
+      if(btn){btn.textContent='❌ Nicht erlaubt';setTimeout(function(){btn.textContent='🔔 Taegl. Erinnerung';},2000);}
+    }
+  });
+}
+function initNotifBtn(){
+  var btn=document.getElementById('notif-btn');
+  if(!btn)return;
+  if(localStorage.getItem('notifications_enabled')==='1'){
+    btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');
+  }
+}
+function checkDailyNotification(){
+  if(localStorage.getItem('notifications_enabled')!=='1')return;
+  if(Notification.permission!=='granted')return;
+  var today=new Date().toISOString().split('T')[0];
+  if(!localStorage.getItem('daily_'+today)){
+    setTimeout(function(){
+      new Notification('🧠 IQ Test',{
+        body:'Deine taegl. Challenge wartet! Wie hoch ist dein IQ heute?',
+        icon:'favicon.ico'
+      });
+    },3000);
+  }
+}
+
+// ── APP BEWERTUNG ──────────────────────────────────────────
+function checkRatingPrompt(){
+  var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
+  if(s.games===3&&!localStorage.getItem('rating_shown')){
+    localStorage.setItem('rating_shown','1');
+    setTimeout(function(){
+      var m=document.getElementById('rating-modal');
+      if(m)m.style.display='flex';
+    },1800);
+  }
+}
+function rateApp(){
+  document.getElementById('rating-modal').style.display='none';
+  window.open('https://play.google.com/store','_blank');
+}
+
+// ── EXTRA JOKER ────────────────────────────────────────────
+function buyExtraJoker(){
+  var btn=document.getElementById('extra-joker-btn');
+  if(!btn||extraJokerUsed)return;
+  btn.disabled=true;
+  var n=3;
+  btn.textContent='⏳ '+n+'s Werbung...';
+  var iv=setInterval(function(){
+    n--;
+    btn.textContent='⏳ '+n+'s Werbung...';
+    if(n<=0){
+      clearInterval(iv);
+      grantExtraJoker();
+    }
+  },1000);
+}
+function grantExtraJoker(){
+  if(!jokerStatus['telefon']){jokerStatus['telefon']=true;}
+  else if(!jokerStatus['5050']){jokerStatus['5050']=true;}
+  else if(!jokerStatus['publikum']){jokerStatus['publikum']=true;}
+  extraJokerUsed=true;
+  updJoker();
+  playSound('sicher');
+  launchConfetti('small');
 }
 
 // ── TAEGLICHE CHALLENGE ────────────────────────────────────
@@ -732,21 +950,39 @@ function loadDailyHS(){
 
 function startDailyGame(){
   playerName=document.getElementById('dni').value||'Spieler';
-  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;extraJokerUsed=false;
   cs={};cm={};times=[];errs=[];qs=[];
   jokerStatus={'5050':true,'telefon':true,'publikum':true};
   updJoker();
   isDailyMode=true;
   clearInterval(_dvTimer);
+  var btn=document.querySelector('#dv .s-btn');
+  if(btn){btn.disabled=true;btn.textContent='Verbinde...';}
+  apiDailyStartWithRetry(0);
+}
+function apiDailyStartWithRetry(attempt){
+  var btn=document.querySelector('#dv .s-btn');
+  var msgs=['Verbinde...','Server startet...','Noch einen Moment...','Fast fertig...'];
+  if(btn)btn.textContent=msgs[Math.min(attempt,msgs.length-1)];
   fetch(API+'/api/daily/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name:playerName})
-  }).then(function(r){return r.json();}).then(function(d){
+  }).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.json();
+  }).then(function(d){
+    if(btn){btn.disabled=false;btn.textContent='Challenge starten';}
     sessionId=d.session_id;
     buildLeiter();updIQ(85);showQuiz();setOfflineBadge(false);
     loadAndShowQ(1);
-  }).catch(function(e){alert('Fehler: '+e.message);});
+  }).catch(function(){
+    if(attempt<3){setTimeout(function(){apiDailyStartWithRetry(attempt+1);},8000);}
+    else{
+      if(btn){btn.disabled=false;btn.textContent='Challenge starten';}
+      alert('Server nicht erreichbar. Bitte kurz warten und nochmal versuchen.');
+    }
+  });
 }
 
 // ── OFFLINE MODUS ──────────────────────────────────────────
@@ -790,6 +1026,69 @@ function closeOnboarding(){
   if(ob)ob.style.display='none';
 }
 
+// ── STERNENHINTERGRUND ─────────────────────────────────────
+function initStarfield(){
+  var cv=document.getElementById('starfield');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  function resize(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  var stars=[];
+  for(var i=0;i<160;i++){
+    stars.push({
+      x:Math.random(),y:Math.random(),
+      r:Math.random()*1.4+0.2,
+      o:Math.random()*0.6+0.1,
+      s:Math.random()*0.3+0.05,
+      t:Math.random()*Math.PI*2
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    var now=Date.now()/1000;
+    stars.forEach(function(s){
+      var pulse=s.o*(0.6+0.4*Math.sin(now*s.s+s.t));
+      ctx.beginPath();
+      ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+pulse+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── RANG BADGE ─────────────────────────────────────────────
+function getRankBadge(iq){
+  if(iq>=145)return{text:'GENIE',bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
+  if(iq>=130)return{text:'HOCHBEGABT',bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
+  if(iq>=120)return{text:'SEHR INTELLIGENT',bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
+  if(iq>=115)return{text:'ÜBERDURCHSCHNITTLICH',bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
+  if(iq>=100)return{text:'DURCHSCHNITTLICH',bg:'transparent',col:'#94a3b8',border:'#475569'};
+  return{text:'WEITER ÜBEN',bg:'transparent',col:'#475569',border:'#1a2540'};
+}
+
+// ── ONBOARDING SLIDES ──────────────────────────────────────
+var _onbSlide=0;
+function onbNext(){
+  var total=4;
+  _onbSlide++;
+  if(_onbSlide>=total){closeOnboarding();return;}
+  for(var i=0;i<total;i++){
+    var s=document.getElementById('onb-'+i);
+    var d=document.getElementById('odot-'+i);
+    if(s)s.classList.toggle('active',i===_onbSlide);
+    if(d)d.classList.toggle('active',i===_onbSlide);
+  }
+  var btn=document.getElementById('onb-next-btn');
+  if(btn)btn.textContent=_onbSlide===total-1?'Los geht\'s!':'Weiter';
+}
+
 // ── INIT ───────────────────────────────────────────────────
+initStarfield();
 loadOfflineCache();
 checkOnboarding();
+checkChallenge();
+initNotifBtn();
+checkDailyNotification();
