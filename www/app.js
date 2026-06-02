@@ -28,6 +28,59 @@ const LANG={
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
 
+// ── SOUND TOGGLE ───────────────────────────────────────────
+var soundEnabled=localStorage.getItem('sound_enabled')!=='0';
+function toggleSound(){
+  soundEnabled=!soundEnabled;
+  localStorage.setItem('sound_enabled',soundEnabled?'1':'0');
+  var btn=document.getElementById('sound-btn');
+  if(btn)btn.textContent=soundEnabled?'🔊':'🔇';
+}
+function initSoundBtn(){
+  var btn=document.getElementById('sound-btn');
+  if(btn)btn.textContent=soundEnabled?'🔊':'🔇';
+}
+
+// ── ACHIEVEMENTS ───────────────────────────────────────────
+var ACHIEVEMENTS=[
+  {id:'first_game',name:'Erster Start',desc:'Erstes Spiel gespielt',icon:'🎮',fn:function(s){return s.games>=1;}},
+  {id:'iq100',name:'Dreistellig',desc:'IQ 100+ erreicht',icon:'💯',fn:function(s){return (s.bestIQ||0)>=100;}},
+  {id:'iq120',name:'Ueberflieger',desc:'IQ 120+ erreicht',icon:'🚀',fn:function(s){return (s.bestIQ||0)>=120;}},
+  {id:'iq130',name:'Hochbegabt',desc:'IQ 130+ erreicht',icon:'✨',fn:function(s){return (s.bestIQ||0)>=130;}},
+  {id:'iq145',name:'Genie',desc:'IQ 145 – Maximum!',icon:'🧠',fn:function(s){return (s.bestIQ||0)>=145;}},
+  {id:'perfect',name:'Perfekt',desc:'Alle 15 Fragen richtig',icon:'⭐',fn:function(s){return (s.bestScore||0)>=15;}},
+  {id:'streak3',name:'3er Streak',desc:'3 Tage Daily Challenge',icon:'🔥',fn:function(s){return (s.dailyStreak||0)>=3;}},
+  {id:'streak7',name:'Wochen-Streak',desc:'7 Tage Daily Challenge',icon:'🏆',fn:function(s){return (s.dailyStreak||0)>=7;}},
+  {id:'games5',name:'Fleissig',desc:'5 Spiele gespielt',icon:'🎯',fn:function(s){return (s.games||0)>=5;}},
+  {id:'games20',name:'Profi',desc:'20 Spiele gespielt',icon:'👑',fn:function(s){return (s.games||0)>=20;}},
+];
+function checkAchievements(){
+  var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
+  var unlocked=JSON.parse(localStorage.getItem('achievements')||'[]');
+  var neu=[];
+  ACHIEVEMENTS.forEach(function(a){
+    if(unlocked.indexOf(a.id)<0&&a.fn(s)){
+      unlocked.push(a.id);
+      neu.push(a);
+    }
+  });
+  localStorage.setItem('achievements',JSON.stringify(unlocked));
+  if(neu.length)setTimeout(function(){showAchievementToast(neu);},1500);
+}
+function showAchievementToast(list){
+  var a=list[0];
+  var t=document.getElementById('ach-toast');
+  if(!t)return;
+  t.querySelector('.ach-icon').textContent=a.icon;
+  t.querySelector('.ach-name').textContent=a.name;
+  t.querySelector('.ach-desc').textContent=a.desc;
+  t.classList.add('show');
+  setTimeout(function(){
+    t.classList.remove('show');
+    if(list.length>1)setTimeout(function(){showAchievementToast(list.slice(1));},600);
+  },3000);
+}
+
 function setLang(lang,btn){
   currentLang=lang;
   document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
@@ -58,6 +111,7 @@ function _ctx(){
   return _ac;
 }
 function playSound(type){
+  if(!soundEnabled)return;
   try{
     var ctx=_ctx();
     var o=ctx.createOscillator(),g=ctx.createGain();
@@ -294,13 +348,38 @@ function showHS(){
     if(!scores.length){
       var d=document.createElement('div');d.className='none';d.textContent='Noch keine Eintraege.';hl.appendChild(d);return;
     }
+    // Podest Top 3
+    if(scores.length>=1){
+      var podest=document.createElement('div');
+      podest.style.cssText='display:flex;align-items:flex-end;justify-content:center;gap:.5rem;margin-bottom:1.5rem;';
+      var medals=['🥇','🥈','🥉'];
+      var heights=['80px','60px','50px'];
+      var order=scores.length>=3?[1,0,2]:[0];
+      order.forEach(function(idx){
+        if(!scores[idx])return;
+        var col=document.createElement('div');
+        col.style.cssText='display:flex;flex-direction:column;align-items:center;gap:.4rem;flex:1;max-width:110px;';
+        var medal=document.createElement('div');medal.style.cssText='font-size:28px;';medal.textContent=medals[idx]||'';
+        var nm=document.createElement('div');nm.style.cssText='font-size:11px;font-weight:700;color:var(--text);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;';nm.textContent=scores[idx].name;
+        var iq=document.createElement('div');iq.style.cssText='font-size:13px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;';iq.textContent='IQ '+scores[idx].iq;
+        var block=document.createElement('div');
+        var bh=heights[idx]||'50px';
+        var bcol=idx===0?'linear-gradient(135deg,#ffd700,#f59e0b)':idx===1?'linear-gradient(135deg,#94a3b8,#64748b)':'linear-gradient(135deg,#a855f7,#7c5fff)';
+        block.style.cssText='width:100%;height:'+bh+';background:'+bcol+';border-radius:8px 8px 0 0;opacity:.8;';
+        col.appendChild(medal);col.appendChild(nm);col.appendChild(iq);col.appendChild(block);
+        podest.appendChild(col);
+      });
+      hl.appendChild(podest);
+    }
+    // Rest der Liste
     for(var i=0;i<scores.length;i++){
       var c=document.createElement('div');c.className='hs-card';
-      var r=document.createElement('span');r.className='hs-rang';r.textContent=(i+1)+'.';
+      var rng=document.createElement('span');rng.className='hs-rang';
+      rng.textContent=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)+'.';
       var n=document.createElement('span');n.className='hs-name';n.textContent=scores[i].name;
       var lv=document.createElement('span');lv.className='hs-lv';lv.textContent='Frage '+scores[i].level;
       var iq=document.createElement('span');iq.className='hs-iq';iq.textContent='IQ '+scores[i].iq;
-      c.appendChild(r);c.appendChild(n);c.appendChild(lv);c.appendChild(iq);
+      c.appendChild(rng);c.appendChild(n);c.appendChild(lv);c.appendChild(iq);
       hl.appendChild(c);
     }
   });
@@ -609,7 +688,36 @@ function calcResult(){
       document.getElementById('ml').appendChild(card);
     }
   }
+  // Kategorie-Auswertung
+  var catSum=document.getElementById('cat-summary');
+  if(catSum){
+    catSum.innerHTML='';
+    var catKeys=Object.keys(cm).filter(function(k){return k&&cm[k]>0;});
+    if(catKeys.length>1){
+      catKeys.sort(function(a,b){
+        var pa=(cs[a]||0)/cm[a],pb=(cs[b]||0)/cm[b];
+        return pb-pa;
+      });
+      var best=catKeys[0],worst=catKeys[catKeys.length-1];
+      var bPct=Math.round((cs[best]||0)/cm[best]*100);
+      var wPct=Math.round((cs[worst]||0)/cm[worst]*100);
+      catSum.innerHTML=
+        '<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">Kategorie-Auswertung</div>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+
+        '<div style="flex:1;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:.8rem;min-width:120px;">'+
+        '<div style="font-size:10px;color:var(--green);margin-bottom:4px;">⭐ STAERKE</div>'+
+        '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[best]||'')+'&nbsp;'+best+'</div>'+
+        '<div style="font-size:11px;color:var(--green);">'+bPct+'% richtig</div></div>'+
+        (catKeys.length>1?
+        '<div style="flex:1;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:.8rem;min-width:120px;">'+
+        '<div style="font-size:10px;color:var(--red);margin-bottom:4px;">📈 POTENTIAL</div>'+
+        '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[worst]||'')+'&nbsp;'+worst+'</div>'+
+        '<div style="font-size:11px;color:var(--red);">'+wPct+'% richtig</div></div>':'')+
+        '</div>';
+    }
+  }
   checkRatingPrompt();
+  checkAchievements();
 }
 
 function saveHS(){
@@ -643,6 +751,7 @@ function saveStats(){
   var s=JSON.parse(localStorage.getItem('iq_stats')||'{}');
   s.games=(s.games||0)+1;
   s.bestIQ=Math.max(s.bestIQ||0,finalIQ);
+  s.bestScore=Math.max(s.bestScore||0,sc);
   s.totalIQ=(s.totalIQ||0)+finalIQ;
   s.totalCorrect=(s.totalCorrect||0)+sc;
   s.totalQuestions=(s.totalQuestions||0)+MAX_FRAGEN;
@@ -681,28 +790,65 @@ function showStats(){
   var acc=s.totalQuestions?Math.round(s.totalCorrect/s.totalQuestions*100):0;
   document.getElementById('st-acc').textContent=g?acc+'%':'–';
   document.getElementById('st-streak').textContent=(s.dailyStreak||0)+' 🔥';
-  var chart=document.getElementById('st-chart');chart.innerHTML='';
+  var chartWrap=document.getElementById('st-chart');chartWrap.innerHTML='';
   var hist=s.history||[];
   if(!hist.length){
-    chart.innerHTML='<div style="color:var(--text3);font-size:13px;text-align:center;width:100%;padding-top:40px;">Noch keine Spiele</div>';
+    chartWrap.innerHTML='<div style="color:var(--text3);font-size:13px;text-align:center;width:100%;padding-top:40px;">Noch keine Spiele</div>';
   }else{
-    hist.slice().reverse().forEach(function(h){
-      var pct=Math.max(5,Math.round((h.iq-85)/(145-85)*100));
-      var col=h.iq>=130?'var(--gold)':h.iq>=115?'var(--accent)':h.iq>=100?'var(--purple)':'var(--text3)';
-      var isDaily=h.daily;
-      var wrap=document.createElement('div');
-      wrap.style.cssText='flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;cursor:default;';
-      wrap.title='IQ '+h.iq+' · '+h.date+(isDaily?' 📅':'');
-      var bar=document.createElement('div');
-      bar.style.cssText='width:100%;border-radius:4px 4px 0 0;background:'+col+';height:'+pct+'%;min-height:4px;position:relative;'+(isDaily?'border-top:2px solid var(--gold);':'');
-      var iqLbl=document.createElement('div');
-      iqLbl.style.cssText='font-size:8px;font-weight:700;color:var(--text3);margin-top:2px;text-align:center;';
-      iqLbl.textContent=h.iq;
-      var dateLbl=document.createElement('div');
-      dateLbl.style.cssText='font-size:7px;color:var(--text3);opacity:.7;text-align:center;white-space:nowrap;overflow:hidden;';
+    var cv2=document.createElement('canvas');
+    cv2.width=chartWrap.offsetWidth||300;cv2.height=90;
+    cv2.style.width='100%';cv2.style.height='90px';
+    chartWrap.appendChild(cv2);
+    var cx=cv2.getContext('2d');
+    var pts=hist.slice().reverse();
+    var n=pts.length;
+    var W=cv2.width,H=cv2.height,pad=10;
+    var minIQ=85,maxIQ=145;
+    function iqY(iq){return H-pad-(iq-minIQ)/(maxIQ-minIQ)*(H-pad*2);}
+    function ptX(i){return pad+(i/(Math.max(n-1,1)))*(W-pad*2);}
+    // Verlaufslinie
+    var grad=cx.createLinearGradient(0,0,W,0);
+    grad.addColorStop(0,'#4a90e2');grad.addColorStop(0.5,'#7c5fff');grad.addColorStop(1,'#ffd700');
+    cx.beginPath();
+    pts.forEach(function(h,i){cx.lineTo(ptX(i),iqY(h.iq));});
+    cx.strokeStyle=grad;cx.lineWidth=2.5;cx.lineJoin='round';cx.stroke();
+    // Flaeche darunter
+    cx.beginPath();
+    pts.forEach(function(h,i){cx.lineTo(ptX(i),iqY(h.iq));});
+    cx.lineTo(ptX(n-1),H);cx.lineTo(ptX(0),H);cx.closePath();
+    var aGrad=cx.createLinearGradient(0,0,0,H);
+    aGrad.addColorStop(0,'rgba(74,144,226,0.25)');aGrad.addColorStop(1,'rgba(74,144,226,0)');
+    cx.fillStyle=aGrad;cx.fill();
+    // Punkte + Labels
+    pts.forEach(function(h,i){
+      var x=ptX(i),y=iqY(h.iq);
+      var col=h.iq>=130?'#ffd700':h.iq>=115?'#4a90e2':h.iq>=100?'#7c5fff':'#475569';
+      cx.beginPath();cx.arc(x,y,3.5,0,Math.PI*2);
+      cx.fillStyle=col;cx.fill();
+      cx.strokeStyle='#030310';cx.lineWidth=1.5;cx.stroke();
+      if(i===0||i===n-1||n<=5){
+        cx.font='7px Arial';cx.fillStyle='#94a3b8';cx.textAlign='center';
+        cx.fillText(h.iq,x,y-7);
+      }
       var d=h.date?h.date.slice(5).replace('-','/'):'-';
-      dateLbl.textContent=d+(isDaily?' 📅':'');
-      wrap.appendChild(bar);wrap.appendChild(iqLbl);wrap.appendChild(dateLbl);chart.appendChild(wrap);
+      cx.font='6px Arial';cx.fillStyle='#475569';cx.textAlign='center';
+      cx.fillText(d,x,H-1);
+    });
+  }
+  // Achievements anzeigen
+  var achEl=document.getElementById('st-achievements');
+  if(achEl){
+    var unlocked=JSON.parse(localStorage.getItem('achievements')||'[]');
+    achEl.innerHTML='';
+    ACHIEVEMENTS.forEach(function(a){
+      var got=unlocked.indexOf(a.id)>=0;
+      var d=document.createElement('div');
+      d.style.cssText='display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;border-radius:10px;margin-bottom:.4rem;background:'+(got?'rgba(74,144,226,0.08)':'rgba(26,37,64,0.4)')+';border:1px solid '+(got?'rgba(74,144,226,0.3)':'var(--border)')+';opacity:'+(got?'1':'0.45')+';';
+      d.innerHTML='<span style="font-size:22px;">'+a.icon+'</span>'+
+        '<div><div style="font-size:12px;font-weight:700;color:'+(got?'var(--text)':'var(--text3)')+';">'+a.name+'</div>'+
+        '<div style="font-size:11px;color:var(--text3);">'+a.desc+'</div></div>'+
+        (got?'<span style="margin-left:auto;font-size:10px;color:var(--green);font-weight:700;">✓</span>':'');
+      achEl.appendChild(d);
     });
   }
   var cats=document.getElementById('st-cats');cats.innerHTML='';
@@ -1087,6 +1233,7 @@ function onbNext(){
 
 // ── INIT ───────────────────────────────────────────────────
 initStarfield();
+initSoundBtn();
 loadOfflineCache();
 checkOnboarding();
 checkChallenge();
