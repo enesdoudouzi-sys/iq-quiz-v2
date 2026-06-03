@@ -17,6 +17,15 @@ function getPreis(lvl){return PREISE_ARR[Math.min(lvl-1,PREISE_ARR.length-1)]+' 
 const SICHER=[5,10,15];
 
 var currentLang='de';
+var currentMode='normal'; // normal | timeattack | learn | endless
+var taTimer=null,taLeft=60,taTotalTime=60;
+
+function setMode(mode,btn){
+  currentMode=mode;
+  document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+}
+
 const LANG={
   de:{title:'IQ Test',sub:'Teste deinen IQ · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
   en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question',teilen:'Share Result'},
@@ -24,6 +33,7 @@ const LANG={
   fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
   es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
   ar:{title:'اختبار الذكاء',sub:'اسئلة غير محدودة - 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
+  pt:{title:'Teste de QI',sub:'Teste seu QI · 15 Perguntas · 3 Ajudas',placeholder:'Seu Nome...',start:'Comecar',highscores:'Recordes',sekunden:'Segundos',iqLabel:'QI Atual',joker:'Ajudas',richtig:'Correto!',falsch:'Errado! Eliminado!',zeit:'Tempo Esgotado!',naechste:'Proxima Pergunta',ergebnis:'Seu Resultado',speichern:'Salvar',gespeichert:'Salvo!',nochmal:'Jogar Novamente',zurueck:'Voltar',perfekt:'Perfeito - todas corretas!',fehler:'ANALISE DE ERROS',deine:'Sua Resposta',richtige:'Resposta Correta',leiter:'Escada de QI',schliessen:'Fechar',telefon:'Ajuda Telefone',publikum:'Ajuda do Publico',iqNach:'Seu QI apos esta pergunta',teilen:'Compartilhar'},
 };
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
@@ -330,6 +340,9 @@ function updIQ(iq){
   el.style.animation='none';
   requestAnimationFrame(function(){el.style.animation='iqPop .4s ease';});
   document.getElementById('iq-live-txt').textContent=getBez(iq);
+  // Hintergrundfarbe je nach IQ
+  var bg=iq>=140?'#0a0518':iq>=130?'#080a10':iq>=115?'#060a18':iq>=100?'#06091a':'#030310';
+  document.documentElement.style.setProperty('--bg',bg);
 }
 function updJoker(){
   document.getElementById('j-5050').disabled=!jokerStatus['5050'];
@@ -387,6 +400,7 @@ function showHS(){
 
 function startGame(){
   isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;
+  if(taTimer){clearInterval(taTimer);taTimer=null;}
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={};cm={};times=[];errs=[];qs=[];
@@ -412,6 +426,26 @@ function apiStartWithRetry(attempt){
     sessionId=d.session_id;
     buildLeiter();updIQ(85);showQuiz();
     setOfflineBadge(false);
+    // Time-Attack: globaler 60s Timer
+    var taOv=document.getElementById('ta-overlay');
+    if(currentMode==='timeattack'){
+      taLeft=60;taTotalTime=60;
+      if(taOv)taOv.style.display='block';
+      document.getElementById('ta-count').textContent=60;
+      document.getElementById('ta-bar-fill').style.width='100%';
+      document.getElementById('ta-score').textContent='0';
+      taTimer=setInterval(function(){
+        taLeft--;
+        var el=document.getElementById('ta-count');
+        var bar=document.getElementById('ta-bar-fill');
+        if(el)el.textContent=taLeft;
+        if(bar)bar.style.width=Math.round(taLeft/taTotalTime*100)+'%';
+        if(taLeft<=10&&el)el.style.color='var(--red)';
+        if(taLeft<=0){clearInterval(taTimer);taTimer=null;calcResult();}
+      },1000);
+    }else{
+      if(taOv)taOv.style.display='none';
+    }
     loadAndShowQ(1);
   }).catch(function(){
     if(attempt<3){
@@ -425,7 +459,8 @@ function apiStartWithRetry(attempt){
 }
 
 function loadAndShowQ(level){
-  if(level>MAX_FRAGEN){calcResult();return;}
+  if(currentMode==='timeattack'&&taLeft<=0){calcResult();return;}
+  if(currentMode!=='timeattack'&&level>MAX_FRAGEN){calcResult();return;}
   cur=level;done=false;gesperrte=[];
   document.getElementById('iq-fb').style.display='none';
   document.getElementById('nb').style.display='none';
@@ -459,8 +494,12 @@ function showQuestion(q){
   var sb=document.getElementById('sb');
   if(q.seq){sb.textContent=q.seq;sb.style.display='block';}else sb.style.display='none';
   var fbox=document.querySelector('.fbox');
-  fbox.style.animation='none';
-  requestAnimationFrame(function(){fbox.style.animation='fadeUp .35s ease';});
+  fbox.classList.remove('flip');
+  requestAnimationFrame(function(){fbox.classList.add('flip');});
+  // Lern-Modus: Erklärungsbox leeren
+  var le=document.getElementById('lern-erkl');
+  if(le){le.style.display='none';le.textContent='';}
+  // Time-Attack: kein Timer, Endless: kein spezieller Timer
   var op=document.getElementById('op');op.innerHTML='';
   var opts=['A','B','C','D'];
   for(var i=0;i<opts.length;i++){
@@ -475,9 +514,19 @@ function showQuestion(q){
     op.appendChild(b);
   }
   updLeiter(level);
-  var sec=level<=5?20:level<=10?25:30;
-  st=Date.now();tick(sec,sec);
-  ti=setInterval(function(){tl--;tick(tl,sec);if(tl<=0){clearInterval(ti);tout();}},1000);
+  if(currentMode==='learn'){
+    // Kein Timer im Lern-Modus
+    document.getElementById('tn').textContent='∞';
+    document.getElementById('ta').style.strokeDashoffset=0;
+    st=Date.now();
+  }else if(currentMode==='timeattack'){
+    st=Date.now();
+    // Timer läuft global, kein per-Frage-Timer
+  }else{
+    var sec=level<=5?20:level<=10?25:30;
+    st=Date.now();tick(sec,sec);
+    ti=setInterval(function(){tl--;tick(tl,sec);if(tl<=0){clearInterval(ti);tout();}},1000);
+  }
 }
 
 function tick(l,t){
@@ -538,20 +587,47 @@ function handleAnswer(key,d,k){
   });
   if(d.richtig){
     sc++;cs[k]=(cs[k]||0)+1;
+    if(currentMode==='timeattack'){document.getElementById('ta-score').textContent=sc;}
     fb.textContent=T('richtig');fb.className='fb ok';
     var isSich=SICHER.indexOf(cur)>=0;
     playSound(isSich?'sicher':'richtig');
     launchConfetti(isSich?'medium':'small');
     showIQFb(true,cur);
-    if(cur>=MAX_FRAGEN){setTimeout(function(){calcResult();},2000);}
-    else{document.getElementById('nb').style.display='block';}
+    // Lern-Modus: Erklärung zeigen, immer weiter
+    if(currentMode==='learn'&&q&&q.erklaerung){
+      var le=document.getElementById('lern-erkl');
+      if(le){le.textContent='💡 '+q.erklaerung;le.style.display='block';}
+    }
+    if(currentMode==='timeattack'){
+      setTimeout(function(){loadAndShowQ(cur+1);},800);
+    }else if(cur>=MAX_FRAGEN){
+      setTimeout(function(){calcResult();},2000);
+    }else{
+      document.getElementById('nb').style.display='block';
+    }
   }else{
     errs.push({q:q,ch:key,to:false,ri:d.richtige_antwort,erklaerung:d.erklaerung||''});
     fb.textContent=T('falsch')+' '+d.richtige_antwort+' - '+d.richtige_antwort_text;
     fb.className='fb no';
     playSound('falsch');
     showIQFb(false,cur);
-    setTimeout(function(){calcResult();},2500);
+    // Lern-Modus: Erklärung zeigen + weiter
+    if(currentMode==='learn'){
+      if(q&&q.erklaerung){
+        var le2=document.getElementById('lern-erkl');
+        if(le2){le2.textContent='💡 '+q.erklaerung;le2.style.display='block';}
+      }
+      setTimeout(function(){
+        if(cur>=MAX_FRAGEN)calcResult();
+        else document.getElementById('nb').style.display='block';
+      },800);
+    }else if(currentMode==='timeattack'){
+      setTimeout(function(){loadAndShowQ(cur+1);},800);
+    }else if(currentMode==='endless'){
+      setTimeout(function(){calcResult();},2500);
+    }else{
+      setTimeout(function(){calcResult();},2500);
+    }
   }
   updIQ(d.iq||finalIQ);
 }
@@ -612,6 +688,11 @@ function useJoker(typ){
 function closeJoker(){document.getElementById('joker-overlay').classList.remove('show');}
 
 function calcResult(){
+  if(taTimer){clearInterval(taTimer);taTimer=null;}
+  var taOv=document.getElementById('ta-overlay');
+  if(taOv)taOv.style.display='none';
+  // Reset Hintergrundfarbe
+  document.documentElement.style.setProperty('--bg','#030310');
   saveStats();
   showResult();
   document.getElementById('pf').style.width='100%';
@@ -639,6 +720,12 @@ function calcResult(){
     fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
     document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
     isDailyMode=false;
+  } else if(currentMode==='timeattack'){
+    document.getElementById('rv-chip').textContent='⏱️ '+sc+' richtig in 60 Sek.';
+  } else if(currentMode==='learn'){
+    document.getElementById('rv-chip').textContent='📚 Lern-Modus · '+sc+'/'+MAX_FRAGEN;
+  } else if(currentMode==='endless'){
+    document.getElementById('rv-chip').textContent='♾️ Endless · '+cur+' Fragen';
   } else {
     document.getElementById('rv-chip').textContent=sc+' / '+MAX_FRAGEN;
   }
