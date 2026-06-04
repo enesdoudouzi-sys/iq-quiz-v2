@@ -91,26 +91,46 @@ function showAchievementToast(list){
   },3000);
 }
 
+var LANG_FLAGS={'de':'🇩🇪','en':'🇬🇧','tr':'🇹🇷','fr':'🇫🇷','es':'🇪🇸','pt':'🇧🇷','ar':'🇸🇦'};
+function toggleLangMenu(){
+  var d=document.getElementById('lang-dropdown');
+  if(d)d.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('lang-globe-wrap');
+  if(wrap&&!wrap.contains(e.target)){
+    var d=document.getElementById('lang-dropdown');
+    if(d)d.classList.remove('open');
+  }
+});
 function setLang(lang,btn){
   currentLang=lang;
-  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.lang-opt').forEach(function(b){b.classList.remove('active');});
   if(btn)btn.classList.add('active');
+  // Aktive Flagge im Globus-Button aktualisieren
+  var flagEl=document.getElementById('lang-active-flag');
+  if(flagEl)flagEl.textContent=LANG_FLAGS[lang]||'🌐';
+  // Dropdown schliessen
+  var d=document.getElementById('lang-dropdown');
+  if(d)d.classList.remove('open');
   document.body.style.direction=lang==='ar'?'rtl':'ltr';
   var t=LANG[lang];
-  document.querySelector('.s-title').textContent=t.title;
-  document.querySelector('.s-sub').textContent=t.sub;
-  document.getElementById('ni').placeholder=t.placeholder;
-  document.querySelector('.s-btn').textContent=t.start;
-  document.querySelector('.s-hs').textContent=t.highscores;
-  document.querySelector('.t-lbl').textContent=t.sekunden;
-  document.querySelector('.iq-live-lbl').textContent=t.iqLabel;
-  document.querySelector('.joker-title').textContent=t.joker;
-  document.querySelector('.leiter-lbl').textContent=t.leiter;
-  document.getElementById('nb').textContent=t.naechste;
-  document.querySelector('.jo-close').textContent=t.schliessen;
-  document.querySelector('.rv-lbl').textContent=t.ergebnis;
-  document.querySelector('.save-btn').textContent=t.speichern;
-  document.querySelector('.iq-fb-lbl').textContent=t.iqNach;
+  var q=function(s){return document.querySelector(s);};
+  var g=function(id){return document.getElementById(id);};
+  if(q('.s-title'))q('.s-title').textContent=t.title;
+  if(q('.s-sub'))q('.s-sub').textContent=t.sub;
+  if(g('ni'))g('ni').placeholder=t.placeholder;
+  if(q('.s-btn'))q('.s-btn').textContent=t.start;
+  if(q('.s-hs'))q('.s-hs').textContent=t.highscores;
+  if(q('.t-lbl'))q('.t-lbl').textContent=t.sekunden;
+  if(q('.iq-live-lbl'))q('.iq-live-lbl').textContent=t.iqLabel;
+  if(q('.joker-title'))q('.joker-title').textContent=t.joker;
+  if(q('.leiter-lbl'))q('.leiter-lbl').textContent=t.leiter;
+  if(g('nb'))g('nb').textContent=t.naechste;
+  if(q('.jo-close'))q('.jo-close').textContent=t.schliessen;
+  if(q('.rv-lbl'))q('.rv-lbl').textContent=t.ergebnis;
+  if(q('.save-btn'))q('.save-btn').textContent=t.speichern;
+  if(q('.iq-fb-lbl'))q('.iq-fb-lbl').textContent=t.iqNach;
 }
 
 // ── SOUNDS ────────────────────────────────────────────────
