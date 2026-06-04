@@ -1038,6 +1038,54 @@ function downloadBlob(blob){
   setTimeout(function(){URL.revokeObjectURL(url);},2000);
 }
 
+// ── SOCIAL MEDIA TEILEN ────────────────────────────────────
+function getSocialText(){
+  return playerName+' hat beim IQ Test IQ '+finalIQ+' erreicht ('+sc+'/15 richtig)! Teste auch deinen IQ!';
+}
+function getSocialUrl(){return 'https://iq-quiz-v2.onrender.com';}
+
+function shareWhatsApp(){
+  var txt=encodeURIComponent(getSocialText()+' '+getSocialUrl());
+  window.open('https://api.whatsapp.com/send?text='+txt,'_blank');
+}
+function shareTelegram(){
+  var txt=encodeURIComponent(getSocialText());
+  var url=encodeURIComponent(getSocialUrl());
+  window.open('https://t.me/share/url?url='+url+'&text='+txt,'_blank');
+}
+function shareTwitter(){
+  var txt=encodeURIComponent(getSocialText()+' #IQTest #IQQuiz');
+  var url=encodeURIComponent(getSocialUrl());
+  window.open('https://twitter.com/intent/tweet?text='+txt+'&url='+url,'_blank');
+}
+function shareFacebook(){
+  var url=encodeURIComponent(getSocialUrl());
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank');
+}
+function shareInstagram(){
+  // Instagram erlaubt kein direktes Web-Posting — Bild speichern + Anweisung
+  shareImage();
+  setTimeout(function(){
+    var btn=document.querySelector('.social-btn.instagram');
+    if(btn){
+      var orig=btn.innerHTML;
+      btn.innerHTML='&#10003; Bild gespeichert!';
+      setTimeout(function(){btn.innerHTML=orig;},2500);
+    }
+  },500);
+}
+function copyAppLink(){
+  var txt=getSocialText()+' '+getSocialUrl();
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){
+      var btn=document.querySelector('.social-btn.copylink');
+      if(btn){var o=btn.textContent;btn.textContent='✅ Kopiert!';setTimeout(function(){btn.textContent=o;},2000);}
+    });
+  }else{
+    window.open(getSocialUrl(),'_blank');
+  }
+}
+
 // ── FREUND HERAUSFORDERN ───────────────────────────────────
 function shareChallenge(){
   var url=window.location.origin+window.location.pathname+'?challenge='+finalIQ;
