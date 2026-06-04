@@ -116,21 +116,31 @@ function setLang(lang,btn){
   document.body.style.direction=lang==='ar'?'rtl':'ltr';
   var t=LANG[lang];
   var q=function(s){return document.querySelector(s);};
+  var qa=function(s){return document.querySelectorAll(s);};
   var g=function(id){return document.getElementById(id);};
+  // Startscreen
   if(q('.s-title'))q('.s-title').textContent=t.title;
   if(q('.s-sub'))q('.s-sub').textContent=t.sub;
   if(g('ni'))g('ni').placeholder=t.placeholder;
+  if(g('dni'))g('dni').placeholder=t.placeholder;
   if(q('.s-btn'))q('.s-btn').textContent=t.start;
   if(q('.s-hs'))q('.s-hs').textContent=t.highscores;
+  // Quiz
   if(q('.t-lbl'))q('.t-lbl').textContent=t.sekunden;
   if(q('.iq-live-lbl'))q('.iq-live-lbl').textContent=t.iqLabel;
   if(q('.joker-title'))q('.joker-title').textContent=t.joker;
-  if(q('.leiter-lbl'))q('.leiter-lbl').textContent=t.leiter;
+  qa('.leiter-lbl').forEach(function(el){el.textContent=t.leiter;});
   if(g('nb'))g('nb').textContent=t.naechste;
+  if(g('j-telefon'))g('j-telefon').innerHTML='&#128222; '+t.telefon;
+  if(g('j-publikum'))g('j-publikum').innerHTML='&#128101; '+t.publikum;
+  // Joker Overlay
   if(q('.jo-close'))q('.jo-close').textContent=t.schliessen;
+  if(q('.iq-fb-lbl'))q('.iq-fb-lbl').textContent=t.iqNach;
+  // Ergebnis
   if(q('.rv-lbl'))q('.rv-lbl').textContent=t.ergebnis;
   if(q('.save-btn'))q('.save-btn').textContent=t.speichern;
-  if(q('.iq-fb-lbl'))q('.iq-fb-lbl').textContent=t.iqNach;
+  if(q('.save-in'))q('.save-in').placeholder=t.ergebnis+'...';
+  if(q('.rbtn'))q('.rbtn').textContent=t.nochmal;
 }
 
 // ── SOUNDS ────────────────────────────────────────────────
