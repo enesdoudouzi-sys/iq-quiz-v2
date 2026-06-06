@@ -298,6 +298,7 @@ function getBez(iq){
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
+var ADS_ENABLED=false; // true = Werbung an, false = Werbung aus
 var isPremium=localStorage.getItem('iq_premium')==='true';
 var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
@@ -1474,13 +1475,14 @@ checkDailyNotification();
 // ── MONETARISIERUNG ────────────────────────────────────────────────────────
 
 function updPremiumUI(){
+  var showAds=ADS_ENABLED&&!isPremium;
   var banner=document.getElementById('ad-banner');
-  if(banner)banner.style.display=isPremium?'none':'flex';
+  if(banner)banner.style.display=showAds?'flex':'none';
   var upgradeBtn=document.getElementById('s-upgrade-btn');
   if(upgradeBtn)upgradeBtn.style.display=isPremium?'none':'flex';
   var badge=document.getElementById('prem-badge');
   if(badge)badge.style.display=isPremium?'inline-block':'none';
-  document.body.style.paddingBottom=isPremium?'0':'68px';
+  document.body.style.paddingBottom=showAds?'68px':'0';
 }
 
 function showPremium(){
@@ -1504,6 +1506,7 @@ function buyPremium(){
 }
 
 function showRewardedAd(cb){
+  if(!ADS_ENABLED){if(cb)cb();return;}
   var overlay=document.getElementById('ad-screen');
   if(!overlay)return;
   overlay.style.display='flex';
@@ -1524,7 +1527,7 @@ function showRewardedAd(cb){
 }
 
 function showInterstitial(cb){
-  if(isPremium){if(cb)cb();return;}
+  if(!ADS_ENABLED||isPremium){if(cb)cb();return;}
   var overlay=document.getElementById('inter-ad');
   if(!overlay){if(cb)cb();return;}
   overlay.style.display='flex';
