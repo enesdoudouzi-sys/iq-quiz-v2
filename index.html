@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Enes Doudouzi">
 <title>IQ Test</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -282,6 +283,21 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .load-brain-anim{animation:brainBounce 1.8s ease infinite;filter:drop-shadow(0 0 20px rgba(124,95,255,0.5));}
 @keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
 .load-bar-shine{background:linear-gradient(90deg,#4a90e2,#7c5fff,#4a90e2) !important;background-size:200% 100% !important;animation:shimmer 1.4s linear infinite;}
+/* ── NEUE JOKER ── */
+.zeit-joker-btn{border-color:var(--red) !important;color:var(--red) !important;display:none;}
+.zeit-joker-btn:hover:not(:disabled){background:rgba(239,68,68,0.12) !important;box-shadow:0 0 16px rgba(239,68,68,0.3) !important;}
+.skip-joker-btn{border-color:var(--orange) !important;color:var(--orange) !important;}
+.skip-joker-btn:hover:not(:disabled){background:rgba(245,158,11,0.12) !important;box-shadow:0 0 16px rgba(245,158,11,0.3) !important;}
+.doppel-joker-btn{border-color:var(--green) !important;color:var(--green) !important;position:relative;}
+.doppel-joker-btn:hover:not(:disabled){background:rgba(34,197,94,0.12) !important;box-shadow:0 0 16px rgba(34,197,94,0.3) !important;}
+.doppel-active-badge{position:absolute;top:-5px;right:-5px;background:var(--green);color:#081a10;font-size:8px;font-weight:800;padding:2px 5px;border-radius:99px;animation:doppelPulse 1s ease infinite;}
+@keyframes doppelPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+@keyframes phoneRing{0%,100%{transform:rotate(0);}10%{transform:rotate(-25deg);}20%{transform:rotate(25deg);}30%{transform:rotate(-20deg);}40%{transform:rotate(20deg);}50%{transform:rotate(0);}}
+.phone-ring-anim{font-size:52px;animation:phoneRing 0.8s ease infinite;display:block;text-align:center;margin:.6rem 0;filter:drop-shadow(0 0 14px rgba(74,144,226,0.7));}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+.phone-ring-txt{font-size:13px;color:var(--text2);text-align:center;letter-spacing:.08em;animation:blink 1s ease infinite;}
+@keyframes revealHint{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.jo-hint-reveal{animation:revealHint .5s ease both;}
 /* ── SPIELMODI ── */
 .mode-bar{display:flex;gap:.4rem;width:100%;margin-bottom:-.4rem;}
 .mode-btn{flex:1;padding:.6rem .3rem;border-radius:10px;border:1.5px solid var(--border);background:rgba(10,15,30,0.8);color:var(--text2);cursor:pointer;font-size:11px;font-weight:700;transition:all .2s;text-align:center;}
@@ -341,7 +357,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="onb-slide" id="onb-2">
     <div class="onb-icon">&#127183;</div>
     <div class="onb-title">3 Joker, 3 Chancen</div>
-    <div class="onb-text">&#9986;&#65039; 50:50 eliminiert 2 falsche Antworten<br>&#128222; Telefon gibt einen Expertentipp<br>&#128101; Publikum zeigt die Meinung der Masse</div>
+    <div class="onb-text">&#9986;&#65039; 50:50 eliminiert 2 Antworten<br>&#128222; Telefon: Expertentipp (mit Animation)<br>&#128101; Publikum zeigt die Stimmen<br>&#9201; +30s &middot; &#9197; Frage skippen &middot; &#127919; Doppel-Chance</div>
   </div>
   <div class="onb-slide" id="onb-3">
     <div class="onb-icon">&#127942;</div>
@@ -490,6 +506,9 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <button class="joker-btn" id="j-5050" onclick="useJoker('5050')">&#9986;&#65039; 50 : 50</button>
       <button class="joker-btn" id="j-telefon" onclick="useJoker('telefon')">&#128222; Telefon-Joker</button>
       <button class="joker-btn" id="j-publikum" onclick="useJoker('publikum')">&#128101; Publikums-Joker</button>
+      <button class="joker-btn zeit-joker-btn" id="j-zeit" onclick="useJoker('zeit')">&#9201;&#65039; +30 Sekunden</button>
+      <button class="joker-btn skip-joker-btn" id="j-skip" onclick="useJoker('skip')">&#9197;&#65039; Frage &#252;berspringen</button>
+      <button class="joker-btn doppel-joker-btn" id="j-doppel" onclick="useJoker('doppel')">&#127919; Doppel-Chance</button>
       <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zurueckholen</button>
     </div>
   </div>

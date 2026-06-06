@@ -298,11 +298,12 @@ function getBez(iq){
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
-var jokerStatus={'5050':true,'telefon':true,'publikum':true};
+var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
 var isOfflineMode=false,offlineQs=[];
 var extraJokerUsed=false;
+var doppelChanceActive=false;
 var challengeTarget=0;
 
 function toggleKat(btn,kat){
@@ -378,6 +379,12 @@ function updJoker(){
   document.getElementById('j-5050').disabled=!jokerStatus['5050'];
   document.getElementById('j-telefon').disabled=!jokerStatus['telefon'];
   document.getElementById('j-publikum').disabled=!jokerStatus['publikum'];
+  var zeitBtn=document.getElementById('j-zeit');
+  if(zeitBtn){zeitBtn.style.display=currentMode==='timeattack'?'flex':'none';zeitBtn.disabled=!jokerStatus['zeit'];}
+  var skipBtn=document.getElementById('j-skip');
+  if(skipBtn)skipBtn.disabled=!jokerStatus['skip'];
+  var doppelBtn=document.getElementById('j-doppel');
+  if(doppelBtn)doppelBtn.disabled=!jokerStatus['doppel'];
   var allUsed=!jokerStatus['5050']&&!jokerStatus['telefon']&&!jokerStatus['publikum'];
   var extraBtn=document.getElementById('extra-joker-btn');
   if(extraBtn)extraBtn.style.display=(allUsed&&!extraJokerUsed)?'flex':'none';
@@ -429,12 +436,12 @@ function showHS(){
 }
 
 function startGame(){
-  isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;
+  isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={};cm={};times=[];errs=[];qs=[];
-  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
   updJoker();
   var startBtn=document.querySelector('.s-btn');
   if(startBtn){startBtn.disabled=true;startBtn.textContent='Verbinde...';}
@@ -491,7 +498,8 @@ function apiStartWithRetry(attempt){
 function loadAndShowQ(level){
   if(currentMode==='timeattack'&&taLeft<=0){calcResult();return;}
   if(currentMode!=='timeattack'&&level>MAX_FRAGEN){calcResult();return;}
-  cur=level;done=false;gesperrte=[];
+  cur=level;done=false;gesperrte=[];doppelChanceActive=false;
+  var dBadge=document.querySelector('.doppel-active-badge');if(dBadge)dBadge.remove();
   document.getElementById('iq-fb').style.display='none';
   document.getElementById('nb').style.display='none';
   document.getElementById('fb').textContent='';
@@ -607,6 +615,24 @@ function pick(key){
   }).then(function(r){return r.json();}).then(function(d){handleAnswer(key,d,k);});
 }
 function handleAnswer(key,d,k){
+  // Doppel-Chance: bei falscher Antwort einen zweiten Versuch geben
+  if(!d.richtig&&doppelChanceActive){
+    doppelChanceActive=false;
+    done=false;
+    times.pop();
+    var qk=qs[cur]?qs[cur].kategorie:'';if(cm[qk]>0)cm[qk]--;
+    // Falsche Antwort sperren
+    document.querySelectorAll('.opt').forEach(function(b){
+      if(b.getAttribute('data-key')===key){b.classList.add('no');b.disabled=true;}
+    });
+    // Badge entfernen
+    var dBadge=document.querySelector('.doppel-active-badge');
+    if(dBadge)dBadge.remove();
+    document.getElementById('fb').textContent='❌ Falsch! Noch ein Versuch!';
+    document.getElementById('fb').className='fb no';
+    playSound('falsch');
+    return;
+  }
   var q=qs[cur];
   var bs=document.querySelectorAll('.opt');
   var fb=document.getElementById('fb');
@@ -674,6 +700,44 @@ document.getElementById('nb').onclick=function(){loadAndShowQ(cur+1);};
 
 function useJoker(typ){
   if(!jokerStatus[typ])return;
+  // ── Client-side Joker ──────────────────────────────────────
+  if(typ==='zeit'){
+    if(currentMode!=='timeattack')return;
+    jokerStatus['zeit']=false;updJoker();playSound('joker');
+    taLeft=Math.min(taLeft+30,120);
+    taTotalTime=Math.max(taTotalTime,taLeft);
+    var countEl=document.getElementById('ta-count');
+    var barEl=document.getElementById('ta-bar-fill');
+    if(countEl)countEl.textContent=taLeft;
+    if(barEl)barEl.style.width=Math.round(taLeft/taTotalTime*100)+'%';
+    if(countEl){countEl.style.color='var(--green)';countEl.style.textShadow='0 0 24px rgba(34,197,94,0.9)';}
+    setTimeout(function(){if(countEl){countEl.style.color='';countEl.style.textShadow='';}},1800);
+    return;
+  }
+  if(typ==='skip'){
+    if(done)return;
+    jokerStatus['skip']=false;updJoker();playSound('joker');
+    done=true;clearInterval(ti);
+    var fb=document.getElementById('fb');
+    fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
+    setTimeout(function(){loadAndShowQ(cur+1);},800);
+    return;
+  }
+  if(typ==='doppel'){
+    if(done)return;
+    jokerStatus['doppel']=false;updJoker();playSound('joker');
+    doppelChanceActive=true;
+    var dBtn=document.getElementById('j-doppel');
+    if(dBtn){
+      var badge=document.createElement('span');badge.className='doppel-active-badge';badge.textContent='AKTIV';
+      dBtn.appendChild(badge);
+    }
+    var fb2=document.getElementById('fb');
+    fb2.textContent='🎯 Doppel-Chance aktiv! Du hast 2 Versuche.';fb2.className='fb ok';
+    setTimeout(function(){if(!done&&document.getElementById('fb').className==='fb ok')document.getElementById('fb').textContent='';},2200);
+    return;
+  }
+  // ── Server-side Joker (5050, telefon, publikum) ────────────
   fetch(API+'/api/joker',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -690,10 +754,18 @@ function useJoker(typ){
     }else if(d.typ==='telefon'){
       document.getElementById('jo-title').textContent=T('telefon');
       var content=document.getElementById('jo-content');content.innerHTML='';
-      var p1=document.createElement('div');p1.className='jo-text';p1.textContent='"'+d.text+'"';
-      var p2=document.createElement('div');p2.className='jo-tipp';p2.textContent='Antwort: '+d.tipp;
-      content.appendChild(p1);content.appendChild(p2);
+      // Animiertes Klingeln
+      var phoneEl=document.createElement('div');phoneEl.className='phone-ring-anim';phoneEl.textContent='📞';
+      var ringTxt=document.createElement('div');ringTxt.className='phone-ring-txt';ringTxt.textContent='Verbinde mit Experten...';
+      content.appendChild(phoneEl);content.appendChild(ringTxt);
       document.getElementById('joker-overlay').classList.add('show');
+      // Nach 2.2s den Tipp enthüllen
+      setTimeout(function(){
+        content.innerHTML='';
+        var p1=document.createElement('div');p1.className='jo-text jo-hint-reveal';p1.textContent='"'+d.text+'"';
+        var p2=document.createElement('div');p2.className='jo-tipp jo-hint-reveal';p2.style.animationDelay='.15s';p2.textContent='Antwort: '+d.tipp;
+        content.appendChild(p1);content.appendChild(p2);
+      },2200);
     }else if(d.typ==='publikum'){
       document.getElementById('jo-title').textContent=T('publikum');
       var content=document.getElementById('jo-content');content.innerHTML='';
@@ -1261,9 +1333,9 @@ function loadDailyHS(){
 
 function startDailyGame(){
   playerName=document.getElementById('dni').value||'Spieler';
-  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;extraJokerUsed=false;
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   cs={};cm={};times=[];errs=[];qs=[];
-  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
   updJoker();
   isDailyMode=true;
   clearInterval(_dvTimer);
