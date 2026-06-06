@@ -298,6 +298,7 @@ function getBez(iq){
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
+var isPremium=localStorage.getItem('iq_premium')==='true';
 var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
@@ -793,9 +794,11 @@ function calcResult(){
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   var taOv=document.getElementById('ta-overlay');
   if(taOv)taOv.style.display='none';
-  // Reset Hintergrundfarbe
   document.documentElement.style.setProperty('--bg','#030310');
   saveStats();
+  showInterstitial(function(){_fillResult();});
+}
+function _fillResult(){
   showResult();
   document.getElementById('pf').style.width='100%';
   var sum=0;for(var i=0;i<times.length;i++)sum+=times[i];
@@ -907,6 +910,7 @@ function calcResult(){
   }
   checkRatingPrompt();
   checkAchievements();
+  updPremiumUI();
 }
 
 function saveHS(){
@@ -1253,19 +1257,9 @@ function rateApp(){
 
 // ── EXTRA JOKER ────────────────────────────────────────────
 function buyExtraJoker(){
-  var btn=document.getElementById('extra-joker-btn');
-  if(!btn||extraJokerUsed)return;
-  btn.disabled=true;
-  var n=3;
-  btn.textContent='⏳ '+n+'s Werbung...';
-  var iv=setInterval(function(){
-    n--;
-    btn.textContent='⏳ '+n+'s Werbung...';
-    if(n<=0){
-      clearInterval(iv);
-      grantExtraJoker();
-    }
-  },1000);
+  if(extraJokerUsed)return;
+  if(isPremium){grantExtraJoker();return;}
+  showRewardedAd(function(){grantExtraJoker();});
 }
 function grantExtraJoker(){
   if(!jokerStatus['telefon']){jokerStatus['telefon']=true;}
@@ -1476,3 +1470,98 @@ checkOnboarding();
 checkChallenge();
 initNotifBtn();
 checkDailyNotification();
+
+// ── MONETARISIERUNG ────────────────────────────────────────────────────────
+
+function updPremiumUI(){
+  var banner=document.getElementById('ad-banner');
+  if(banner)banner.style.display=isPremium?'none':'flex';
+  var upgradeBtn=document.getElementById('s-upgrade-btn');
+  if(upgradeBtn)upgradeBtn.style.display=isPremium?'none':'flex';
+  var badge=document.getElementById('prem-badge');
+  if(badge)badge.style.display=isPremium?'inline-block':'none';
+  document.body.style.paddingBottom=isPremium?'0':'68px';
+}
+
+function showPremium(){
+  var m=document.getElementById('premium-modal');
+  if(m)m.style.display='flex';
+}
+function closePremium(){
+  var m=document.getElementById('premium-modal');
+  if(m)m.style.display='none';
+}
+function buyPremium(){
+  // Capacitor IAP Hook: Purchases.purchaseProduct({productIdentifier:'iq_premium_v1'})
+  isPremium=true;
+  localStorage.setItem('iq_premium','true');
+  closePremium();
+  closeShop();
+  updPremiumUI();
+  showAchToast('👑','Premium aktiviert!','Keine Werbung · Badge freigeschaltet');
+  playSound('sicher');
+  launchConfetti('big');
+}
+
+function showRewardedAd(cb){
+  var overlay=document.getElementById('ad-screen');
+  if(!overlay)return;
+  overlay.style.display='flex';
+  var count=5;
+  var countEl=document.getElementById('ad-count');
+  var skipBtn=document.getElementById('ad-skip-btn');
+  if(countEl)countEl.textContent=count;
+  if(skipBtn)skipBtn.style.display='none';
+  var iv=setInterval(function(){
+    count--;
+    if(countEl)countEl.textContent=count;
+    if(count<=2&&skipBtn){
+      skipBtn.style.display='block';
+      skipBtn.onclick=function(){clearInterval(iv);overlay.style.display='none';if(cb)cb();};
+    }
+    if(count<=0){clearInterval(iv);overlay.style.display='none';if(cb)cb();}
+  },1000);
+}
+
+function showInterstitial(cb){
+  if(isPremium){if(cb)cb();return;}
+  var overlay=document.getElementById('inter-ad');
+  if(!overlay){if(cb)cb();return;}
+  overlay.style.display='flex';
+  var count=3;
+  var countEl=document.getElementById('inter-count');
+  var skipBtn=document.getElementById('inter-skip-btn');
+  if(countEl)countEl.textContent=count;
+  if(skipBtn){
+    skipBtn.style.display='none';
+    skipBtn.onclick=function(){clearInterval(iv);overlay.style.display='none';if(cb)cb();};
+  }
+  var iv=setInterval(function(){
+    count--;
+    if(countEl)countEl.textContent=count;
+    if(count<=1&&skipBtn)skipBtn.style.display='block';
+    if(count<=0){clearInterval(iv);overlay.style.display='none';if(cb)cb();}
+  },1000);
+}
+
+function showShop(){
+  var m=document.getElementById('shop-modal');
+  if(m)m.style.display='flex';
+}
+function closeShop(){
+  var m=document.getElementById('shop-modal');
+  if(m)m.style.display='none';
+}
+function buyJokerPack(){
+  // Capacitor IAP Hook: Purchases.purchaseProduct({productIdentifier:'joker_pack_5'})
+  jokerStatus['5050']=true;jokerStatus['telefon']=true;jokerStatus['publikum']=true;
+  jokerStatus['skip']=true;jokerStatus['doppel']=true;
+  extraJokerUsed=false;
+  updJoker();
+  closeShop();
+  playSound('sicher');
+  launchConfetti('medium');
+  showAchToast('🎯','5 Joker aufgefüllt!','Alle Joker sind wieder verfügbar');
+}
+
+updPremiumUI();
