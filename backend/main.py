@@ -37,6 +37,14 @@ if os.path.exists(FRONTEND):
 create_tables()
 sessions = {}
 
+SESSION_TTL = 3 * 3600  # 3 Stunden
+
+def cleanup_sessions():
+    now = time.time()
+    expired = [k for k, v in sessions.items() if now - v.get("erstellt", now) > SESSION_TTL]
+    for k in expired:
+        del sessions[k]
+
 class StartRequest(BaseModel):
     name: str
     kategorie: str = "alle"
@@ -78,6 +86,21 @@ class HighscoreRequest(BaseModel):
     name: str
     iq: int
     level: int
+    session_id: str = ""
+    @validator('name')
+    def name_valid(cls, v):
+        return v.strip()[:20]
+    @validator('iq')
+    def iq_valid(cls, v):
+        if v < 0 or v > 200:
+            raise ValueError('Ungueltiger IQ')
+        return v
+
+class DailySubmitRequest(BaseModel):
+    name: str
+    iq: int
+    level: int
+    session_id: str = ""
     @validator('name')
     def name_valid(cls, v):
         return v.strip()[:20]
@@ -112,6 +135,7 @@ def health():
 @app.post("/api/start")
 @limiter.limit("10/minute")
 def start_game(request: Request, req: StartRequest):
+    cleanup_sessions()
     if len(sessions) > 1000:
         oldest = list(sessions.keys())[:100]
         for k in oldest:
@@ -125,6 +149,8 @@ def start_game(request: Request, req: StartRequest):
         "sicher_level":    0,
         "aktuelles_level": 1,
         "erstellt":        time.time(),
+        "final_iq":        85,
+        "final_level":     0,
     }
     return {"session_id": session_id, "total": len(fragen)}
 
@@ -137,13 +163,14 @@ def get_frage(request: Request, session_id: str, level: int):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     return {
-        "level":     frage["level"],
-        "frage":     frage["frage"],
-        "antworten": frage["antworten"],
-        "kategorie": frage["kategorie"],
-        "preis":     PREISSTUFEN.get(level, "1.000.000 EUR"),
-        "sicher":    level in SICHERHEITSSTUFEN,
-        "seq":       frage.get("seq"),
+        "level":          frage["level"],
+        "frage":          frage["frage"],
+        "antworten":      frage["antworten"],
+        "kategorie":      frage["kategorie"],
+        "schwierigkeit":  frage.get("schwierigkeit", 1),
+        "preis":          PREISSTUFEN.get(level, "1.000.000 EUR"),
+        "sicher":         level in SICHERHEITSSTUFEN,
+        "seq":            frage.get("seq"),
     }
 
 @app.post("/api/antwort")
@@ -163,6 +190,9 @@ def pruefe_antwort(request: Request, req: AntwortRequest):
     sicher = session["sicher_level"]
     iq_level = req.level if richtig else sicher
     iq = IQ_TABELLE.get(iq_level, 85)
+    # Fortschritt im Server tracken für Highscore-Validierung
+    session["final_iq"] = iq
+    session["final_level"] = req.level if richtig else req.level - 1
     return {
         "richtig":               richtig,
         "richtige_antwort":      frage["richtig"],
@@ -192,7 +222,7 @@ def joker(request: Request, req: JokerRequest):
     elif req.typ == "telefon":
         if random.random() < 0.80:
             tipp = richtig
-            text = random.choice(["Ich bin mir sicher:","Ohne Zweifel:","Ich glaube es ist"])
+            text = random.choice(["Ich bin mir sicher:", "Ohne Zweifel:", "Ich glaube es ist"])
         else:
             falsche = [k for k in ["A","B","C","D"] if k != richtig]
             tipp = random.choice(falsche)
@@ -208,6 +238,7 @@ def joker(request: Request, req: JokerRequest):
 @app.post("/api/daily/start")
 @limiter.limit("5/minute")
 def start_daily(request: Request, req: StartRequest):
+    cleanup_sessions()
     if len(sessions) > 1000:
         oldest = list(sessions.keys())[:100]
         for k in oldest:
@@ -224,6 +255,9 @@ def start_daily(request: Request, req: StartRequest):
         "erstellt":        time.time(),
         "daily":           True,
         "datum":           today,
+        "daily_submitted": False,
+        "final_iq":        85,
+        "final_level":     0,
     }
     return {"session_id": session_id, "total": 15, "datum": today}
 
@@ -236,9 +270,21 @@ def get_daily_highscores(request: Request, db: Session = Depends(get_db)):
 
 @app.post("/api/daily/submit")
 @limiter.limit("3/minute")
-def submit_daily(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
+def submit_daily(request: Request, req: DailySubmitRequest, db: Session = Depends(get_db)):
     today = dt_date.today().isoformat()
-    score = DailyScore(datum=today, name=req.name, iq=req.iq, level=req.level, erstellt=time.time())
+    # Doppeleinreichung über Session verhindern
+    if req.session_id and req.session_id in sessions:
+        session = sessions[req.session_id]
+        if session.get("daily_submitted"):
+            raise HTTPException(400, "Bereits heute eingereicht")
+        session["daily_submitted"] = True
+        # IQ aus Session nehmen statt Client-Wert zu vertrauen
+        verified_iq = session.get("final_iq", req.iq)
+        verified_level = session.get("final_level", req.level)
+    else:
+        verified_iq = req.iq
+        verified_level = req.level
+    score = DailyScore(datum=today, name=req.name, iq=verified_iq, level=verified_level, erstellt=time.time())
     db.add(score)
     db.commit()
     return {"ok": True}
@@ -249,6 +295,7 @@ def get_offline_fragen(request: Request):
     fragen = get_random_fragen(15)
     return [{"level": f["level"], "frage": f["frage"], "antworten": f["antworten"],
              "richtig": f["richtig"], "kategorie": f["kategorie"],
+             "schwierigkeit": f.get("schwierigkeit", 1),
              "seq": f.get("seq"), "erklaerung": f.get("erklaerung", "")} for f in fragen]
 
 @app.get("/api/highscores")
@@ -260,7 +307,16 @@ def get_highscores(request: Request, db: Session = Depends(get_db)):
 @app.post("/api/highscores")
 @limiter.limit("5/minute")
 def post_highscore(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
-    score = Highscore(name=req.name, iq=req.iq, level=req.level)
+    # IQ aus Session validieren wenn session_id mitgeschickt wird
+    if req.session_id and req.session_id in sessions:
+        session = sessions[req.session_id]
+        verified_iq = session.get("final_iq", req.iq)
+        verified_level = session.get("final_level", req.level)
+    else:
+        # Ohne Session: Plausibilitätsprüfung
+        verified_iq = min(req.iq, 145)
+        verified_level = min(req.level, 15)
+    score = Highscore(name=req.name, iq=verified_iq, level=verified_level)
     db.add(score)
     db.commit()
     return {"ok": True}

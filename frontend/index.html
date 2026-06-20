@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Teste deinen IQ mit 15 Fragen im Wer-wird-Millionär-Stil. Joker, Timer, Highscores und tägliche Challenges warten auf dich!">
+<meta property="og:title" content="IQ Test – Wie hoch ist dein IQ?">
+<meta property="og:description" content="15 Fragen, 3 Joker, Live-IQ-Anzeige. Teste jetzt deinen IQ!">
+<meta property="og:url" content="https://enesdoudouzi-sys.github.io/iq-quiz-v2/">
 <title>IQ Test</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -71,6 +75,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .joker-btn:disabled{opacity:.25;cursor:not-allowed;border-color:var(--border);color:var(--text3);transform:none;box-shadow:none;}
 .extra-joker-btn{display:none;border-color:var(--gold) !important;color:var(--gold) !important;}
 .extra-joker-btn:hover:not(:disabled){background:rgba(255,215,0,0.12) !important;box-shadow:0 0 16px rgba(255,215,0,0.25) !important;}
+/* ── KEYBOARD HINT ── */
+.kb-hint{font-size:9px;color:var(--text3);text-align:center;margin-top:.2rem;opacity:.6;letter-spacing:.05em;}
 /* ── FRAGE ── */
 .qm{display:flex;flex-direction:column;gap:.8rem;padding:.5rem 0;}
 .qm-top{display:flex;justify-content:space-between;align-items:center;}
@@ -103,7 +109,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes iqPop{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
 .opt.appear{animation:fadeUp .3s ease both;}
-/* ── IQ LEITER ── */
+/* ── IQ LEITER Desktop ── */
 .li.sicher.aktiv{box-shadow:0 0 18px rgba(124,95,255,0.4);}
 .qr{padding-top:.5rem;}
 .leiter-lbl{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:.8rem;}
@@ -113,6 +119,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .li.sicher{color:var(--purple);}
 .li-iq{font-size:9px;opacity:.6;}
 .li-preis{font-weight:600;font-size:9px;}
+/* ── MOBIL LEITER ── */
+#mobile-leiter-btn{display:none;position:fixed;bottom:16px;right:16px;z-index:100;background:rgba(10,15,30,0.97);border:1.5px solid var(--accent);border-radius:14px;padding:.6rem 1rem;color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(74,144,226,0.3);transition:all .2s;}
+#mobile-leiter-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(74,144,226,0.4);}
+#mobile-leiter-panel{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(6,9,26,0.98);border-top:1.5px solid var(--border);border-radius:20px 20px 0 0;padding:1rem;max-height:70vh;overflow-y:auto;backdrop-filter:blur(16px);transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+#mobile-leiter-panel.open{transform:translateY(0);}
+#mobile-leiter-close{float:right;background:transparent;border:none;color:var(--text3);font-size:20px;cursor:pointer;margin-bottom:.5rem;}
+#mobile-leiter-inner{}
 /* ── FEEDBACK ── */
 .fb{min-height:26px;font-size:14px;font-weight:700;text-align:center;}
 .fb.ok{color:var(--green);text-shadow:0 0 10px rgba(34,197,94,0.4);}
@@ -293,7 +306,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .ta-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:99px;transition:width .5s linear;}
 .ta-count{font-size:42px;font-weight:800;color:var(--green);text-align:center;text-shadow:0 0 16px rgba(34,197,94,0.4);}
 .ta-label{font-size:10px;color:var(--text3);text-align:center;text-transform:uppercase;letter-spacing:.1em;}
-/* Lern-Modus Erklaerung */
+/* Lern-Modus Erklärung */
 .lern-erkl{background:rgba(74,144,226,0.08);border:1px solid rgba(74,144,226,0.25);border-radius:12px;padding:.8rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;display:none;margin-top:.5rem;}
 /* Card-Flip */
 @keyframes cardFlip{0%{transform:rotateY(90deg) scale(0.95);opacity:0;}100%{transform:rotateY(0deg) scale(1);opacity:1;}}
@@ -318,9 +331,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 @media(max-width:800px){
 #qv.active{display:flex;flex-direction:column;}
 .ql{flex-direction:row;flex-wrap:wrap;justify-content:center;}
+/* IQ-Leiter auf Desktop verbergen, Mobil-Button zeigen */
 .qr{display:none;}
+#mobile-leiter-btn{display:flex;align-items:center;gap:.4rem;}
+#mobile-leiter-panel{display:block;}
 .opts{grid-template-columns:1fr;}
 .rv-grid{grid-template-columns:1fr 1fr;}
+.kb-hint{display:none;}
 }
 </style>
 </head>
@@ -331,7 +348,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="onb-slide active" id="onb-0">
     <div class="onb-icon">&#129504;</div>
     <div class="onb-title">Willkommen beim IQ Test!</div>
-    <div class="onb-text">15 Fragen aus 9 Kategorien testen deine Intelligenz. Beantworte sie schnell &mdash; jede Sekunde zaehlt!</div>
+    <div class="onb-text">15 Fragen aus 9 Kategorien testen deine Intelligenz. Beantworte sie schnell &mdash; jede Sekunde zählt!</div>
   </div>
   <div class="onb-slide" id="onb-1">
     <div class="onb-icon">&#128200;</div>
@@ -341,12 +358,12 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="onb-slide" id="onb-2">
     <div class="onb-icon">&#127183;</div>
     <div class="onb-title">3 Joker, 3 Chancen</div>
-    <div class="onb-text">&#9986;&#65039; 50:50 eliminiert 2 falsche Antworten<br>&#128222; Telefon gibt einen Expertentipp<br>&#128101; Publikum zeigt die Meinung der Masse</div>
+    <div class="onb-text">✂️ 50:50 eliminiert 2 falsche Antworten<br>📞 Telefon gibt einen Expertentipp<br>👥 Publikum zeigt die Meinung der Masse</div>
   </div>
   <div class="onb-slide" id="onb-3">
     <div class="onb-icon">&#127942;</div>
-    <div class="onb-title">Bereit fuer den Test?</div>
-    <div class="onb-text">Taegliche Challenges, globale Highscores und ein persoenliches IQ-Zertifikat warten auf dich!</div>
+    <div class="onb-title">Bereit für den Test?</div>
+    <div class="onb-text">Tägliche Challenges, globale Highscores und ein persönliches IQ-Zertifikat warten auf dich!</div>
   </div>
   <div class="onb-dots">
     <div class="onb-dot active" id="odot-0"></div>
@@ -355,7 +372,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="onb-dot" id="odot-3"></div>
   </div>
   <button class="onb-btn" id="onb-next-btn" onclick="onbNext()">Weiter</button>
-  <button class="onb-skip" onclick="closeOnboarding()">Ueberspringen</button>
+  <button class="onb-skip" onclick="closeOnboarding()">Überspringen</button>
 </div>
 <!-- LOADING -->
 <div id="loading-screen" style="position:fixed;inset:0;background:#030310;display:flex;pointer-events:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:1rem;">
@@ -369,10 +386,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <!-- RATING -->
 <div id="rating-modal">
   <div class="rating-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-  <div class="rating-title">Gefaellt dir der IQ Test?</div>
-  <div class="rating-sub">Wenn dir die App Spass macht, hinterlasse eine Bewertung &ndash; das hilft uns sehr!</div>
-  <button class="rating-btn" onclick="rateApp()">&#11088; Jetzt bewerten</button>
-  <button class="rating-later" onclick="document.getElementById('rating-modal').style.display='none'">Spaeter</button>
+  <div class="rating-title">Gefällt dir der IQ Test?</div>
+  <div class="rating-sub">Wenn dir die App Spaß macht, teile sie mit Freunden &ndash; das hilft uns sehr!</div>
+  <button class="rating-btn" onclick="rateApp()">&#127775; App weiterempfehlen</button>
+  <button class="rating-later" onclick="document.getElementById('rating-modal').style.display='none'">Später</button>
 </div>
 <!-- START -->
 <div id="lang-globe-wrap">
@@ -393,9 +410,9 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="s-brain">&#129504;</div>
   <div class="s-title">IQ Test</div>
   <div class="s-sub">Teste deinen IQ &middot; 15 Fragen &middot; 3 Joker</div>
-  <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
+  <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20" autocomplete="off"/>
   <div class="kat-section">
-    <div class="kat-title">Kategorie waehlen</div>
+    <div class="kat-title">Kategorie wählen</div>
     <div class="kat-grid">
       <button class="kat-btn active" onclick="toggleKat(this,'alle')">&#127919; Alle</button>
       <button class="kat-btn" onclick="toggleKat(this,'Allgemeinwissen')">&#127758; Allgemeinwissen</button>
@@ -428,15 +445,15 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     </div>
   </div>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
-  <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
+  <button class="s-daily" onclick="showDailyInfo()">&#128197; Tägliche Challenge</button>
   <button class="s-hs" onclick="showHS()">&#127942; Highscores</button>
   <button class="s-stats" onclick="showStats()">&#128202; Statistiken</button>
-  <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; Taegl. Erinnerung</button>
+  <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; Tägl. Erinnerung</button>
 </div>
 <!-- DAILY -->
 <div id="dv">
   <div style="font-size:58px;text-align:center;filter:drop-shadow(0 0 16px rgba(255,215,0,0.4));">&#128197;</div>
-  <div class="s-title" style="font-size:32px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;background-clip:text;">Taegliche Challenge</div>
+  <div class="s-title" style="font-size:32px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;background-clip:text;">Tägliche Challenge</div>
   <div class="dv-date" id="dv-date"></div>
   <div class="dv-countdown" id="dv-countdown">--:--:--</div>
   <div id="dv-already" style="display:none;width:100%;">
@@ -444,13 +461,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="dv-score" id="dv-score-info"></div>
   </div>
   <div id="dv-play" style="width:100%;display:flex;flex-direction:column;gap:.9rem;">
-    <div class="dv-desc">15 Fragen &middot; gleiche Fragen fuer alle &middot; 1x pro Tag</div>
+    <div class="dv-desc">15 Fragen &middot; gleiche Fragen für alle &middot; 1x pro Tag</div>
     <input class="s-input" id="dni" type="text" placeholder="Dein Name..." maxlength="20"/>
     <button class="s-btn" onclick="startDailyGame()">Challenge starten</button>
   </div>
   <div class="leiter-lbl" style="width:100%;margin-top:.5rem;">Tages-Bestenliste</div>
   <div id="dv-hs" style="width:100%;"></div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zurück</button>
 </div>
 <!-- QUIZ -->
 <div id="qv">
@@ -490,7 +507,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <button class="joker-btn" id="j-5050" onclick="useJoker('5050')">&#9986;&#65039; 50 : 50</button>
       <button class="joker-btn" id="j-telefon" onclick="useJoker('telefon')">&#128222; Telefon-Joker</button>
       <button class="joker-btn" id="j-publikum" onclick="useJoker('publikum')">&#128101; Publikums-Joker</button>
-      <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zurueckholen</button>
+      <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zurückholen</button>
+      <div class="kb-hint">Tastatur: A B C D · Enter = Weiter</div>
     </div>
   </div>
   <div class="qm">
@@ -511,7 +529,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="joker-overlay" id="joker-overlay">
       <div class="jo-title" id="jo-title"></div>
       <div id="jo-content"></div>
-      <button class="jo-close" onclick="closeJoker()">Schliessen</button>
+      <button class="jo-close" onclick="closeJoker()">Schließen</button>
     </div>
     <div class="iq-fb" id="iq-fb">
       <div class="iq-fb-lbl">Dein IQ nach dieser Frage</div>
@@ -519,13 +537,20 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <div class="iq-fb-bez" id="iq-fb-bez">-</div>
     </div>
     <div style="overflow:hidden;margin-top:.8rem;">
-      <button class="nxt" id="nb">Naechste Frage</button>
+      <button class="nxt" id="nb">Nächste Frage</button>
     </div>
   </div>
   <div class="qr">
     <div class="leiter-lbl">IQ Leiter</div>
     <div id="leiter"></div>
   </div>
+</div>
+<!-- MOBIL: IQ-Leiter Button & Panel -->
+<button id="mobile-leiter-btn" onclick="toggleMobileLeiter()">&#128200; IQ Leiter</button>
+<div id="mobile-leiter-panel">
+  <button id="mobile-leiter-close" onclick="toggleMobileLeiter()">&#10005;</button>
+  <div class="leiter-lbl" style="margin-top:.5rem;">IQ Leiter</div>
+  <div id="mobile-leiter-inner"></div>
 </div>
 <!-- ERGEBNIS -->
 <div id="rv">
@@ -552,12 +577,11 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="err-lbl" id="err-lbl"></div>
   <div id="ml"></div>
   <div class="save-row">
-    <input class="save-in" id="sn" placeholder="Name fuer Highscore..."/>
+    <input class="save-in" id="sn" placeholder="Name für Highscore..."/>
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
   <div id="cat-summary" style="margin-bottom:1rem;"></div>
   <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
-  <!-- Social Media Teilen -->
   <div class="social-section">
     <div class="social-lbl">Teilen</div>
     <div class="social-grid">
@@ -592,7 +616,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="cert-title">IQ Test Zertifikat</div>
     <div class="cert-sub">Offizieller Nachweis</div>
     <div class="cert-hr"></div>
-    <div class="cert-lbl">Hiermit wird bestaetigt, dass</div>
+    <div class="cert-lbl">Hiermit wird bestätigt, dass</div>
     <div class="cert-name" id="cert-name"></div>
     <div class="cert-lbl">einen IQ von</div>
     <div class="cert-iq" id="cert-iq"></div>
@@ -627,13 +651,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="st-chart-lbl">&#127942; Achievements</div>
     <div id="st-achievements"></div>
   </div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zurück</button>
 </div>
 <!-- HIGHSCORES -->
 <div id="hv">
   <h2>&#127942; Highscores</h2>
   <div id="hl"></div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zurück</button>
 </div>
 <a href="datenschutz.html" style="position:fixed;bottom:10px;right:10px;font-size:11px;color:#1a2540;text-decoration:none;z-index:2;">Datenschutz</a>
 <!-- Achievement Toast -->
