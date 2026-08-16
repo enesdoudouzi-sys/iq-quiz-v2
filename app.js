@@ -1,4 +1,46 @@
 const API = 'https://iq-quiz-v2.onrender.com';
+// ── ECHTE KAEUFE (RevenueCat) ───────────────────────────────────────────────
+// TODO: Vor dem Store-Release echte RevenueCat API-Keys eintragen
+// (RevenueCat Dashboard -> Project Settings -> API Keys). Getrennte Keys fuer
+// Android/iOS. Ohne gueltigen Key schlaegt configure() fehl und Kaeufe sind
+// deaktiviert (kein Fallback auf "gratis freischalten" mehr!).
+const REVENUECAT_API_KEY_ANDROID = 'REPLACE_ME_ANDROID_KEY';
+const REVENUECAT_API_KEY_IOS     = 'REPLACE_ME_IOS_KEY';
+const RC_ENTITLEMENT_PREMIUM = 'premium';        // Entitlement-ID im RevenueCat Dashboard
+const RC_PACKAGE_PREMIUM     = 'iq_premium_v1';  // Package/Product-ID im RevenueCat Dashboard
+const RC_PACKAGE_JOKERPACK   = 'joker_pack_5';   // Package/Product-ID im RevenueCat Dashboard
+function isNativeApp(){
+  return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+}
+function rcPlugin(){
+  return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Purchases) || null;
+}
+var rcConfigured = false;
+async function initPurchases(){
+  if(!isNativeApp())return; // Web-Vorschau: keine echten Kaeufe moeglich
+  var Purchases = rcPlugin();
+  if(!Purchases)return;
+  var platform = (window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || 'android';
+  var apiKey = platform === 'ios' ? REVENUECAT_API_KEY_IOS : REVENUECAT_API_KEY_ANDROID;
+  if(!apiKey || apiKey.indexOf('REPLACE_ME') === 0)return; // Keys noch nicht gesetzt
+  try{
+    await Purchases.configure({ apiKey: apiKey });
+    rcConfigured = true;
+    await syncPremiumFromStore();
+  }catch(e){ console.error('Purchases.configure fehlgeschlagen', e); }
+}
+async function syncPremiumFromStore(){
+  var Purchases = rcPlugin();
+  if(!Purchases || !rcConfigured)return;
+  try{
+    var res = await Purchases.getCustomerInfo();
+    var active = res && res.customerInfo && res.customerInfo.entitlements && res.customerInfo.entitlements.active;
+    var unlocked = !!(active && active[RC_ENTITLEMENT_PREMIUM]);
+    isPremium = unlocked;
+    localStorage.setItem('iq_premium', unlocked ? 'true' : 'false');
+    if(typeof updPremiumUI === 'function')updPremiumUI();
+  }catch(e){ console.error('getCustomerInfo fehlgeschlagen', e); }
+}
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6'};
 const KAT_ICONS = {'Allgemeinwissen':'🌍','Logik & Zahlenfolgen':'🧩','Konzentration':'🎯','Geschichte':'📜','Wissenschaft & Natur':'🔬','Wissenschaft':'🔬','Sport':'⚽','Mathematik':'🔢','Musik':'🎵','Geographie':'🗺️'};
@@ -1471,6 +1513,7 @@ checkOnboarding();
 checkChallenge();
 initNotifBtn();
 checkDailyNotification();
+initPurchases();
 
 // ── MONETARISIERUNG ────────────────────────────────────────────────────────
 
@@ -1493,16 +1536,76 @@ function closePremium(){
   var m=document.getElementById('premium-modal');
   if(m)m.style.display='none';
 }
-function buyPremium(){
-  // Capacitor IAP Hook: Purchases.purchaseProduct({productIdentifier:'iq_premium_v1'})
-  isPremium=true;
-  localStorage.setItem('iq_premium','true');
-  closePremium();
-  closeShop();
-  updPremiumUI();
-  showAchToast('👑','Premium aktiviert!','Keine Werbung · Badge freigeschaltet');
-  playSound('sicher');
-  launchConfetti('big');
+async function buyPremium(){
+  if(!isNativeApp()){
+    showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Premium zu kaufen');
+    return;
+  }
+  var Purchases = rcPlugin();
+  if(!Purchases||!rcConfigured){
+    showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+    return;
+  }
+  var buyBtn=document.querySelector('.prem-buy-btn');
+  if(buyBtn){buyBtn.disabled=true;buyBtn.textContent='⏳ Wird verarbeitet...';}
+  try{
+    var offerings = await Purchases.getOfferings();
+    var pkg = findPackage(offerings, RC_PACKAGE_PREMIUM);
+    if(!pkg)throw new Error('Package nicht gefunden: '+RC_PACKAGE_PREMIUM);
+    var result = await Purchases.purchasePackage({ aPackage: pkg });
+    var active = result && result.customerInfo && result.customerInfo.entitlements && result.customerInfo.entitlements.active;
+    if(active && active[RC_ENTITLEMENT_PREMIUM]){
+      isPremium=true;
+      localStorage.setItem('iq_premium','true');
+      closePremium();
+      closeShop();
+      updPremiumUI();
+      showAchToast('👑','Premium aktiviert!','Keine Werbung · Badge freigeschaltet');
+      playSound('sicher');
+      launchConfetti('big');
+    }else{
+      showAchToast('⚠️','Kauf nicht bestätigt','Bitte versuche es erneut oder nutze "Käufe wiederherstellen"');
+    }
+  }catch(e){
+    if(!(e && (e.userCancelled||e.code==='PURCHASE_CANCELLED_ERROR'))){
+      console.error('Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+    }
+  }finally{
+    if(buyBtn){buyBtn.disabled=false;buyBtn.textContent='👑 Jetzt kaufen';}
+  }
+}
+function findPackage(offerings, identifier){
+  try{
+    var current = offerings && offerings.current;
+    var pkgs = (current && current.availablePackages) || [];
+    for(var i=0;i<pkgs.length;i++){
+      if(pkgs[i].identifier===identifier || (pkgs[i].product && pkgs[i].product.identifier===identifier))return pkgs[i];
+    }
+  }catch(e){}
+  return null;
+}
+async function restorePurchases(){
+  if(!isNativeApp()||!rcConfigured){
+    showAchToast('ℹ️','Nur in der App verfügbar','Käufe wiederherstellen geht nur in der installierten App');
+    return;
+  }
+  var Purchases = rcPlugin();
+  try{
+    var result = await Purchases.restorePurchases();
+    var active = result && result.customerInfo && result.customerInfo.entitlements && result.customerInfo.entitlements.active;
+    if(active && active[RC_ENTITLEMENT_PREMIUM]){
+      isPremium=true;
+      localStorage.setItem('iq_premium','true');
+      updPremiumUI();
+      showAchToast('👑','Premium wiederhergestellt!','Dein früherer Kauf wurde gefunden');
+    }else{
+      showAchToast('ℹ️','Kein Kauf gefunden','Es wurde kein früherer Premium-Kauf gefunden');
+    }
+  }catch(e){
+    console.error('Wiederherstellung fehlgeschlagen', e);
+    showAchToast('⚠️','Wiederherstellung fehlgeschlagen','Bitte versuche es später erneut');
+  }
 }
 
 function showRewardedAd(cb){
@@ -1555,8 +1658,28 @@ function closeShop(){
   var m=document.getElementById('shop-modal');
   if(m)m.style.display='none';
 }
-function buyJokerPack(){
-  // Capacitor IAP Hook: Purchases.purchaseProduct({productIdentifier:'joker_pack_5'})
+async function buyJokerPack(){
+  if(!isNativeApp()){
+    showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Joker zu kaufen');
+    return;
+  }
+  var Purchases = rcPlugin();
+  if(!Purchases||!rcConfigured){
+    showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+    return;
+  }
+  try{
+    var offerings = await Purchases.getOfferings();
+    var pkg = findPackage(offerings, RC_PACKAGE_JOKERPACK);
+    if(!pkg)throw new Error('Package nicht gefunden: '+RC_PACKAGE_JOKERPACK);
+    await Purchases.purchasePackage({ aPackage: pkg }); // Consumable: Kauf selbst ist die Bestaetigung
+  }catch(e){
+    if(!(e && (e.userCancelled||e.code==='PURCHASE_CANCELLED_ERROR'))){
+      console.error('Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+    }
+    return;
+  }
   jokerStatus['5050']=true;jokerStatus['telefon']=true;jokerStatus['publikum']=true;
   jokerStatus['skip']=true;jokerStatus['doppel']=true;
   extraJokerUsed=false;
