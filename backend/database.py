@@ -26,14 +26,6 @@ class DailyScore(Base):
     level    = Column(Integer)
     erstellt = Column(Float)
 
-class User(Base):
-    __tablename__ = "users"
-    id           = Column(Integer, primary_key=True, index=True)
-    username     = Column(String, unique=True, index=True)
-    email        = Column(String, unique=True, index=True)
-    password     = Column(String)
-    erstellt_am  = Column(DateTime, default=datetime.now)
-
 def get_db():
     db = SessionLocal()
     try:
