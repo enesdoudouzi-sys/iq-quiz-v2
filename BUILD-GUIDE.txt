@@ -3,9 +3,26 @@
   Version 1.1 | com.enesdoudouzi.iqtest
 ═══════════════════════════════════════════════════════════════
 
-Keystore-Daten (SICHER AUFBEWAHREN!):
+⚠️ SICHERHEITSHINWEIS: Hier stand bisher das Keystore-Passwort im
+Klartext in diesem oeffentlichen Repo. Das Passwort "iqtest2024"
+gilt als KOMPROMITTIERT. Bitte:
+  1. Kompletten Signing-Vorgang pruefen: Falls die App noch NICHT
+     im Play Store veroeffentlicht ist -> neuen Keystore mit neuem,
+     starkem Passwort erzeugen (keytool -genkey ...) und den alten
+     verwerfen.
+  2. Falls die App BEREITS veroeffentlicht ist und Google Play App
+     Signing aktiv ist: Google verwaltet den eigentlichen App-
+     Signing-Key selbst, dieser Upload-Keystore ist "nur" der
+     Upload-Key. Trotzdem: Upload-Key-Reset im Play Console
+     (Release > Setup > App integrity) anfragen, da das Passwort
+     oeffentlich war.
+  3. Das Passwort NIE wieder in eine Datei schreiben, die eingecheckt
+     wird. Stattdessen lokal in ~/.gradle/gradle.properties (liegt
+     ausserhalb des Repos) oder in einem Passwort-Manager speichern,
+     und beim Build interaktiv eingeben.
+
+Keystore-Datei (liegt lokal bei dir, NICHT im Repo):
   Datei:     iqtest-release.keystore
-  Passwort:  iqtest2024
   Alias:     iqtest
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -26,9 +43,9 @@ In Android Studio:
   Build → Generate Signed Bundle / APK
   → Android App Bundle → Next
   → Key store path: iqtest-release.keystore
-  → Store password: iqtest2024
+  → Store password: <aus Passwort-Manager/lokaler gradle.properties>
   → Key alias: iqtest
-  → Key password: iqtest2024
+  → Key password: <aus Passwort-Manager/lokaler gradle.properties>
   → Next → release → Finish
 
 Output-Datei:
@@ -44,9 +61,9 @@ In Android Studio:
   Build → Generate Signed Bundle / APK
   → APK → Next
   → Key store path: iqtest-release.keystore
-  → Store password: iqtest2024
+  → Store password: <aus Passwort-Manager/lokaler gradle.properties>
   → Key alias: iqtest
-  → Key password: iqtest2024
+  → Key password: <aus Passwort-Manager/lokaler gradle.properties>
   → Next → release → Finish
 
 Output-Datei:
