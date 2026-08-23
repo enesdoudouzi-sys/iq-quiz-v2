@@ -6,3 +6,4 @@ nano
 index_backup.html
 *.keystore
 *.jks
+android/keystore.properties
