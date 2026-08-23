@@ -1541,12 +1541,41 @@ async function buyPremium(){
     showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Premium zu kaufen');
     return;
   }
+  var buyBtn=document.querySelector('.prem-buy-btn');
+  if(STORE_TARGET === 'galaxy'){
+    var SamsungIap = samsungIapPlugin();
+    if(!SamsungIap||!samsungIapReady){
+      showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+      return;
+    }
+    if(buyBtn){buyBtn.disabled=true;buyBtn.textContent='⏳ Wird verarbeitet...';}
+    try{
+      var result = await SamsungIap.startPayment({ itemId: SAMSUNG_ITEM_PREMIUM });
+      if(result && result.success){
+        isPremium=true;
+        localStorage.setItem('iq_premium','true');
+        closePremium();
+        closeShop();
+        updPremiumUI();
+        showAchToast('👑','Premium aktiviert!','Keine Werbung · Badge freigeschaltet');
+        playSound('sicher');
+        launchConfetti('big');
+      }else{
+        showAchToast('⚠️','Kauf nicht bestätigt','Bitte versuche es erneut oder nutze "Käufe wiederherstellen"');
+      }
+    }catch(e){
+      console.error('Samsung Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+    }finally{
+      if(buyBtn){buyBtn.disabled=false;buyBtn.textContent='👑 Jetzt kaufen';}
+    }
+    return;
+  }
   var Purchases = rcPlugin();
   if(!Purchases||!rcConfigured){
     showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
     return;
   }
-  var buyBtn=document.querySelector('.prem-buy-btn');
   if(buyBtn){buyBtn.disabled=true;buyBtn.textContent='⏳ Wird verarbeitet...';}
   try{
     var offerings = await Purchases.getOfferings();
@@ -1586,7 +1615,25 @@ function findPackage(offerings, identifier){
   return null;
 }
 async function restorePurchases(){
-  if(!isNativeApp()||!rcConfigured){
+  if(!isNativeApp()){
+    showAchToast('ℹ️','Nur in der App verfügbar','Käufe wiederherstellen geht nur in der installierten App');
+    return;
+  }
+  if(STORE_TARGET === 'galaxy'){
+    if(!samsungIapReady){
+      showAchToast('ℹ️','Nur in der App verfügbar','Käufe wiederherstellen geht nur in der installierten App');
+      return;
+    }
+    var wasPremium = isPremium;
+    await syncPremiumFromStore();
+    if(isPremium){
+      showAchToast('👑','Premium wiederhergestellt!','Dein früherer Kauf wurde gefunden');
+    }else{
+      showAchToast('ℹ️','Kein Kauf gefunden','Es wurde kein früherer Premium-Kauf gefunden');
+    }
+    return;
+  }
+  if(!rcConfigured){
     showAchToast('ℹ️','Nur in der App verfügbar','Käufe wiederherstellen geht nur in der installierten App');
     return;
   }
@@ -1663,6 +1710,37 @@ async function buyJokerPack(){
     showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Joker zu kaufen');
     return;
   }
+  if(STORE_TARGET === 'galaxy'){
+    var SamsungIap = samsungIapPlugin();
+    if(!SamsungIap||!samsungIapReady){
+      showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+      return;
+    }
+    try{
+      var result = await SamsungIap.startPayment({ itemId: SAMSUNG_ITEM_JOKERPACK });
+      if(!result || !result.success){
+        showAchToast('⚠️','Kauf nicht bestätigt','Bitte versuche es erneut');
+        return;
+      }
+      if(result.purchaseId){
+        try{ await SamsungIap.consumePurchasedItems({ purchaseId: result.purchaseId }); }
+        catch(ce){ console.error('Samsung consumePurchasedItems fehlgeschlagen', ce); }
+      }
+    }catch(e){
+      console.error('Samsung Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+      return;
+    }
+    jokerStatus['5050']=true;jokerStatus['telefon']=true;jokerStatus['publikum']=true;
+    jokerStatus['skip']=true;jokerStatus['doppel']=true;
+    extraJokerUsed=false;
+    updJoker();
+    closeShop();
+    playSound('sicher');
+    launchConfetti('medium');
+    showAchToast('🎯','5 Joker aufgefüllt!','Alle Joker sind wieder verfügbar');
+    return;
+  }
   var Purchases = rcPlugin();
   if(!Purchases||!rcConfigured){
     showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
@@ -1672,7 +1750,7 @@ async function buyJokerPack(){
     var offerings = await Purchases.getOfferings();
     var pkg = findPackage(offerings, RC_PACKAGE_JOKERPACK);
     if(!pkg)throw new Error('Package nicht gefunden: '+RC_PACKAGE_JOKERPACK);
-    await Purchases.purchasePackage({ aPackage: pkg }); // Consumable: Kauf selbst ist die Bestaetigung
+    await Purchases.purchasePackage({ aPackage: pkg });
   }catch(e){
     if(!(e && (e.userCancelled||e.code==='PURCHASE_CANCELLED_ERROR'))){
       console.error('Kauf fehlgeschlagen', e);
