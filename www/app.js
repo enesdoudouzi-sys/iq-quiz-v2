@@ -1,4 +1,46 @@
 const API = 'https://iq-quiz-v2.onrender.com';
+// ── ECHTE KAEUFE (RevenueCat) ───────────────────────────────────────────────
+// TODO: Vor dem Store-Release echte RevenueCat API-Keys eintragen
+// (RevenueCat Dashboard -> Project Settings -> API Keys). Getrennte Keys fuer
+// Android/iOS. Ohne gueltigen Key schlaegt configure() fehl und Kaeufe sind
+// deaktiviert (kein Fallback auf "gratis freischalten" mehr!).
+const REVENUECAT_API_KEY_ANDROID = 'REPLACE_ME_ANDROID_KEY';
+const REVENUECAT_API_KEY_IOS     = 'REPLACE_ME_IOS_KEY';
+const RC_ENTITLEMENT_PREMIUM = 'premium';        // Entitlement-ID im RevenueCat Dashboard
+const RC_PACKAGE_PREMIUM     = 'iq_premium_v1';  // Package/Product-ID im RevenueCat Dashboard
+const RC_PACKAGE_JOKERPACK   = 'joker_pack_5';   // Package/Product-ID im RevenueCat Dashboard
+function isNativeApp(){
+  return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+}
+function rcPlugin(){
+  return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Purchases) || null;
+}
+var rcConfigured = false;
+async function initPurchases(){
+  if(!isNativeApp())return; // Web-Vorschau: keine echten Kaeufe moeglich
+  var Purchases = rcPlugin();
+  if(!Purchases)return;
+  var platform = (window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || 'android';
+  var apiKey = platform === 'ios' ? REVENUECAT_API_KEY_IOS : REVENUECAT_API_KEY_ANDROID;
+  if(!apiKey || apiKey.indexOf('REPLACE_ME') === 0)return; // Keys noch nicht gesetzt
+  try{
+    await Purchases.configure({ apiKey: apiKey });
+    rcConfigured = true;
+    await syncPremiumFromStore();
+  }catch(e){ console.error('Purchases.configure fehlgeschlagen', e); }
+}
+async function syncPremiumFromStore(){
+  var Purchases = rcPlugin();
+  if(!Purchases || !rcConfigured)return;
+  try{
+    var res = await Purchases.getCustomerInfo();
+    var active = res && res.customerInfo && res.customerInfo.entitlements && res.customerInfo.entitlements.active;
+    var unlocked = !!(active && active[RC_ENTITLEMENT_PREMIUM]);
+    isPremium = unlocked;
+    localStorage.setItem('iq_premium', unlocked ? 'true' : 'false');
+    if(typeof updPremiumUI === 'function')updPremiumUI();
+  }catch(e){ console.error('getCustomerInfo fehlgeschlagen', e); }
+}
 const L = ['A','B','C','D'];
 const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6'};
 const KAT_ICONS = {'Allgemeinwissen':'🌍','Logik & Zahlenfolgen':'🧩','Konzentration':'🎯','Geschichte':'📜','Wissenschaft & Natur':'🔬','Wissenschaft':'🔬','Sport':'⚽','Mathematik':'🔢','Musik':'🎵','Geographie':'🗺️'};
@@ -298,11 +340,14 @@ function getBez(iq){
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
-var jokerStatus={'5050':true,'telefon':true,'publikum':true};
+var ADS_ENABLED=false; // true = Werbung an, false = Werbung aus
+var isPremium=localStorage.getItem('iq_premium')==='true';
+var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
 var isOfflineMode=false,offlineQs=[];
 var extraJokerUsed=false;
+var doppelChanceActive=false;
 var challengeTarget=0;
 
 function toggleKat(btn,kat){
@@ -378,6 +423,12 @@ function updJoker(){
   document.getElementById('j-5050').disabled=!jokerStatus['5050'];
   document.getElementById('j-telefon').disabled=!jokerStatus['telefon'];
   document.getElementById('j-publikum').disabled=!jokerStatus['publikum'];
+  var zeitBtn=document.getElementById('j-zeit');
+  if(zeitBtn){zeitBtn.style.display=currentMode==='timeattack'?'flex':'none';zeitBtn.disabled=!jokerStatus['zeit'];}
+  var skipBtn=document.getElementById('j-skip');
+  if(skipBtn)skipBtn.disabled=!jokerStatus['skip'];
+  var doppelBtn=document.getElementById('j-doppel');
+  if(doppelBtn)doppelBtn.disabled=!jokerStatus['doppel'];
   var allUsed=!jokerStatus['5050']&&!jokerStatus['telefon']&&!jokerStatus['publikum'];
   var extraBtn=document.getElementById('extra-joker-btn');
   if(extraBtn)extraBtn.style.display=(allUsed&&!extraJokerUsed)?'flex':'none';
@@ -429,12 +480,12 @@ function showHS(){
 }
 
 function startGame(){
-  isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;
+  isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   playerName=document.getElementById('ni').value||'Spieler';
   cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];
   cs={};cm={};times=[];errs=[];qs=[];
-  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
   updJoker();
   var startBtn=document.querySelector('.s-btn');
   if(startBtn){startBtn.disabled=true;startBtn.textContent='Verbinde...';}
@@ -491,7 +542,8 @@ function apiStartWithRetry(attempt){
 function loadAndShowQ(level){
   if(currentMode==='timeattack'&&taLeft<=0){calcResult();return;}
   if(currentMode!=='timeattack'&&level>MAX_FRAGEN){calcResult();return;}
-  cur=level;done=false;gesperrte=[];
+  cur=level;done=false;gesperrte=[];doppelChanceActive=false;
+  var dBadge=document.querySelector('.doppel-active-badge');if(dBadge)dBadge.remove();
   document.getElementById('iq-fb').style.display='none';
   document.getElementById('nb').style.display='none';
   document.getElementById('fb').textContent='';
@@ -607,6 +659,24 @@ function pick(key){
   }).then(function(r){return r.json();}).then(function(d){handleAnswer(key,d,k);});
 }
 function handleAnswer(key,d,k){
+  // Doppel-Chance: bei falscher Antwort einen zweiten Versuch geben
+  if(!d.richtig&&doppelChanceActive){
+    doppelChanceActive=false;
+    done=false;
+    times.pop();
+    var qk=qs[cur]?qs[cur].kategorie:'';if(cm[qk]>0)cm[qk]--;
+    // Falsche Antwort sperren
+    document.querySelectorAll('.opt').forEach(function(b){
+      if(b.getAttribute('data-key')===key){b.classList.add('no');b.disabled=true;}
+    });
+    // Badge entfernen
+    var dBadge=document.querySelector('.doppel-active-badge');
+    if(dBadge)dBadge.remove();
+    document.getElementById('fb').textContent='❌ Falsch! Noch ein Versuch!';
+    document.getElementById('fb').className='fb no';
+    playSound('falsch');
+    return;
+  }
   var q=qs[cur];
   var bs=document.querySelectorAll('.opt');
   var fb=document.getElementById('fb');
@@ -674,6 +744,44 @@ document.getElementById('nb').onclick=function(){loadAndShowQ(cur+1);};
 
 function useJoker(typ){
   if(!jokerStatus[typ])return;
+  // ── Client-side Joker ──────────────────────────────────────
+  if(typ==='zeit'){
+    if(currentMode!=='timeattack')return;
+    jokerStatus['zeit']=false;updJoker();playSound('joker');
+    taLeft=Math.min(taLeft+30,120);
+    taTotalTime=Math.max(taTotalTime,taLeft);
+    var countEl=document.getElementById('ta-count');
+    var barEl=document.getElementById('ta-bar-fill');
+    if(countEl)countEl.textContent=taLeft;
+    if(barEl)barEl.style.width=Math.round(taLeft/taTotalTime*100)+'%';
+    if(countEl){countEl.style.color='var(--green)';countEl.style.textShadow='0 0 24px rgba(34,197,94,0.9)';}
+    setTimeout(function(){if(countEl){countEl.style.color='';countEl.style.textShadow='';}},1800);
+    return;
+  }
+  if(typ==='skip'){
+    if(done)return;
+    jokerStatus['skip']=false;updJoker();playSound('joker');
+    done=true;clearInterval(ti);
+    var fb=document.getElementById('fb');
+    fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
+    setTimeout(function(){loadAndShowQ(cur+1);},800);
+    return;
+  }
+  if(typ==='doppel'){
+    if(done)return;
+    jokerStatus['doppel']=false;updJoker();playSound('joker');
+    doppelChanceActive=true;
+    var dBtn=document.getElementById('j-doppel');
+    if(dBtn){
+      var badge=document.createElement('span');badge.className='doppel-active-badge';badge.textContent='AKTIV';
+      dBtn.appendChild(badge);
+    }
+    var fb2=document.getElementById('fb');
+    fb2.textContent='🎯 Doppel-Chance aktiv! Du hast 2 Versuche.';fb2.className='fb ok';
+    setTimeout(function(){if(!done&&document.getElementById('fb').className==='fb ok')document.getElementById('fb').textContent='';},2200);
+    return;
+  }
+  // ── Server-side Joker (5050, telefon, publikum) ────────────
   fetch(API+'/api/joker',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -690,10 +798,18 @@ function useJoker(typ){
     }else if(d.typ==='telefon'){
       document.getElementById('jo-title').textContent=T('telefon');
       var content=document.getElementById('jo-content');content.innerHTML='';
-      var p1=document.createElement('div');p1.className='jo-text';p1.textContent='"'+d.text+'"';
-      var p2=document.createElement('div');p2.className='jo-tipp';p2.textContent='Antwort: '+d.tipp;
-      content.appendChild(p1);content.appendChild(p2);
+      // Animiertes Klingeln
+      var phoneEl=document.createElement('div');phoneEl.className='phone-ring-anim';phoneEl.textContent='📞';
+      var ringTxt=document.createElement('div');ringTxt.className='phone-ring-txt';ringTxt.textContent='Verbinde mit Experten...';
+      content.appendChild(phoneEl);content.appendChild(ringTxt);
       document.getElementById('joker-overlay').classList.add('show');
+      // Nach 2.2s den Tipp enthüllen
+      setTimeout(function(){
+        content.innerHTML='';
+        var p1=document.createElement('div');p1.className='jo-text jo-hint-reveal';p1.textContent='"'+d.text+'"';
+        var p2=document.createElement('div');p2.className='jo-tipp jo-hint-reveal';p2.style.animationDelay='.15s';p2.textContent='Antwort: '+d.tipp;
+        content.appendChild(p1);content.appendChild(p2);
+      },2200);
     }else if(d.typ==='publikum'){
       document.getElementById('jo-title').textContent=T('publikum');
       var content=document.getElementById('jo-content');content.innerHTML='';
@@ -721,9 +837,11 @@ function calcResult(){
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   var taOv=document.getElementById('ta-overlay');
   if(taOv)taOv.style.display='none';
-  // Reset Hintergrundfarbe
   document.documentElement.style.setProperty('--bg','#030310');
   saveStats();
+  showInterstitial(function(){_fillResult();});
+}
+function _fillResult(){
   showResult();
   document.getElementById('pf').style.width='100%';
   var sum=0;for(var i=0;i<times.length;i++)sum+=times[i];
@@ -835,6 +953,7 @@ function calcResult(){
   }
   checkRatingPrompt();
   checkAchievements();
+  updPremiumUI();
 }
 
 function saveHS(){
@@ -1181,19 +1300,9 @@ function rateApp(){
 
 // ── EXTRA JOKER ────────────────────────────────────────────
 function buyExtraJoker(){
-  var btn=document.getElementById('extra-joker-btn');
-  if(!btn||extraJokerUsed)return;
-  btn.disabled=true;
-  var n=3;
-  btn.textContent='⏳ '+n+'s Werbung...';
-  var iv=setInterval(function(){
-    n--;
-    btn.textContent='⏳ '+n+'s Werbung...';
-    if(n<=0){
-      clearInterval(iv);
-      grantExtraJoker();
-    }
-  },1000);
+  if(extraJokerUsed)return;
+  if(isPremium){grantExtraJoker();return;}
+  showRewardedAd(function(){grantExtraJoker();});
 }
 function grantExtraJoker(){
   if(!jokerStatus['telefon']){jokerStatus['telefon']=true;}
@@ -1261,9 +1370,9 @@ function loadDailyHS(){
 
 function startDailyGame(){
   playerName=document.getElementById('dni').value||'Spieler';
-  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;extraJokerUsed=false;
+  cur=0;sc=0;done=false;finalIQ=85;gesperrte=[];isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   cs={};cm={};times=[];errs=[];qs=[];
-  jokerStatus={'5050':true,'telefon':true,'publikum':true};
+  jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
   updJoker();
   isDailyMode=true;
   clearInterval(_dvTimer);
@@ -1404,3 +1513,181 @@ checkOnboarding();
 checkChallenge();
 initNotifBtn();
 checkDailyNotification();
+initPurchases();
+
+// ── MONETARISIERUNG ────────────────────────────────────────────────────────
+
+function updPremiumUI(){
+  var showAds=ADS_ENABLED&&!isPremium;
+  var banner=document.getElementById('ad-banner');
+  if(banner)banner.style.display=showAds?'flex':'none';
+  var upgradeBtn=document.getElementById('s-upgrade-btn');
+  if(upgradeBtn)upgradeBtn.style.display=isPremium?'none':'flex';
+  var badge=document.getElementById('prem-badge');
+  if(badge)badge.style.display=isPremium?'inline-block':'none';
+  document.body.style.paddingBottom=showAds?'68px':'0';
+}
+
+function showPremium(){
+  var m=document.getElementById('premium-modal');
+  if(m)m.style.display='flex';
+}
+function closePremium(){
+  var m=document.getElementById('premium-modal');
+  if(m)m.style.display='none';
+}
+async function buyPremium(){
+  if(!isNativeApp()){
+    showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Premium zu kaufen');
+    return;
+  }
+  var Purchases = rcPlugin();
+  if(!Purchases||!rcConfigured){
+    showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+    return;
+  }
+  var buyBtn=document.querySelector('.prem-buy-btn');
+  if(buyBtn){buyBtn.disabled=true;buyBtn.textContent='⏳ Wird verarbeitet...';}
+  try{
+    var offerings = await Purchases.getOfferings();
+    var pkg = findPackage(offerings, RC_PACKAGE_PREMIUM);
+    if(!pkg)throw new Error('Package nicht gefunden: '+RC_PACKAGE_PREMIUM);
+    var result = await Purchases.purchasePackage({ aPackage: pkg });
+    var active = result && result.customerInfo && result.customerInfo.entitlements && result.customerInfo.entitlements.active;
+    if(active && active[RC_ENTITLEMENT_PREMIUM]){
+      isPremium=true;
+      localStorage.setItem('iq_premium','true');
+      closePremium();
+      closeShop();
+      updPremiumUI();
+      showAchToast('👑','Premium aktiviert!','Keine Werbung · Badge freigeschaltet');
+      playSound('sicher');
+      launchConfetti('big');
+    }else{
+      showAchToast('⚠️','Kauf nicht bestätigt','Bitte versuche es erneut oder nutze "Käufe wiederherstellen"');
+    }
+  }catch(e){
+    if(!(e && (e.userCancelled||e.code==='PURCHASE_CANCELLED_ERROR'))){
+      console.error('Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+    }
+  }finally{
+    if(buyBtn){buyBtn.disabled=false;buyBtn.textContent='👑 Jetzt kaufen';}
+  }
+}
+function findPackage(offerings, identifier){
+  try{
+    var current = offerings && offerings.current;
+    var pkgs = (current && current.availablePackages) || [];
+    for(var i=0;i<pkgs.length;i++){
+      if(pkgs[i].identifier===identifier || (pkgs[i].product && pkgs[i].product.identifier===identifier))return pkgs[i];
+    }
+  }catch(e){}
+  return null;
+}
+async function restorePurchases(){
+  if(!isNativeApp()||!rcConfigured){
+    showAchToast('ℹ️','Nur in der App verfügbar','Käufe wiederherstellen geht nur in der installierten App');
+    return;
+  }
+  var Purchases = rcPlugin();
+  try{
+    var result = await Purchases.restorePurchases();
+    var active = result && result.customerInfo && result.customerInfo.entitlements && result.customerInfo.entitlements.active;
+    if(active && active[RC_ENTITLEMENT_PREMIUM]){
+      isPremium=true;
+      localStorage.setItem('iq_premium','true');
+      updPremiumUI();
+      showAchToast('👑','Premium wiederhergestellt!','Dein früherer Kauf wurde gefunden');
+    }else{
+      showAchToast('ℹ️','Kein Kauf gefunden','Es wurde kein früherer Premium-Kauf gefunden');
+    }
+  }catch(e){
+    console.error('Wiederherstellung fehlgeschlagen', e);
+    showAchToast('⚠️','Wiederherstellung fehlgeschlagen','Bitte versuche es später erneut');
+  }
+}
+
+function showRewardedAd(cb){
+  if(!ADS_ENABLED){if(cb)cb();return;}
+  var overlay=document.getElementById('ad-screen');
+  if(!overlay)return;
+  overlay.style.display='flex';
+  var count=5;
+  var countEl=document.getElementById('ad-count');
+  var skipBtn=document.getElementById('ad-skip-btn');
+  if(countEl)countEl.textContent=count;
+  if(skipBtn)skipBtn.style.display='none';
+  var iv=setInterval(function(){
+    count--;
+    if(countEl)countEl.textContent=count;
+    if(count<=2&&skipBtn){
+      skipBtn.style.display='block';
+      skipBtn.onclick=function(){clearInterval(iv);overlay.style.display='none';if(cb)cb();};
+    }
+    if(count<=0){clearInterval(iv);overlay.style.display='none';if(cb)cb();}
+  },1000);
+}
+
+function showInterstitial(cb){
+  if(!ADS_ENABLED||isPremium){if(cb)cb();return;}
+  var overlay=document.getElementById('inter-ad');
+  if(!overlay){if(cb)cb();return;}
+  overlay.style.display='flex';
+  var count=3;
+  var countEl=document.getElementById('inter-count');
+  var skipBtn=document.getElementById('inter-skip-btn');
+  if(countEl)countEl.textContent=count;
+  if(skipBtn){
+    skipBtn.style.display='none';
+    skipBtn.onclick=function(){clearInterval(iv);overlay.style.display='none';if(cb)cb();};
+  }
+  var iv=setInterval(function(){
+    count--;
+    if(countEl)countEl.textContent=count;
+    if(count<=1&&skipBtn)skipBtn.style.display='block';
+    if(count<=0){clearInterval(iv);overlay.style.display='none';if(cb)cb();}
+  },1000);
+}
+
+function showShop(){
+  var m=document.getElementById('shop-modal');
+  if(m)m.style.display='flex';
+}
+function closeShop(){
+  var m=document.getElementById('shop-modal');
+  if(m)m.style.display='none';
+}
+async function buyJokerPack(){
+  if(!isNativeApp()){
+    showAchToast('ℹ️','Nur in der App verfügbar','Bitte lade die IQ-Test-App aus dem Store, um Joker zu kaufen');
+    return;
+  }
+  var Purchases = rcPlugin();
+  if(!Purchases||!rcConfigured){
+    showAchToast('⚠️','Kauf momentan nicht möglich','Bitte versuche es später erneut');
+    return;
+  }
+  try{
+    var offerings = await Purchases.getOfferings();
+    var pkg = findPackage(offerings, RC_PACKAGE_JOKERPACK);
+    if(!pkg)throw new Error('Package nicht gefunden: '+RC_PACKAGE_JOKERPACK);
+    await Purchases.purchasePackage({ aPackage: pkg }); // Consumable: Kauf selbst ist die Bestaetigung
+  }catch(e){
+    if(!(e && (e.userCancelled||e.code==='PURCHASE_CANCELLED_ERROR'))){
+      console.error('Kauf fehlgeschlagen', e);
+      showAchToast('⚠️','Kauf fehlgeschlagen','Bitte versuche es später erneut');
+    }
+    return;
+  }
+  jokerStatus['5050']=true;jokerStatus['telefon']=true;jokerStatus['publikum']=true;
+  jokerStatus['skip']=true;jokerStatus['doppel']=true;
+  extraJokerUsed=false;
+  updJoker();
+  closeShop();
+  playSound('sicher');
+  launchConfetti('medium');
+  showAchToast('🎯','5 Joker aufgefüllt!','Alle Joker sind wieder verfügbar');
+}
+
+updPremiumUI();
