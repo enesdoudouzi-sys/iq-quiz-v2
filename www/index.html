@@ -399,7 +399,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="onb-slide active" id="onb-0">
     <div class="onb-icon">&#129504;</div>
     <div class="onb-title">Willkommen beim IQ Test!</div>
-    <div class="onb-text">15 Fragen aus 9 Kategorien testen deine Intelligenz. Beantworte sie schnell &mdash; jede Sekunde zaehlt!</div>
+    <div class="onb-text">15 Fragen aus 9 Kategorien &ndash; ein Wissens- und Logik-Quiz zum Spa&szlig;. Kein wissenschaftlicher IQ-Test. Beantworte schnell &mdash; jede Sekunde z&auml;hlt!</div>
   </div>
   <div class="onb-slide" id="onb-1">
     <div class="onb-icon">&#128200;</div>
@@ -413,8 +413,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   </div>
   <div class="onb-slide" id="onb-3">
     <div class="onb-icon">&#127942;</div>
-    <div class="onb-title">Bereit fuer den Test?</div>
-    <div class="onb-text">Taegliche Challenges, globale Highscores und ein persoenliches IQ-Zertifikat warten auf dich!</div>
+    <div class="onb-title">Bereit f&uuml;r das Quiz?</div>
+    <div class="onb-text">T&auml;gliche Challenges, globale Highscores und eine pers&ouml;nliche Spa&szlig;-Urkunde warten auf dich!</div>
   </div>
   <div class="onb-dots">
     <div class="onb-dot active" id="odot-0"></div>
@@ -440,7 +440,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="rating-title">Gefaellt dir der IQ Test?</div>
   <div class="rating-sub">Wenn dir die App Spass macht, hinterlasse eine Bewertung &ndash; das hilft uns sehr!</div>
   <button class="rating-btn" onclick="rateApp()">&#11088; Jetzt bewerten</button>
-  <button class="rating-later" onclick="document.getElementById('rating-modal').style.display='none'">Spaeter</button>
+  <button class="rating-later" onclick="document.getElementById('rating-modal').style.display='none'">Sp&auml;ter</button>
 </div>
 <!-- START -->
 <div id="lang-globe-wrap">
@@ -460,10 +460,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <div id="sv" style="position:relative;">
   <div class="s-brain">&#129504;</div>
   <div class="s-title">IQ Test</div>
-  <div class="s-sub">Teste deinen IQ &middot; 15 Fragen &middot; 3 Joker</div>
+  <div class="s-sub">Das IQ-Quiz &middot; 15 Fragen &middot; 3 Joker<br><span style="font-size:11px;opacity:.7;">Unterhaltung &ndash; kein wissenschaftlicher IQ-Test</span></div>
   <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
   <div class="kat-section">
-    <div class="kat-title">Kategorie waehlen</div>
+    <div class="kat-title">Kategorie w&auml;hlen</div>
     <div class="kat-grid">
       <button class="kat-btn active" onclick="toggleKat(this,'alle')">&#127919; Alle</button>
       <button class="kat-btn" onclick="toggleKat(this,'Allgemeinwissen')">&#127758; Allgemeinwissen</button>
@@ -496,16 +496,16 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     </div>
   </div>
   <button class="s-btn" onclick="startGame()">Jetzt starten</button>
-  <button class="s-daily" onclick="showDailyInfo()">&#128197; Taegliche Challenge</button>
+  <button class="s-daily" onclick="showDailyInfo()">&#128197; T&auml;gliche Challenge</button>
   <button class="s-hs" onclick="showHS()">&#127942; Highscores</button>
   <button class="s-stats" onclick="showStats()">&#128202; Statistiken</button>
-  <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; Taegl. Erinnerung</button>
-  <button class="s-upgrade" id="s-upgrade-btn" onclick="showPremium()">&#128081; Premium &middot; Werbefrei f&uuml;r 2,99 &euro;</button>
+  <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; T&auml;gl. Erinnerung</button>
+  <button class="s-upgrade" id="s-upgrade-btn" onclick="showPremium()">&#128081; Premium &middot; einmalig 2,99 &euro;</button>
 </div>
 <!-- DAILY -->
 <div id="dv">
   <div style="font-size:58px;text-align:center;filter:drop-shadow(0 0 16px rgba(255,215,0,0.4));">&#128197;</div>
-  <div class="s-title" style="font-size:32px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;background-clip:text;">Taegliche Challenge</div>
+  <div class="s-title" style="font-size:32px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;background-clip:text;">T&auml;gliche Challenge</div>
   <div class="dv-date" id="dv-date"></div>
   <div class="dv-countdown" id="dv-countdown">--:--:--</div>
   <div id="dv-already" style="display:none;width:100%;">
@@ -513,13 +513,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="dv-score" id="dv-score-info"></div>
   </div>
   <div id="dv-play" style="width:100%;display:flex;flex-direction:column;gap:.9rem;">
-    <div class="dv-desc">15 Fragen &middot; gleiche Fragen fuer alle &middot; 1x pro Tag</div>
+    <div class="dv-desc">15 Fragen &middot; gleiche Fragen f&uuml;r alle &middot; 1x pro Tag</div>
     <input class="s-input" id="dni" type="text" placeholder="Dein Name..." maxlength="20"/>
     <button class="s-btn" onclick="startDailyGame()">Challenge starten</button>
   </div>
   <div class="leiter-lbl" style="width:100%;margin-top:.5rem;">Tages-Bestenliste</div>
   <div id="dv-hs" style="width:100%;"></div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zur&uuml;ck</button>
 </div>
 <!-- QUIZ -->
 <div id="qv">
@@ -562,7 +562,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <button class="joker-btn zeit-joker-btn" id="j-zeit" onclick="useJoker('zeit')">&#9201;&#65039; +30 Sekunden</button>
       <button class="joker-btn skip-joker-btn" id="j-skip" onclick="useJoker('skip')">&#9197;&#65039; Frage &#252;berspringen</button>
       <button class="joker-btn doppel-joker-btn" id="j-doppel" onclick="useJoker('doppel')">&#127919; Doppel-Chance</button>
-      <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zurueckholen</button>
+      <button class="joker-btn extra-joker-btn" id="extra-joker-btn" onclick="buyExtraJoker()">&#128250; Joker zur&uuml;ckholen</button>
       <button class="joker-btn" id="j-shop" onclick="showShop()" style="border-color:var(--gold);color:var(--gold);margin-top:.3rem;">&#128722; Shop</button>
     </div>
   </div>
@@ -592,7 +592,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <div class="iq-fb-bez" id="iq-fb-bez">-</div>
     </div>
     <div style="overflow:hidden;margin-top:.8rem;">
-      <button class="nxt" id="nb">Naechste Frage</button>
+      <button class="nxt" id="nb">N&auml;chste Frage</button>
     </div>
   </div>
   <div class="qr">
@@ -625,11 +625,11 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="err-lbl" id="err-lbl"></div>
   <div id="ml"></div>
   <div class="save-row">
-    <input class="save-in" id="sn" placeholder="Name fuer Highscore..."/>
+    <input class="save-in" id="sn" placeholder="Name f&uuml;r Highscore..."/>
     <button class="save-btn" onclick="saveHS()">Speichern</button>
   </div>
   <div id="cat-summary" style="margin-bottom:1rem;"></div>
-  <button class="cert-btn" onclick="downloadCert()">&#128196; Zertifikat als PDF</button>
+  <button class="cert-btn" onclick="downloadCert()">&#128196; Urkunde als PDF</button>
   <!-- Social Media Teilen -->
   <div class="social-section">
     <div class="social-lbl">Teilen</div>
@@ -662,12 +662,12 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <div id="cert">
   <div class="cert-inner">
     <div class="cert-logo">&#129504;</div>
-    <div class="cert-title">IQ Test Zertifikat</div>
-    <div class="cert-sub">Offizieller Nachweis</div>
+    <div class="cert-title">IQ-Quiz Urkunde</div>
+    <div class="cert-sub">Spa&szlig;-Urkunde &middot; kein wissenschaftlicher IQ-Test</div>
     <div class="cert-hr"></div>
-    <div class="cert-lbl">Hiermit wird bestaetigt, dass</div>
+    <div class="cert-lbl">Diese Urkunde geht an</div>
     <div class="cert-name" id="cert-name"></div>
-    <div class="cert-lbl">einen IQ von</div>
+    <div class="cert-lbl">f&uuml;r einen Quiz-IQ von</div>
     <div class="cert-iq" id="cert-iq"></div>
     <div class="cert-class" id="cert-class"></div>
     <div class="cert-detail" id="cert-detail"></div>
@@ -700,13 +700,13 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
     <div class="st-chart-lbl">&#127942; Achievements</div>
     <div id="st-achievements"></div>
   </div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zur&uuml;ck</button>
 </div>
 <!-- HIGHSCORES -->
 <div id="hv">
   <h2>&#127942; Highscores</h2>
   <div id="hl"></div>
-  <button class="rbtn" onclick="showStart()">Zurueck</button>
+  <button class="rbtn" onclick="showStart()">Zur&uuml;ck</button>
 </div>
 <a href="datenschutz.html" style="position:fixed;bottom:10px;right:10px;font-size:11px;color:#1a2540;text-decoration:none;z-index:2;">Datenschutz</a>
 <a href="impressum.html" style="position:fixed;bottom:10px;right:78px;font-size:11px;color:#1a2540;text-decoration:none;z-index:2;">Impressum</a>
@@ -732,10 +732,9 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <div class="prem-title">IQ Test Premium</div>
   <div class="prem-sub">Einmalig kaufen &mdash; f&uuml;r immer genie&szlig;en</div>
   <div class="prem-features">
-    <div class="prem-feat"><div class="prem-feat-icon">&#128683;</div><div><div class="prem-feat-name">Keine Werbung</div><div class="prem-feat-desc">Keine Banner, keine Interstitials</div></div></div>
-    <div class="prem-feat"><div class="prem-feat-icon">&#127919;</div><div><div class="prem-feat-name">Joker ohne Werbung zur&uuml;ckholen</div><div class="prem-feat-desc">Extra-Joker direkt &mdash; kein Video n&ouml;tig</div></div></div>
+    <div class="prem-feat"><div class="prem-feat-icon">&#128683;</div><div><div class="prem-feat-name">Werbefrei f&uuml;r immer</div><div class="prem-feat-desc">Gilt auch, falls sp&auml;ter Werbung eingef&uuml;hrt wird</div></div></div>
+    <div class="prem-feat"><div class="prem-feat-icon">&#127919;</div><div><div class="prem-feat-name">Entwicklung unterst&uuml;tzen</div><div class="prem-feat-desc">Hilft, neue Fragen und Funktionen zu finanzieren</div></div></div>
     <div class="prem-feat"><div class="prem-feat-icon">&#128081;</div><div><div class="prem-feat-name">Premium-Badge im Spiel</div><div class="prem-feat-desc">Exklusiver goldener Badge in der Quiz-Ansicht</div></div></div>
-    <div class="prem-feat"><div class="prem-feat-icon">&#9855;&#65039;</div><div><div class="prem-feat-name">Endloser Spielspa&szlig;</div><div class="prem-feat-desc">Alle Modi ohne Einschr&auml;nkungen</div></div></div>
   </div>
   <div class="prem-price">2,99 &euro;</div>
   <div class="prem-price-sub">Einmaliger Kauf &middot; Kein Abo</div>
@@ -782,7 +781,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
       <div class="shop-card-icon">&#128081;</div>
       <div class="shop-card-info">
         <div class="shop-card-name">Premium</div>
-        <div class="shop-card-desc">Keine Werbung &middot; Joker ohne Video &middot; Badge</div>
+        <div class="shop-card-desc">Werbefrei f&uuml;r immer &middot; Badge</div>
       </div>
       <div class="shop-card-price">2,99 &euro;</div>
     </div>

@@ -3,119 +3,147 @@
   App: IQ Test | com.enesdoudouzi.iqtest
 ═══════════════════════════════════════════════════════════════
 
+WICHTIG (Play-Richtlinien): Das Quiz ist KEIN wissenschaftlicher IQ-Test.
+Deshalb in Titel, Beschreibung und Screenshots nie "offizieller IQ-Test",
+"echter IQ" o. ä. versprechen. Die Texte unten sind darauf abgestimmt.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DEUTSCH (DE)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 APP NAME (max 30 Zeichen):
-IQ Test – Teste dein Wissen
+IQ Quiz – Teste dein Wissen
 
 KURZBESCHREIBUNG (max 80 Zeichen):
-Teste deinen IQ mit 160 Fragen, 3 Jokern & täglichen Challenges!
+Quiz mit 15 Fragen, 3 Jokern & täglicher Challenge – zum Spaß, kein IQ-Test.
 
 LANGE BESCHREIBUNG (max 4000 Zeichen):
-Wie hoch ist dein IQ wirklich? Finde es heraus mit dem ultimativen IQ Test!
+Wie hoch ist dein Quiz-IQ? Finde es heraus mit dem IQ-Quiz im Stil der großen TV-Quizshows!
 
-Stell dich 15 anspruchsvollen Fragen aus 7 verschiedenen Kategorien und ermittle deinen persönlichen IQ-Wert. Mit 3 mächtigen Jokern, einem Live-IQ-Anzeiger und spannenden Animationen macht das Testen deiner Intelligenz mehr Spaß denn je.
+Stell dich 15 Fragen aus 9 Kategorien und sieh live, wie dein Quiz-IQ mit jeder richtigen Antwort steigt. Mit Jokern, Live-Anzeige und Animationen wird jede Runde spannend.
+
+Wichtig: Dieses Quiz dient der Unterhaltung. Der angezeigte Quiz-IQ ist kein wissenschaftlich validierter IQ-Test und ersetzt keine psychologische Diagnostik.
 
 🧠 FEATURES:
 
-▶ 160 Fragen aus 7 Kategorien
+▶ 274 Fragen aus 9 Kategorien
    • Allgemeinwissen
    • Geschichte
-   • Wissenschaft & Natur
+   • Wissenschaft
    • Sport
    • Mathematik
    • Logik & Zahlenfolgen
    • Konzentration
+   • Musik
+   • Geographie
 
-🃏 3 JOKER wie im TV:
+🃏 JOKER:
    • 50:50 – Eliminiert 2 falsche Antworten
    • Telefon-Joker – Ein Experte gibt einen Tipp
    • Publikums-Joker – Die Crowd hilft dir
+   • Extra: +30 Sekunden, Frage überspringen, Doppel-Chance
 
 📅 TÄGLICHE CHALLENGE:
-   Jeden Tag neue Fragen – dieselben für alle Spieler weltweit. Vergleiche dich in der Tages-Bestenliste!
+   Jeden Tag neue Fragen – dieselben für alle Spieler. Vergleiche dich in der Tages-Bestenliste!
 
-📊 DETAILLIERTE STATISTIKEN:
-   Verfolge deinen IQ-Verlauf, deine Kategorie-Genauigkeit und deinen Challenge-Streak über Zeit.
+📊 STATISTIKEN:
+   Verfolge deinen Verlauf, deine Kategorie-Genauigkeit und deine Challenge-Serie.
 
-🏆 HIGHSCORES & ZERTIFIKAT:
-   Speichere deinen Score in der globalen Bestenliste und lade dein persönliches IQ-Zertifikat als PDF herunter.
+🏆 HIGHSCORES & URKUNDE:
+   Trag dich (mit Spitzname) in die globale Bestenliste ein und speichere deine persönliche Spaß-Urkunde als PDF.
 
-🎉 MOTIVIERENDE EFFEKTE:
-   Konfetti, Sounds und Animationen machen jede richtige Antwort zum Erlebnis.
+🎮 SPIELMODI:
+   Normal, Time-Attack, Lernen und Endless.
 
-🌍 6 SPRACHEN:
-   Deutsch, Englisch, Türkisch, Französisch, Spanisch, Arabisch
+🌍 7 SPRACHEN:
+   Deutsch, Englisch, Türkisch, Französisch, Spanisch, Portugiesisch, Arabisch
 
-📱 Für alle geeignet – ob Schüler, Student oder Erwachsener. Trainiere dein Gehirn täglich und verbessere deinen IQ!
+💎 PREMIUM (optional, einmaliger Kauf, kein Abo):
+   Werbefrei für immer und goldenes Premium-Abzeichen. Zusätzlich gibt es ein optionales Joker-Pack.
 
-Datenschutzerklärung: https://iq-quiz-v2.onrender.com/datenschutz
+📱 Für Spieler ab 13 Jahren.
+
+Datenschutzerklärung: https://enesdoudouzi-sys.github.io/iq-quiz-v2/datenschutz.html
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   ENGLISH (EN)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 APP NAME (max 30 chars):
-IQ Test – Test Your Intelligence
+IQ Quiz – Test Your Knowledge
 
 SHORT DESCRIPTION (max 80 chars):
-Test your IQ with 160 questions, 3 lifelines & daily challenges!
+Quiz with 15 questions, 3 lifelines & daily challenge – for fun, not an IQ test.
 
 LONG DESCRIPTION (max 4000 chars):
-How high is your IQ really? Find out with the ultimate IQ Test!
+How high is your quiz IQ? Find out with the IQ quiz inspired by the big TV quiz shows!
 
-Answer 15 challenging questions from 7 different categories and discover your personal IQ score. With 3 powerful lifelines, a live IQ tracker and exciting animations, testing your intelligence has never been more fun.
+Face 15 questions from 9 categories and watch your quiz IQ rise live with every correct answer. Lifelines, a live display and animations make every round exciting.
+
+Please note: this quiz is for entertainment. The displayed quiz IQ is not a scientifically validated IQ test and does not replace psychological assessment.
 
 🧠 FEATURES:
 
-▶ 160 Questions across 7 Categories
+▶ 274 questions across 9 categories
    • General Knowledge
    • History
-   • Science & Nature
+   • Science
    • Sports
    • Mathematics
    • Logic & Number Sequences
    • Concentration
+   • Music
+   • Geography
 
-🃏 3 LIFELINES:
+🃏 LIFELINES:
    • 50:50 – Eliminates 2 wrong answers
    • Phone Lifeline – An expert gives you a hint
    • Audience Lifeline – The crowd helps you out
+   • Extras: +30 seconds, skip question, double chance
 
 📅 DAILY CHALLENGE:
-   New questions every day – the same for all players worldwide. Compete in the daily leaderboard!
+   New questions every day – the same for all players. Compete in the daily leaderboard!
 
-📊 DETAILED STATISTICS:
-   Track your IQ progress, category accuracy and daily challenge streak over time.
+📊 STATISTICS:
+   Track your progress, category accuracy and daily challenge streak.
 
 🏆 HIGHSCORES & CERTIFICATE:
-   Save your score on the global leaderboard and download your personal IQ certificate as PDF.
+   Enter the global leaderboard (with a nickname) and save your personal fun certificate as PDF.
 
-🎉 MOTIVATING EFFECTS:
-   Confetti, sounds and animations make every correct answer a celebration.
+🎮 GAME MODES:
+   Normal, Time-Attack, Learning and Endless.
 
-🌍 6 LANGUAGES:
-   German, English, Turkish, French, Spanish, Arabic
+🌍 7 LANGUAGES:
+   German, English, Turkish, French, Spanish, Portuguese, Arabic
 
-📱 Suitable for everyone – students, professionals and adults alike. Train your brain daily and improve your IQ!
+💎 PREMIUM (optional, one-time purchase, no subscription):
+   Ad-free forever and a golden Premium badge. An optional joker pack is also available.
 
-Privacy Policy: https://iq-quiz-v2.onrender.com/datenschutz
+📱 For players aged 13 and over.
+
+Privacy Policy: https://enesdoudouzi-sys.github.io/iq-quiz-v2/datenschutz.html
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   STORE EINSTELLUNGEN (Play Console)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Kategorie:         Bildung  (Education)
-Content Rating:    Alle (Everyone / PEGI 3)
-Datenschutz-URL:   https://iq-quiz-v2.onrender.com/datenschutz
+Kategorie:         Trivia (Spiele) – NICHT "Bildung", da kein Lerninhalt zugesichert wird
+Content Rating:    Fragebogen in der Play Console ehrlich ausfüllen (Ergebnis nicht vorab festlegen)
+Zielgruppe:        13+ (nicht "alle Altersgruppen"; sonst gelten Families-Policy-Auflagen)
+Datenschutz-URL:   https://enesdoudouzi-sys.github.io/iq-quiz-v2/datenschutz.html
 Support-E-Mail:    enesdoudouzi@googlemail.com
-Website:           https://iq-quiz-v2.onrender.com
+Website:           https://enesdoudouzi-sys.github.io/iq-quiz-v2/
+
+Data-Safety-Formular (Play Console) – passend zur Datenschutzerklärung:
+  • Gesammelt: Name (optional, Bestenliste), Kaufhistorie (RevenueCat),
+    IP-Adresse (Server-Logs/Kaufdienst)
+  • Weitergabe an Dienstleister: RevenueCat (Kaufabwicklung)
+  • Verschlüsselung bei Übertragung: ja (HTTPS)
+  • Löschung auf Anfrage möglich: ja (E-Mail)
+  • Keine Werbung, keine Analyse-Dienste in dieser Version
 
 Tags / Keywords:
-IQ Test, IQ Quiz, Intelligenztest, Quiz, Allgemeinwissen,
-Gehirn trainieren, Brain Test, Wissenstest, Trivia, Logik
+IQ Quiz, Quiz, Allgemeinwissen, Gehirn trainieren, Wissenstest, Trivia, Logik
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   SCREENSHOTS – Was du aufnehmen solltest
@@ -123,35 +151,31 @@ Gehirn trainieren, Brain Test, Wissenstest, Trivia, Logik
 
 Mindestens 2, empfohlen 6-8 Screenshots (Hochformat):
 
-1. Startscreen mit IQ Test Titel + Buttons
+1. Startscreen mit Titel + Buttons
 2. Frage-Screen mit Timer, Antworten und IQ-Leiter
 3. Joker-Popup (z.B. Publikums-Joker mit Balkengrafik)
-4. Ergebnis-Screen mit grossem IQ-Wert + Konfetti
+4. Ergebnis-Screen mit grossem Quiz-IQ + Konfetti
 5. Statistiken-Screen
 6. Tägliche Challenge / Bestenliste
-7. Zertifikat (vor dem Drucken)
+7. Spaß-Urkunde (vor dem Drucken)
 
 Feature Graphic (1024x500 px):
-→ Dunkler Hintergrund, grosses Gehirn-Logo, "IQ Test" Text
+→ Dunkler Hintergrund, grosses Gehirn-Logo, "IQ Quiz" Text
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  RELEASE NOTES (Was ist neu in Version 1.1)
+  RELEASE NOTES (Was ist neu in Version 1.2)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 DE:
-• Konfetti, Sounds und Animationen
-• Tägliche Challenge mit Bestenliste
-• IQ-Zertifikat als PDF
-• Statistiken und IQ-Verlauf
-• Neues App-Icon und Splash Screen
-• 7 Kategorien wählbar
+• Echte Käufe über Google Play (Premium, Joker-Pack)
+• Neue Hinweise: Unterhaltung, kein wissenschaftlicher IQ-Test
+• Überarbeitete Datenschutzerklärung
+• Korrekturen bei deutschen Texten (Umlaute)
 
 EN:
-• Confetti, sounds and animations
-• Daily Challenge with leaderboard
-• IQ Certificate as PDF
-• Statistics and IQ history
-• New app icon and splash screen
-• 7 selectable categories
+• Real purchases via Google Play (Premium, joker pack)
+• New notes: entertainment, not a scientific IQ test
+• Updated privacy policy
+• Fixes to German texts
 
 ═══════════════════════════════════════════════════════════════

@@ -1,6 +1,6 @@
 # 🧠 IQ Quiz
 
-> **Wer wird Millionär** – als IQ-Test. Entwickelt von Enes Doudouzi.
+> Quiz im Stil der großen TV-Quizshows (Unterhaltung, kein wissenschaftlicher IQ-Test). Entwickelt von Enes Doudouzi.
 
 [![Live](https://img.shields.io/badge/Live-GitHub%20Pages-blue?style=flat-square)](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
 [![API](https://img.shields.io/badge/API-Render.com-green?style=flat-square)](https://iq-quiz-v2.onrender.com)
@@ -13,13 +13,13 @@
 
 | Feature | Beschreibung |
 |---|---|
-| ✅ 105 Fragen | Zufällig aus 3 Kategorien |
+| ✅ 274 Fragen | Zufällig aus 9 Kategorien |
 | ⏱️ Timer | 20 / 25 / 30 Sek pro Level |
 | 🧠 Live IQ | Aktualisiert nach jeder Frage |
 | 💰 Preisleiter | WWM-Style mit Sicherheitsstufen |
 | ☠️ Game Over | Falsche Antwort = ausgeschieden |
 | 🃏 3 Joker | 50:50 · Telefon · Publikum |
-| 🌍 6 Sprachen | DE · EN · TR · FR · ES · AR |
+| 🌍 7 Sprachen | DE · EN · TR · FR · ES · PT · AR |
 | 🏆 Highscores | Top 10 in SQLite Datenbank |
 | 🔊 Sounds | Richtig / Falsch / Gewonnen |
 | 📱 Mobile | Responsive + PWA ready |
