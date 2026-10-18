@@ -529,7 +529,7 @@ function apiStartWithRetry(attempt){
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
+    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw,modus:currentMode})
   }).then(function(r){
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
@@ -664,6 +664,17 @@ function tout(){
     if(b.getAttribute('data-key')===q.richtig)b.classList.add('ok');
     b.disabled=true;
   });
+  if(!isOfflineMode&&sessionId&&sessionId!=='offline'){
+    // Server informieren: Zeit abgelaufen zaehlt als falsche Antwort ("X")
+    fetch(API+'/api/antwort',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({session_id:sessionId,level:cur,antwort:'X'})}).then(function(r){return r.json();}).then(function(d){
+      if(d&&d.richtige_antwort){
+        document.querySelectorAll('.opt').forEach(function(b){
+          if(b.getAttribute('data-key')===d.richtige_antwort)b.classList.add('ok');
+        });
+      }
+    }).catch(function(){});
+  }
   document.getElementById('fb').textContent=T('zeit');
   document.getElementById('fb').className='fb to';
   playSound('falsch');
@@ -691,7 +702,7 @@ function pick(key){
 }
 function handleAnswer(key,d,k){
   // Doppel-Chance: bei falscher Antwort einen zweiten Versuch geben
-  if(!d.richtig&&doppelChanceActive){
+  if(!d.richtig&&(d.nochmal||(isOfflineMode&&doppelChanceActive))){
     doppelChanceActive=false;
     done=false;
     times.pop();
@@ -791,15 +802,25 @@ function useJoker(typ){
   }
   if(typ==='skip'){
     if(done)return;
-    jokerStatus['skip']=false;updJoker();playSound('joker');
-    done=true;clearInterval(ti);
-    var fb=document.getElementById('fb');
-    fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
-    setTimeout(function(){loadAndShowQ(cur+1);},800);
+    var doSkip=function(){
+      jokerStatus['skip']=false;updJoker();playSound('joker');
+      done=true;clearInterval(ti);
+      var fb=document.getElementById('fb');
+      fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
+      setTimeout(function(){loadAndShowQ(cur+1);},800);
+    };
+    if(isOfflineMode){doSkip();return;}
+    fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({session_id:sessionId,level:cur,typ:'skip'})}).then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(doSkip).catch(function(){});
     return;
   }
   if(typ==='doppel'){
     if(done)return;
+    if(!isOfflineMode){
+      fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({session_id:sessionId,level:cur,typ:'doppel'})}).catch(function(){});
+    }
     jokerStatus['doppel']=false;updJoker();playSound('joker');
     doppelChanceActive=true;
     var dBtn=document.getElementById('j-doppel');
@@ -896,7 +917,7 @@ function _fillResult(){
   if(isDailyMode){
     var _today=new Date().toISOString().split('T')[0];
     localStorage.setItem('daily_'+_today,JSON.stringify({iq:finalIQ,level:sc}));
-    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
+    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc,session_id:sessionId})}).catch(function(){});
     document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
     isDailyMode=false;
   } else if(currentMode==='timeattack'){
@@ -992,9 +1013,10 @@ function saveHS(){
   fetch(API+'/api/highscores',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,iq:finalIQ,level:sc})
-  }).then(function(){
+    body:JSON.stringify({name:name,iq:finalIQ,level:sc,session_id:sessionId})
+  }).then(function(r){
     var btn=document.querySelector('.save-btn');
+    if(!r.ok){btn.textContent=(r.status===400?'Nur Normal/Endless':'Fehler');setTimeout(function(){btn.textContent=T('speichern');},2500);return;}
     btn.textContent=T('gespeichert');
     setTimeout(function(){btn.textContent=T('speichern');},2000);
   });
