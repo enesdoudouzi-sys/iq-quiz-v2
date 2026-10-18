@@ -319,6 +319,10 @@ ALLE_FRAGEN = [
     {"kategorie":"Geographie","schwierigkeit":2,"frage":"Wie heisst die Strasse zwischen Europa und Afrika?","antworten":{"A":"Strasse von Dover","B":"Strasse von Gibraltar","C":"Strasse von Messina","D":"Strasse von Hormus"},"richtig":"B","erklaerung":"Die Strasse von Gibraltar verbindet das Mittelmeer mit dem Atlantik.","seq":None},
 ]
 
+# Zusaetzliche Kategorien (siehe fragen_extra.py)
+from fragen_extra import EXTRA_FRAGEN
+ALLE_FRAGEN.extend(EXTRA_FRAGEN)
+
 SICHERHEITSSTUFEN = [5, 10, 15]
 
 IQ_TABELLE = {}
