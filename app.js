@@ -73,8 +73,8 @@ async function syncPremiumFromStore(){
   }catch(e){ console.error('getCustomerInfo fehlgeschlagen', e); }
 }
 const L = ['A','B','C','D'];
-const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6'};
-const KAT_ICONS = {'Allgemeinwissen':'🌍','Logik & Zahlenfolgen':'🧩','Konzentration':'🎯','Geschichte':'📜','Wissenschaft & Natur':'🔬','Wissenschaft':'🔬','Sport':'⚽','Mathematik':'🔢','Musik':'🎵','Geographie':'🗺️'};
+const COL = {'Allgemeinwissen':'#4a90e2','Logik & Zahlenfolgen':'#7c5fff','Konzentration':'#06b6d4','Geschichte':'#f59e0b','Wissenschaft & Natur':'#22c55e','Wissenschaft':'#22c55e','Sport':'#ef4444','Mathematik':'#a855f7','Musik':'#ec4899','Geographie':'#14b8a6','Film & TV':'#e11d48','Essen & Trinken':'#f97316','Technik & Computer':'#0ea5e9','Tiere & Natur':'#16a34a','Kunst & Literatur':'#d946ef','Weltraum':'#6366f1','Deutschland & Europa':'#eab308','Körper & Gesundheit':'#f43f5e'};
+const KAT_ICONS = {'Allgemeinwissen':'🌍','Logik & Zahlenfolgen':'🧩','Konzentration':'🎯','Geschichte':'📜','Wissenschaft & Natur':'🔬','Wissenschaft':'🔬','Sport':'⚽','Mathematik':'🔢','Musik':'🎵','Geographie':'🗺️','Film & TV':'🎬','Essen & Trinken':'🍽️','Technik & Computer':'💻','Tiere & Natur':'🐾','Kunst & Literatur':'🎨','Weltraum':'🚀','Deutschland & Europa':'🏛️','Körper & Gesundheit':'🩺'};
 const MAX_FRAGEN = 15;
 const IQ_TBL = {};
 for(var i=0;i<=50;i++){

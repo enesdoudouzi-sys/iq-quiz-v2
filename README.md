@@ -13,7 +13,7 @@
 
 | Feature | Beschreibung |
 |---|---|
-| ✅ 274 Fragen | Zufällig aus 9 Kategorien |
+| ✅ 515 Fragen | Zufällig aus 17 Kategorien |
 | ⏱️ Timer | 20 / 25 / 30 Sek pro Level |
 | 🧠 Live IQ | Aktualisiert nach jeder Frage |
 | 💰 Preisleiter | WWM-Style mit Sicherheitsstufen |
@@ -60,6 +60,7 @@ iq-quiz-v2/
 ├── backend/
 │   ├── main.py
 │   ├── fragen.py
+│   ├── fragen_extra.py
 │   ├── database.py
 │   ├── auth.py
 │   └── requirements.txt

@@ -20,13 +20,13 @@ Quiz mit 15 Fragen, 3 Jokern & täglicher Challenge – zum Spaß, kein IQ-Test.
 LANGE BESCHREIBUNG (max 4000 Zeichen):
 Wie hoch ist dein Quiz-IQ? Finde es heraus mit dem IQ-Quiz im Stil der großen TV-Quizshows!
 
-Stell dich 15 Fragen aus 9 Kategorien und sieh live, wie dein Quiz-IQ mit jeder richtigen Antwort steigt. Mit Jokern, Live-Anzeige und Animationen wird jede Runde spannend.
+Stell dich 15 Fragen aus 17 Kategorien und sieh live, wie dein Quiz-IQ mit jeder richtigen Antwort steigt. Mit Jokern, Live-Anzeige und Animationen wird jede Runde spannend.
 
 Wichtig: Dieses Quiz dient der Unterhaltung. Der angezeigte Quiz-IQ ist kein wissenschaftlich validierter IQ-Test und ersetzt keine psychologische Diagnostik.
 
 🧠 FEATURES:
 
-▶ 274 Fragen aus 9 Kategorien
+▶ 515 Fragen aus 17 Kategorien
    • Allgemeinwissen
    • Geschichte
    • Wissenschaft
@@ -36,6 +36,14 @@ Wichtig: Dieses Quiz dient der Unterhaltung. Der angezeigte Quiz-IQ ist kein wis
    • Konzentration
    • Musik
    • Geographie
+   • Film & TV
+   • Essen & Trinken
+   • Technik & Computer
+   • Tiere & Natur
+   • Kunst & Literatur
+   • Weltraum
+   • Deutschland & Europa
+   • Körper & Gesundheit
 
 🃏 JOKER:
    • 50:50 – Eliminiert 2 falsche Antworten
@@ -78,13 +86,13 @@ Quiz with 15 questions, 3 lifelines & daily challenge – for fun, not an IQ tes
 LONG DESCRIPTION (max 4000 chars):
 How high is your quiz IQ? Find out with the IQ quiz inspired by the big TV quiz shows!
 
-Face 15 questions from 9 categories and watch your quiz IQ rise live with every correct answer. Lifelines, a live display and animations make every round exciting.
+Face 15 questions from 17 categories and watch your quiz IQ rise live with every correct answer. Lifelines, a live display and animations make every round exciting.
 
 Please note: this quiz is for entertainment. The displayed quiz IQ is not a scientifically validated IQ test and does not replace psychological assessment.
 
 🧠 FEATURES:
 
-▶ 274 questions across 9 categories
+▶ 515 questions across 17 categories
    • General Knowledge
    • History
    • Science
@@ -94,6 +102,14 @@ Please note: this quiz is for entertainment. The displayed quiz IQ is not a scie
    • Concentration
    • Music
    • Geography
+   • Film & TV
+   • Food & Drink
+   • Technology & Computers
+   • Animals & Nature
+   • Art & Literature
+   • Space
+   • Germany & Europe
+   • Body & Health
 
 🃏 LIFELINES:
    • 50:50 – Eliminates 2 wrong answers
