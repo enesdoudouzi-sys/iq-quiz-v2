@@ -1,6 +1,6 @@
 ═══════════════════════════════════════════════════════════════
   IQ TEST – BUILD & STORE GUIDE
-  Version 1.1 | com.enesdoudouzi.iqtest
+  Version 1.2 | com.enesdoudouzi.iqtest
 ═══════════════════════════════════════════════════════════════
 
 ⚠️ SICHERHEITSHINWEIS: Hier stand bisher das Keystore-Passwort im
@@ -31,7 +31,8 @@ Keystore-Datei (liegt lokal bei dir, NICHT im Repo):
 
 Im Terminal (im iq-quiz-web Ordner):
 
-  node_modules/.bin/cap sync android
+  npm install
+  npx cap sync android
 
 Das kopiert die neueste Web-Version in den Android Bundle.
 
@@ -67,7 +68,7 @@ In Android Studio:
   → Next → release → Finish
 
 Output-Datei:
-  android/app/release/IQ-Test-v1.1.apk
+  android/app/release/IQ-Test-v1.2.apk
 
 Verwendet fuer: Amazon Appstore, Samsung Galaxy Store,
                 direkte APK-Verteilung
@@ -79,12 +80,12 @@ Verwendet fuer: Amazon Appstore, Samsung Galaxy Store,
 Registrierung: developer.amazon.com (kostenlos)
 
 Was du brauchst:
-  ✅ IQ-Test-v1.1.apk
+  ✅ IQ-Test-v1.2.apk
   ✅ Icon 512x512: assets/icon-1024.png (auf 512px skalieren)
   ✅ Screenshots (3-10 Stueck)
   ✅ Kurzbeschreibung (aus store-listing.txt)
   ✅ Lange Beschreibung (aus store-listing.txt)
-  ✅ Datenschutz-URL: https://iq-quiz-v2.onrender.com/datenschutz
+  ✅ Datenschutz-URL: https://enesdoudouzi-sys.github.io/iq-quiz-v2/datenschutz.html
 
 Kategorie: Games > Trivia ODER Education
 
@@ -100,7 +101,7 @@ Besonderheit Amazon:
 Registrierung: seller.samsungapps.com (kostenlos)
 
 Was du brauchst:
-  ✅ IQ-Test-v1.1.apk
+  ✅ IQ-Test-v1.2.apk
   ✅ Icon 512x512
   ✅ Screenshots (4+ Stueck, 1080x1920 empfohlen)
   ✅ Feature Graphic: assets/feature-graphic.png
@@ -126,14 +127,35 @@ Was du brauchst:
   ✅ Feature Graphic 1024x500: assets/feature-graphic.png
   ✅ Screenshots (2-8 Stueck)
   ✅ Beschreibungen (aus store-listing.txt)
-  ✅ Datenschutz-URL: https://iq-quiz-v2.onrender.com/datenschutz
+  ✅ Datenschutz-URL: https://enesdoudouzi-sys.github.io/iq-quiz-v2/datenschutz.html
 
-Kategorie: Education
-Content Rating: Everyone / PEGI 3
+Kategorie: Trivia (Spiele)
+Zielgruppe: 13+ ; Content Rating per Fragebogen ehrlich ausfuellen
 
 Besonderheit Google Play:
   - Groesste Reichweite (3+ Milliarden Nutzer)
   - Review dauert ca. 1-3 Werktage (manchmal laenger)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  VOR DEM ERSTEN PLAY-RELEASE (Checkliste)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] RevenueCat-Keys in app.js eintragen (REVENUECAT_API_KEY_ANDROID) und
+      im RevenueCat-Dashboard Entitlement "premium" sowie Packages
+      "iq_premium_v1" und "joker_pack_5" mit den Play-Produkten verknuepfen
+  [ ] In-App-Produkte in der Play Console anlegen (Premium einmalig,
+      Joker-Pack als verbrauchbar)
+  [ ] Android-Build in Android Studio pruefen (Target SDK 36, Gradle 8.14.3):
+      npm install && npx cap sync android, dann Signed AAB bauen
+  [ ] Neue Entwicklerkonten: Geschlossener Test mit mindestens 12 Testern
+      ueber 14 Tage (aktuelle Vorgaben in der Play Console pruefen)
+  [ ] Data-Safety-Formular und Content-Rating-Fragebogen ausfuellen
+  [ ] Impressum/Gewerbe: Betrieb mit Verkauf ist gewerblich -> Gewerbe
+      anmelden, Steuerfragen klaeren (Steuerberater), Kontaktmoeglichkeit
+      im Impressum ergaenzen (siehe TODO in impressum.html)
+  [ ] Mit Render einen Auftragsverarbeitungsvertrag (DPA) abschliessen und
+      Speicherdauer der Logs pruefen; RevenueCat-DPA ebenfalls akzeptieren
+  [ ] Samsung/Amazon: Samsung-IAP ist derzeit NICHT aktiv (extras/samsung-iap/)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   EMPFOHLENE REIHENFOLGE
@@ -147,9 +169,9 @@ Besonderheit Google Play:
   NAECHSTE VERSION VEROEFFENTLICHEN
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-In android/app/build.gradle erhoehen:
-  versionCode 3          (immer +1)
-  versionName "1.2"      (sichtbare Version)
+In android/app/build.gradle erhoehen (aktuell versionCode 3 / "1.2"):
+  versionCode 4          (immer +1)
+  versionName "1.3"      (sichtbare Version)
 
 Dann: cap sync → neu bauen → hochladen
 

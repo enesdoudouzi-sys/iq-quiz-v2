@@ -16,8 +16,17 @@ function rcPlugin(){
   return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Purchases) || null;
 }
 var rcConfigured = false;
+// Store-Ziel: 'play' = Google Play (RevenueCat). 'galaxy' = Samsung IAP, derzeit NICHT aktiv
+// (Plugin liegt in extras/samsung-iap/, siehe dortige README).
+const STORE_TARGET = 'play';
+const SAMSUNG_ITEM_PREMIUM   = '';
+const SAMSUNG_ITEM_JOKERPACK = '';
+var samsungIapReady = false;
+function samsungIapPlugin(){
+  return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.SamsungIap) || null;
+}
 async function initPurchases(){
-  if(!isNativeApp())return; // Web-Vorschau: keine echten Kaeufe moeglich
+  if(!isNativeApp())return; // Web-Vorschau: keine echten Käufe möglich
   var Purchases = rcPlugin();
   if(!Purchases)return;
   var platform = (window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || 'android';
@@ -27,7 +36,29 @@ async function initPurchases(){
     await Purchases.configure({ apiKey: apiKey });
     rcConfigured = true;
     await syncPremiumFromStore();
+    await loadStorePrices();
   }catch(e){ console.error('Purchases.configure fehlgeschlagen', e); }
+}
+// Preise kommen aus dem Store (lokale Währung, korrekt inkl. Steuern) statt fest im HTML
+async function loadStorePrices(){
+  var Purchases = rcPlugin();
+  if(!Purchases || !rcConfigured)return;
+  try{
+    var offerings = await Purchases.getOfferings();
+    var prem = findPackage(offerings, RC_PACKAGE_PREMIUM);
+    var joker = findPackage(offerings, RC_PACKAGE_JOKERPACK);
+    var pp = prem && prem.product && prem.product.priceString;
+    var jp = joker && joker.product && joker.product.priceString;
+    if(pp){
+      document.querySelectorAll('.prem-price, .shop-card.gold .shop-card-price').forEach(function(el){el.textContent=pp;});
+      var up=document.getElementById('s-upgrade-btn');
+      if(up)up.textContent='👑 Premium · einmalig '+pp;
+    }
+    if(jp){
+      var jel=document.querySelector('.shop-card:not(.gold) .shop-card-price');
+      if(jel)jel.textContent=jp;
+    }
+  }catch(e){ console.error('Preise laden fehlgeschlagen', e); }
 }
 async function syncPremiumFromStore(){
   var Purchases = rcPlugin();
@@ -69,12 +100,12 @@ function setMode(mode,btn){
 }
 
 const LANG={
-  de:{title:'IQ Test',sub:'Teste deinen IQ · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Naechste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurueck',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schliessen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
+  de:{title:'IQ Test',sub:'Das IQ-Quiz · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Nächste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurück',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schließen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
   en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question',teilen:'Share Result'},
   tr:{title:'IQ Testi',sub:'IQ\'nunu Test Et · 15 Soru · 3 Joker',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
-  fr:{title:'Test QI',sub:'Questions Illimitees - 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
-  es:{title:'Test de IQ',sub:'Preguntas Ilimitadas - 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
-  ar:{title:'اختبار الذكاء',sub:'اسئلة غير محدودة - 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
+  fr:{title:'Test QI',sub:'Quiz QI · 15 Questions · 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
+  es:{title:'Test de IQ',sub:'Quiz de IQ · 15 Preguntas · 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
+  ar:{title:'اختبار الذكاء',sub:'اختبار ترفيهي · 15 سؤالًا · 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
   pt:{title:'Teste de QI',sub:'Teste seu QI · 15 Perguntas · 3 Ajudas',placeholder:'Seu Nome...',start:'Comecar',highscores:'Recordes',sekunden:'Segundos',iqLabel:'QI Atual',joker:'Ajudas',richtig:'Correto!',falsch:'Errado! Eliminado!',zeit:'Tempo Esgotado!',naechste:'Proxima Pergunta',ergebnis:'Seu Resultado',speichern:'Salvar',gespeichert:'Salvo!',nochmal:'Jogar Novamente',zurueck:'Voltar',perfekt:'Perfeito - todas corretas!',fehler:'ANALISE DE ERROS',deine:'Sua Resposta',richtige:'Resposta Correta',leiter:'Escada de QI',schliessen:'Fechar',telefon:'Ajuda Telefone',publikum:'Ajuda do Publico',iqNach:'Seu QI apos esta pergunta',teilen:'Compartilhar'},
 };
 
@@ -97,7 +128,7 @@ function initSoundBtn(){
 var ACHIEVEMENTS=[
   {id:'first_game',name:'Erster Start',desc:'Erstes Spiel gespielt',icon:'🎮',fn:function(s){return s.games>=1;}},
   {id:'iq100',name:'Dreistellig',desc:'IQ 100+ erreicht',icon:'💯',fn:function(s){return (s.bestIQ||0)>=100;}},
-  {id:'iq120',name:'Ueberflieger',desc:'IQ 120+ erreicht',icon:'🚀',fn:function(s){return (s.bestIQ||0)>=120;}},
+  {id:'iq120',name:'Überflieger',desc:'IQ 120+ erreicht',icon:'🚀',fn:function(s){return (s.bestIQ||0)>=120;}},
   {id:'iq130',name:'Hochbegabt',desc:'IQ 130+ erreicht',icon:'✨',fn:function(s){return (s.bestIQ||0)>=130;}},
   {id:'iq145',name:'Genie',desc:'IQ 145 – Maximum!',icon:'🧠',fn:function(s){return (s.bestIQ||0)>=145;}},
   {id:'perfect',name:'Perfekt',desc:'Alle 15 Fragen richtig',icon:'⭐',fn:function(s){return (s.bestScore||0)>=15;}},
@@ -331,7 +362,7 @@ function getBez(iq){
   if(iq>=145)return 'Genie';
   if(iq>=130)return 'Hochbegabt';
   if(iq>=120)return 'Sehr intelligent';
-  if(iq>=116)return 'Ueberdurchschnittlich';
+  if(iq>=116)return 'Überdurchschnittlich';
   if(iq>=100)return 'Durchschnittlich';
   if(iq>=94)return 'Leicht unterdurchschnittlich';
   return 'Unterdurchschnittlich';
@@ -341,7 +372,7 @@ var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var ADS_ENABLED=false; // true = Werbung an, false = Werbung aus
-var isPremium=localStorage.getItem('iq_premium')==='true';
+var isPremium=isNativeApp()&&localStorage.getItem('iq_premium')==='true'; // wird beim Start per RevenueCat geprüft
 var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
@@ -1109,10 +1140,10 @@ function showStats(){
 // ── ZERTIFIKAT ─────────────────────────────────────────────
 function downloadCert(){
   document.getElementById('cert-name').textContent=playerName;
-  document.getElementById('cert-iq').textContent='IQ '+finalIQ;
+  document.getElementById('cert-iq').textContent=String(finalIQ);
   document.getElementById('cert-class').textContent=getBez(finalIQ);
   document.getElementById('cert-detail').textContent=sc+' von 15 Fragen richtig · '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('cert-footer').textContent='IQ-Quiz · iq-quiz-v2.onrender.com · '+new Date().toLocaleDateString('de-DE');
+  document.getElementById('cert-footer').textContent='Unterhaltung, kein wissenschaftlicher IQ-Test · IQ-Quiz · '+new Date().toLocaleDateString('de-DE');
   window.print();
 }
 
@@ -1248,16 +1279,16 @@ function toggleNotifications(){
   var btn=document.getElementById('notif-btn');
   if(localStorage.getItem('notifications_enabled')==='1'){
     localStorage.removeItem('notifications_enabled');
-    if(btn){btn.textContent='🔔 Taegl. Erinnerung';btn.classList.remove('active');}
+    if(btn){btn.textContent='🔔 Tägl. Erinnerung';btn.classList.remove('active');}
     return;
   }
   Notification.requestPermission().then(function(perm){
     if(perm==='granted'){
       localStorage.setItem('notifications_enabled','1');
       if(btn){btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');}
-      new Notification('IQ Test',{body:'Du bekommst jetzt taeglich eine Erinnerung fuer die Challenge!',icon:'favicon.ico'});
+      new Notification('IQ Test',{body:'Du bekommst jetzt täglich eine Erinnerung für die Challenge!',icon:'favicon.ico'});
     }else{
-      if(btn){btn.textContent='❌ Nicht erlaubt';setTimeout(function(){btn.textContent='🔔 Taegl. Erinnerung';},2000);}
+      if(btn){btn.textContent='❌ Nicht erlaubt';setTimeout(function(){btn.textContent='🔔 Tägl. Erinnerung';},2000);}
     }
   });
 }
