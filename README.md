@@ -1,13 +1,27 @@
+<div align="center">
+
 # 🧠 IQ Quiz
 
-> Quiz im Stil der großen TV-Quizshows (Unterhaltung, kein wissenschaftlicher IQ-Test). Entwickelt von Enes Doudouzi.
+**Ein Quiz im Stil der großen TV-Quizshows — Full-Stack-App mit 515 Fragen, 7 Sprachen, Preisleiter & Jokern.**
+*(Unterhaltung, kein wissenschaftlicher IQ-Test.)*
 
-[![Live](https://img.shields.io/badge/Live-GitHub%20Pages-blue?style=flat-square)](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
-[![API](https://img.shields.io/badge/API-Render.com-green?style=flat-square)](https://iq-quiz-v2.onrender.com)
-[![Python](https://img.shields.io/badge/Python-3.13-yellow?style=flat-square)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-teal?style=flat-square)](https://fastapi.tiangolo.com)
+[![Live](https://img.shields.io/badge/Live-Spielen-2563eb?style=for-the-badge&logo=github)](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
+&nbsp;
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-Android-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
+
+### 👉 [**Jetzt spielen**](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
+
+</div>
 
 ---
+
+## 📖 Über das Projekt
+
+Eine komplette **Full-Stack-Quiz-App**: Python/FastAPI-Backend mit Datenbank & Auth, dazu ein Frontend als **PWA** und eine **Android-App** (Capacitor). Von der Datenbank bis zur App im Store — alles selbst gebaut.
+
+**Was dieses Projekt zeigt:** REST-API-Design · Datenbank (SQLite/SQLAlchemy) · JWT-Auth · Rate-Limiting · Mehrsprachigkeit · PWA & Mobile-Packaging · Deployment (Render + GitHub Pages).
 
 ## 🎮 Features
 
@@ -20,71 +34,39 @@
 | ☠️ Game Over | Falsche Antwort = ausgeschieden |
 | 🃏 3 Joker | 50:50 · Telefon · Publikum |
 | 🌍 7 Sprachen | DE · EN · TR · FR · ES · PT · AR |
-| 🏆 Highscores | Top 10 in SQLite Datenbank |
+| 🏆 Highscores | Top 10 in SQLite-Datenbank |
 | 🔊 Sounds | Richtig / Falsch / Gewonnen |
-| 📱 Mobile | Responsive + PWA ready |
+| 📱 Mobile | Responsive + PWA + Android (Capacitor) |
 
----
-
-## 🛠️ Tech Stack
+## 🛠️ Tech-Stack
 
 | Backend | Frontend | Hosting |
 |---|---|---|
-| Python 3.13 | HTML5 | Render.com |
-| FastAPI | CSS3 | GitHub Pages |
-| SQLite | JavaScript | |
-| SQLAlchemy | PWA / Service Worker | |
-| JWT Auth | | |
-| Rate Limiting | | |
+| Python 3.13 · FastAPI | HTML5 · CSS3 · JavaScript | Render.com (API) |
+| SQLite · SQLAlchemy | PWA / Service Worker | GitHub Pages (Frontend) |
+| JWT-Auth · Rate-Limiting | Capacitor (Android/iOS) | |
 
----
+## 🔒 Sicherheit
+
+| Maßnahme | Umsetzung |
+|---|---|
+| ✅ CORS | Nur erlaubte Herkünfte |
+| ✅ Rate-Limiting | 10 Starts / 60 Antworten pro Minute |
+| ✅ Input-Validierung | Alle Eingaben geprüft |
+| ✅ HTTPS | Automatisch via Render |
+| ✅ Session-Limit | Max. 1000 gleichzeitig |
 
 ## 🚀 Lokal starten
 
 ```bash
 git clone https://github.com/enesdoudouzi-sys/iq-quiz-v2.git
 cd iq-quiz-v2/backend
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python3 -m uvicorn main:app --reload
+python3 -m uvicorn main:app --reload      # http://localhost:8000
 ```
 
-Browser: http://localhost:8000
-
----
-
-## 📁 Struktur
-
-iq-quiz-v2/
-├── backend/
-│   ├── main.py
-│   ├── fragen.py
-│   ├── fragen_extra.py
-│   ├── database.py
-│   ├── auth.py
-│   └── requirements.txt
-├── frontend/
-│   ├── index.html
-│   └── app.js
-└── www/
-
-## 🔒 Sicherheit
-
-| | |
-|---|---|
-| ✅ CORS | Nur GitHub Pages erlaubt |
-| ✅ Rate Limiting | 10 Starts / 60 Antworten pro Minute |
-| ✅ Input Check | Alle Eingaben validiert |
-| ✅ HTTPS | Automatisch via Render.com |
-| ✅ Session Limit | Max 1000 gleichzeitig |
-
----
-
-## 📱 Mobile App
-
-Gebaut mit **Capacitor** für Android & iOS.
-
+**Android-App bauen:**
 ```bash
 npx cap sync android
 npx cap open android
@@ -92,11 +74,8 @@ npx cap open android
 
 ---
 
-## 👨‍💻 Entwickler
+<div align="center">
 
-**Enes Doudouzi**
-GitHub: [@enesdoudouzi-sys](https://github.com/enesdoudouzi-sys)
+Entwickelt von **Enes Doudouzi** · [@enesdoudouzi-sys](https://github.com/enesdoudouzi-sys)
 
----
-
-*Entwickelt mit Python · FastAPI · JavaScript · Capacitor*
+</div>
