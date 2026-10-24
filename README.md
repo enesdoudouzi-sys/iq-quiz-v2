@@ -15,6 +15,8 @@
 
 </div>
 
+![IQ Quiz Vorschau](screenshots/start.png)
+
 ---
 
 ## 📖 Über das Projekt
