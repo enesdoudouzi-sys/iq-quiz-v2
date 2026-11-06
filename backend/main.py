@@ -7,10 +7,10 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
-import os, random, uuid, time
+import os, random, uuid, time, re, hmac
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
-from database import get_db, create_tables, Highscore, DailyScore
+from database import get_db, create_tables, Highscore, DailyScore, Kontakt
 from datetime import date as dt_date
 
 limiter = Limiter(key_func=get_remote_address)
@@ -25,6 +25,7 @@ app.add_middleware(
         "http://127.0.0.1:8000",
         "https://enesdoudouzi-sys.github.io",
         "https://iq-quiz-v2.onrender.com",
+        "https://localhost",  # Android-App (Capacitor, androidScheme https)
     ],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -69,6 +70,30 @@ class AntwortRequest(BaseModel):
     def level_valid(cls, v):
         if v < 1 or v > 50:
             raise ValueError('Ungueltiges Level')
+        return v
+
+class KontaktRequest(BaseModel):
+    name: str
+    email: str
+    nachricht: str
+    website: str = ""  # Honeypot, muss leer bleiben
+    @validator('name')
+    def name_valid(cls, v):
+        v = v.strip()
+        if len(v) < 1 or len(v) > 100:
+            raise ValueError('Name muss 1-100 Zeichen lang sein')
+        return v
+    @validator('email')
+    def email_valid(cls, v):
+        v = v.strip()
+        if len(v) > 200 or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', v):
+            raise ValueError('Ungueltige E-Mail-Adresse')
+        return v
+    @validator('nachricht')
+    def nachricht_valid(cls, v):
+        v = v.strip()
+        if len(v) < 5 or len(v) > 3000:
+            raise ValueError('Nachricht muss 5-3000 Zeichen lang sein')
         return v
 
 class JokerRequest(BaseModel):
@@ -320,3 +345,23 @@ def post_highscore(request: Request, req: HighscoreRequest, db: Session = Depend
     db.add(score)
     db.commit()
     return {"ok": True}
+
+@app.post("/api/kontakt")
+@limiter.limit("3/minute")
+def kontakt(request: Request, req: KontaktRequest, db: Session = Depends(get_db)):
+    if req.website:
+        return {"ok": True}  # Bot: still verwerfen
+    db.add(Kontakt(name=req.name, email=req.email, nachricht=req.nachricht))
+    db.commit()
+    return {"ok": True}
+
+@app.get("/api/kontakt")
+@limiter.limit("10/minute")
+def kontakt_liste(request: Request, db: Session = Depends(get_db)):
+    # Nur fuer den Betreiber: Header "X-Admin-Token" = Umgebungsvariable ADMIN_TOKEN (auf Render setzen)
+    token = os.environ.get("ADMIN_TOKEN", "")
+    if not token or not hmac.compare_digest(request.headers.get("X-Admin-Token", ""), token):
+        raise HTTPException(status_code=403, detail="Kein Zugriff")
+    rows = db.query(Kontakt).order_by(Kontakt.erstellt.desc()).limit(100).all()
+    return [{"id": k.id, "name": k.name, "email": k.email, "nachricht": k.nachricht,
+             "erstellt": k.erstellt.isoformat()} for k in rows]

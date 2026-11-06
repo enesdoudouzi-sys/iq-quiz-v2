@@ -34,6 +34,14 @@ class User(Base):
     password     = Column(String)
     erstellt_am  = Column(DateTime, default=datetime.now)
 
+class Kontakt(Base):
+    __tablename__ = "kontakt"
+    id        = Column(Integer, primary_key=True, index=True)
+    name      = Column(String)
+    email     = Column(String)
+    nachricht = Column(String)
+    erstellt  = Column(DateTime, default=datetime.now)
+
 def get_db():
     db = SessionLocal()
     try:
