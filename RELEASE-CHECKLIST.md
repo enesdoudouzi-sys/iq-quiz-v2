@@ -1,4 +1,4 @@
-# Release-Checkliste Google Play (Version 1.2)
+# Release-Checkliste Google Play (Version 1.3)
 
 Alles hier braucht deine Konten oder Entscheidungen. Der Code ist dafür vorbereitet.
 
@@ -30,8 +30,10 @@ Build → Generate Signed Bundle (AAB). Auf einem echten Gerät testen: Quiz, Ka
 
 ## 3. Gewerbe und Impressum
 
+Kontaktformular im Impressum ist eingebaut (`POST /api/kontakt`). Nachrichten abrufen: `GET /api/kontakt` mit Header `X-Admin-Token`; dafür auf Render die Umgebungsvariable `ADMIN_TOKEN` setzen. Achtung: Auf dem kostenlosen Render-Plan geht die SQLite-Datenbank bei jedem Neustart verloren.
+
 - Verkauf in der App ist gewerblich: Gewerbe beim Gewerbeamt anmelden und Steuerfragen (Umsatzsteuer, Kleinunternehmerregelung § 19 UStG) mit Steuerberater klären.
-- `impressum.html` (und `frontend/impressum.html`): zweite Kontaktmöglichkeit ergänzen (Telefonnummer oder Kontaktformular), ggf. USt-ID. Das TODO-Kommentar dort danach löschen.
+- `impressum.html`: ggf. USt-ID bzw. Hinweis nach § 19 UStG ergänzen.
 
 ## 4. Verträge zur Auftragsverarbeitung
 
