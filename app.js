@@ -4,7 +4,7 @@ const API = 'https://iq-quiz-v2.onrender.com';
 // (RevenueCat Dashboard -> Project Settings -> API Keys). Getrennte Keys fuer
 // Android/iOS. Ohne gueltigen Key schlaegt configure() fehl und Kaeufe sind
 // deaktiviert (kein Fallback auf "gratis freischalten" mehr!).
-const REVENUECAT_API_KEY_ANDROID = 'REPLACE_ME_ANDROID_KEY';
+const REVENUECAT_API_KEY_ANDROID = 'goog_AsprjTqhXEnNZvoqgTDOmCnLGZR';
 const REVENUECAT_API_KEY_IOS     = 'REPLACE_ME_IOS_KEY';
 const RC_ENTITLEMENT_PREMIUM = 'premium';        // Entitlement-ID im RevenueCat Dashboard
 const RC_PACKAGE_PREMIUM     = 'iq_premium_v1';  // Package/Product-ID im RevenueCat Dashboard

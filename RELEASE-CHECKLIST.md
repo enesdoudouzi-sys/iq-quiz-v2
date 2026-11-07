@@ -16,7 +16,7 @@ Alles hier braucht deine Konten oder Entscheidungen. Der Code ist dafür vorbere
 3. Entitlement `premium` anlegen und mit `iq_premium_v1` verknüpfen.
 4. Offering „current" mit zwei Packages anlegen: eines mit `iq_premium_v1`, eines mit `joker_pack_5`.
 5. Unter *Project Settings → API Keys* den **Android Public SDK Key** (beginnt mit `goog_`) kopieren.
-6. In `app.js` ganz oben `REVENUECAT_API_KEY_ANDROID = 'REPLACE_ME_ANDROID_KEY'` durch den Key ersetzen.
+6. ✅ Android-Key ist in `app.js` eingetragen (Version 1.4).
 7. `www/` neu befüllen: `cp app.js www/app.js && npx cap sync android`.
 
 ## 2. Bauen und testen (Android Studio, JDK 21)
