@@ -18,6 +18,7 @@ function rcPlugin(){
 var rcConfigured = false;
 // Store-Ziel: 'play' = Google Play (RevenueCat). 'galaxy' = Samsung IAP, derzeit NICHT aktiv
 // (Plugin liegt in extras/samsung-iap/, siehe dortige README).
+// 'free' = Gratis-Ausgabe (z. B. Galaxy Store ohne IAP): alles freigeschaltet, keine Kaeufe.
 const STORE_TARGET = 'play';
 const SAMSUNG_ITEM_PREMIUM   = '';
 const SAMSUNG_ITEM_JOKERPACK = '';
@@ -27,6 +28,7 @@ function samsungIapPlugin(){
 }
 async function initPurchases(){
   if(!isNativeApp())return; // Web-Vorschau: keine echten Käufe möglich
+  if(STORE_TARGET === 'free')return; // Gratis-Ausgabe: keine Käufe
   var Purchases = rcPlugin();
   if(!Purchases)return;
   var platform = (window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || 'android';
@@ -372,7 +374,7 @@ var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var ADS_ENABLED=false; // true = Werbung an, false = Werbung aus
-var isPremium=isNativeApp()&&localStorage.getItem('iq_premium')==='true'; // wird beim Start per RevenueCat geprüft
+var isPremium=(isNativeApp()&&STORE_TARGET==='free')||(isNativeApp()&&localStorage.getItem('iq_premium')==='true'); // Gratis-Ausgabe: alles frei, sonst beim Start per RevenueCat geprüft
 var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
@@ -1549,6 +1551,8 @@ initPurchases();
 // ── MONETARISIERUNG ────────────────────────────────────────────────────────
 
 function updPremiumUI(){
+  var shopBtn=document.getElementById('j-shop');
+  if(shopBtn&&STORE_TARGET==='free'&&isNativeApp())shopBtn.style.display='none';
   var showAds=ADS_ENABLED&&!isPremium;
   var banner=document.getElementById('ad-banner');
   if(banner)banner.style.display=showAds?'flex':'none';
