@@ -47,6 +47,18 @@ def cleanup_sessions():
     for k in expired:
         del sessions[k]
 
+# Namen in der öffentlichen Bestenliste: nur druckbare Zeichen, Länge 1-20,
+# einfacher Filter gegen Beleidigungen (Google-Play-Richtlinie für Nutzerinhalte).
+_BLOCKED = ["nazi","hitler","fick","fuck","hure","nutte","fotze","wichser","arschloch","schlampe","bitch","cunt","nigger","nigga","neger","kanake","schwuchtel","faggot","retard","porn","sex","penis","vagina","orospu","siktir","amk","piç","kahpe","yarrak","göt"]
+def clean_name(v: str) -> str:
+    v = re.sub(r"[\x00-\x1f\x7f<>]", "", (v or "")).strip()[:20]
+    if not v:
+        raise ValueError('Name fehlt')
+    norm = re.sub(r"[^a-zäöüßçğış]", "", v.lower().replace("0","o").replace("1","i").replace("3","e").replace("4","a").replace("5","s").replace("@","a").replace("$","s"))
+    if any(b in norm for b in _BLOCKED):
+        raise ValueError('Name nicht erlaubt')
+    return v
+
 class StartRequest(BaseModel):
     name: str
     kategorie: str = "alle"
@@ -56,7 +68,7 @@ class StartRequest(BaseModel):
         v = v.strip()
         if len(v) < 1 or len(v) > 20:
             raise ValueError('Name muss 1-20 Zeichen lang sein')
-        return v
+        return clean_name(v)
 
 class AntwortRequest(BaseModel):
     session_id: str
@@ -115,7 +127,7 @@ class HighscoreRequest(BaseModel):
     session_id: str = ""
     @validator('name')
     def name_valid(cls, v):
-        return v.strip()[:20]
+        return clean_name(v)
     @validator('iq')
     def iq_valid(cls, v):
         if v < 0 or v > 200:
@@ -129,7 +141,7 @@ class DailySubmitRequest(BaseModel):
     session_id: str = ""
     @validator('name')
     def name_valid(cls, v):
-        return v.strip()[:20]
+        return clean_name(v)
     @validator('iq')
     def iq_valid(cls, v):
         if v < 0 or v > 200:
@@ -299,17 +311,15 @@ def get_daily_highscores(request: Request, db: Session = Depends(get_db)):
 def submit_daily(request: Request, req: DailySubmitRequest, db: Session = Depends(get_db)):
     today = dt_date.today().isoformat()
     # Doppeleinreichung über Session verhindern
-    if req.session_id and req.session_id in sessions:
-        session = sessions[req.session_id]
-        if session.get("daily_submitted"):
-            raise HTTPException(400, "Bereits heute eingereicht")
-        session["daily_submitted"] = True
-        # IQ aus Session nehmen statt Client-Wert zu vertrauen
-        verified_iq = session.get("final_iq", req.iq)
-        verified_level = session.get("final_level", req.level)
-    else:
-        verified_iq = req.iq
-        verified_level = req.level
+    session = sessions.get(req.session_id) if req.session_id else None
+    if not session:
+        raise HTTPException(400, "Ungueltige oder abgelaufene Spiel-Session")
+    if session.get("daily_submitted"):
+        raise HTTPException(400, "Bereits heute eingereicht")
+    session["daily_submitted"] = True
+    # IQ aus der Session statt dem Client-Wert vertrauen
+    verified_iq = session.get("final_iq", 85)
+    verified_level = session.get("final_level", 0)
     score = DailyScore(datum=today, name=req.name, iq=verified_iq, level=verified_level, erstellt=time.time())
     db.add(score)
     db.commit()
@@ -334,14 +344,15 @@ def get_highscores(request: Request, db: Session = Depends(get_db)):
 @limiter.limit("5/minute")
 def post_highscore(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
     # IQ aus Session validieren wenn session_id mitgeschickt wird
-    if req.session_id and req.session_id in sessions:
-        session = sessions[req.session_id]
-        verified_iq = session.get("final_iq", req.iq)
-        verified_level = session.get("final_level", req.level)
-    else:
-        # Ohne Session: Plausibilitätsprüfung
-        verified_iq = min(req.iq, 145)
-        verified_level = min(req.level, 15)
+    # Nur Ergebnisse aus einem echten Spiel auf diesem Server zählen (kein freies Eintragen)
+    session = sessions.get(req.session_id) if req.session_id else None
+    if not session:
+        raise HTTPException(400, "Ungueltige oder abgelaufene Spiel-Session")
+    if session.get("hs_submitted"):
+        raise HTTPException(400, "Bereits gespeichert")
+    session["hs_submitted"] = True
+    verified_iq = session.get("final_iq", 85)
+    verified_level = session.get("final_level", 0)
     score = Highscore(name=req.name, iq=verified_iq, level=verified_level)
     db.add(score)
     db.commit()

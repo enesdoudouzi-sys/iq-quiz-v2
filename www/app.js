@@ -113,6 +113,58 @@ const LANG={
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
 
+// ── Oberflächen-Texte des Startbildschirms (zusätzlich zu LANG) ─────────
+// Kategorie-Werte für die API bleiben deutsch, übersetzt wird nur die Beschriftung.
+const UI={
+  de:{hint:'Unterhaltung – kein wissenschaftlicher IQ-Test',kat:'Kategorie wählen',schw:'Schwierigkeit',mode:'Spielmodus',alle:'Alle',leicht:'Leicht',mittel:'Mittel',schwer:'Schwer',
+      normal:'Normal',time:'Time-Attack',learn:'Lernen',endless:'Endless',daily:'Tägliche Challenge',stats:'Statistiken',notif:'Tägl. Erinnerung',notifOn:'Erinnerung aktiv',app:'App installieren (gratis) · Android, iPhone, PC',
+      cats:['Allgemeinwissen','Geschichte','Wissenschaft','Sport','Mathematik','Logik','Konzentration','Musik','Geographie','Film & TV','Essen & Trinken','Technik & Computer','Tiere & Natur','Kunst & Literatur','Weltraum','Deutschland & Europa','Körper & Gesundheit']},
+  en:{hint:'Entertainment – not a scientific IQ test',kat:'Choose a category',schw:'Difficulty',mode:'Game mode',alle:'All',leicht:'Easy',mittel:'Medium',schwer:'Hard',
+      normal:'Normal',time:'Time Attack',learn:'Learn',endless:'Endless',daily:'Daily Challenge',stats:'Statistics',notif:'Daily reminder',notifOn:'Reminder on',app:'Install the app (free) · Android, iPhone, PC',
+      cats:['General knowledge','History','Science','Sports','Maths','Logic','Concentration','Music','Geography','Film & TV','Food & Drink','Tech & Computers','Animals & Nature','Art & Literature','Space','Germany & Europe','Body & Health']},
+  tr:{hint:'Eğlence amaçlıdır – bilimsel bir IQ testi değildir',kat:'Kategori seç',schw:'Zorluk',mode:'Oyun modu',alle:'Tümü',leicht:'Kolay',mittel:'Orta',schwer:'Zor',
+      normal:'Normal',time:'Zamana karşı',learn:'Öğren',endless:'Sonsuz',daily:'Günlük meydan okuma',stats:'İstatistikler',notif:'Günlük hatırlatma',notifOn:'Hatırlatma açık',app:'Uygulamayı yükle (ücretsiz) · Android, iPhone, PC',
+      cats:['Genel kültür','Tarih','Bilim','Spor','Matematik','Mantık','Konsantrasyon','Müzik','Coğrafya','Film & TV','Yeme & İçme','Teknoloji & Bilgisayar','Hayvanlar & Doğa','Sanat & Edebiyat','Uzay','Almanya & Avrupa','Vücut & Sağlık']},
+  fr:{hint:'Divertissement – pas un test de QI scientifique',kat:'Choisir une catégorie',schw:'Difficulté',mode:'Mode de jeu',alle:'Toutes',leicht:'Facile',mittel:'Moyen',schwer:'Difficile',
+      normal:'Normal',time:'Contre la montre',learn:'Apprendre',endless:'Sans fin',daily:'Défi du jour',stats:'Statistiques',notif:'Rappel quotidien',notifOn:'Rappel activé',app:"Installer l'app (gratuit) · Android, iPhone, PC",
+      cats:['Culture générale','Histoire','Sciences','Sport','Maths','Logique','Concentration','Musique','Géographie','Cinéma & TV','Cuisine & Boissons','Tech & Informatique','Animaux & Nature','Art & Littérature','Espace','Allemagne & Europe','Corps & Santé']},
+  es:{hint:'Entretenimiento – no es un test de CI científico',kat:'Elige una categoría',schw:'Dificultad',mode:'Modo de juego',alle:'Todas',leicht:'Fácil',mittel:'Media',schwer:'Difícil',
+      normal:'Normal',time:'Contrarreloj',learn:'Aprender',endless:'Sin fin',daily:'Reto diario',stats:'Estadísticas',notif:'Recordatorio diario',notifOn:'Recordatorio activo',app:'Instalar la app (gratis) · Android, iPhone, PC',
+      cats:['Cultura general','Historia','Ciencia','Deportes','Matemáticas','Lógica','Concentración','Música','Geografía','Cine & TV','Comida & Bebida','Tecnología','Animales & Naturaleza','Arte & Literatura','Espacio','Alemania & Europa','Cuerpo & Salud']},
+  pt:{hint:'Entretenimento – não é um teste de QI científico',kat:'Escolha uma categoria',schw:'Dificuldade',mode:'Modo de jogo',alle:'Todas',leicht:'Fácil',mittel:'Médio',schwer:'Difícil',
+      normal:'Normal',time:'Contra o tempo',learn:'Aprender',endless:'Infinito',daily:'Desafio diário',stats:'Estatísticas',notif:'Lembrete diário',notifOn:'Lembrete ativo',app:'Instalar o app (grátis) · Android, iPhone, PC',
+      cats:['Conhecimentos gerais','História','Ciência','Esportes','Matemática','Lógica','Concentração','Música','Geografia','Cinema & TV','Comida & Bebida','Tecnologia','Animais & Natureza','Arte & Literatura','Espaço','Alemanha & Europa','Corpo & Saúde']},
+  ar:{hint:'للترفيه – ليس اختبار ذكاء علميًا',kat:'اختر فئة',schw:'الصعوبة',mode:'وضع اللعب',alle:'الكل',leicht:'سهل',mittel:'متوسط',schwer:'صعب',
+      normal:'عادي',time:'ضد الوقت',learn:'تعلّم',endless:'بلا نهاية',daily:'التحدي اليومي',stats:'الإحصائيات',notif:'تذكير يومي',notifOn:'التذكير مفعّل',app:'ثبّت التطبيق (مجانًا) · Android وiPhone والكمبيوتر',
+      cats:['ثقافة عامة','تاريخ','علوم','رياضة','رياضيات','منطق','تركيز','موسيقى','جغرافيا','أفلام وتلفزيون','طعام وشراب','تقنية وحاسوب','حيوانات وطبيعة','فن وأدب','الفضاء','ألمانيا وأوروبا','الجسم والصحة']}
+};
+function UT(k){return (UI[currentLang]&&UI[currentLang][k])||UI.de[k];}
+// Emoji am Anfang behalten, nur den Text dahinter ersetzen
+function setLabel(el,txt){if(!el)return;var m=el.textContent.match(/^[^\p{L}\p{N}]*/u);el.textContent=(m?m[0]:'')+txt;}
+function applyUiLang(){
+  var u=UI[currentLang]||UI.de;
+  document.documentElement.lang=currentLang;
+  document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';
+  var sub=document.querySelector('.s-sub');
+  if(sub){sub.textContent=T('sub');var sp=document.createElement('span');sp.style.cssText='font-size:12px;color:var(--text2);';sp.textContent=u.hint;sub.appendChild(document.createElement('br'));sub.appendChild(sp);}
+  var kt=document.querySelectorAll('.kat-title');
+  if(kt[0])kt[0].textContent=u.kat; if(kt[1])kt[1].textContent=u.schw; if(kt[2])kt[2].textContent=u.mode;
+  var kb=document.querySelectorAll('.kat-btn');
+  kb.forEach(function(b,i){setLabel(b,i===0?u.alle:(u.cats[i-1]||b.textContent));});
+  var sb=document.querySelectorAll('.schw-btn');
+  [u.alle,u.leicht,u.mittel,u.schwer].forEach(function(t,i){setLabel(sb[i],t);});
+  setLabel(document.getElementById('mode-normal'),u.normal);
+  setLabel(document.getElementById('mode-time'),u.time);
+  setLabel(document.getElementById('mode-learn'),u.learn);
+  setLabel(document.getElementById('mode-endless'),u.endless);
+  setLabel(document.querySelector('.s-daily'),u.daily);
+  setLabel(document.querySelector('.s-stats'),u.stats);
+  var nb=document.getElementById('notif-btn');
+  if(nb)setLabel(nb,localStorage.getItem('notifications_enabled')==='1'?u.notifOn:u.notif);
+  var dl=document.querySelector('a[href="download.html"]');
+  if(dl)setLabel(dl,u.app);
+}
+
 // ── SOUND TOGGLE ───────────────────────────────────────────
 var soundEnabled=localStorage.getItem('sound_enabled')!=='0';
 function toggleSound(){
@@ -216,6 +268,8 @@ function setLang(lang,btn){
   if(q('.save-btn'))q('.save-btn').textContent=t.speichern;
   if(q('.save-in'))q('.save-in').placeholder=t.ergebnis+'...';
   if(q('.rbtn'))q('.rbtn').textContent=t.nochmal;
+  applyUiLang();
+  try{localStorage.setItem('iq_lang',lang);}catch(e){}
 }
 
 // ── SOUNDS ────────────────────────────────────────────────
@@ -898,7 +952,7 @@ function _fillResult(){
   if(isDailyMode){
     var _today=new Date().toISOString().split('T')[0];
     localStorage.setItem('daily_'+_today,JSON.stringify({iq:finalIQ,level:sc}));
-    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
+    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc,session_id:sessionId})});
     document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
     isDailyMode=false;
   } else if(currentMode==='timeattack'){
@@ -994,8 +1048,12 @@ function saveHS(){
   fetch(API+'/api/highscores',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,iq:finalIQ,level:sc})
-  }).then(function(){
+    body:JSON.stringify({name:name,iq:finalIQ,level:sc,session_id:sessionId})
+  }).then(function(r){
+    if(!r.ok){return r.json().catch(function(){return {};}).then(function(d){
+      var m=(d&&d.detail&&(d.detail[0]&&d.detail[0].msg||d.detail))||'';
+      showAchToast('⚠️','Nicht gespeichert',/nicht erlaubt/i.test(m)?'Bitte einen anderen Namen wählen':'Nur Ergebnisse aus einem Online-Spiel können gespeichert werden');
+    });}
     var btn=document.querySelector('.save-btn');
     btn.textContent=T('gespeichert');
     setTimeout(function(){btn.textContent=T('speichern');},2000);
@@ -1281,13 +1339,13 @@ function toggleNotifications(){
   var btn=document.getElementById('notif-btn');
   if(localStorage.getItem('notifications_enabled')==='1'){
     localStorage.removeItem('notifications_enabled');
-    if(btn){btn.textContent='🔔 Tägl. Erinnerung';btn.classList.remove('active');}
+    if(btn){btn.textContent='🔔 '+UT('notif');btn.classList.remove('active');}
     return;
   }
   Notification.requestPermission().then(function(perm){
     if(perm==='granted'){
       localStorage.setItem('notifications_enabled','1');
-      if(btn){btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');}
+      if(btn){btn.textContent='✅ '+UT('notifOn');btn.classList.add('active');}
       new Notification('IQ Test',{body:'Du bekommst jetzt täglich eine Erinnerung für die Challenge!',icon:'favicon.ico'});
     }else{
       if(btn){btn.textContent='❌ Nicht erlaubt';setTimeout(function(){btn.textContent='🔔 Tägl. Erinnerung';},2000);}
@@ -1298,7 +1356,7 @@ function initNotifBtn(){
   var btn=document.getElementById('notif-btn');
   if(!btn)return;
   if(localStorage.getItem('notifications_enabled')==='1'){
-    btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');
+    btn.textContent='✅ '+UT('notifOn');btn.classList.add('active');
   }
 }
 function checkDailyNotification(){
@@ -1539,6 +1597,12 @@ function onbNext(){
 }
 
 // ── INIT ───────────────────────────────────────────────────
+(function initLang(){
+  var saved='';try{saved=localStorage.getItem('iq_lang')||'';}catch(e){}
+  var guess=(navigator.language||'de').slice(0,2).toLowerCase();
+  var l=LANG[saved]?saved:(LANG[guess]?guess:'de');
+  if(l!=='de')setLang(l,document.getElementById('lopt-'+l));
+})();
 initStarfield();
 initSoundBtn();
 loadOfflineCache();
