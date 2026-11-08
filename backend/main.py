@@ -13,7 +13,13 @@ from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_B
 from database import get_db, create_tables, Highscore, DailyScore, Kontakt
 from datetime import date as dt_date
 
-limiter = Limiter(key_func=get_remote_address)
+def client_ip(request: Request) -> str:
+    # Render (und andere Hoster) setzen die echte Nutzer-IP in X-Forwarded-For.
+    # Ohne das teilen sich alle Nutzer das Limit der Proxy-IP.
+    fwd = request.headers.get("x-forwarded-for", "")
+    return fwd.split(",")[0].strip() or get_remote_address(request)
+
+limiter = Limiter(key_func=client_ip)
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -116,7 +122,7 @@ class JokerRequest(BaseModel):
     gesperrte: list = []
     @validator('typ')
     def typ_valid(cls, v):
-        if v not in ['5050','telefon','publikum']:
+        if v not in ['5050','telefon','publikum','skip','doppel']:
             raise ValueError('Ungueltiger Joker')
         return v
 
@@ -183,7 +189,7 @@ def start_game(request: Request, req: StartRequest):
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
-        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "joker":           {"5050": True, "telefon": True, "publikum": True, "skip": True, "doppel": True},
         "sicher_level":    0,
         "aktuelles_level": 1,
         "erstellt":        time.time(),
@@ -222,15 +228,25 @@ def pruefe_antwort(request: Request, req: AntwortRequest):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     richtig = req.antwort == frage["richtig"]
+    if not richtig and session.get("doppel_level") == req.level:
+        # Doppel-Chance: zweiter Versuch, Level bleibt, Lösung wird nicht verraten
+        session.pop("doppel_level", None)
+        return {"richtig": False, "zweiter_versuch": True}
+    session.pop("doppel_level", None)
     if richtig and req.level in SICHERHEITSSTUFEN:
         session["sicher_level"] = req.level
     session["aktuelles_level"] = req.level + 1
     sicher = session["sicher_level"]
     iq_level = req.level if richtig else sicher
     iq = IQ_TABELLE.get(iq_level, 85)
-    # Fortschritt im Server tracken für Highscore-Validierung
-    session["final_iq"] = iq
-    session["final_level"] = req.level if richtig else req.level - 1
+    # Fortschritt für die Highscore-Prüfung: nach der ersten falschen Antwort
+    # wird das Ergebnis eingefroren (Lern-/Time-Attack-Modus spielen weiter,
+    # dürfen den Bestenlisten-Wert aber nicht mehr erhöhen)
+    if not session.get("eingefroren"):
+        session["final_iq"] = iq
+        session["final_level"] = req.level if richtig else req.level - 1
+        if not richtig:
+            session["eingefroren"] = True
     return {
         "richtig":               richtig,
         "richtige_antwort":      frage["richtig"],
@@ -252,7 +268,16 @@ def joker(request: Request, req: JokerRequest):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     richtig = frage["richtig"]
+    if req.typ in ("skip", "doppel") and req.level != session.get("aktuelles_level", 1):
+        raise HTTPException(400, "Ungueltige Level-Reihenfolge")
     session["joker"][req.typ] = False
+    if req.typ == "skip":
+        # Frage überspringen: weiter zum nächsten Level, IQ bleibt unverändert
+        session["aktuelles_level"] = req.level + 1
+        return {"typ": "skip"}
+    if req.typ == "doppel":
+        session["doppel_level"] = req.level
+        return {"typ": "doppel"}
     if req.typ == "5050":
         falsche = [k for k in ["A","B","C","D"] if k != richtig and k not in req.gesperrte]
         entfernen = random.sample(falsche, min(2, len(falsche)))
@@ -287,7 +312,7 @@ def start_daily(request: Request, req: StartRequest):
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
-        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "joker":           {"5050": True, "telefon": True, "publikum": True, "skip": True, "doppel": True},
         "sicher_level":    0,
         "aktuelles_level": 1,
         "erstellt":        time.time(),
