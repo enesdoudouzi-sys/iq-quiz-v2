@@ -628,7 +628,7 @@ function apiStartWithRetry(attempt){
 
 function loadAndShowQ(level){
   if(currentMode==='timeattack'&&taLeft<=0){calcResult();return;}
-  if(currentMode!=='timeattack'&&level>MAX_FRAGEN){calcResult();return;}
+  if(level>MAX_FRAGEN){calcResult();return;}
   cur=level;done=false;gesperrte=[];doppelChanceActive=false;
   var dBadge=document.querySelector('.doppel-active-badge');if(dBadge)dBadge.remove();
   document.getElementById('iq-fb').style.display='none';
@@ -638,9 +638,9 @@ function loadAndShowQ(level){
   document.getElementById('joker-overlay').classList.remove('show');
   if(isOfflineMode&&qs[level]){showQuestion(qs[level]);return;}
   fetch(API+'/api/frage/'+sessionId+'/'+level)
-  .then(function(r){return r.json();})
+  .then(function(r){if(!r.ok)throw new Error(r.status===404?'Spiel-Sitzung abgelaufen – bitte neu starten.':'Fehler '+r.status);return r.json();})
   .then(function(q){qs[level]=q;showQuestion(q);})
-  .catch(function(e){alert('Fehler: '+e.message);});
+  .catch(function(e){alert(e.message||'Verbindung fehlgeschlagen');});
 }
 function showQuestion(q){
   var level=q.level;
@@ -743,11 +743,17 @@ function pick(key){
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({session_id:sessionId,level:cur,antwort:key})
-  }).then(function(r){return r.json();}).then(function(d){handleAnswer(key,d,k);});
+  }).then(function(r){
+    return r.json().then(function(d){
+      if(!r.ok)throw new Error(r.status===404?'Spiel-Sitzung abgelaufen – bitte neu starten.':(d&&d.detail)||('Fehler '+r.status));
+      return d;
+    });
+  }).then(function(d){handleAnswer(key,d,k);})
+  .catch(function(e){done=false;showAchToast('⚠️','Verbindungsproblem',e.message||'Bitte erneut versuchen');});
 }
 function handleAnswer(key,d,k){
   // Doppel-Chance: bei falscher Antwort einen zweiten Versuch geben
-  if(!d.richtig&&doppelChanceActive){
+  if(d.zweiter_versuch||(!d.richtig&&doppelChanceActive&&isOfflineMode)){
     doppelChanceActive=false;
     done=false;
     times.pop();
@@ -849,6 +855,7 @@ function useJoker(typ){
     if(done)return;
     jokerStatus['skip']=false;updJoker();playSound('joker');
     done=true;clearInterval(ti);
+    if(!isOfflineMode)fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,level:cur,typ:'skip'})}).catch(function(){});
     var fb=document.getElementById('fb');
     fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
     setTimeout(function(){loadAndShowQ(cur+1);},800);
@@ -858,6 +865,7 @@ function useJoker(typ){
     if(done)return;
     jokerStatus['doppel']=false;updJoker();playSound('joker');
     doppelChanceActive=true;
+    if(!isOfflineMode)fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,level:cur,typ:'doppel'})}).catch(function(){});
     var dBtn=document.getElementById('j-doppel');
     if(dBtn){
       var badge=document.createElement('span');badge.className='doppel-active-badge';badge.textContent='AKTIV';
