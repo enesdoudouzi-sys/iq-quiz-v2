@@ -26,6 +26,7 @@ app.add_middleware(
         "https://enesdoudouzi-sys.github.io",
         "https://iq-quiz-v2.onrender.com",
         "https://localhost",  # Android-App (Capacitor, androidScheme https)
+        "https://html-classic.itch.zone",  # itch.io (Spiel laeuft dort im iframe)
     ],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
