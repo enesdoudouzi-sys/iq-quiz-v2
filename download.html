@@ -52,12 +52,12 @@ a{color:#4a90e2}
 
 <div class="pane" id="p-android">
   <div class="card">
-    <a class="btn g" href="downloads/IQ-Test.apk" download="IQ-Quiz.apk">📥 Android-App herunterladen (7 MB)</a>
+    <a class="btn g" href="downloads/IQ-Test.apk" download="IQ-Test.apk">📥 Android-App herunterladen (7 MB)</a>
     <p class="meta">Version 1.6 · Android 7.0 oder neuer</p>
     <h2 style="margin-top:1rem">So installierst du sie</h2>
     <ol>
       <li>Auf <b>„Android-App herunterladen“</b> tippen.</li>
-      <li>Nach dem Download auf <b>IQ-Quiz.apk</b> tippen (Benachrichtigung oder Ordner „Downloads“).</li>
+      <li>Nach dem Download auf <b>IQ-Test.apk</b> tippen (Benachrichtigung oder Ordner „Downloads“).</li>
       <li>Fragt Android nach „Unbekannte Apps installieren“: für den Browser <b>„Zulassen“</b> aktivieren und zurückgehen.</li>
       <li>Auf <b>„Installieren“</b> tippen – fertig.</li>
     </ol>
@@ -83,7 +83,7 @@ a{color:#4a90e2}
     <button class="btn v pwa-btn" type="button">💻 Als App installieren</button>
     <ol>
       <li>Mit <b>Chrome</b> oder <b>Edge</b> öffnen und oben auf „Als App installieren“ klicken – oder rechts in der Adresszeile auf das Symbol <b>⊕ / „Installieren“</b>.</li>
-      <li>Das Quiz erscheint im Startmenü bzw. Dock und öffnet sich im eigenen Fenster.</li>
+      <li>Das Quiz erscheint im Menü bzw. Dock und öffnet sich im eigenen Fenster.</li>
     </ol>
     <p class="note">Mac mit Safari: Menü <b>Ablage → „Zum Dock hinzufügen“</b>. Firefox: einfach <a href="index.html">im Browser spielen</a>.</p>
   </div>
@@ -114,14 +114,12 @@ a{color:#4a90e2}
   }
   document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('data-p'));});});
   show(def);
-  // Web-App-Installation (Chrome/Edge/Android)
   var promptEv=null;
   window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();promptEv=e;});
   function install(ev){
     if(ev)ev.preventDefault();
     if(promptEv){promptEv.prompt();promptEv=null;}
-    else alert('Dein Browser bietet die Installation über das Menü an: Chrome/Edge → ⋮ bzw. ⊕ in der Adresszeile → „App installieren“. Safari → Teilen → „Zum Home-Bildschirm“.');
-  }
+    else alert('Dein Browser bietet die Installation über das Menü an: Chrome/Edge → ⋮ bzw. ⊕ in der Adresszeile → „App installieren“. Safari → Teilen → „Zum Home-Bildschirm“.');}
   document.querySelectorAll('.pwa-btn,.pwa-link').forEach(function(b){b.addEventListener('click',install);});
   if('serviceWorker' in navigator)navigator.serviceWorker.register('service-worker.js').catch(function(){});
 })();
