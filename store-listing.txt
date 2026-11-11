@@ -26,7 +26,7 @@ Wichtig: Dieses Quiz dient der Unterhaltung. Der angezeigte Quiz-IQ ist kein wis
 
 🧠 FEATURES:
 
-▶ 515 Fragen aus 17 Kategorien
+▶ 540 Fragen aus 17 Kategorien
    • Allgemeinwissen
    • Geschichte
    • Wissenschaft
@@ -92,7 +92,7 @@ Please note: this quiz is for entertainment. The displayed quiz IQ is not a scie
 
 🧠 FEATURES:
 
-▶ 515 questions across 17 categories
+▶ 540 questions across 17 categories
    • General Knowledge
    • History
    • Science

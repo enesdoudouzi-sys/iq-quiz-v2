@@ -116,25 +116,25 @@ function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
 // ── Oberflächen-Texte des Startbildschirms (zusätzlich zu LANG) ─────────
 // Kategorie-Werte für die API bleiben deutsch, übersetzt wird nur die Beschriftung.
 const UI={
-  de:{donate:'Spiel unterstützen (Spende)',hint:'Unterhaltung – kein wissenschaftlicher IQ-Test',kat:'Kategorie wählen',schw:'Schwierigkeit',mode:'Spielmodus',alle:'Alle',leicht:'Leicht',mittel:'Mittel',schwer:'Schwer',
+  de:{hsAll:'Allzeit',hsWeek:'Diese Woche',donate:'Spiel unterstützen (Spende)',hint:'Unterhaltung – kein wissenschaftlicher IQ-Test',kat:'Kategorie wählen',schw:'Schwierigkeit',mode:'Spielmodus',alle:'Alle',leicht:'Leicht',mittel:'Mittel',schwer:'Schwer',
       normal:'Normal',time:'Time-Attack',learn:'Lernen',endless:'Endless',daily:'Tägliche Challenge',stats:'Statistiken',notif:'Tägl. Erinnerung',notifOn:'Erinnerung aktiv',app:'App installieren (gratis) · Android, iPhone, PC',
       cats:['Allgemeinwissen','Geschichte','Wissenschaft','Sport','Mathematik','Logik','Konzentration','Musik','Geographie','Film & TV','Essen & Trinken','Technik & Computer','Tiere & Natur','Kunst & Literatur','Weltraum','Deutschland & Europa','Körper & Gesundheit']},
-  en:{donate:'Support the game (donate)',hint:'Entertainment – not a scientific IQ test',kat:'Choose a category',schw:'Difficulty',mode:'Game mode',alle:'All',leicht:'Easy',mittel:'Medium',schwer:'Hard',
+  en:{hsAll:'All time',hsWeek:'This week',donate:'Support the game (donate)',hint:'Entertainment – not a scientific IQ test',kat:'Choose a category',schw:'Difficulty',mode:'Game mode',alle:'All',leicht:'Easy',mittel:'Medium',schwer:'Hard',
       normal:'Normal',time:'Time Attack',learn:'Learn',endless:'Endless',daily:'Daily Challenge',stats:'Statistics',notif:'Daily reminder',notifOn:'Reminder on',app:'Install the app (free) · Android, iPhone, PC',
       cats:['General knowledge','History','Science','Sports','Maths','Logic','Concentration','Music','Geography','Film & TV','Food & Drink','Tech & Computers','Animals & Nature','Art & Literature','Space','Germany & Europe','Body & Health']},
-  tr:{donate:'Oyunu destekle (bağış)',hint:'Eğlence amaçlıdır – bilimsel bir IQ testi değildir',kat:'Kategori seç',schw:'Zorluk',mode:'Oyun modu',alle:'Tümü',leicht:'Kolay',mittel:'Orta',schwer:'Zor',
+  tr:{hsAll:'Tüm zamanlar',hsWeek:'Bu hafta',donate:'Oyunu destekle (bağış)',hint:'Eğlence amaçlıdır – bilimsel bir IQ testi değildir',kat:'Kategori seç',schw:'Zorluk',mode:'Oyun modu',alle:'Tümü',leicht:'Kolay',mittel:'Orta',schwer:'Zor',
       normal:'Normal',time:'Zamana karşı',learn:'Öğren',endless:'Sonsuz',daily:'Günlük meydan okuma',stats:'İstatistikler',notif:'Günlük hatırlatma',notifOn:'Hatırlatma açık',app:'Uygulamayı yükle (ücretsiz) · Android, iPhone, PC',
       cats:['Genel kültür','Tarih','Bilim','Spor','Matematik','Mantık','Konsantrasyon','Müzik','Coğrafya','Film & TV','Yeme & İçme','Teknoloji & Bilgisayar','Hayvanlar & Doğa','Sanat & Edebiyat','Uzay','Almanya & Avrupa','Vücut & Sağlık']},
-  fr:{donate:'Soutenir le jeu (don)',hint:'Divertissement – pas un test de QI scientifique',kat:'Choisir une catégorie',schw:'Difficulté',mode:'Mode de jeu',alle:'Toutes',leicht:'Facile',mittel:'Moyen',schwer:'Difficile',
+  fr:{hsAll:'Depuis toujours',hsWeek:'Cette semaine',donate:'Soutenir le jeu (don)',hint:'Divertissement – pas un test de QI scientifique',kat:'Choisir une catégorie',schw:'Difficulté',mode:'Mode de jeu',alle:'Toutes',leicht:'Facile',mittel:'Moyen',schwer:'Difficile',
       normal:'Normal',time:'Contre la montre',learn:'Apprendre',endless:'Sans fin',daily:'Défi du jour',stats:'Statistiques',notif:'Rappel quotidien',notifOn:'Rappel activé',app:"Installer l'app (gratuit) · Android, iPhone, PC",
       cats:['Culture générale','Histoire','Sciences','Sport','Maths','Logique','Concentration','Musique','Géographie','Cinéma & TV','Cuisine & Boissons','Tech & Informatique','Animaux & Nature','Art & Littérature','Espace','Allemagne & Europe','Corps & Santé']},
-  es:{donate:'Apoya el juego (donación)',hint:'Entretenimiento – no es un test de CI científico',kat:'Elige una categoría',schw:'Dificultad',mode:'Modo de juego',alle:'Todas',leicht:'Fácil',mittel:'Media',schwer:'Difícil',
+  es:{hsAll:'Siempre',hsWeek:'Esta semana',donate:'Apoya el juego (donación)',hint:'Entretenimiento – no es un test de CI científico',kat:'Elige una categoría',schw:'Dificultad',mode:'Modo de juego',alle:'Todas',leicht:'Fácil',mittel:'Media',schwer:'Difícil',
       normal:'Normal',time:'Contrarreloj',learn:'Aprender',endless:'Sin fin',daily:'Reto diario',stats:'Estadísticas',notif:'Recordatorio diario',notifOn:'Recordatorio activo',app:'Instalar la app (gratis) · Android, iPhone, PC',
       cats:['Cultura general','Historia','Ciencia','Deportes','Matemáticas','Lógica','Concentración','Música','Geografía','Cine & TV','Comida & Bebida','Tecnología','Animales & Naturaleza','Arte & Literatura','Espacio','Alemania & Europa','Cuerpo & Salud']},
-  pt:{donate:'Apoie o jogo (doação)',hint:'Entretenimento – não é um teste de QI científico',kat:'Escolha uma categoria',schw:'Dificuldade',mode:'Modo de jogo',alle:'Todas',leicht:'Fácil',mittel:'Médio',schwer:'Difícil',
+  pt:{hsAll:'Sempre',hsWeek:'Esta semana',donate:'Apoie o jogo (doação)',hint:'Entretenimento – não é um teste de QI científico',kat:'Escolha uma categoria',schw:'Dificuldade',mode:'Modo de jogo',alle:'Todas',leicht:'Fácil',mittel:'Médio',schwer:'Difícil',
       normal:'Normal',time:'Contra o tempo',learn:'Aprender',endless:'Infinito',daily:'Desafio diário',stats:'Estatísticas',notif:'Lembrete diário',notifOn:'Lembrete ativo',app:'Instalar o app (grátis) · Android, iPhone, PC',
       cats:['Conhecimentos gerais','História','Ciência','Esportes','Matemática','Lógica','Concentração','Música','Geografia','Cinema & TV','Comida & Bebida','Tecnologia','Animais & Natureza','Arte & Literatura','Espaço','Alemanha & Europa','Corpo & Saúde']},
-  ar:{donate:'ادعم اللعبة (تبرّع)',hint:'للترفيه – ليس اختبار ذكاء علميًا',kat:'اختر فئة',schw:'الصعوبة',mode:'وضع اللعب',alle:'الكل',leicht:'سهل',mittel:'متوسط',schwer:'صعب',
+  ar:{hsAll:'كل الأوقات',hsWeek:'هذا الأسبوع',donate:'ادعم اللعبة (تبرّع)',hint:'للترفيه – ليس اختبار ذكاء علميًا',kat:'اختر فئة',schw:'الصعوبة',mode:'وضع اللعب',alle:'الكل',leicht:'سهل',mittel:'متوسط',schwer:'صعب',
       normal:'عادي',time:'ضد الوقت',learn:'تعلّم',endless:'بلا نهاية',daily:'التحدي اليومي',stats:'الإحصائيات',notif:'تذكير يومي',notifOn:'التذكير مفعّل',app:'ثبّت التطبيق (مجانًا) · Android وiPhone والكمبيوتر',
       cats:['ثقافة عامة','تاريخ','علوم','رياضة','رياضيات','منطق','تركيز','موسيقى','جغرافيا','أفلام وتلفزيون','طعام وشراب','تقنية وحاسوب','حيوانات وطبيعة','فن وأدب','الفضاء','ألمانيا وأوروبا','الجسم والصحة']}
 };
@@ -160,6 +160,8 @@ function applyUiLang(){
   setLabel(document.querySelector('.s-daily'),u.daily);
   setLabel(document.querySelector('.s-stats'),u.stats);
   setLabel(document.getElementById('s-donate-btn'),u.donate);
+  setLabel(document.getElementById('hs-tab-alle'),u.hsAll);
+  setLabel(document.getElementById('hs-tab-woche'),u.hsWeek);
   var nb=document.getElementById('notif-btn');
   if(nb)setLabel(nb,localStorage.getItem('notifications_enabled')==='1'?u.notifOn:u.notif);
   var dl=document.querySelector('a[href="download.html"]');
@@ -522,10 +524,12 @@ function updJoker(){
   if(extraBtn)extraBtn.style.display=(allUsed&&!extraJokerUsed)?'flex':'none';
 }
 
-function showHS(){
+function showHS(zeitraum){
+  zeitraum=zeitraum==='woche'?'woche':'alle';
   document.getElementById('sv').style.display='none';
   document.getElementById('hv').style.display='block';
-  fetch(API+'/api/highscores').then(function(r){return r.json();}).then(function(scores){
+  ['alle','woche'].forEach(function(z){var b=document.getElementById('hs-tab-'+z);if(b)b.classList.toggle('active',z===zeitraum);});
+  fetch(API+'/api/highscores'+(zeitraum==='woche'?'?zeitraum=woche':'')).then(function(r){return r.json();}).then(function(scores){
     var hl=document.getElementById('hl');hl.innerHTML='';
     if(!scores.length){
       var d=document.createElement('div');d.className='none';d.textContent='Noch keine Eintraege.';hl.appendChild(d);return;

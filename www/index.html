@@ -714,6 +714,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <!-- HIGHSCORES -->
 <div id="hv">
   <h2>&#127942; Highscores</h2>
+  <div class="mode-row" id="hs-tabs" style="justify-content:center;margin-bottom:1rem;">
+    <button class="mode-btn active" id="hs-tab-alle" onclick="showHS('alle')">Allzeit</button>
+    <button class="mode-btn" id="hs-tab-woche" onclick="showHS('woche')">Diese Woche</button>
+  </div>
   <div id="hl"></div>
   <button class="rbtn" onclick="showStart()">Zur&uuml;ck</button>
 </div>
