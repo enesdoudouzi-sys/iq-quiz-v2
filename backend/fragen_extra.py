@@ -1,6 +1,6 @@
-"""Zusaetzliche Fragen in 8 neuen Kategorien.
+"""Zusätzliche Fragen in 8 neuen Kategorien.
 
-Format je Zeile: (schwierigkeit, frage, richtige_antwort, [3 falsche], erklaerung)
+Format je Zeile: (schwierigkeit, frage, richtige_antwort, [3 falsche], erklärung)
 schwierigkeit: 1=leicht, 2=mittel, 3=schwer
 
 Die Antwort-Reihenfolge wird beim Laden deterministisch gemischt (pro Frage
@@ -269,7 +269,6 @@ DEUTSCHLAND_EUROPA = [
 
 KOERPER_GESUNDHEIT = [
     (1, "Wie viele Zähne hat ein Erwachsener mit Weisheitszähnen?", "32", ["28", "30", "34"], "Das vollständige Erwachsenengebiss hat 32 Zähne."),
-    (1, "Welches Organ pumpt das Blut durch den Körper?", "Herz", ["Leber", "Lunge", "Niere"], "Das Herz ist ein Hohlmuskel."),
     (2, "Welches ist das größte Organ des Menschen?", "Haut", ["Leber", "Lunge", "Darm"], "Die Haut bedeckt etwa 1,8 Quadratmeter."),
     (2, "Welches Vitamin bildet der Körper mit Hilfe von Sonnenlicht?", "Vitamin D", ["Vitamin A", "Vitamin C", "Vitamin K"], "Die Haut bildet Vitamin D unter UV-Strahlung."),
     (2, "Wie viele Chromosomen hat ein Mensch normalerweise?", "46", ["23", "44", "48"], "Der Mensch hat 23 Chromosomenpaare."),
@@ -300,6 +299,41 @@ KOERPER_GESUNDHEIT = [
     (2, "Wie viele Stunden Schlaf werden Erwachsenen im Durchschnitt empfohlen?", "7 bis 9 Stunden", ["4 bis 5 Stunden", "10 bis 12 Stunden", "12 bis 14 Stunden"], "Die meisten Erwachsenen brauchen sieben bis neun Stunden Schlaf."),
 ]
 
+# Neue Sport-Fragen (Sport hatte mit 22 die wenigsten Fragen)
+SPORT_NEU = [
+    (1, "Wie viele Spieler einer Mannschaft stehen beim Fußball gleichzeitig auf dem Platz?", "11", ["9", "10", "12"], "Jede Mannschaft spielt mit elf Spielern, einer davon ist der Torwart."),
+    (1, "In welcher Sportart gibt es einen „Slam Dunk“?", "Basketball", ["Volleyball", "Handball", "Tennis"], "Beim Slam Dunk wird der Ball von oben in den Korb gestopft."),
+    (1, "Mit welchem Gerät spielt man Badminton?", "Federball und Schläger", ["Puck und Schläger", "Ball und Keule", "Scheibe und Stock"], "Badminton wird mit Schläger und Federball gespielt."),
+    (2, "Wie lang ist ein Marathon?", "42,195 km", ["21,0975 km", "40 km", "50 km"], "Die Marathon-Distanz beträgt seit 1921 offiziell 42,195 Kilometer."),
+    (2, "Wie viele Punkte zählt ein Touchdown im American Football?", "6", ["3", "5", "7"], "Ein Touchdown bringt sechs Punkte, danach folgt ein Zusatzversuch."),
+    (2, "Welches Land gewann die Fußball-WM 2014?", "Deutschland", ["Argentinien", "Brasilien", "Spanien"], "Deutschland besiegte im Finale von Rio Argentinien mit 1:0."),
+    (2, "Wie viele Felder hat ein Schachbrett?", "64", ["36", "49", "81"], "Ein Schachbrett hat 8 × 8 = 64 Felder."),
+    (2, "In welcher Stadt fanden die Olympischen Sommerspiele 1972 statt?", "München", ["Berlin", "Rom", "Montreal"], "1972 war München Gastgeber der Olympischen Sommerspiele."),
+    (2, "Wie hoch hängt ein Basketballkorb (Ringoberkante)?", "3,05 m", ["2,75 m", "2,90 m", "3,25 m"], "Der Ring hängt 3,05 Meter (10 Fuß) über dem Boden."),
+    (3, "Wer hält den Weltrekord über 100 Meter der Männer (9,58 s)?", "Usain Bolt", ["Carl Lewis", "Tyson Gay", "Yohan Blake"], "Usain Bolt lief 2009 in Berlin 9,58 Sekunden."),
+    (3, "Wie viele Grand-Slam-Turniere gibt es im Tennis pro Jahr?", "4", ["3", "5", "6"], "Australian Open, French Open, Wimbledon und US Open."),
+    (3, "Welcher Sportler gewann die meisten olympischen Goldmedaillen?", "Michael Phelps", ["Usain Bolt", "Carl Lewis", "Larissa Latynina"], "Schwimmer Michael Phelps gewann 23 Goldmedaillen."),
+    (3, "Wie heißt der höchste Wurf beim Darts mit drei Pfeilen?", "180", ["150", "170", "200"], "Dreimal Triple-20 ergibt 180 Punkte."),
+    (3, "In welchem Jahr fand die erste Fußball-Weltmeisterschaft statt?", "1930", ["1920", "1934", "1950"], "Die erste WM fand 1930 in Uruguay statt."),
+]
+
+# Zusätzliche schwere Fragen für die Stufen 11–15
+SCHWER_NEU_ALLGEMEIN = [
+    (3, "Wie heißt die Hauptstadt von Australien?", "Canberra", ["Sydney", "Melbourne", "Perth"], "Canberra wurde als Kompromiss zwischen Sydney und Melbourne gegründet."),
+    (3, "Welches chemische Element hat das Symbol „W“?", "Wolfram", ["Wasserstoff", "Wismut", "Vanadium"], "„W“ kommt vom Namen „Wolfram“; englisch heißt es Tungsten."),
+    (3, "Wie viele Zähne hat ein erwachsener Mensch normalerweise (mit Weisheitszähnen)?", "32", ["28", "30", "36"], "Mit den vier Weisheitszähnen sind es 32 Zähne."),
+    (3, "Welches Land hat die meisten Zeitzonen (inklusive Überseegebiete)?", "Frankreich", ["Russland", "USA", "China"], "Durch seine Überseegebiete hat Frankreich 12 Zeitzonen."),
+    (3, "Wer formulierte die drei Gesetze der Bewegung?", "Isaac Newton", ["Galileo Galilei", "Albert Einstein", "Johannes Kepler"], "Newton veröffentlichte sie 1687 in den „Principia“."),
+    (3, "Wie heißt das kleinste Land der Welt?", "Vatikanstadt", ["Monaco", "San Marino", "Liechtenstein"], "Die Vatikanstadt ist nur etwa 0,44 km² groß."),
+    (3, "Welcher Planet dreht sich „liegend“ mit einer Achsneigung von etwa 98°?", "Uranus", ["Neptun", "Saturn", "Venus"], "Uranus rollt quasi auf seiner Bahn um die Sonne."),
+    (3, "Wie heißt die Lehre von den Pilzen?", "Mykologie", ["Mykonose", "Phykologie", "Ornithologie"], "Die Mykologie beschäftigt sich mit Pilzen."),
+    (3, "Welcher Komponist schrieb die Oper „Die Zauberflöte“?", "Wolfgang Amadeus Mozart", ["Ludwig van Beethoven", "Richard Wagner", "Giuseppe Verdi"], "Mozart komponierte sie 1791, kurz vor seinem Tod."),
+    (3, "Wie viele Bits hat ein Byte?", "8", ["4", "16", "32"], "Ein Byte besteht aus acht Bit."),
+    (3, "Welcher Fluss ist der längste Europas?", "Wolga", ["Donau", "Rhein", "Dnepr"], "Die Wolga ist rund 3.530 km lang."),
+    (3, "Wie heißt der längste Knochen im menschlichen Körper?", "Oberschenkelknochen", ["Schienbein", "Oberarmknochen", "Wadenbein"], "Der Oberschenkelknochen (Femur) ist der längste Knochen."),
+    (3, "Welche Programmiersprache wurde von Guido van Rossum entwickelt?", "Python", ["Java", "Ruby", "C++"], "Python erschien erstmals 1991."),
+]
+
 EXTRA_FRAGEN = (
     _build("Film & TV", FILM_TV)
     + _build("Essen & Trinken", ESSEN_TRINKEN)
@@ -309,4 +343,6 @@ EXTRA_FRAGEN = (
     + _build("Weltraum", WELTRAUM)
     + _build("Deutschland & Europa", DEUTSCHLAND_EUROPA)
     + _build("Körper & Gesundheit", KOERPER_GESUNDHEIT)
+    + _build("Sport", SPORT_NEU)
+    + _build("Allgemeinwissen", SCHWER_NEU_ALLGEMEIN)
 )

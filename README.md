@@ -2,7 +2,7 @@
 
 # 🧠 IQ Quiz
 
-**Ein Quiz im Stil der großen TV-Quizshows — Full-Stack-App mit 515 Fragen, 7 Sprachen, Preisleiter & Jokern.**
+**Ein Quiz im Stil der großen TV-Quizshows — Full-Stack-App mit 540 Fragen, 7 Sprachen, Preisleiter & Jokern.**
 *(Unterhaltung, kein wissenschaftlicher IQ-Test.)*
 
 [![Live](https://img.shields.io/badge/Live-Spielen-2563eb?style=for-the-badge&logo=github)](https://enesdoudouzi-sys.github.io/iq-quiz-v2)
@@ -29,7 +29,7 @@ Eine komplette **Full-Stack-Quiz-App**: Python/FastAPI-Backend mit Datenbank & A
 
 | Feature | Beschreibung |
 |---|---|
-| ✅ 515 Fragen | Zufällig aus 17 Kategorien |
+| ✅ 540 Fragen | Zufällig aus 17 Kategorien |
 | ⏱️ Timer | 20 / 25 / 30 Sek pro Level |
 | 🧠 Live IQ | Aktualisiert nach jeder Frage |
 | 💰 Preisleiter | WWM-Style mit Sicherheitsstufen |

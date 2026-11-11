@@ -11,7 +11,7 @@ import os, random, uuid, time, re, hmac
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
 from database import get_db, create_tables, Highscore, DailyScore, Kontakt
-from datetime import date as dt_date
+from datetime import date as dt_date, datetime, timedelta
 
 def client_ip(request: Request) -> str:
     # Render (und andere Hoster) setzen die echte Nutzer-IP in X-Forwarded-For.
@@ -361,8 +361,12 @@ def get_offline_fragen(request: Request):
 
 @app.get("/api/highscores")
 @limiter.limit("30/minute")
-def get_highscores(request: Request, db: Session = Depends(get_db)):
-    scores = db.query(Highscore).order_by(Highscore.iq.desc()).limit(10).all()
+def get_highscores(request: Request, zeitraum: str = "alle", db: Session = Depends(get_db)):
+    q = db.query(Highscore)
+    if zeitraum == "woche":
+        # Wochen-Bestenliste: nur die letzten 7 Tage, damit auch neue Spieler oben landen
+        q = q.filter(Highscore.datum >= datetime.now() - timedelta(days=7))
+    scores = q.order_by(Highscore.iq.desc(), Highscore.datum.asc()).limit(10).all()
     return [{"name": s.name, "iq": s.iq, "level": s.level} for s in scores]
 
 @app.post("/api/highscores")
