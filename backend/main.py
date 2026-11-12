@@ -69,6 +69,7 @@ class StartRequest(BaseModel):
     name: str
     kategorie: str = "alle"
     schwierigkeit: str = "alle"
+    sprache: str = "de"
     @validator('name')
     def name_valid(cls, v):
         v = v.strip()
@@ -197,7 +198,7 @@ def start_game(request: Request, req: StartRequest):
         for k in oldest:
             del sessions[k]
     session_id = str(uuid.uuid4())
-    fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit)
+    fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit, req.sprache)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
@@ -320,7 +321,7 @@ def start_daily(request: Request, req: StartRequest):
             del sessions[k]
     today = dt_date.today().isoformat()
     session_id = str(uuid.uuid4())
-    fragen = get_daily_fragen(today, 15)
+    fragen = get_daily_fragen(today, 15, req.sprache)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
@@ -364,8 +365,8 @@ def submit_daily(request: Request, req: DailySubmitRequest, db: Session = Depend
 
 @app.get("/api/offline")
 @limiter.limit("10/minute")
-def get_offline_fragen(request: Request):
-    fragen = get_random_fragen(15)
+def get_offline_fragen(request: Request, sprache: str = "de"):
+    fragen = get_random_fragen(15, sprache=sprache)
     return [{"level": f["level"], "frage": f["frage"], "antworten": f["antworten"],
              "richtig": f["richtig"], "kategorie": f["kategorie"],
              "schwierigkeit": f.get("schwierigkeit", 1),

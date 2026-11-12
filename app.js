@@ -610,7 +610,7 @@ function apiStartWithRetry(attempt){
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
+    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw,sprache:currentLang})
   }).then(function(r){
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
@@ -1512,7 +1512,7 @@ function apiDailyStartWithRetry(attempt){
   fetch(API+'/api/daily/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName})
+    body:JSON.stringify({name:playerName,sprache:currentLang})
   }).then(function(r){
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
@@ -1538,7 +1538,7 @@ function setOfflineBadge(show){
 function loadOfflineCache(){
   var cached=localStorage.getItem('iq_offline_cache');
   if(cached){try{offlineQs=JSON.parse(cached);}catch(e){}}
-  fetch(API+'/api/offline')
+  fetch(API+'/api/offline?sprache='+encodeURIComponent(currentLang))
     .then(function(r){return r.json();})
     .then(function(fragen){
       localStorage.setItem('iq_offline_cache',JSON.stringify(fragen));

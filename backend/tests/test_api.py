@@ -156,3 +156,21 @@ def test_statistik_und_kontakt_nur_mit_token(client):
     assert c.post("/api/kontakt", json={"name": "A", "email": "a@b.de", "nachricht": "Hallo Welt"}).json() == {"ok": True}
     assert c.get("/api/kontakt").status_code == 403
     assert len(c.get("/api/kontakt", headers={"X-Admin-Token": "test-token"}).json()) == 1
+
+
+def test_uebersetzungen_vollstaendig():
+    import fragen as F
+    ids = {F.frage_id(f) for f in F.ALLE_FRAGEN}
+    for lang in ("en", "tr"):
+        tr = F._UEBERSETZUNGEN[lang]
+        assert ids <= set(tr), f"{lang}: {len(ids - set(tr))} fehlen"
+        for v in tr.values():
+            assert len(v["antworten"]) == 4 and len(set(v["antworten"])) == 4
+
+
+def test_start_englisch(client):
+    c, main = client
+    for sprache, verboten in (("en", "Welche"), ("tr", "Welche")):
+        sid = c.post("/api/start", json={"name": "Tester", "sprache": sprache}).json()["session_id"]
+        texte = " ".join(f["frage"] for f in main.sessions[sid]["fragen"])
+        assert verboten not in texte and "Wie viele" not in texte
