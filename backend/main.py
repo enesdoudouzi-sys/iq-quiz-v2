@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 import os, random, uuid, time, re, hmac
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
-from database import get_db, create_tables, Highscore, DailyScore, Kontakt
+from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Ereignis
 from datetime import date as dt_date, datetime, timedelta
 
 def client_ip(request: Request) -> str:
@@ -90,6 +90,18 @@ class AntwortRequest(BaseModel):
         if v < 1 or v > 50:
             raise ValueError('Ungueltiges Level')
         return v
+
+class EreignisRequest(BaseModel):
+    typ: str
+    info: str = ""
+    @validator('typ')
+    def typ_valid(cls, v):
+        if v not in ('start', 'ende', 'fehler'):
+            raise ValueError('Ungueltiger Typ')
+        return v
+    @validator('info')
+    def info_valid(cls, v):
+        return re.sub(r"[\x00-\x1f\x7f]", " ", v or "")[:500]
 
 class KontaktRequest(BaseModel):
     name: str
@@ -406,3 +418,32 @@ def kontakt_liste(request: Request, db: Session = Depends(get_db)):
     rows = db.query(Kontakt).order_by(Kontakt.erstellt.desc()).limit(100).all()
     return [{"id": k.id, "name": k.name, "email": k.email, "nachricht": k.nachricht,
              "erstellt": k.erstellt.isoformat()} for k in rows]
+
+@app.post("/api/log")
+@limiter.limit("30/minute")
+def log_ereignis(request: Request, req: EreignisRequest, db: Session = Depends(get_db)):
+    db.add(Ereignis(typ=req.typ, info=req.info))
+    if random.random() < 0.02:
+        # Gelegentlich aufräumen: Einträge älter als 90 Tage löschen (siehe Datenschutzerklärung)
+        db.query(Ereignis).filter(Ereignis.datum < datetime.now() - timedelta(days=90)).delete()
+    db.commit()
+    return {"ok": True}
+
+@app.get("/api/statistik")
+@limiter.limit("10/minute")
+def statistik(request: Request, tage: int = 7, db: Session = Depends(get_db)):
+    # Nur für den Betreiber (Header X-Admin-Token = ADMIN_TOKEN)
+    token = os.environ.get("ADMIN_TOKEN", "")
+    if not token or not hmac.compare_digest(request.headers.get("X-Admin-Token", ""), token):
+        raise HTTPException(status_code=403, detail="Kein Zugriff")
+    seit = datetime.now() - timedelta(days=max(1, min(tage, 90)))
+    q = db.query(Ereignis).filter(Ereignis.datum >= seit)
+    zaehler = {t: q.filter(Ereignis.typ == t).count() for t in ("start", "ende", "fehler")}
+    fehler = q.filter(Ereignis.typ == "fehler").order_by(Ereignis.datum.desc()).limit(30).all()
+    return {
+        "zeitraum_tage": tage,
+        "spiele_gestartet": zaehler["start"],
+        "spiele_beendet": zaehler["ende"],
+        "fehler": zaehler["fehler"],
+        "letzte_fehler": [{"datum": f.datum.isoformat(), "info": f.info} for f in fehler],
+    }

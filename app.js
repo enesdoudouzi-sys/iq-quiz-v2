@@ -1,4 +1,24 @@
 const API = 'https://iq-quiz-v2.onrender.com';
+const APP_VERSION = '1.9';
+
+// ── Anonyme Nutzungs- und Fehlerstatistik ───────────────────────────────────
+// Sendet nur Ereignistyp + kurze technische Info (keine Namen, keine IDs).
+function logEvent(typ, info){
+  try{
+    var plat=(window.Capacitor&&window.Capacitor.getPlatform&&window.Capacitor.getPlatform())||'web';
+    fetch(API+'/api/log',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({typ:typ,info:(String(info||'')+' | v'+APP_VERSION+' '+plat).slice(0,500)})}).catch(function(){});
+  }catch(e){}
+}
+var _errCount=0;
+window.addEventListener('error',function(e){
+  if(_errCount++>5)return; // nicht fluten
+  logEvent('fehler',(e.message||'Fehler')+' @ '+String(e.filename||'').split('/').pop()+':'+(e.lineno||0));
+});
+window.addEventListener('unhandledrejection',function(e){
+  if(_errCount++>5)return;
+  var r=e.reason; logEvent('fehler','Promise: '+((r&&r.message)||String(r)).slice(0,300));
+});
 // ── ECHTE KAEUFE (RevenueCat) ───────────────────────────────────────────────
 // TODO: Vor dem Store-Release echte RevenueCat API-Keys eintragen
 // (RevenueCat Dashboard -> Project Settings -> API Keys). Getrennte Keys fuer
@@ -101,56 +121,14 @@ function setMode(mode,btn){
   if(btn)btn.classList.add('active');
 }
 
-const LANG={
-  de:{title:'IQ Test',sub:'Das IQ-Quiz · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Nächste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurück',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schließen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
-  en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question',teilen:'Share Result'},
-  tr:{title:'IQ Testi',sub:'IQ\'nunu Test Et · 15 Soru · 3 Joker',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
-  fr:{title:'Test QI',sub:'Quiz QI · 15 Questions · 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
-  es:{title:'Test de IQ',sub:'Quiz de IQ · 15 Preguntas · 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
-  ar:{title:'اختبار الذكاء',sub:'اختبار ترفيهي · 15 سؤالًا · 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
-  pt:{title:'Teste de QI',sub:'Teste seu QI · 15 Perguntas · 3 Ajudas',placeholder:'Seu Nome...',start:'Comecar',highscores:'Recordes',sekunden:'Segundos',iqLabel:'QI Atual',joker:'Ajudas',richtig:'Correto!',falsch:'Errado! Eliminado!',zeit:'Tempo Esgotado!',naechste:'Proxima Pergunta',ergebnis:'Seu Resultado',speichern:'Salvar',gespeichert:'Salvo!',nochmal:'Jogar Novamente',zurueck:'Voltar',perfekt:'Perfeito - todas corretas!',fehler:'ANALISE DE ERROS',deine:'Sua Resposta',richtige:'Resposta Correta',leiter:'Escada de QI',schliessen:'Fechar',telefon:'Ajuda Telefone',publikum:'Ajuda do Publico',iqNach:'Seu QI apos esta pergunta',teilen:'Compartilhar'},
-};
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
 
 // ── Oberflächen-Texte des Startbildschirms (zusätzlich zu LANG) ─────────
 // Kategorie-Werte für die API bleiben deutsch, übersetzt wird nur die Beschriftung.
-const UI={
-  de:{hsAll:'Allzeit',hsWeek:'Diese Woche',donate:'Spiel unterstützen (Spende)',hint:'Unterhaltung – kein wissenschaftlicher IQ-Test',kat:'Kategorie wählen',schw:'Schwierigkeit',mode:'Spielmodus',alle:'Alle',leicht:'Leicht',mittel:'Mittel',schwer:'Schwer',
-      normal:'Normal',time:'Time-Attack',learn:'Lernen',endless:'Endless',daily:'Tägliche Challenge',stats:'Statistiken',notif:'Tägl. Erinnerung',notifOn:'Erinnerung aktiv',app:'App installieren (gratis) · Android, iPhone, PC',
-      cats:['Allgemeinwissen','Geschichte','Wissenschaft','Sport','Mathematik','Logik','Konzentration','Musik','Geographie','Film & TV','Essen & Trinken','Technik & Computer','Tiere & Natur','Kunst & Literatur','Weltraum','Deutschland & Europa','Körper & Gesundheit']},
-  en:{hsAll:'All time',hsWeek:'This week',donate:'Support the game (donate)',hint:'Entertainment – not a scientific IQ test',kat:'Choose a category',schw:'Difficulty',mode:'Game mode',alle:'All',leicht:'Easy',mittel:'Medium',schwer:'Hard',
-      normal:'Normal',time:'Time Attack',learn:'Learn',endless:'Endless',daily:'Daily Challenge',stats:'Statistics',notif:'Daily reminder',notifOn:'Reminder on',app:'Install the app (free) · Android, iPhone, PC',
-      cats:['General knowledge','History','Science','Sports','Maths','Logic','Concentration','Music','Geography','Film & TV','Food & Drink','Tech & Computers','Animals & Nature','Art & Literature','Space','Germany & Europe','Body & Health']},
-  tr:{hsAll:'Tüm zamanlar',hsWeek:'Bu hafta',donate:'Oyunu destekle (bağış)',hint:'Eğlence amaçlıdır – bilimsel bir IQ testi değildir',kat:'Kategori seç',schw:'Zorluk',mode:'Oyun modu',alle:'Tümü',leicht:'Kolay',mittel:'Orta',schwer:'Zor',
-      normal:'Normal',time:'Zamana karşı',learn:'Öğren',endless:'Sonsuz',daily:'Günlük meydan okuma',stats:'İstatistikler',notif:'Günlük hatırlatma',notifOn:'Hatırlatma açık',app:'Uygulamayı yükle (ücretsiz) · Android, iPhone, PC',
-      cats:['Genel kültür','Tarih','Bilim','Spor','Matematik','Mantık','Konsantrasyon','Müzik','Coğrafya','Film & TV','Yeme & İçme','Teknoloji & Bilgisayar','Hayvanlar & Doğa','Sanat & Edebiyat','Uzay','Almanya & Avrupa','Vücut & Sağlık']},
-  fr:{hsAll:'Depuis toujours',hsWeek:'Cette semaine',donate:'Soutenir le jeu (don)',hint:'Divertissement – pas un test de QI scientifique',kat:'Choisir une catégorie',schw:'Difficulté',mode:'Mode de jeu',alle:'Toutes',leicht:'Facile',mittel:'Moyen',schwer:'Difficile',
-      normal:'Normal',time:'Contre la montre',learn:'Apprendre',endless:'Sans fin',daily:'Défi du jour',stats:'Statistiques',notif:'Rappel quotidien',notifOn:'Rappel activé',app:"Installer l'app (gratuit) · Android, iPhone, PC",
-      cats:['Culture générale','Histoire','Sciences','Sport','Maths','Logique','Concentration','Musique','Géographie','Cinéma & TV','Cuisine & Boissons','Tech & Informatique','Animaux & Nature','Art & Littérature','Espace','Allemagne & Europe','Corps & Santé']},
-  es:{hsAll:'Siempre',hsWeek:'Esta semana',donate:'Apoya el juego (donación)',hint:'Entretenimiento – no es un test de CI científico',kat:'Elige una categoría',schw:'Dificultad',mode:'Modo de juego',alle:'Todas',leicht:'Fácil',mittel:'Media',schwer:'Difícil',
-      normal:'Normal',time:'Contrarreloj',learn:'Aprender',endless:'Sin fin',daily:'Reto diario',stats:'Estadísticas',notif:'Recordatorio diario',notifOn:'Recordatorio activo',app:'Instalar la app (gratis) · Android, iPhone, PC',
-      cats:['Cultura general','Historia','Ciencia','Deportes','Matemáticas','Lógica','Concentración','Música','Geografía','Cine & TV','Comida & Bebida','Tecnología','Animales & Naturaleza','Arte & Literatura','Espacio','Alemania & Europa','Cuerpo & Salud']},
-  pt:{hsAll:'Sempre',hsWeek:'Esta semana',donate:'Apoie o jogo (doação)',hint:'Entretenimento – não é um teste de QI científico',kat:'Escolha uma categoria',schw:'Dificuldade',mode:'Modo de jogo',alle:'Todas',leicht:'Fácil',mittel:'Médio',schwer:'Difícil',
-      normal:'Normal',time:'Contra o tempo',learn:'Aprender',endless:'Infinito',daily:'Desafio diário',stats:'Estatísticas',notif:'Lembrete diário',notifOn:'Lembrete ativo',app:'Instalar o app (grátis) · Android, iPhone, PC',
-      cats:['Conhecimentos gerais','História','Ciência','Esportes','Matemática','Lógica','Concentração','Música','Geografia','Cinema & TV','Comida & Bebida','Tecnologia','Animais & Natureza','Arte & Literatura','Espaço','Alemanha & Europa','Corpo & Saúde']},
-  ar:{hsAll:'كل الأوقات',hsWeek:'هذا الأسبوع',donate:'ادعم اللعبة (تبرّع)',hint:'للترفيه – ليس اختبار ذكاء علميًا',kat:'اختر فئة',schw:'الصعوبة',mode:'وضع اللعب',alle:'الكل',leicht:'سهل',mittel:'متوسط',schwer:'صعب',
-      normal:'عادي',time:'ضد الوقت',learn:'تعلّم',endless:'بلا نهاية',daily:'التحدي اليومي',stats:'الإحصائيات',notif:'تذكير يومي',notifOn:'التذكير مفعّل',app:'ثبّت التطبيق (مجانًا) · Android وiPhone والكمبيوتر',
-      cats:['ثقافة عامة','تاريخ','علوم','رياضة','رياضيات','منطق','تركيز','موسيقى','جغرافيا','أفلام وتلفزيون','طعام وشراب','تقنية وحاسوب','حيوانات وطبيعة','فن وأدب','الفضاء','ألمانيا وأوروبا','الجسم والصحة']}
-};
 
 // ── Texte im Spiel und im Ergebnis (zusätzlich zu LANG/UI) ─────────────────
-const KAT_DE=['Allgemeinwissen','Geschichte','Wissenschaft','Sport','Mathematik','Logik & Zahlenfolgen','Konzentration','Musik','Geographie','Film & TV','Essen & Trinken','Technik & Computer','Tiere & Natur','Kunst & Literatur','Weltraum','Deutschland & Europa','Körper & Gesundheit'];
 function katName(k){var i=KAT_DE.indexOf(k);return i>=0?((UI[currentLang]||UI.de).cats[i]||k):k;}
-const G={
-  de:{bez:['Genie','Hochbegabt','Sehr intelligent','Überdurchschnittlich','Durchschnittlich','Leicht unterdurchschnittlich','Unterdurchschnittlich'],res:['Hervorragend!','Sehr gut!','Gut!','Weiter üben!'],zeit:'+30 Sekunden',skip:'Frage überspringen',doppel:'Doppel-Chance',cRichtig:'Richtige',cKat:'Kategorie',cSchw:'Schwierigkeit',cZeit:'Ø Zeit',sek:'Sek.',cert:'Urkunde als PDF',teilen:'Teilen',chal:'Freund herausfordern',share:'Ergebnis teilen',again:'Nochmal starten',ach:'Achievement freigeschaltet!',retry:'❌ Falsch! Noch ein Versuch!',doppelOn:'🎯 Doppel-Chance aktiv! Du hast 2 Versuche.',skipped:'⏭️ Frage übersprungen!',katAus:'Kategorie-Auswertung',st:'⭐ STÄRKE',sw:'📉 SCHWÄCHE',pct:'% richtig',taRes:' richtig in 60 Sek.'},
-  en:{bez:['Genius','Highly gifted','Very intelligent','Above average','Average','Slightly below average','Below average'],res:['Outstanding!','Very good!','Good!','Keep practising!'],zeit:'+30 seconds',skip:'Skip question',doppel:'Double chance',cRichtig:'Correct',cKat:'Category',cSchw:'Difficulty',cZeit:'Ø time',sek:'s',cert:'Certificate as PDF',teilen:'Share',chal:'Challenge a friend',share:'Share result',again:'Play again',ach:'Achievement unlocked!',retry:'❌ Wrong! One more try!',doppelOn:'🎯 Double chance active! You have 2 tries.',skipped:'⏭️ Question skipped!',katAus:'Category analysis',st:'⭐ STRENGTH',sw:'📉 WEAKNESS',pct:'% correct',taRes:' correct in 60 s'},
-  tr:{bez:['Dahi','Üstün yetenekli','Çok zeki','Ortalamanın üstünde','Ortalama','Ortalamanın biraz altında','Ortalamanın altında'],res:['Mükemmel!','Çok iyi!','İyi!','Çalışmaya devam!'],zeit:'+30 saniye',skip:'Soruyu atla',doppel:'Çift şans',cRichtig:'Doğru',cKat:'Kategori',cSchw:'Zorluk',cZeit:'Ø süre',sek:'sn',cert:'PDF sertifika',teilen:'Paylaş',chal:'Arkadaşını davet et',share:'Sonucu paylaş',again:'Tekrar oyna',ach:'Başarı kazanıldı!',retry:'❌ Yanlış! Bir hakkın daha var!',doppelOn:'🎯 Çift şans aktif! 2 hakkın var.',skipped:'⏭️ Soru atlandı!',katAus:'Kategori analizi',st:'⭐ GÜÇLÜ YÖN',sw:'📉 ZAYIF YÖN',pct:'% doğru',taRes:' doğru, 60 sn'},
-  fr:{bez:['Génie','Surdoué','Très intelligent','Au-dessus de la moyenne','Dans la moyenne','Légèrement en dessous','En dessous de la moyenne'],res:['Excellent !','Très bien !','Bien !','Continue à t’entraîner !'],zeit:'+30 secondes',skip:'Passer la question',doppel:'Double chance',cRichtig:'Correctes',cKat:'Catégorie',cSchw:'Difficulté',cZeit:'Ø temps',sek:'s',cert:'Certificat PDF',teilen:'Partager',chal:'Défier un ami',share:'Partager le résultat',again:'Rejouer',ach:'Succès débloqué !',retry:'❌ Faux ! Encore un essai !',doppelOn:'🎯 Double chance active ! Tu as 2 essais.',skipped:'⏭️ Question passée !',katAus:'Analyse par catégorie',st:'⭐ POINT FORT',sw:'📉 POINT FAIBLE',pct:'% correct',taRes:' correctes en 60 s'},
-  es:{bez:['Genio','Superdotado','Muy inteligente','Por encima de la media','Promedio','Ligeramente por debajo','Por debajo de la media'],res:['¡Excelente!','¡Muy bien!','¡Bien!','¡Sigue practicando!'],zeit:'+30 segundos',skip:'Saltar pregunta',doppel:'Doble oportunidad',cRichtig:'Correctas',cKat:'Categoría',cSchw:'Dificultad',cZeit:'Ø tiempo',sek:'s',cert:'Certificado PDF',teilen:'Compartir',chal:'Reta a un amigo',share:'Compartir resultado',again:'Jugar de nuevo',ach:'¡Logro desbloqueado!',retry:'❌ ¡Incorrecto! ¡Otro intento!',doppelOn:'🎯 ¡Doble oportunidad activa! Tienes 2 intentos.',skipped:'⏭️ ¡Pregunta saltada!',katAus:'Análisis por categoría',st:'⭐ FORTALEZA',sw:'📉 DEBILIDAD',pct:'% correcto',taRes:' correctas en 60 s'},
-  pt:{bez:['Gênio','Superdotado','Muito inteligente','Acima da média','Na média','Um pouco abaixo da média','Abaixo da média'],res:['Excelente!','Muito bom!','Bom!','Continue praticando!'],zeit:'+30 segundos',skip:'Pular pergunta',doppel:'Chance dupla',cRichtig:'Corretas',cKat:'Categoria',cSchw:'Dificuldade',cZeit:'Ø tempo',sek:'s',cert:'Certificado em PDF',teilen:'Compartilhar',chal:'Desafiar um amigo',share:'Compartilhar resultado',again:'Jogar de novo',ach:'Conquista desbloqueada!',retry:'❌ Errado! Mais uma tentativa!',doppelOn:'🎯 Chance dupla ativa! Você tem 2 tentativas.',skipped:'⏭️ Pergunta pulada!',katAus:'Análise por categoria',st:'⭐ PONTO FORTE',sw:'📉 PONTO FRACO',pct:'% correto',taRes:' corretas em 60 s'},
-  ar:{bez:['عبقري','موهوب جدًا','ذكي جدًا','فوق المتوسط','متوسط','أقل قليلًا من المتوسط','أقل من المتوسط'],res:['ممتاز!','جيد جدًا!','جيد!','واصل التدريب!'],zeit:'+30 ثانية',skip:'تخطَّ السؤال',doppel:'فرصة مزدوجة',cRichtig:'صحيح',cKat:'الفئة',cSchw:'الصعوبة',cZeit:'متوسط الوقت',sek:'ث',cert:'شهادة PDF',teilen:'مشاركة',chal:'تحدَّ صديقًا',share:'شارك النتيجة',again:'العب مجددًا',ach:'تم فتح إنجاز!',retry:'❌ خطأ! محاولة أخرى!',doppelOn:'🎯 الفرصة المزدوجة مفعّلة! لديك محاولتان.',skipped:'⏭️ تم تخطي السؤال!',katAus:'تحليل الفئات',st:'⭐ نقطة قوة',sw:'📉 نقطة ضعف',pct:'% صحيح',taRes:' صحيحة خلال 60 ث'}
-};
 function GT(k){return (G[currentLang]&&G[currentLang][k])||G.de[k];}
 function applyGameLang(){
   setLabel(document.getElementById('j-zeit'),GT('zeit'));
@@ -168,7 +146,18 @@ function applyGameLang(){
 }
 function UT(k){return (UI[currentLang]&&UI[currentLang][k])||UI.de[k];}
 // Emoji am Anfang behalten, nur den Text dahinter ersetzen
-function setLabel(el,txt){if(!el)return;var m=el.textContent.match(/^[^\p{L}\p{N}]*/u);el.textContent=(m?m[0]:'')+txt;}
+function setLabel(el,txt){if(!el)return;var jt=el.querySelector&&el.querySelector('.jt');if(jt){jt.textContent=txt;el.setAttribute('title',txt);el.setAttribute('aria-label',txt);return;}var m=el.textContent.match(/^[^\p{L}\p{N}]*/u);el.textContent=(m?m[0]:'')+txt;}
+function splitJokerLabels(){
+  document.querySelectorAll('.joker-btn').forEach(function(b){
+    if(b.querySelector('.jt'))return;
+    var t=b.textContent, m=t.match(/^[^\p{L}\p{N}+]*/u), ic=(m?m[0]:'').trim(), rest=t.slice(m?m[0].length:0).trim();
+    b.textContent='';
+    var i=document.createElement('span');i.className='ji';i.textContent=ic||'•';
+    var x=document.createElement('span');x.className='jt';x.textContent=rest;
+    b.appendChild(i);b.appendChild(document.createTextNode(' '));b.appendChild(x);
+    b.setAttribute('title',rest);b.setAttribute('aria-label',rest);
+  });
+}
 function applyUiLang(){
   var u=UI[currentLang]||UI.de;
   document.documentElement.lang=currentLang;
@@ -289,8 +278,8 @@ function setLang(lang,btn){
   if(q('.joker-title'))q('.joker-title').textContent=t.joker;
   qa('.leiter-lbl').forEach(function(el){el.textContent=t.leiter;});
   if(g('nb'))g('nb').textContent=t.naechste;
-  if(g('j-telefon'))g('j-telefon').innerHTML='&#128222; '+t.telefon;
-  if(g('j-publikum'))g('j-publikum').innerHTML='&#128101; '+t.publikum;
+  setLabel(g('j-telefon'),t.telefon);
+  setLabel(g('j-publikum'),t.publikum);
   // Joker Overlay
   if(q('.jo-close'))q('.jo-close').textContent=t.schliessen;
   if(q('.iq-fb-lbl'))q('.iq-fb-lbl').textContent=t.iqNach;
@@ -602,6 +591,7 @@ function showHS(zeitraum){
 }
 
 function startGame(){
+  logEvent('start',currentMode+' '+selectedKat+' '+currentLang);
   isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   playerName=document.getElementById('ni').value||'Spieler';
@@ -964,6 +954,7 @@ function useJoker(typ){
 function closeJoker(){document.getElementById('joker-overlay').classList.remove('show');}
 
 function calcResult(){
+  logEvent('ende',currentMode+' Level '+cur+' IQ '+finalIQ);
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   var taOv=document.getElementById('ta-overlay');
   if(taOv)taOv.style.display='none';
@@ -1640,6 +1631,7 @@ function onbNext(){
 }
 
 // ── INIT ───────────────────────────────────────────────────
+splitJokerLabels();
 (function initLang(){
   var saved='';try{saved=localStorage.getItem('iq_lang')||'';}catch(e){}
   var guess=(navigator.language||'de').slice(0,2).toLowerCase();
