@@ -182,3 +182,14 @@ def test_ip_nicht_faelschbar(client):
         headers = {"x-forwarded-for": "1.2.3.4, 9.9.9.9"}
         client = None
     assert main.client_ip(R()) == "9.9.9.9"
+
+
+def test_ip_hinter_cloudflare(client):
+    c, main = client
+    class R:
+        client = None
+        def __init__(self, h): self.headers = h
+    # echte Anfrage ueber Cloudflare
+    assert main.client_ip(R({"x-forwarded-for": "5.5.5.5, 104.16.1.1", "cf-connecting-ip": "5.5.5.5"})) == "5.5.5.5"
+    # direkter Angriff mit gefaelschtem Header wird ignoriert
+    assert main.client_ip(R({"x-forwarded-for": "9.9.9.9", "cf-connecting-ip": "1.1.1.1"})) == "9.9.9.9"
