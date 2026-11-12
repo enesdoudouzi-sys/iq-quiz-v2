@@ -13,12 +13,33 @@ from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_B
 from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Ereignis
 from datetime import date as dt_date, datetime, timedelta
 
+import ipaddress as _ip
+# Offizielle Cloudflare-Adressbereiche (https://www.cloudflare.com/ips/)
+_CF_NETZE = [_ip.ip_network(n) for n in (
+    "173.245.48.0/20", "103.21.244.0/22", "103.22.200.0/22", "103.31.4.0/22",
+    "141.101.64.0/18", "108.162.192.0/18", "190.93.240.0/20", "188.114.96.0/20",
+    "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
+    "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22", "2400:cb00::/32",
+    "2606:4700::/32", "2803:f800::/32", "2405:b500::/32", "2405:8100::/32",
+    "2a06:98c0::/29", "2c0f:f248::/32")]
+
+def _ist_cloudflare(adr: str) -> bool:
+    try:
+        a = _ip.ip_address(adr)
+        return any(a in n for n in _CF_NETZE)
+    except ValueError:
+        return False
+
 def client_ip(request: Request) -> str:
-    # Render haengt die echte Nutzer-IP hinten an X-Forwarded-For an.
-    # Den letzten Eintrag nehmen: die vorderen kann ein Angreifer selbst
-    # mitschicken, um das Limit zu umgehen.
+    # Render haengt die IP des Absenders hinten an X-Forwarded-For an (nicht faelschbar).
+    # Ist dieser Absender Cloudflare, steht die echte Nutzer-IP in CF-Connecting-IP.
+    # Kommt die Anfrage nicht von Cloudflare, wird CF-Connecting-IP ignoriert.
     fwd = request.headers.get("x-forwarded-for", "")
-    return fwd.split(",")[-1].strip() or get_remote_address(request)
+    absender = fwd.split(",")[-1].strip() or get_remote_address(request)
+    cf = request.headers.get("cf-connecting-ip", "").strip()
+    if cf and _ist_cloudflare(absender):
+        return cf
+    return absender
 
 limiter = Limiter(key_func=client_ip)
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
