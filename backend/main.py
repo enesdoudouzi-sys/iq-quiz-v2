@@ -14,10 +14,11 @@ from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Erei
 from datetime import date as dt_date, datetime, timedelta
 
 def client_ip(request: Request) -> str:
-    # Render (und andere Hoster) setzen die echte Nutzer-IP in X-Forwarded-For.
-    # Ohne das teilen sich alle Nutzer das Limit der Proxy-IP.
+    # Render haengt die echte Nutzer-IP hinten an X-Forwarded-For an.
+    # Den letzten Eintrag nehmen: die vorderen kann ein Angreifer selbst
+    # mitschicken, um das Limit zu umgehen.
     fwd = request.headers.get("x-forwarded-for", "")
-    return fwd.split(",")[0].strip() or get_remote_address(request)
+    return fwd.split(",")[-1].strip() or get_remote_address(request)
 
 limiter = Limiter(key_func=client_ip)
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)

@@ -174,3 +174,11 @@ def test_start_englisch(client):
         sid = c.post("/api/start", json={"name": "Tester", "sprache": sprache}).json()["session_id"]
         texte = " ".join(f["frage"] for f in main.sessions[sid]["fragen"])
         assert verboten not in texte and "Wie viele" not in texte
+
+
+def test_ip_nicht_faelschbar(client):
+    c, main = client
+    class R:  # einfacher Ersatz fuer Request
+        headers = {"x-forwarded-for": "1.2.3.4, 9.9.9.9"}
+        client = None
+    assert main.client_ip(R()) == "9.9.9.9"
