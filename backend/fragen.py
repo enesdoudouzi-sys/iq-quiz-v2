@@ -1,5 +1,8 @@
 import random
 import re
+import os
+import json
+import hashlib
 
 # schwierigkeit: 1=leicht, 2=mittel, 3=schwer
 # erklaerung: kurze Erklaerung warum die Antwort richtig ist
@@ -145,7 +148,7 @@ ALLE_FRAGEN = [
     {"kategorie":"Logik & Zahlenfolgen","schwierigkeit":2,"frage":"Welche Zahl fehlt?\n0 - 1 - 3 - 6 - 10 - ?","antworten":{"A":"13","B":"14","C":"15","D":"16"},"richtig":"C","erklaerung":"Die Differenzen sind 1, 2, 3, 4, 5 – also: 10+5=15.","seq":"0  1  3  6  10  ?"},
 
     # ── KONZENTRATION ─────────────────────────────────────────────────────────
-    {"kategorie":"Konzentration","schwierigkeit":2,"frage":"Wie viele gerade Zahlen liegen zwischen 14 und 26?","antworten":{"A":"4","B":"5","C":"6","D":"7"},"richtig":"C","erklaerung":"Die geraden Zahlen sind: 16, 18, 20, 22, 24 – also 5? Nein: 14<x<26: 16,18,20,22,24 = 5. Antwort C=6 einschliesslich 16-26: 16,18,20,22,24,26 = 6.","seq":None},
+    {"kategorie":"Konzentration","schwierigkeit":2,"frage":"Wie viele gerade Zahlen liegen zwischen 14 und 26 (beide ausgeschlossen)?","antworten":{"A":"4","B":"5","C":"6","D":"7"},"richtig":"B","erklaerung":"Die geraden Zahlen zwischen 14 und 26 sind 16, 18, 20, 22 und 24 – also 5.","seq":None},
     {"kategorie":"Konzentration","schwierigkeit":2,"frage":"Ein Zug fährt 90 km/h. Wie weit in 40 Minuten?","antworten":{"A":"50 km","B":"55 km","C":"60 km","D":"65 km"},"richtig":"C","erklaerung":"40 Minuten = 2/3 Stunde. 90 km/h x 2/3 = 60 km.","seq":None},
     {"kategorie":"Konzentration","schwierigkeit":2,"frage":"15 x 4 - 18 / 3 = ?","antworten":{"A":"52","B":"54","C":"56","D":"58"},"richtig":"B","erklaerung":"Punkt vor Strich: 15x4=60, 18/3=6, dann 60-6=54.","seq":"15 x 4  -  18 / 3  =  ?"},
     {"kategorie":"Konzentration","schwierigkeit":1,"frage":"Umfang eines Quadrats mit Seite 7 cm?","antworten":{"A":"21 cm","B":"28 cm","C":"35 cm","D":"49 cm"},"richtig":"B","erklaerung":"Umfang Quadrat = 4 x Seite = 4 x 7 = 28 cm.","seq":None},
@@ -172,13 +175,13 @@ ALLE_FRAGEN = [
     {"kategorie":"Musik","schwierigkeit":1,"frage":"Von wem stammt die Sinfonie Nr. 9 mit dem 'Ode an die Freude'?","antworten":{"A":"Mozart","B":"Bach","C":"Beethoven","D":"Schubert"},"richtig":"C","erklaerung":"Beethovens 9. Sinfonie mit dem Schlusschor 'Ode an die Freude' ist heute die Europahymne.","seq":None},
     {"kategorie":"Musik","schwierigkeit":1,"frage":"Welche Band sang 'Bohemian Rhapsody'?","antworten":{"A":"The Beatles","B":"Led Zeppelin","C":"Queen","D":"Rolling Stones"},"richtig":"C","erklaerung":"'Bohemian Rhapsody' von Queen wurde 1975 veröffentlicht und von Freddie Mercury geschrieben.","seq":None},
     {"kategorie":"Musik","schwierigkeit":2,"frage":"In welchem Land wurde Mozart geboren?","antworten":{"A":"Deutschland","B":"Österreich","C":"Italien","D":"Tschechien"},"richtig":"B","erklaerung":"Wolfgang Amadeus Mozart wurde 1756 in Salzburg (Österreich) geboren.","seq":None},
-    {"kategorie":"Musik","schwierigkeit":1,"frage":"Was ist ein Oktave?","antworten":{"A":"5 Töne","B":"7 Töne","C":"8 Töne","D":"12 Töne"},"richtig":"C","erklaerung":"Eine Oktave umfasst 8 Stammtöne (C bis zum nächsten C).","seq":None},
+    {"kategorie":"Musik","schwierigkeit":1,"frage":"Wie viele Stammtöne umfasst eine Oktave (von C bis zum nächsten C)?","antworten":{"A":"5 Töne","B":"7 Töne","C":"8 Töne","D":"12 Töne"},"richtig":"C","erklaerung":"Eine Oktave umfasst 8 Stammtöne (C bis zum nächsten C).","seq":None},
     {"kategorie":"Musik","schwierigkeit":2,"frage":"Welches Instrument spielt man mit dem Mund?","antworten":{"A":"Geige","B":"Trompete","C":"Harfe","D":"Xylophon"},"richtig":"B","erklaerung":"Die Trompete ist ein Blasinstrument – man spielt sie durch Lippenvibration.","seq":None},
     {"kategorie":"Musik","schwierigkeit":1,"frage":"Wie viele Mitglieder hatten die Beatles?","antworten":{"A":"3","B":"4","C":"5","D":"6"},"richtig":"B","erklaerung":"Die Beatles bestanden aus 4 Mitgliedern: John Lennon, Paul McCartney, George Harrison, Ringo Starr.","seq":None},
     {"kategorie":"Musik","schwierigkeit":2,"frage":"Was bedeutet 'Forte' in der Musik?","antworten":{"A":"Langsam","B":"Laut","C":"Leise","D":"Schnell"},"richtig":"B","erklaerung":"'Forte' (f) bedeutet laut – 'Piano' (p) bedeutet leise.","seq":None},
     {"kategorie":"Musik","schwierigkeit":1,"frage":"Welches Land ist Heimat des Flamenco?","antworten":{"A":"Italien","B":"Portugal","C":"Spanien","D":"Argentinien"},"richtig":"C","erklaerung":"Flamenco stammt aus Andalusien (Südspanien) und ist seit 2010 UNESCO-Kulturerbe.","seq":None},
-    {"kategorie":"Musik","schwierigkeit":2,"frage":"Wer komponierte die Brandenburgischen Konzerte?","antworten":{"A":"Handel","B":"Bach","C":"Vivaldi","D":"Haydn"},"richtig":"B","erklaerung":"Johann Sebastian Bach schrieb die 6 Brandenburgischen Konzerte um 1721.","seq":None},
-    {"kategorie":"Musik","schwierigkeit":1,"frage":"Wie heisst der berühmteste Gitarrist von Jimi Hendrix?","antworten":{"A":"Eric Clapton","B":"Jimmy Page","C":"Jimi Hendrix selbst","D":"Carlos Santana"},"richtig":"C","erklaerung":"Jimi Hendrix gilt selbst als einer der grössten Gitarristen aller Zeiten.","seq":None},
+    {"kategorie":"Musik","schwierigkeit":2,"frage":"Wer komponierte die Brandenburgischen Konzerte?","antworten":{"A":"Händel","B":"Bach","C":"Vivaldi","D":"Haydn"},"richtig":"B","erklaerung":"Johann Sebastian Bach schrieb die 6 Brandenburgischen Konzerte um 1721.","seq":None},
+    {"kategorie":"Musik","schwierigkeit":1,"frage":"Welcher Gitarrist spielte 1969 in Woodstock die US-Nationalhymne auf der E-Gitarre?","antworten":{"A":"Eric Clapton","B":"Jimmy Page","C":"Jimi Hendrix","D":"Carlos Santana"},"richtig":"C","erklaerung":"Jimi Hendrix spielte am 18. August 1969 in Woodstock eine legendäre Version von „The Star-Spangled Banner“.","seq":None},
     {"kategorie":"Musik","schwierigkeit":2,"frage":"Was ist ein Metronom?","antworten":{"A":"Ein Instrument","B":"Ein Taktmesser","C":"Eine Notenschrift","D":"Ein Akkord"},"richtig":"B","erklaerung":"Das Metronom gibt einen gleichmässigen Takt vor – unverzichtbar beim Üben.","seq":None},
     {"kategorie":"Musik","schwierigkeit":1,"frage":"Welche Sängerin ist als 'Queen of Pop' bekannt?","antworten":{"A":"Beyonce","B":"Lady Gaga","C":"Madonna","D":"Rihanna"},"richtig":"C","erklaerung":"Madonna wird seit den 1980ern als 'Queen of Pop' bezeichnet.","seq":None},
     {"kategorie":"Musik","schwierigkeit":3,"frage":"Was ist ein Arpeggio?","antworten":{"A":"Ein schnelles Stück","B":"Gebrochener Akkord","C":"Ein Rhythmus","D":"Ein Tongeschlecht"},"richtig":"B","erklaerung":"Ein Arpeggio ist ein 'gebrochener Akkord' – die Töne werden nacheinander statt gleichzeitig gespielt.","seq":None},
@@ -357,6 +360,34 @@ IQ_BEZEICHNUNG = {
     range(135,200): "Ausnahmetalent",
 }
 
+# ── Übersetzungen der Fragen ────────────────────────────────────────────────
+# Dateien uebersetzungen/<sprache>.json: { frage_id: {"frage": ..., "antworten": [A, B, C, D], "erklaerung": ...} }
+# Die Antworten stehen in der Original-Reihenfolge A–D (vor dem Mischen).
+# Fehlt eine Übersetzung, bleibt die deutsche Frage.
+def frage_id(frage):
+    return hashlib.sha1(frage["frage"].strip().encode("utf-8")).hexdigest()[:10]
+
+_UEBERSETZUNGEN = {}
+_UE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uebersetzungen")
+if os.path.isdir(_UE_DIR):
+    for _datei in os.listdir(_UE_DIR):
+        if _datei.endswith(".json"):
+            with open(os.path.join(_UE_DIR, _datei), encoding="utf-8") as _f:
+                _UEBERSETZUNGEN[_datei[:-5]] = json.load(_f)
+
+SPRACHEN = ["de"] + sorted(_UEBERSETZUNGEN)
+
+def _uebersetze(frage, sprache):
+    u = _UEBERSETZUNGEN.get(sprache, {}).get(frage_id(frage))
+    if not u or len(u.get("antworten", [])) != 4:
+        return frage
+    frage["frage"] = u["frage"]
+    frage["antworten"] = dict(zip(["A", "B", "C", "D"], u["antworten"]))
+    if u.get("erklaerung"):
+        frage["erklaerung"] = u["erklaerung"]
+    frage["sprache"] = sprache
+    return frage
+
 def _mische_antworten(frage, rng):
     """Antworten in zufällige Reihenfolge bringen und 'richtig' anpassen.
     Ohne das wäre die richtige Antwort in 41 % der Fragen 'C'."""
@@ -388,22 +419,23 @@ def _ansteigende_auswahl(pool, anzahl, rng):
                 break
     return auswahl
 
-def _baue_runde(pool, anzahl, rng):
+def _baue_runde(pool, anzahl, rng, sprache="de"):
     fragen = []
     for i, f in enumerate(_ansteigende_auswahl(pool, anzahl, rng)):
         frage = dict(f)
         frage["antworten"] = dict(f["antworten"])
+        _uebersetze(frage, sprache)
         _mische_antworten(frage, rng)
         frage["level"] = i + 1
         fragen.append(frage)
     return fragen
 
-def get_daily_fragen(date_str, anzahl=15):
+def get_daily_fragen(date_str, anzahl=15, sprache="de"):
     # Gleicher Seed pro Tag: alle Spieler bekommen dieselben Fragen in derselben Reihenfolge
     rng = random.Random(date_str)
-    return _baue_runde(ALLE_FRAGEN, anzahl, rng)
+    return _baue_runde(ALLE_FRAGEN, anzahl, rng, sprache)
 
-def get_random_fragen(anzahl=15, kategorie='alle', schwierigkeit='alle'):
+def get_random_fragen(anzahl=15, kategorie='alle', schwierigkeit='alle', sprache='de'):
     rng = random.Random()
     if kategorie == 'alle':
         pool = ALLE_FRAGEN
@@ -424,6 +456,7 @@ def get_random_fragen(anzahl=15, kategorie='alle', schwierigkeit='alle'):
                 for i, f in enumerate(pool[:anzahl]):
                     frage = dict(f)
                     frage["antworten"] = dict(f["antworten"])
+                    _uebersetze(frage, sprache)
                     _mische_antworten(frage, rng)
                     frage["level"] = i + 1
                     fragen.append(frage)
@@ -431,4 +464,4 @@ def get_random_fragen(anzahl=15, kategorie='alle', schwierigkeit='alle'):
         except ValueError:
             pass
 
-    return _baue_runde(pool, anzahl, rng)
+    return _baue_runde(pool, anzahl, rng, sprache)

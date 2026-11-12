@@ -1,8 +1,8 @@
 /* Service Worker – IQ Quiz (Website)
    Seiten zuerst frisch aus dem Netz, gespeicherte Version nur offline.
    Anfragen an den Server (Render) und fremde Seiten werden nie gespeichert. */
-const CACHE = 'iq-quiz-v2';
-const FILES = ['./', './index.html', './app.js', './style.css', './assets/icon-512.png'];
+const CACHE = 'iq-quiz-v3';
+const FILES = ['./', './index.html', './i18n.js', './app.js', './style.css', './assets/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(FILES.map(f => c.add(f).catch(() => {})))).then(() => self.skipWaiting()));
