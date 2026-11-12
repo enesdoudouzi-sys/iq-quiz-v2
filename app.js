@@ -138,6 +138,34 @@ const UI={
       normal:'عادي',time:'ضد الوقت',learn:'تعلّم',endless:'بلا نهاية',daily:'التحدي اليومي',stats:'الإحصائيات',notif:'تذكير يومي',notifOn:'التذكير مفعّل',app:'ثبّت التطبيق (مجانًا) · Android وiPhone والكمبيوتر',
       cats:['ثقافة عامة','تاريخ','علوم','رياضة','رياضيات','منطق','تركيز','موسيقى','جغرافيا','أفلام وتلفزيون','طعام وشراب','تقنية وحاسوب','حيوانات وطبيعة','فن وأدب','الفضاء','ألمانيا وأوروبا','الجسم والصحة']}
 };
+
+// ── Texte im Spiel und im Ergebnis (zusätzlich zu LANG/UI) ─────────────────
+const KAT_DE=['Allgemeinwissen','Geschichte','Wissenschaft','Sport','Mathematik','Logik & Zahlenfolgen','Konzentration','Musik','Geographie','Film & TV','Essen & Trinken','Technik & Computer','Tiere & Natur','Kunst & Literatur','Weltraum','Deutschland & Europa','Körper & Gesundheit'];
+function katName(k){var i=KAT_DE.indexOf(k);return i>=0?((UI[currentLang]||UI.de).cats[i]||k):k;}
+const G={
+  de:{bez:['Genie','Hochbegabt','Sehr intelligent','Überdurchschnittlich','Durchschnittlich','Leicht unterdurchschnittlich','Unterdurchschnittlich'],res:['Hervorragend!','Sehr gut!','Gut!','Weiter üben!'],zeit:'+30 Sekunden',skip:'Frage überspringen',doppel:'Doppel-Chance',cRichtig:'Richtige',cKat:'Kategorie',cSchw:'Schwierigkeit',cZeit:'Ø Zeit',sek:'Sek.',cert:'Urkunde als PDF',teilen:'Teilen',chal:'Freund herausfordern',share:'Ergebnis teilen',again:'Nochmal starten',ach:'Achievement freigeschaltet!',retry:'❌ Falsch! Noch ein Versuch!',doppelOn:'🎯 Doppel-Chance aktiv! Du hast 2 Versuche.',skipped:'⏭️ Frage übersprungen!',katAus:'Kategorie-Auswertung',st:'⭐ STÄRKE',sw:'📉 SCHWÄCHE',pct:'% richtig',taRes:' richtig in 60 Sek.'},
+  en:{bez:['Genius','Highly gifted','Very intelligent','Above average','Average','Slightly below average','Below average'],res:['Outstanding!','Very good!','Good!','Keep practising!'],zeit:'+30 seconds',skip:'Skip question',doppel:'Double chance',cRichtig:'Correct',cKat:'Category',cSchw:'Difficulty',cZeit:'Ø time',sek:'s',cert:'Certificate as PDF',teilen:'Share',chal:'Challenge a friend',share:'Share result',again:'Play again',ach:'Achievement unlocked!',retry:'❌ Wrong! One more try!',doppelOn:'🎯 Double chance active! You have 2 tries.',skipped:'⏭️ Question skipped!',katAus:'Category analysis',st:'⭐ STRENGTH',sw:'📉 WEAKNESS',pct:'% correct',taRes:' correct in 60 s'},
+  tr:{bez:['Dahi','Üstün yetenekli','Çok zeki','Ortalamanın üstünde','Ortalama','Ortalamanın biraz altında','Ortalamanın altında'],res:['Mükemmel!','Çok iyi!','İyi!','Çalışmaya devam!'],zeit:'+30 saniye',skip:'Soruyu atla',doppel:'Çift şans',cRichtig:'Doğru',cKat:'Kategori',cSchw:'Zorluk',cZeit:'Ø süre',sek:'sn',cert:'PDF sertifika',teilen:'Paylaş',chal:'Arkadaşını davet et',share:'Sonucu paylaş',again:'Tekrar oyna',ach:'Başarı kazanıldı!',retry:'❌ Yanlış! Bir hakkın daha var!',doppelOn:'🎯 Çift şans aktif! 2 hakkın var.',skipped:'⏭️ Soru atlandı!',katAus:'Kategori analizi',st:'⭐ GÜÇLÜ YÖN',sw:'📉 ZAYIF YÖN',pct:'% doğru',taRes:' doğru, 60 sn'},
+  fr:{bez:['Génie','Surdoué','Très intelligent','Au-dessus de la moyenne','Dans la moyenne','Légèrement en dessous','En dessous de la moyenne'],res:['Excellent !','Très bien !','Bien !','Continue à t’entraîner !'],zeit:'+30 secondes',skip:'Passer la question',doppel:'Double chance',cRichtig:'Correctes',cKat:'Catégorie',cSchw:'Difficulté',cZeit:'Ø temps',sek:'s',cert:'Certificat PDF',teilen:'Partager',chal:'Défier un ami',share:'Partager le résultat',again:'Rejouer',ach:'Succès débloqué !',retry:'❌ Faux ! Encore un essai !',doppelOn:'🎯 Double chance active ! Tu as 2 essais.',skipped:'⏭️ Question passée !',katAus:'Analyse par catégorie',st:'⭐ POINT FORT',sw:'📉 POINT FAIBLE',pct:'% correct',taRes:' correctes en 60 s'},
+  es:{bez:['Genio','Superdotado','Muy inteligente','Por encima de la media','Promedio','Ligeramente por debajo','Por debajo de la media'],res:['¡Excelente!','¡Muy bien!','¡Bien!','¡Sigue practicando!'],zeit:'+30 segundos',skip:'Saltar pregunta',doppel:'Doble oportunidad',cRichtig:'Correctas',cKat:'Categoría',cSchw:'Dificultad',cZeit:'Ø tiempo',sek:'s',cert:'Certificado PDF',teilen:'Compartir',chal:'Reta a un amigo',share:'Compartir resultado',again:'Jugar de nuevo',ach:'¡Logro desbloqueado!',retry:'❌ ¡Incorrecto! ¡Otro intento!',doppelOn:'🎯 ¡Doble oportunidad activa! Tienes 2 intentos.',skipped:'⏭️ ¡Pregunta saltada!',katAus:'Análisis por categoría',st:'⭐ FORTALEZA',sw:'📉 DEBILIDAD',pct:'% correcto',taRes:' correctas en 60 s'},
+  pt:{bez:['Gênio','Superdotado','Muito inteligente','Acima da média','Na média','Um pouco abaixo da média','Abaixo da média'],res:['Excelente!','Muito bom!','Bom!','Continue praticando!'],zeit:'+30 segundos',skip:'Pular pergunta',doppel:'Chance dupla',cRichtig:'Corretas',cKat:'Categoria',cSchw:'Dificuldade',cZeit:'Ø tempo',sek:'s',cert:'Certificado em PDF',teilen:'Compartilhar',chal:'Desafiar um amigo',share:'Compartilhar resultado',again:'Jogar de novo',ach:'Conquista desbloqueada!',retry:'❌ Errado! Mais uma tentativa!',doppelOn:'🎯 Chance dupla ativa! Você tem 2 tentativas.',skipped:'⏭️ Pergunta pulada!',katAus:'Análise por categoria',st:'⭐ PONTO FORTE',sw:'📉 PONTO FRACO',pct:'% correto',taRes:' corretas em 60 s'},
+  ar:{bez:['عبقري','موهوب جدًا','ذكي جدًا','فوق المتوسط','متوسط','أقل قليلًا من المتوسط','أقل من المتوسط'],res:['ممتاز!','جيد جدًا!','جيد!','واصل التدريب!'],zeit:'+30 ثانية',skip:'تخطَّ السؤال',doppel:'فرصة مزدوجة',cRichtig:'صحيح',cKat:'الفئة',cSchw:'الصعوبة',cZeit:'متوسط الوقت',sek:'ث',cert:'شهادة PDF',teilen:'مشاركة',chal:'تحدَّ صديقًا',share:'شارك النتيجة',again:'العب مجددًا',ach:'تم فتح إنجاز!',retry:'❌ خطأ! محاولة أخرى!',doppelOn:'🎯 الفرصة المزدوجة مفعّلة! لديك محاولتان.',skipped:'⏭️ تم تخطي السؤال!',katAus:'تحليل الفئات',st:'⭐ نقطة قوة',sw:'📉 نقطة ضعف',pct:'% صحيح',taRes:' صحيحة خلال 60 ث'}
+};
+function GT(k){return (G[currentLang]&&G[currentLang][k])||G.de[k];}
+function applyGameLang(){
+  setLabel(document.getElementById('j-zeit'),GT('zeit'));
+  setLabel(document.getElementById('j-skip'),GT('skip'));
+  setLabel(document.getElementById('j-doppel'),GT('doppel'));
+  var ct=document.querySelectorAll('.rv-ct');
+  [GT('cRichtig'),GT('cKat'),GT('cSchw'),GT('cZeit')].forEach(function(t,i){if(ct[i])ct[i].textContent=t;});
+  setLabel(document.querySelector('.cert-btn'),GT('cert'));
+  var sl=document.querySelector('.social-lbl');if(sl)sl.textContent=GT('teilen');
+  setLabel(document.querySelector('.chal-btn'),GT('chal'));
+  setLabel(document.querySelector('.share-btn'),GT('share'));
+  document.querySelectorAll('#rv .rbtn, .rbtn').forEach(function(b){if(/Nochmal|again|Tekrar|Rejouer|nuevo|novo|مجدد/i.test(b.textContent))b.textContent=GT('again');});
+  var at=document.getElementById('ach-toast');
+  if(at){var h=at.querySelector('div[style*="uppercase"]');if(h)setLabel(h,GT('ach'));}
+}
 function UT(k){return (UI[currentLang]&&UI[currentLang][k])||UI.de[k];}
 // Emoji am Anfang behalten, nur den Text dahinter ersetzen
 function setLabel(el,txt){if(!el)return;var m=el.textContent.match(/^[^\p{L}\p{N}]*/u);el.textContent=(m?m[0]:'')+txt;}
@@ -272,6 +300,7 @@ function setLang(lang,btn){
   if(q('.save-in'))q('.save-in').placeholder=t.ergebnis+'...';
   if(q('.rbtn'))q('.rbtn').textContent=t.nochmal;
   applyUiLang();
+  applyGameLang();
   try{localStorage.setItem('iq_lang',lang);}catch(e){}
 }
 
@@ -418,13 +447,14 @@ setTimeout(function(){if(!_loaderDone)showLoader('Server startet...',60);},3000)
 fetch(API+'/health').then(function(){hideLoader();}).catch(function(){});
 
 function getBez(iq){
-  if(iq>=145)return 'Genie';
-  if(iq>=130)return 'Hochbegabt';
-  if(iq>=120)return 'Sehr intelligent';
-  if(iq>=116)return 'Überdurchschnittlich';
-  if(iq>=100)return 'Durchschnittlich';
-  if(iq>=94)return 'Leicht unterdurchschnittlich';
-  return 'Unterdurchschnittlich';
+  var b=GT('bez');
+  if(iq>=145)return b[0];
+  if(iq>=130)return b[1];
+  if(iq>=120)return b[2];
+  if(iq>=116)return b[3];
+  if(iq>=100)return b[4];
+  if(iq>=94)return b[5];
+  return b[6];
 }
 
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
@@ -650,7 +680,7 @@ function loadAndShowQ(level){
 function showQuestion(q){
   var level=q.level;
   document.getElementById('qc').textContent=level+' / '+MAX_FRAGEN;
-  document.getElementById('pb').textContent=q.kategorie.toUpperCase();
+  document.getElementById('pb').textContent=katName(q.kategorie).toUpperCase();
   document.getElementById('preis').textContent=q.preis||getPreis(level);
   var col=COL[q.kategorie]||'#4a90e2';
   document.getElementById('pdot').style.background=col;
@@ -770,7 +800,7 @@ function handleAnswer(key,d,k){
     // Badge entfernen
     var dBadge=document.querySelector('.doppel-active-badge');
     if(dBadge)dBadge.remove();
-    document.getElementById('fb').textContent='❌ Falsch! Noch ein Versuch!';
+    document.getElementById('fb').textContent=GT('retry');
     document.getElementById('fb').className='fb no';
     playSound('falsch');
     return;
@@ -862,7 +892,7 @@ function useJoker(typ){
     done=true;clearInterval(ti);
     if(!isOfflineMode)fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,level:cur,typ:'skip'})}).catch(function(){});
     var fb=document.getElementById('fb');
-    fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
+    fb.textContent=GT('skipped');fb.className='fb ok';
     setTimeout(function(){loadAndShowQ(cur+1);},800);
     return;
   }
@@ -877,7 +907,7 @@ function useJoker(typ){
       dBtn.appendChild(badge);
     }
     var fb2=document.getElementById('fb');
-    fb2.textContent='🎯 Doppel-Chance aktiv! Du hast 2 Versuche.';fb2.className='fb ok';
+    fb2.textContent=GT('doppelOn');fb2.className='fb ok';
     setTimeout(function(){if(!done&&document.getElementById('fb').className==='fb ok')document.getElementById('fb').textContent='';},2200);
     return;
   }
@@ -952,15 +982,15 @@ function _fillResult(){
   var emoji=iq>=145?'🧠':iq>=130?'✨':iq>=115?'⭐':iq>=100?'👍':'💪';
   document.getElementById('rv-emoji').textContent=emoji;
   animateCount(document.getElementById('rv-iq'),85,iq,1500);
-  document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
+  document.getElementById('rv-sub').textContent=(function(r){return iq>=130?r[0]:iq>=115?r[1]:iq>=100?r[2]:r[3];})(GT('res'));
   var rb=document.getElementById('rank-badge');
   if(rb){var rank=getRankBadge(iq);rb.textContent=rank.text;rb.style.background=rank.bg;rb.style.color=rank.col;rb.style.borderColor=rank.border;rb.style.boxShadow='0 0 16px '+rank.border+'44';}
   var totalCm=0;Object.keys(cm).forEach(function(k){totalCm+=cm[k];});
   var totalCs=0;Object.keys(cs).forEach(function(k){totalCs+=cs[k];});
   document.getElementById('baw').textContent=totalCs+' / '+totalCm;
-  document.getElementById('blog').textContent=selectedKat==='alle'?'Alle':selectedKat;
-  document.getElementById('bkz').textContent=selectedSchw==='alle'?'Alle':selectedSchw==='1'?'Leicht':selectedSchw==='2'?'Mittel':'Schwer';
-  document.getElementById('bt').textContent=avg+' Sek.';
+  document.getElementById('blog').textContent=selectedKat==='alle'?UT('alle'):katName(selectedKat);
+  document.getElementById('bkz').textContent=selectedSchw==='alle'?UT('alle'):selectedSchw==='1'?UT('leicht'):selectedSchw==='2'?UT('mittel'):UT('schwer');
+  document.getElementById('bt').textContent=avg+' '+GT('sek');
   document.getElementById('sn').value=playerName;
   if(isDailyMode){
     var _today=new Date().toISOString().split('T')[0];
@@ -969,7 +999,7 @@ function _fillResult(){
     document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
     isDailyMode=false;
   } else if(currentMode==='timeattack'){
-    document.getElementById('rv-chip').textContent='⏱️ '+sc+' richtig in 60 Sek.';
+    document.getElementById('rv-chip').textContent='⏱️ '+sc+GT('taRes');
   } else if(currentMode==='learn'){
     document.getElementById('rv-chip').textContent='📚 Lern-Modus · '+sc+'/'+MAX_FRAGEN;
   } else if(currentMode==='endless'){
@@ -1000,7 +1030,7 @@ function _fillResult(){
     for(var i=0;i<errs.length;i++){
       var e=errs[i];
       var card=document.createElement('div');card.className='err-card';
-      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=e.q.kategorie;card.appendChild(cat);
+      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=katName(e.q.kategorie);card.appendChild(cat);
       if(e.to){var tob=document.createElement('span');tob.className='tob';tob.textContent=T('zeit');card.appendChild(tob);}
       var qd=document.createElement('div');qd.className='err-q';qd.textContent=e.q.frage;card.appendChild(qd);
       if(e.q.seq){var sd=document.createElement('div');sd.className='err-seq';sd.textContent=e.q.seq;card.appendChild(sd);}
@@ -1037,17 +1067,17 @@ function _fillResult(){
       var bPct=Math.round((cs[best]||0)/cm[best]*100);
       var wPct=Math.round((cs[worst]||0)/cm[worst]*100);
       catSum.innerHTML=
-        '<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">Kategorie-Auswertung</div>'+
+        '<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">'+GT('katAus')+'</div>'+
         '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+
         '<div style="flex:1;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:.8rem;min-width:120px;">'+
-        '<div style="font-size:10px;color:var(--green);margin-bottom:4px;">⭐ STAERKE</div>'+
+        '<div style="font-size:10px;color:var(--green);margin-bottom:4px;">'+GT('st')+'</div>'+
         '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[best]||'')+'&nbsp;'+best+'</div>'+
-        '<div style="font-size:11px;color:var(--green);">'+bPct+'% richtig</div></div>'+
+        '<div style="font-size:11px;color:var(--green);">'+bPct+GT('pct')+'</div></div>'+
         (catKeys.length>1?
         '<div style="flex:1;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:.8rem;min-width:120px;">'+
-        '<div style="font-size:10px;color:var(--red);margin-bottom:4px;">📈 POTENTIAL</div>'+
+        '<div style="font-size:10px;color:var(--red);margin-bottom:4px;">'+GT('sw')+'</div>'+
         '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[worst]||'')+'&nbsp;'+worst+'</div>'+
-        '<div style="font-size:11px;color:var(--red);">'+wPct+'% richtig</div></div>':'')+
+        '<div style="font-size:11px;color:var(--red);">'+wPct+GT('pct')+'</div></div>':'')+
         '</div>';
     }
   }
@@ -1585,12 +1615,12 @@ function initStarfield(){
 
 // ── RANG BADGE ─────────────────────────────────────────────
 function getRankBadge(iq){
-  if(iq>=145)return{text:'GENIE',bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
-  if(iq>=130)return{text:'HOCHBEGABT',bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
-  if(iq>=120)return{text:'SEHR INTELLIGENT',bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
-  if(iq>=115)return{text:'ÜBERDURCHSCHNITTLICH',bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
-  if(iq>=100)return{text:'DURCHSCHNITTLICH',bg:'transparent',col:'#94a3b8',border:'#475569'};
-  return{text:'WEITER ÜBEN',bg:'transparent',col:'#475569',border:'#1a2540'};
+  if(iq>=145)return{text:GT('bez')[0].toUpperCase(),bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
+  if(iq>=130)return{text:GT('bez')[1].toUpperCase(),bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
+  if(iq>=120)return{text:GT('bez')[2].toUpperCase(),bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
+  if(iq>=115)return{text:GT('bez')[3].toUpperCase(),bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
+  if(iq>=100)return{text:GT('bez')[4].toUpperCase(),bg:'transparent',col:'#94a3b8',border:'#475569'};
+  return{text:GT('res')[3].replace(/!$/,'').toUpperCase(),bg:'transparent',col:'#475569',border:'#1a2540'};
 }
 
 // ── ONBOARDING SLIDES ──────────────────────────────────────
