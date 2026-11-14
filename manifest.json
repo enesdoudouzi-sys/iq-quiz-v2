@@ -1,0 +1,16 @@
+{
+  "name": "IQ Quiz – Teste dein Wissen",
+  "short_name": "IQ Quiz",
+  "description": "Quiz mit 515 Fragen, Jokern und täglicher Challenge – zum Spaß, kein IQ-Test.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#030310",
+  "theme_color": "#060614",
+  "lang": "de",
+  "icons": [
+    { "src": "assets/icon-512.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
+}

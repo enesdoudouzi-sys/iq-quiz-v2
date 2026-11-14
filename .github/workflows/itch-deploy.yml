@@ -1,0 +1,46 @@
+# Lädt das Quiz bei jedem Update auf main automatisch auf itch.io hoch.
+# Einmalig einrichten:
+#   1. https://itch.io/user/settings/api-keys → „Generate new API key“
+#   2. GitHub → Repo → Settings → Secrets and variables → Actions →
+#      „New repository secret“: Name BUTLER_API_KEY, Wert = der Schlüssel
+name: itch.io veröffentlichen
+
+on:
+  push:
+    branches: [main]
+    paths: ['www/**', '.github/workflows/itch-deploy.yml']
+  workflow_dispatch:
+
+env:
+  ITCH_TARGET: enes89/iq-quiz:html5
+
+jobs:
+  itch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Web-Version für itch.io vorbereiten
+        run: |
+          mkdir -p build
+          cp -r www/. build/
+          rm -f build/service-worker.js
+          # Auf itch.io gibt es keine Käufe: Premium- und Shop-Knopf ausblenden
+          sed -i 's#</head>#<style>\#s-upgrade-btn,\#j-shop{display:none!important}</style>\n</head>#' build/index.html
+
+      - name: Butler installieren
+        run: |
+          curl -sSL -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip -q butler.zip -d butler && chmod +x butler/butler
+          ./butler/butler -V
+
+      - name: Auf itch.io hochladen
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          if [ -z "$BUTLER_API_KEY" ]; then
+            echo "::warning::BUTLER_API_KEY fehlt – Upload übersprungen (siehe Kommentar oben in dieser Datei)."
+            exit 0
+          fi
+          VERSION=$(grep -oP 'versionName "\K[^"]+' android/app/build.gradle || echo dev)
+          ./butler/butler push build "$ITCH_TARGET" --userversion "$VERSION"

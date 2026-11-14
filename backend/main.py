@@ -7,13 +7,41 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
-import os, random, uuid, time
+import os, random, uuid, time, re, hmac
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
-from database import get_db, create_tables, Highscore, DailyScore
-from datetime import date as dt_date
+from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Ereignis
+from datetime import date as dt_date, datetime, timedelta
 
-limiter = Limiter(key_func=get_remote_address)
+import ipaddress as _ip
+# Offizielle Cloudflare-Adressbereiche (https://www.cloudflare.com/ips/)
+_CF_NETZE = [_ip.ip_network(n) for n in (
+    "173.245.48.0/20", "103.21.244.0/22", "103.22.200.0/22", "103.31.4.0/22",
+    "141.101.64.0/18", "108.162.192.0/18", "190.93.240.0/20", "188.114.96.0/20",
+    "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
+    "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22", "2400:cb00::/32",
+    "2606:4700::/32", "2803:f800::/32", "2405:b500::/32", "2405:8100::/32",
+    "2a06:98c0::/29", "2c0f:f248::/32")]
+
+def _ist_cloudflare(adr: str) -> bool:
+    try:
+        a = _ip.ip_address(adr)
+        return any(a in n for n in _CF_NETZE)
+    except ValueError:
+        return False
+
+def client_ip(request: Request) -> str:
+    # Render haengt die IP des Absenders hinten an X-Forwarded-For an (nicht faelschbar).
+    # Ist dieser Absender Cloudflare, steht die echte Nutzer-IP in CF-Connecting-IP.
+    # Kommt die Anfrage nicht von Cloudflare, wird CF-Connecting-IP ignoriert.
+    fwd = request.headers.get("x-forwarded-for", "")
+    absender = fwd.split(",")[-1].strip() or get_remote_address(request)
+    cf = request.headers.get("cf-connecting-ip", "").strip()
+    if cf and _ist_cloudflare(absender):
+        return cf
+    return absender
+
+limiter = Limiter(key_func=client_ip)
 app = FastAPI(title="IQ Quiz API", docs_url=None, redoc_url=None)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -25,6 +53,8 @@ app.add_middleware(
         "http://127.0.0.1:8000",
         "https://enesdoudouzi-sys.github.io",
         "https://iq-quiz-v2.onrender.com",
+        "https://localhost",  # Android-App (Capacitor, androidScheme https)
+        "https://html-classic.itch.zone",  # itch.io (Spiel laeuft dort im iframe)
     ],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -45,16 +75,29 @@ def cleanup_sessions():
     for k in expired:
         del sessions[k]
 
+# Namen in der öffentlichen Bestenliste: nur druckbare Zeichen, Länge 1-20,
+# einfacher Filter gegen Beleidigungen (Google-Play-Richtlinie für Nutzerinhalte).
+_BLOCKED = ["nazi","hitler","fick","fuck","hure","nutte","fotze","wichser","arschloch","schlampe","bitch","cunt","nigger","nigga","neger","kanake","schwuchtel","faggot","retard","porn","sex","penis","vagina","orospu","siktir","amk","piç","kahpe","yarrak","göt"]
+def clean_name(v: str) -> str:
+    v = re.sub(r"[\x00-\x1f\x7f<>]", "", (v or "")).strip()[:20]
+    if not v:
+        raise ValueError('Name fehlt')
+    norm = re.sub(r"[^a-zäöüßçğış]", "", v.lower().replace("0","o").replace("1","i").replace("3","e").replace("4","a").replace("5","s").replace("@","a").replace("$","s"))
+    if any(b in norm for b in _BLOCKED):
+        raise ValueError('Name nicht erlaubt')
+    return v
+
 class StartRequest(BaseModel):
     name: str
     kategorie: str = "alle"
     schwierigkeit: str = "alle"
+    sprache: str = "de"
     @validator('name')
     def name_valid(cls, v):
         v = v.strip()
         if len(v) < 1 or len(v) > 20:
             raise ValueError('Name muss 1-20 Zeichen lang sein')
-        return v
+        return clean_name(v)
 
 class AntwortRequest(BaseModel):
     session_id: str
@@ -71,6 +114,42 @@ class AntwortRequest(BaseModel):
             raise ValueError('Ungueltiges Level')
         return v
 
+class EreignisRequest(BaseModel):
+    typ: str
+    info: str = ""
+    @validator('typ')
+    def typ_valid(cls, v):
+        if v not in ('start', 'ende', 'fehler'):
+            raise ValueError('Ungueltiger Typ')
+        return v
+    @validator('info')
+    def info_valid(cls, v):
+        return re.sub(r"[\x00-\x1f\x7f]", " ", v or "")[:500]
+
+class KontaktRequest(BaseModel):
+    name: str
+    email: str
+    nachricht: str
+    website: str = ""  # Honeypot, muss leer bleiben
+    @validator('name')
+    def name_valid(cls, v):
+        v = v.strip()
+        if len(v) < 1 or len(v) > 100:
+            raise ValueError('Name muss 1-100 Zeichen lang sein')
+        return v
+    @validator('email')
+    def email_valid(cls, v):
+        v = v.strip()
+        if len(v) > 200 or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', v):
+            raise ValueError('Ungueltige E-Mail-Adresse')
+        return v
+    @validator('nachricht')
+    def nachricht_valid(cls, v):
+        v = v.strip()
+        if len(v) < 5 or len(v) > 3000:
+            raise ValueError('Nachricht muss 5-3000 Zeichen lang sein')
+        return v
+
 class JokerRequest(BaseModel):
     session_id: str
     level: int
@@ -78,7 +157,7 @@ class JokerRequest(BaseModel):
     gesperrte: list = []
     @validator('typ')
     def typ_valid(cls, v):
-        if v not in ['5050','telefon','publikum']:
+        if v not in ['5050','telefon','publikum','skip','doppel']:
             raise ValueError('Ungueltiger Joker')
         return v
 
@@ -89,7 +168,7 @@ class HighscoreRequest(BaseModel):
     session_id: str = ""
     @validator('name')
     def name_valid(cls, v):
-        return v.strip()[:20]
+        return clean_name(v)
     @validator('iq')
     def iq_valid(cls, v):
         if v < 0 or v > 200:
@@ -103,7 +182,7 @@ class DailySubmitRequest(BaseModel):
     session_id: str = ""
     @validator('name')
     def name_valid(cls, v):
-        return v.strip()[:20]
+        return clean_name(v)
     @validator('iq')
     def iq_valid(cls, v):
         if v < 0 or v > 200:
@@ -141,11 +220,11 @@ def start_game(request: Request, req: StartRequest):
         for k in oldest:
             del sessions[k]
     session_id = str(uuid.uuid4())
-    fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit)
+    fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit, req.sprache)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
-        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "joker":           {"5050": True, "telefon": True, "publikum": True, "skip": True, "doppel": True},
         "sicher_level":    0,
         "aktuelles_level": 1,
         "erstellt":        time.time(),
@@ -184,15 +263,25 @@ def pruefe_antwort(request: Request, req: AntwortRequest):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     richtig = req.antwort == frage["richtig"]
+    if not richtig and session.get("doppel_level") == req.level:
+        # Doppel-Chance: zweiter Versuch, Level bleibt, Lösung wird nicht verraten
+        session.pop("doppel_level", None)
+        return {"richtig": False, "zweiter_versuch": True}
+    session.pop("doppel_level", None)
     if richtig and req.level in SICHERHEITSSTUFEN:
         session["sicher_level"] = req.level
     session["aktuelles_level"] = req.level + 1
     sicher = session["sicher_level"]
     iq_level = req.level if richtig else sicher
     iq = IQ_TABELLE.get(iq_level, 85)
-    # Fortschritt im Server tracken für Highscore-Validierung
-    session["final_iq"] = iq
-    session["final_level"] = req.level if richtig else req.level - 1
+    # Fortschritt für die Highscore-Prüfung: nach der ersten falschen Antwort
+    # wird das Ergebnis eingefroren (Lern-/Time-Attack-Modus spielen weiter,
+    # dürfen den Bestenlisten-Wert aber nicht mehr erhöhen)
+    if not session.get("eingefroren"):
+        session["final_iq"] = iq
+        session["final_level"] = req.level if richtig else req.level - 1
+        if not richtig:
+            session["eingefroren"] = True
     return {
         "richtig":               richtig,
         "richtige_antwort":      frage["richtig"],
@@ -214,7 +303,16 @@ def joker(request: Request, req: JokerRequest):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     richtig = frage["richtig"]
+    if req.typ in ("skip", "doppel") and req.level != session.get("aktuelles_level", 1):
+        raise HTTPException(400, "Ungueltige Level-Reihenfolge")
     session["joker"][req.typ] = False
+    if req.typ == "skip":
+        # Frage überspringen: weiter zum nächsten Level, IQ bleibt unverändert
+        session["aktuelles_level"] = req.level + 1
+        return {"typ": "skip"}
+    if req.typ == "doppel":
+        session["doppel_level"] = req.level
+        return {"typ": "doppel"}
     if req.typ == "5050":
         falsche = [k for k in ["A","B","C","D"] if k != richtig and k not in req.gesperrte]
         entfernen = random.sample(falsche, min(2, len(falsche)))
@@ -245,11 +343,11 @@ def start_daily(request: Request, req: StartRequest):
             del sessions[k]
     today = dt_date.today().isoformat()
     session_id = str(uuid.uuid4())
-    fragen = get_daily_fragen(today, 15)
+    fragen = get_daily_fragen(today, 15, req.sprache)
     sessions[session_id] = {
         "name":            req.name,
         "fragen":          fragen,
-        "joker":           {"5050": True, "telefon": True, "publikum": True},
+        "joker":           {"5050": True, "telefon": True, "publikum": True, "skip": True, "doppel": True},
         "sicher_level":    0,
         "aktuelles_level": 1,
         "erstellt":        time.time(),
@@ -273,17 +371,15 @@ def get_daily_highscores(request: Request, db: Session = Depends(get_db)):
 def submit_daily(request: Request, req: DailySubmitRequest, db: Session = Depends(get_db)):
     today = dt_date.today().isoformat()
     # Doppeleinreichung über Session verhindern
-    if req.session_id and req.session_id in sessions:
-        session = sessions[req.session_id]
-        if session.get("daily_submitted"):
-            raise HTTPException(400, "Bereits heute eingereicht")
-        session["daily_submitted"] = True
-        # IQ aus Session nehmen statt Client-Wert zu vertrauen
-        verified_iq = session.get("final_iq", req.iq)
-        verified_level = session.get("final_level", req.level)
-    else:
-        verified_iq = req.iq
-        verified_level = req.level
+    session = sessions.get(req.session_id) if req.session_id else None
+    if not session:
+        raise HTTPException(400, "Ungueltige oder abgelaufene Spiel-Session")
+    if session.get("daily_submitted"):
+        raise HTTPException(400, "Bereits heute eingereicht")
+    session["daily_submitted"] = True
+    # IQ aus der Session statt dem Client-Wert vertrauen
+    verified_iq = session.get("final_iq", 85)
+    verified_level = session.get("final_level", 0)
     score = DailyScore(datum=today, name=req.name, iq=verified_iq, level=verified_level, erstellt=time.time())
     db.add(score)
     db.commit()
@@ -291,8 +387,8 @@ def submit_daily(request: Request, req: DailySubmitRequest, db: Session = Depend
 
 @app.get("/api/offline")
 @limiter.limit("10/minute")
-def get_offline_fragen(request: Request):
-    fragen = get_random_fragen(15)
+def get_offline_fragen(request: Request, sprache: str = "de"):
+    fragen = get_random_fragen(15, sprache=sprache)
     return [{"level": f["level"], "frage": f["frage"], "antworten": f["antworten"],
              "richtig": f["richtig"], "kategorie": f["kategorie"],
              "schwierigkeit": f.get("schwierigkeit", 1),
@@ -300,23 +396,77 @@ def get_offline_fragen(request: Request):
 
 @app.get("/api/highscores")
 @limiter.limit("30/minute")
-def get_highscores(request: Request, db: Session = Depends(get_db)):
-    scores = db.query(Highscore).order_by(Highscore.iq.desc()).limit(10).all()
+def get_highscores(request: Request, zeitraum: str = "alle", db: Session = Depends(get_db)):
+    q = db.query(Highscore)
+    if zeitraum == "woche":
+        # Wochen-Bestenliste: nur die letzten 7 Tage, damit auch neue Spieler oben landen
+        q = q.filter(Highscore.datum >= datetime.now() - timedelta(days=7))
+    scores = q.order_by(Highscore.iq.desc(), Highscore.datum.asc()).limit(10).all()
     return [{"name": s.name, "iq": s.iq, "level": s.level} for s in scores]
 
 @app.post("/api/highscores")
 @limiter.limit("5/minute")
 def post_highscore(request: Request, req: HighscoreRequest, db: Session = Depends(get_db)):
     # IQ aus Session validieren wenn session_id mitgeschickt wird
-    if req.session_id and req.session_id in sessions:
-        session = sessions[req.session_id]
-        verified_iq = session.get("final_iq", req.iq)
-        verified_level = session.get("final_level", req.level)
-    else:
-        # Ohne Session: Plausibilitätsprüfung
-        verified_iq = min(req.iq, 145)
-        verified_level = min(req.level, 15)
+    # Nur Ergebnisse aus einem echten Spiel auf diesem Server zählen (kein freies Eintragen)
+    session = sessions.get(req.session_id) if req.session_id else None
+    if not session:
+        raise HTTPException(400, "Ungueltige oder abgelaufene Spiel-Session")
+    if session.get("hs_submitted"):
+        raise HTTPException(400, "Bereits gespeichert")
+    session["hs_submitted"] = True
+    verified_iq = session.get("final_iq", 85)
+    verified_level = session.get("final_level", 0)
     score = Highscore(name=req.name, iq=verified_iq, level=verified_level)
     db.add(score)
     db.commit()
     return {"ok": True}
+
+@app.post("/api/kontakt")
+@limiter.limit("3/minute")
+def kontakt(request: Request, req: KontaktRequest, db: Session = Depends(get_db)):
+    if req.website:
+        return {"ok": True}  # Bot: still verwerfen
+    db.add(Kontakt(name=req.name, email=req.email, nachricht=req.nachricht))
+    db.commit()
+    return {"ok": True}
+
+@app.get("/api/kontakt")
+@limiter.limit("10/minute")
+def kontakt_liste(request: Request, db: Session = Depends(get_db)):
+    # Nur fuer den Betreiber: Header "X-Admin-Token" = Umgebungsvariable ADMIN_TOKEN (auf Render setzen)
+    token = os.environ.get("ADMIN_TOKEN", "")
+    if not token or not hmac.compare_digest(request.headers.get("X-Admin-Token", ""), token):
+        raise HTTPException(status_code=403, detail="Kein Zugriff")
+    rows = db.query(Kontakt).order_by(Kontakt.erstellt.desc()).limit(100).all()
+    return [{"id": k.id, "name": k.name, "email": k.email, "nachricht": k.nachricht,
+             "erstellt": k.erstellt.isoformat()} for k in rows]
+
+@app.post("/api/log")
+@limiter.limit("30/minute")
+def log_ereignis(request: Request, req: EreignisRequest, db: Session = Depends(get_db)):
+    db.add(Ereignis(typ=req.typ, info=req.info))
+    if random.random() < 0.02:
+        # Gelegentlich aufräumen: Einträge älter als 90 Tage löschen (siehe Datenschutzerklärung)
+        db.query(Ereignis).filter(Ereignis.datum < datetime.now() - timedelta(days=90)).delete()
+    db.commit()
+    return {"ok": True}
+
+@app.get("/api/statistik")
+@limiter.limit("10/minute")
+def statistik(request: Request, tage: int = 7, db: Session = Depends(get_db)):
+    # Nur für den Betreiber (Header X-Admin-Token = ADMIN_TOKEN)
+    token = os.environ.get("ADMIN_TOKEN", "")
+    if not token or not hmac.compare_digest(request.headers.get("X-Admin-Token", ""), token):
+        raise HTTPException(status_code=403, detail="Kein Zugriff")
+    seit = datetime.now() - timedelta(days=max(1, min(tage, 90)))
+    q = db.query(Ereignis).filter(Ereignis.datum >= seit)
+    zaehler = {t: q.filter(Ereignis.typ == t).count() for t in ("start", "ende", "fehler")}
+    fehler = q.filter(Ereignis.typ == "fehler").order_by(Ereignis.datum.desc()).limit(30).all()
+    return {
+        "zeitraum_tage": tage,
+        "spiele_gestartet": zaehler["start"],
+        "spiele_beendet": zaehler["ende"],
+        "fehler": zaehler["fehler"],
+        "letzte_fehler": [{"datum": f.datum.isoformat(), "info": f.info} for f in fehler],
+    }

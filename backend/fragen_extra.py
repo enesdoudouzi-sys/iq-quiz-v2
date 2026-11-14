@@ -1,6 +1,6 @@
-"""Zusaetzliche Fragen in 8 neuen Kategorien.
+"""Zusätzliche Fragen in 8 neuen Kategorien.
 
-Format je Zeile: (schwierigkeit, frage, richtige_antwort, [3 falsche], erklaerung)
+Format je Zeile: (schwierigkeit, frage, richtige_antwort, [3 falsche], erklärung)
 schwierigkeit: 1=leicht, 2=mittel, 3=schwer
 
 Die Antwort-Reihenfolge wird beim Laden deterministisch gemischt (pro Frage
@@ -147,7 +147,6 @@ TIERE_NATUR = [
     (2, "In welchem Regenwald lebt das größte zusammenhängende tropische Waldgebiet der Erde?", "Amazonas-Regenwald", ["Kongo-Regenwald", "Daintree-Regenwald", "Borneo-Regenwald"], "Der Amazonas-Regenwald ist der größte tropische Regenwald."),
     (1, "Welches Tier hat den längsten Hals?", "Giraffe", ["Elefant", "Kamel", "Strauß"], "Der Hals einer Giraffe misst bis zu 2 Meter."),
     (2, "Welches dieser Tiere ist ein Wirbeltier?", "Frosch", ["Qualle", "Schnecke", "Spinne"], "Frösche haben eine Wirbelsäule."),
-    (1, "Welches ist das größte lebende Landtier?", "Afrikanischer Elefant", ["Nashorn", "Nilpferd", "Giraffe"], "Der Afrikanische Elefant wiegt bis zu 6 Tonnen."),
     (3, "Von welchem Baum stammt Kork?", "Korkeiche", ["Buche", "Birke", "Kastanie"], "Kork wird aus der Rinde der Korkeiche gewonnen."),
     (2, "Welche Pflanze gehört zu den am schnellsten wachsenden Gräsern?", "Bambus", ["Weizen", "Mais", "Schilf"], "Bambus kann an einem Tag fast einen Meter wachsen."),
     (1, "Was stellen Bienen aus Nektar her?", "Honig", ["Wachs", "Zucker", "Sirup"], "Bienen verwandeln Nektar in Honig."),
@@ -208,7 +207,6 @@ WELTRAUM = [
     (1, "Wie viele natürliche Monde hat die Erde?", "1", ["2", "3", "0"], "Die Erde hat nur den Mond."),
     (1, "Welcher Planet hat die auffälligsten Ringe?", "Saturn", ["Jupiter", "Mars", "Venus"], "Saturns Ringe bestehen aus Eis und Gestein."),
     (3, "Wie lange braucht das Licht von der Sonne zur Erde ungefähr?", "8 Minuten", ["8 Sekunden", "1 Stunde", "1 Tag"], "Das Sonnenlicht ist etwa acht Minuten unterwegs."),
-    (2, "Wie hieß der erste Mensch im Weltall (1961)?", "Juri Gagarin", ["Neil Armstrong", "Alan Shepard", "Walentina Tereschkowa"], "Gagarin umrundete die Erde am 12. April 1961."),
     (3, "Wie heißt der größte Mond des Saturn?", "Titan", ["Europa", "Ganymed", "Io"], "Titan hat eine dichte Atmosphäre."),
     (2, "Wie nennt man die Explosion eines massereichen Sterns am Ende seines Lebens?", "Supernova", ["Nova", "Pulsar", "Quasar"], "Eine Supernova kann kurzzeitig so hell leuchten wie eine ganze Galaxie."),
     (3, "Welcher Stern ist der Sonne am nächsten?", "Proxima Centauri", ["Sirius", "Betelgeuse", "Polarstern"], "Proxima Centauri ist etwa 4,2 Lichtjahre entfernt."),
@@ -269,7 +267,6 @@ DEUTSCHLAND_EUROPA = [
 
 KOERPER_GESUNDHEIT = [
     (1, "Wie viele Zähne hat ein Erwachsener mit Weisheitszähnen?", "32", ["28", "30", "34"], "Das vollständige Erwachsenengebiss hat 32 Zähne."),
-    (1, "Welches Organ pumpt das Blut durch den Körper?", "Herz", ["Leber", "Lunge", "Niere"], "Das Herz ist ein Hohlmuskel."),
     (2, "Welches ist das größte Organ des Menschen?", "Haut", ["Leber", "Lunge", "Darm"], "Die Haut bedeckt etwa 1,8 Quadratmeter."),
     (2, "Welches Vitamin bildet der Körper mit Hilfe von Sonnenlicht?", "Vitamin D", ["Vitamin A", "Vitamin C", "Vitamin K"], "Die Haut bildet Vitamin D unter UV-Strahlung."),
     (2, "Wie viele Chromosomen hat ein Mensch normalerweise?", "46", ["23", "44", "48"], "Der Mensch hat 23 Chromosomenpaare."),
@@ -300,6 +297,30 @@ KOERPER_GESUNDHEIT = [
     (2, "Wie viele Stunden Schlaf werden Erwachsenen im Durchschnitt empfohlen?", "7 bis 9 Stunden", ["4 bis 5 Stunden", "10 bis 12 Stunden", "12 bis 14 Stunden"], "Die meisten Erwachsenen brauchen sieben bis neun Stunden Schlaf."),
 ]
 
+# Neue Sport-Fragen (Sport hatte mit 22 die wenigsten Fragen)
+SPORT_NEU = [
+    (1, "In welcher Sportart gibt es einen „Slam Dunk“?", "Basketball", ["Volleyball", "Handball", "Tennis"], "Beim Slam Dunk wird der Ball von oben in den Korb gestopft."),
+    (1, "Mit welchem Gerät spielt man Badminton?", "Federball und Schläger", ["Puck und Schläger", "Ball und Keule", "Scheibe und Stock"], "Badminton wird mit Schläger und Federball gespielt."),
+    (2, "Wie viele Punkte zählt ein Touchdown im American Football?", "6", ["3", "5", "7"], "Ein Touchdown bringt sechs Punkte, danach folgt ein Zusatzversuch."),
+    (2, "Welches Land gewann die Fußball-WM 2014?", "Deutschland", ["Argentinien", "Brasilien", "Spanien"], "Deutschland besiegte im Finale von Rio Argentinien mit 1:0."),
+    (2, "Wie viele Felder hat ein Schachbrett?", "64", ["36", "49", "81"], "Ein Schachbrett hat 8 × 8 = 64 Felder."),
+    (2, "In welcher Stadt fanden die Olympischen Sommerspiele 1972 statt?", "München", ["Berlin", "Rom", "Montreal"], "1972 war München Gastgeber der Olympischen Sommerspiele."),
+    (2, "Wie hoch hängt ein Basketballkorb (Ringoberkante)?", "3,05 m", ["2,75 m", "2,90 m", "3,25 m"], "Der Ring hängt 3,05 Meter (10 Fuß) über dem Boden."),
+    (3, "Wer hält den Weltrekord über 100 Meter der Männer (9,58 s)?", "Usain Bolt", ["Carl Lewis", "Tyson Gay", "Yohan Blake"], "Usain Bolt lief 2009 in Berlin 9,58 Sekunden."),
+    (3, "Wie viele Grand-Slam-Turniere gibt es im Tennis pro Jahr?", "4", ["3", "5", "6"], "Australian Open, French Open, Wimbledon und US Open."),
+    (3, "Wie heißt der höchste Wurf beim Darts mit drei Pfeilen?", "180", ["150", "170", "200"], "Dreimal Triple-20 ergibt 180 Punkte."),
+]
+
+# Zusätzliche schwere Fragen für die Stufen 11–15
+SCHWER_NEU_ALLGEMEIN = [
+    (3, "Welches chemische Element hat das Symbol „W“?", "Wolfram", ["Wasserstoff", "Wismut", "Vanadium"], "„W“ kommt vom Namen „Wolfram“; englisch heißt es Tungsten."),
+    (3, "Welches Land hat die meisten Zeitzonen (inklusive Überseegebiete)?", "Frankreich", ["Russland", "USA", "China"], "Durch seine Überseegebiete hat Frankreich 12 Zeitzonen."),
+    (3, "Wer formulierte die drei Gesetze der Bewegung?", "Isaac Newton", ["Galileo Galilei", "Albert Einstein", "Johannes Kepler"], "Newton veröffentlichte sie 1687 in den „Principia“."),
+    (3, "Wie heißt die Lehre von den Pilzen?", "Mykologie", ["Mykonose", "Phykologie", "Ornithologie"], "Die Mykologie beschäftigt sich mit Pilzen."),
+    (3, "Welcher Komponist schrieb die Oper „Die Zauberflöte“?", "Wolfgang Amadeus Mozart", ["Ludwig van Beethoven", "Richard Wagner", "Giuseppe Verdi"], "Mozart komponierte sie 1791, kurz vor seinem Tod."),
+    (3, "Welche Programmiersprache wurde von Guido van Rossum entwickelt?", "Python", ["Java", "Ruby", "C++"], "Python erschien erstmals 1991."),
+]
+
 EXTRA_FRAGEN = (
     _build("Film & TV", FILM_TV)
     + _build("Essen & Trinken", ESSEN_TRINKEN)
@@ -309,4 +330,35 @@ EXTRA_FRAGEN = (
     + _build("Weltraum", WELTRAUM)
     + _build("Deutschland & Europa", DEUTSCHLAND_EUROPA)
     + _build("Körper & Gesundheit", KOERPER_GESUNDHEIT)
+    + _build("Sport", SPORT_NEU)
+    + _build("Allgemeinwissen", SCHWER_NEU_ALLGEMEIN)
 )
+
+# v1.9: zusätzliche Fragen für kleinere Kategorien
+NEU_V19 = [
+    ('Geschichte', 2, 'Wer war der erste Kaiser von China?', 'Qin Shihuangdi', ['Kublai Khan', 'Puyi', 'Konfuzius'], 'Qin Shihuangdi einte China 221 v. Chr. und ließ die Terrakotta-Armee bauen.'),
+    ('Geschichte', 3, 'In welchem Jahr eroberten die Osmanen Konstantinopel?', '1453', ['1389', '1492', '1517'], 'Sultan Mehmed II. eroberte die Stadt am 29. Mai 1453.'),
+    ('Geschichte', 3, 'Welches Reich wurde von Dschingis Khan gegründet?', 'Mongolisches Reich', ['Osmanisches Reich', 'Perserreich', 'Mogulreich'], 'Dschingis Khan gründete 1206 das Mongolische Reich, später das größte zusammenhängende Landreich der Geschichte.'),
+    ('Geschichte', 2, 'Wer schlug 1517 seine 95 Thesen an?', 'Martin Luther', ['Johannes Calvin', 'Jan Hus', 'Ulrich Zwingli'], 'Luthers Thesen gelten als Beginn der Reformation.'),
+    ('Geschichte', 3, 'Welche Stadt wurde 79 n. Chr. vom Vesuv verschüttet?', 'Pompeji', ['Ostia', 'Neapel', 'Syrakus'], 'Der Ausbruch begrub Pompeji unter Asche – dadurch blieb die Stadt erhalten.'),
+    ('Geschichte', 2, 'Wer gründete 1923 die Republik Türkei?', 'Mustafa Kemal Atatürk', ['İsmet İnönü', 'Sultan Mehmed VI.', 'Enver Pascha'], 'Atatürk wurde am 29. Oktober 1923 erster Präsident der Türkei.'),
+    ('Wissenschaft', 3, 'Welches Teilchen hat eine negative elektrische Ladung?', 'Elektron', ['Proton', 'Neutron', 'Photon'], 'Elektronen sind negativ, Protonen positiv, Neutronen neutral geladen.'),
+    ('Wissenschaft', 3, 'Welches Metall ist bei Raumtemperatur flüssig?', 'Quecksilber', ['Natrium', 'Blei', 'Zinn'], 'Quecksilber (Hg) schmilzt bereits bei −39 °C.'),
+    ('Mathematik', 2, 'Was ist 25 % von 360?', '90', ['75', '80', '120'], '25 % ist ein Viertel: 360 ÷ 4 = 90.'),
+    ('Mathematik', 3, 'Wie viele Diagonalen hat ein Sechseck?', '9', ['6', '8', '12'], 'Formel n·(n−3)/2 = 6·3/2 = 9.'),
+    ('Mathematik', 3, 'Was ist die Summe der Zahlen von 1 bis 100?', '5050', ['5000', '5100', '10100'], 'Gauß-Formel: 100 · 101 / 2 = 5050.'),
+    ('Mathematik', 2, 'Was ist 0,5 × 0,5?', '0,25', ['0,1', '1', '2,5'], '0,5 × 0,5 = 1/2 × 1/2 = 1/4 = 0,25.'),
+    ('Mathematik', 3, 'Ein Preis steigt um 10 % und sinkt dann um 10 %. Wie ändert er sich insgesamt?', '1 % billiger', ['Gleich', '1 % teurer', '2 % billiger'], '1,1 × 0,9 = 0,99 – also 1 % weniger als vorher.'),
+    ('Logik & Zahlenfolgen', 3, 'Welche Zahl kommt als nächstes?\n1 - 3 - 7 - 15 - 31 - ?', '63', ['47', '62', '64'], 'Jede Zahl wird verdoppelt plus 1: 31 × 2 + 1 = 63.'),
+    ('Logik & Zahlenfolgen', 3, 'Welche Zahl fehlt?\n2 - 6 - 12 - 20 - 30 - ?', '42', ['36', '40', '44'], 'Die Abstände wachsen um 2 (4, 6, 8, 10, 12): 30 + 12 = 42.'),
+    ('Logik & Zahlenfolgen', 3, 'Anna ist größer als Ben, Ben ist größer als Clara. Wer ist am kleinsten?', 'Clara', ['Anna', 'Ben', 'Nicht bestimmbar'], 'Anna > Ben > Clara – also ist Clara am kleinsten.'),
+    ('Logik & Zahlenfolgen', 2, 'Welcher Buchstabe kommt als nächstes?\nA - C - E - G - ?', 'I', ['H', 'J', 'K'], 'Es wird immer ein Buchstabe übersprungen: G, (H), I.'),
+    ('Logik & Zahlenfolgen', 3, 'Ein Schläger und ein Ball kosten zusammen 1,10 €. Der Schläger kostet 1 € mehr als der Ball. Was kostet der Ball?', '0,05 €', ['0,10 €', '0,01 €', '0,15 €'], 'Ball = x, Schläger = x + 1. 2x + 1 = 1,10 → x = 0,05 €.'),
+    ('Konzentration', 2, 'Wie oft kommt der Buchstabe E im Wort ERDBEERE vor?', '4', ['2', '3', '5'], 'E-R-D-B-E-E-R-E: das E kommt viermal vor.'),
+    ('Konzentration', 2, '17 + 28 − 9 = ?', '36', ['34', '35', '38'], '17 + 28 = 45, 45 − 9 = 36.'),
+    ('Konzentration', 3, 'Wie viele Dreiecke hat ein Quadrat, wenn man beide Diagonalen einzeichnet?', '8', ['4', '6', '10'], '4 kleine Dreiecke + 4 große (je zwei kleine zusammen) = 8.'),
+    ('Konzentration', 3, 'Es ist 14:45 Uhr. Wie spät ist es in 2 Stunden und 30 Minuten?', '17:15', ['16:15', '17:00', '17:45'], '14:45 + 2:00 = 16:45, + 0:30 = 17:15.'),
+    ('Konzentration', 2, 'Wie viele Monate haben 28 Tage?', '12', ['1', '2', '6'], 'Jeder Monat hat mindestens 28 Tage – also alle 12.'),
+]
+for _kat in dict.fromkeys(r[0] for r in NEU_V19):
+    EXTRA_FRAGEN += _build(_kat, [r[1:] for r in NEU_V19 if r[0] == _kat])
