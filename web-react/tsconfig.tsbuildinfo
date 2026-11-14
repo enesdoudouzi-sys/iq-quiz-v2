@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/quizLogik.test.ts","./src/quizLogik.ts","./src/api/client.ts","./src/api/types.ts","./src/components/Bestenliste.tsx","./src/components/ErgebnisScreen.tsx","./src/components/QuizScreen.tsx","./src/components/StartScreen.tsx"],"version":"5.6.3"}
