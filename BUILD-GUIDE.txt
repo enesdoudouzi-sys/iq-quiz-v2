@@ -32,7 +32,7 @@ Keystore-Datei (liegt lokal bei dir, NICHT im Repo):
 Im Terminal (im iq-quiz-web Ordner):
 
   npm install
-  npx cap sync android
+  npm run cap:sync
 
 Das kopiert die neueste Web-Version in den Android Bundle.
 
@@ -146,7 +146,7 @@ Besonderheit Google Play:
   [ ] In-App-Produkte in der Play Console anlegen (Premium einmalig,
       Joker-Pack als verbrauchbar)
   [ ] Android-Build in Android Studio pruefen (Target SDK 36, Gradle 8.14.3):
-      npm install && npx cap sync android, dann Signed AAB bauen
+      npm install && npm run cap:sync, dann Signed AAB bauen
   [ ] Neue Entwicklerkonten: Geschlossener Test mit mindestens 12 Testern
       ueber 14 Tage (aktuelle Vorgaben in der Play Console pruefen)
   [ ] Data-Safety-Formular und Content-Rating-Fragebogen ausfuellen
@@ -173,6 +173,6 @@ In android/app/build.gradle erhoehen (aktuell versionCode 3 / "1.2"):
   versionCode 4          (immer +1)
   versionName "1.3"      (sichtbare Version)
 
-Dann: cap sync → neu bauen → hochladen
+Dann: npm run cap:sync → neu bauen → hochladen
 
 ═══════════════════════════════════════════════════════════════

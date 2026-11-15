@@ -22,6 +22,9 @@ jobs:
       - name: JavaScript-Syntax prüfen
         working-directory: .
         run: node --check i18n.js && node --check app.js
+      - name: Prüfen, ob www/ (Android-App) aktuell ist
+        working-directory: .
+        run: node scripts/build-www.mjs && git diff --exit-code -- www
 
   frontend-react:
     runs-on: ubuntu-latest

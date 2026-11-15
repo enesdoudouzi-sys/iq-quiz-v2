@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<!-- nur-web -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <meta name="theme-color" content="#060614">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="IQ Quiz">
+<!-- /nur-web -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Enes Doudouzi">
 <title>IQ Test</title>
@@ -541,7 +543,9 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; T&auml;gl. Erinnerung</button>
   <button class="s-upgrade" id="s-upgrade-btn" onclick="showPremium()">&#128081; Premium &middot; einmalig 2,99 &euro;</button>
   <a class="s-daily" id="s-donate-btn" href="https://enes89.itch.io/iq-quiz/purchase" target="_blank" rel="noopener" style="display:none;text-align:center;text-decoration:none;border-color:#f472b6;color:#f472b6;box-sizing:border-box;">&#128155; Spiel unterst&uuml;tzen (Spende)</a>
+<!-- nur-web -->
   <a class="s-daily" href="download.html" style="display:block;text-align:center;text-decoration:none;border-color:#3ddc84;color:#3ddc84;box-sizing:border-box;">&#128242; App installieren (gratis) &middot; Android, iPhone, PC</a>
+<!-- /nur-web -->
 </div>
 <!-- DAILY -->
 <div id="dv">
@@ -836,6 +840,8 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 <script src="i18n.js"></script>
 <script src="app.js"></script>
+<!-- nur-web -->
 <script>if('serviceWorker' in navigator && !(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())){navigator.serviceWorker.register('service-worker.js').catch(function(){});}</script>
+<!-- /nur-web -->
 </body>
 </html>
