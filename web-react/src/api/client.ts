@@ -1,4 +1,6 @@
-import type { AntwortErgebnis, Buchstabe, Frage, Highscore, Sprache, StartAntwort } from "./types";
+import type {
+  AntwortErgebnis, Buchstabe, Frage, Highscore, JokerErgebnis, JokerTyp, Modus, Sprache, StartAntwort,
+} from "./types";
 
 // Lokal: VITE_API_URL=http://localhost:8000 npm run dev
 export const API_URL: string = import.meta.env.VITE_API_URL ?? "https://iq-quiz-v2.onrender.com";
@@ -16,24 +18,25 @@ async function request<T>(pfad: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export const api = {
-  start: (name: string, sprache: Sprache) =>
-    request<StartAntwort>("/api/start", { method: "POST", body: JSON.stringify({ name, sprache }) }),
+const post = <T>(pfad: string, daten: unknown) =>
+  request<T>(pfad, { method: "POST", body: JSON.stringify(daten) });
 
-  frage: (sessionId: string, level: number) =>
-    request<Frage>(`/api/frage/${sessionId}/${level}`),
+export const api = {
+  start: (name: string, sprache: Sprache, modus: Modus) =>
+    post<StartAntwort>(modus === "daily" ? "/api/daily/start" : "/api/start", { name, sprache }),
+
+  frage: (sessionId: string, level: number) => request<Frage>(`/api/frage/${sessionId}/${level}`),
 
   antwort: (sessionId: string, level: number, antwort: Buchstabe) =>
-    request<AntwortErgebnis>("/api/antwort", {
-      method: "POST",
-      body: JSON.stringify({ session_id: sessionId, level, antwort }),
-    }),
+    post<AntwortErgebnis>("/api/antwort", { session_id: sessionId, level, antwort }),
 
-  highscores: () => request<Highscore[]>("/api/highscores"),
+  joker: (sessionId: string, level: number, typ: JokerTyp, gesperrte: Buchstabe[]) =>
+    post<JokerErgebnis>("/api/joker", { session_id: sessionId, level, typ, gesperrte }),
 
-  highscoreSpeichern: (sessionId: string, name: string, iq: number, level: number) =>
-    request<{ ok: boolean }>("/api/highscores", {
-      method: "POST",
-      body: JSON.stringify({ session_id: sessionId, name, iq, level }),
-    }),
+  highscores: (zeitraum: "alle" | "woche") => request<Highscore[]>(`/api/highscores?zeitraum=${zeitraum}`),
+  dailyHighscores: () => request<Highscore[]>("/api/daily/highscores"),
+
+  ergebnisSpeichern: (modus: Modus, sessionId: string, name: string, iq: number, level: number) =>
+    post<{ ok: boolean }>(modus === "daily" ? "/api/daily/submit" : "/api/highscores",
+      { session_id: sessionId, name, iq, level }),
 };

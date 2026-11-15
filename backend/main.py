@@ -52,6 +52,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:8000",
         "http://127.0.0.1:8000",
+        "http://localhost:5173",  # React-Frontend: npm run dev
+        "http://localhost:4173",  # React-Frontend: npm run preview
         "https://enesdoudouzi-sys.github.io",
         "https://iq-quiz-v2.onrender.com",
         "https://localhost",  # Android-App (Capacitor, androidScheme https)
