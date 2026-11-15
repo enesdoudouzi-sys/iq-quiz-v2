@@ -58,9 +58,11 @@ iq-quiz-v2/
 │   ├── daten/fragen.json      → alle 551 Fragen (hier neue Fragen eintragen)
 │   ├── fragen.py              → Fragen laden, Mischen, Schwierigkeit, Übersetzung
 │   ├── session_store.py       → laufende Spiele in der Datenbank
+│   ├── observability.py       → JSON-Logs und Prometheus-Metriken
 │   ├── database.py            → Datenbank-Tabellen (SQLAlchemy)
 │   ├── uebersetzungen/        → en.json, tr.json
 │   └── tests/                 → Automatische Tests (pytest)
+├── deploy/helm/iq-quiz/       → Helm-Chart für Kubernetes (siehe deploy/README.md)
 └── web-react/                 → Neues Frontend in React + TypeScript + Tailwind + Vite (in Arbeit)
 ```
 
@@ -74,7 +76,8 @@ iq-quiz-v2/
 | Backend | Python · FastAPI · Pydantic · slowapi |
 | Datenbank | PostgreSQL (Produktion) · SQLite (lokal) · SQLAlchemy |
 | Hosting | Render (API) · GitHub Pages (Website) · itch.io |
-| DevOps | Docker (non-root, Health-Check) · docker-compose mit PostgreSQL · CI-Pipeline (GitHub Actions) |
+| DevOps | Docker (non-root, Health-Check) · docker-compose mit PostgreSQL · Helm-Chart für Kubernetes · CI-Pipeline (GitHub Actions) mit Image-Upload nach ghcr.io |
+| Observability | Strukturierte JSON-Logs (ohne IP-Adressen) · Prometheus-Metriken unter `/metrics` |
 | Qualität | pytest (18 Tests) · Vitest · Git-Branches und Pull Requests |
 | KI | Entwickelt mit Claude Code (Agentic Coding) |
 
@@ -165,7 +168,8 @@ Blöcke, die nur auf die Website gehören, stehen in `index.html` zwischen `<!--
 - [ ] Neues Frontend in React + TypeScript live schalten
 - [ ] Spieler-Login mit Supabase
 - [x] Docker + docker-compose (Backend + PostgreSQL)
-- [ ] Helm-Chart für Kubernetes, Cloudflare, n8n-Automatisierung
+- [x] Helm-Chart für Kubernetes, JSON-Logs, Prometheus-Metriken
+- [ ] Cloudflare, n8n-Automatisierung
 - [ ] GitHub Actions aktiv (wartet auf Freischaltung des Kontos)
 
 ---

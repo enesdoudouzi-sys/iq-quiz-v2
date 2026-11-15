@@ -1,0 +1,41 @@
+# Standardwerte – mit eigener Datei überschreibbar: helm install iq ./deploy/helm/iq-quiz -f meine-werte.yaml
+
+replicaCount: 2   # mehrere Pods möglich, da laufende Spiele in der Datenbank liegen
+
+image:
+  repository: ghcr.io/enesdoudouzi-sys/iq-quiz-backend
+  tag: ""          # leer = appVersion aus Chart.yaml
+  pullPolicy: IfNotPresent
+
+# Zugangsdaten: entweder ein vorhandenes Kubernetes-Secret angeben (empfohlen) ...
+existingSecret: ""   # muss die Schlüssel DATABASE_URL und ADMIN_TOKEN enthalten
+# ... oder hier Werte setzen (nur zum Testen, landen sonst im Klartext in der values-Datei)
+secret:
+  databaseUrl: ""
+  adminToken: ""
+
+logLevel: INFO
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: nginx
+  host: api.iq-quiz.example
+  tls: false
+
+resources:
+  requests: { cpu: 50m, memory: 128Mi }
+  limits:   { cpu: 500m, memory: 256Mi }
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+
+# Prometheus holt /metrics automatisch ab (Annotations am Pod)
+metrics:
+  scrape: true

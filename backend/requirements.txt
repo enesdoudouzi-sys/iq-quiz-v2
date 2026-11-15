@@ -40,3 +40,4 @@ watchfiles==1.2.0
 websockets==16.0
 wrapt==2.2.0
 psycopg2-binary==2.9.10
+prometheus-client==0.21.1

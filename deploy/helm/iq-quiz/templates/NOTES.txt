@@ -1,0 +1,6 @@
+IQ-Quiz Backend ist installiert.
+
+Lokal testen:
+  kubectl port-forward svc/{{ include "iq-quiz.fullname" . }} 8000:{{ .Values.service.port }}
+  curl http://localhost:8000/health
+  curl http://localhost:8000/metrics

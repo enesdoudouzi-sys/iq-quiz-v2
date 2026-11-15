@@ -226,3 +226,41 @@ def test_fragen_json_format():
         assert f["schwierigkeit"] in (1, 2, 3), f"Frage {i}: schwierigkeit muss 1, 2 oder 3 sein"
         assert len(set(f["antworten"].values())) == 4, f"Frage {i}: Antworten nicht eindeutig"
         assert f["frage"].strip() and f["erklaerung"].strip(), f"Frage {i}: leerer Text"
+
+
+def test_metrics_nur_mit_token(client, monkeypatch):
+    c, main = client
+    monkeypatch.delenv("METRICS_OFFEN", raising=False)
+    monkeypatch.setenv("ADMIN_TOKEN", "geheim")
+    assert c.get("/metrics").status_code == 403
+    assert c.get("/metrics", headers={"Authorization": "Bearer falsch"}).status_code == 403
+    assert c.get("/metrics", headers={"Authorization": "Bearer geheim"}).status_code == 200
+
+
+def test_metrics_zaehlen_spiele_und_antworten(client, monkeypatch):
+    c, main = client
+    monkeypatch.setenv("METRICS_OFFEN", "true")
+    sid = neues_spiel(c)
+    c.post("/api/antwort", json={"session_id": sid, "level": 1, "antwort": richtig(main, sid, 1)})
+    text = c.get("/metrics").text
+    assert 'iqquiz_spiele_gestartet_total{modus="normal",sprache="de"}' in text
+    assert 'iqquiz_antworten_total{richtig="true"}' in text
+    # Routen-Vorlage statt echter Session-ID im Label
+    assert 'route="/api/frage/{session_id}/{level}"' in text or 'route="/api/start"' in text
+    assert sid not in text
+
+
+def test_logs_sind_json_ohne_ip_und_session(client, caplog):
+    import json as _json, logging
+    import observability as obs
+    c, main = client
+    sid = neues_spiel(c)
+    with caplog.at_level(logging.INFO, logger="iqquiz"):
+        c.get(f"/api/frage/{sid}/1", headers={"X-Forwarded-For": "203.0.113.7"})
+    fmt = obs.JsonFormatter()
+    zeilen = [fmt.format(r) for r in caplog.records if r.name == "iqquiz"]
+    eintraege = [_json.loads(z) for z in zeilen]          # jede Zeile ist gültiges JSON
+    assert any(e.get("route") == "/api/frage/{session_id}/{level}" and e.get("status") == 200
+               for e in eintraege)
+    alles = "\n".join(zeilen)
+    assert "203.0.113.7" not in alles and sid not in alles  # keine IP, keine Session-ID
