@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 import os, random, uuid, time, re, hmac
 
@@ -101,7 +101,8 @@ class StartRequest(BaseModel):
     kategorie: str = "alle"
     schwierigkeit: str = "alle"
     sprache: str = "de"
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def name_valid(cls, v):
         v = v.strip()
         if len(v) < 1 or len(v) > 20:
@@ -112,12 +113,14 @@ class AntwortRequest(BaseModel):
     session_id: str
     level: int
     antwort: str
-    @validator('antwort')
+    @field_validator('antwort')
+    @classmethod
     def antwort_valid(cls, v):
         if v.upper() not in ['A','B','C','D','X']:
             raise ValueError('Ungueltige Antwort')
         return v.upper()
-    @validator('level')
+    @field_validator('level')
+    @classmethod
     def level_valid(cls, v):
         if v < 1 or v > 50:
             raise ValueError('Ungueltiges Level')
@@ -126,12 +129,14 @@ class AntwortRequest(BaseModel):
 class EreignisRequest(BaseModel):
     typ: str
     info: str = ""
-    @validator('typ')
+    @field_validator('typ')
+    @classmethod
     def typ_valid(cls, v):
         if v not in ('start', 'ende', 'fehler'):
             raise ValueError('Ungueltiger Typ')
         return v
-    @validator('info')
+    @field_validator('info')
+    @classmethod
     def info_valid(cls, v):
         return re.sub(r"[\x00-\x1f\x7f]", " ", v or "")[:500]
 
@@ -140,19 +145,22 @@ class KontaktRequest(BaseModel):
     email: str
     nachricht: str
     website: str = ""  # Honeypot, muss leer bleiben
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def name_valid(cls, v):
         v = v.strip()
         if len(v) < 1 or len(v) > 100:
             raise ValueError('Name muss 1-100 Zeichen lang sein')
         return v
-    @validator('email')
+    @field_validator('email')
+    @classmethod
     def email_valid(cls, v):
         v = v.strip()
         if len(v) > 200 or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', v):
             raise ValueError('Ungueltige E-Mail-Adresse')
         return v
-    @validator('nachricht')
+    @field_validator('nachricht')
+    @classmethod
     def nachricht_valid(cls, v):
         v = v.strip()
         if len(v) < 5 or len(v) > 3000:
@@ -164,7 +172,8 @@ class JokerRequest(BaseModel):
     level: int
     typ: str
     gesperrte: list = []
-    @validator('typ')
+    @field_validator('typ')
+    @classmethod
     def typ_valid(cls, v):
         if v not in ['5050','telefon','publikum','skip','doppel']:
             raise ValueError('Ungueltiger Joker')
@@ -175,10 +184,12 @@ class HighscoreRequest(BaseModel):
     iq: int
     level: int
     session_id: str = ""
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def name_valid(cls, v):
         return clean_name(v)
-    @validator('iq')
+    @field_validator('iq')
+    @classmethod
     def iq_valid(cls, v):
         if v < 0 or v > 200:
             raise ValueError('Ungueltiger IQ')
@@ -189,10 +200,12 @@ class DailySubmitRequest(BaseModel):
     iq: int
     level: int
     session_id: str = ""
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def name_valid(cls, v):
         return clean_name(v)
-    @validator('iq')
+    @field_validator('iq')
+    @classmethod
     def iq_valid(cls, v):
         if v < 0 or v > 200:
             raise ValueError('Ungueltiger IQ')
