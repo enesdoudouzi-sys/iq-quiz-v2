@@ -1,0 +1,29 @@
+# Startet Backend + PostgreSQL lokal:   docker compose up --build
+# API danach unter http://localhost:8000/health
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: iqquiz
+      POSTGRES_PASSWORD: iqquiz-lokal      # nur für lokale Entwicklung
+      POSTGRES_DB: iqquiz
+    volumes:
+      - db-daten:/var/lib/postgresql/data  # Daten bleiben nach Neustart erhalten
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U iqquiz"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://iqquiz:iqquiz-lokal@db:5432/iqquiz
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-lokal-nur-zum-testen}
+    depends_on:
+      db:
+        condition: service_healthy         # erst starten, wenn Postgres bereit ist
+
+volumes:
+  db-daten:

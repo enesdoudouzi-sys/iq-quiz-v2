@@ -22,3 +22,30 @@ jobs:
       - name: JavaScript-Syntax prüfen
         working-directory: .
         run: node --check i18n.js && node --check app.js
+
+  frontend-react:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-react
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker-Image bauen
+        run: docker build -t iq-quiz-backend ./backend
+      - name: Container starten und Health-Check prüfen
+        run: |
+          docker run -d --name api -p 8000:8000 iq-quiz-backend
+          for i in $(seq 1 20); do curl -fs localhost:8000/health && exit 0; sleep 1; done
+          docker logs api; exit 1

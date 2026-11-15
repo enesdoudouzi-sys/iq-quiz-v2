@@ -72,7 +72,8 @@ iq-quiz-v2/
 | Backend | Python · FastAPI · Pydantic · slowapi |
 | Datenbank | PostgreSQL (Produktion) · SQLite (lokal) · SQLAlchemy |
 | Hosting | Render (API) · GitHub Pages (Website) · itch.io |
-| Qualität | pytest (18 Tests) · Git-Branches und Pull Requests |
+| DevOps | Docker (non-root, Health-Check) · docker-compose mit PostgreSQL · CI-Pipeline (GitHub Actions) |
+| Qualität | pytest (18 Tests) · Vitest · Git-Branches und Pull Requests |
 | KI | Entwickelt mit Claude Code (Agentic Coding) |
 
 ## 💡 Wichtige technische Entscheidungen
@@ -116,6 +117,12 @@ python3 -m uvicorn main:app --reload      # http://localhost:8000
 python3 -m pytest                         # Tests ausführen
 ```
 
+**Mit Docker (Backend + PostgreSQL):**
+```bash
+docker compose up --build        # API: http://localhost:8000/health
+docker compose down              # stoppen (Daten bleiben im Volume)
+```
+
 **Neues React-Frontend:**
 ```bash
 cd web-react
@@ -153,12 +160,14 @@ cd android && ./gradlew bundleRelease
 - [ ] Dauerhafte Datenbank (Neon/Postgres) aktivieren
 - [ ] Neues Frontend in React + TypeScript live schalten
 - [ ] Spieler-Login mit Supabase
-- [ ] Docker, Cloudflare, GitHub Actions, n8n-Automatisierung
+- [x] Docker + docker-compose (Backend + PostgreSQL)
+- [ ] Helm-Chart für Kubernetes, Cloudflare, n8n-Automatisierung
+- [ ] GitHub Actions aktiv (wartet auf Freischaltung des Kontos)
 
 ---
 
 <div align="center">
 
-Entwickelt von **Enes Doudouzi** · [@enesdoudouzi-sys](https://github.com/enesdoudouzi-sys)
+Entwickelt von **Enes Doudouzi** · DevOps-Bootcamp evoila 2024 (Linux, Docker, Kubernetes, GitLab CI, ArgoCD) · [@enesdoudouzi-sys](https://github.com/enesdoudouzi-sys)
 
 </div>
