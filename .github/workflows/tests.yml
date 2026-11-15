@@ -1,0 +1,89 @@
+# Führt bei jedem Push und Pull Request die Server-Tests aus.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - run: python -m pytest -q tests
+      - name: JavaScript-Syntax prüfen
+        working-directory: .
+        run: node --check i18n.js && node --check app.js
+      - name: Prüfen, ob www/ (Android-App) aktuell ist
+        working-directory: .
+        run: node scripts/build-www.mjs && git diff --exit-code -- www
+
+  frontend-react:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-react
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker-Image bauen
+        run: docker build -t iq-quiz-backend ./backend
+      - name: Container starten und Health-Check prüfen
+        run: |
+          docker run -d --name api -p 8000:8000 iq-quiz-backend
+          for i in $(seq 1 20); do curl -fs localhost:8000/health && exit 0; sleep 1; done
+          docker logs api; exit 1
+
+  helm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+      - name: Helm-Chart prüfen
+        run: |
+          helm lint deploy/helm/iq-quiz --set existingSecret=test
+          helm template iq deploy/helm/iq-quiz --set existingSecret=test \
+            --set ingress.enabled=true --set autoscaling.enabled=true > /tmp/manifeste.yaml
+          echo "Erzeugte Kubernetes-Objekte:"; grep '^kind:' /tmp/manifeste.yaml
+
+  image-veroeffentlichen:
+    # Nur auf main: Docker-Image nach GitHub Container Registry (ghcr.io) hochladen
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [backend, docker, helm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/iq-quiz-backend:latest
+            ghcr.io/${{ github.repository_owner }}/iq-quiz-backend:${{ github.sha }}

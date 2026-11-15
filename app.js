@@ -1,10 +1,30 @@
 const API = 'https://iq-quiz-v2.onrender.com';
+const APP_VERSION = '1.9';
+
+// ── Anonyme Nutzungs- und Fehlerstatistik ───────────────────────────────────
+// Sendet nur Ereignistyp + kurze technische Info (keine Namen, keine IDs).
+function logEvent(typ, info){
+  try{
+    var plat=(window.Capacitor&&window.Capacitor.getPlatform&&window.Capacitor.getPlatform())||'web';
+    fetch(API+'/api/log',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({typ:typ,info:(String(info||'')+' | v'+APP_VERSION+' '+plat).slice(0,500)})}).catch(function(){});
+  }catch(e){}
+}
+var _errCount=0;
+window.addEventListener('error',function(e){
+  if(_errCount++>5)return; // nicht fluten
+  logEvent('fehler',(e.message||'Fehler')+' @ '+String(e.filename||'').split('/').pop()+':'+(e.lineno||0));
+});
+window.addEventListener('unhandledrejection',function(e){
+  if(_errCount++>5)return;
+  var r=e.reason; logEvent('fehler','Promise: '+((r&&r.message)||String(r)).slice(0,300));
+});
 // ── ECHTE KAEUFE (RevenueCat) ───────────────────────────────────────────────
 // TODO: Vor dem Store-Release echte RevenueCat API-Keys eintragen
 // (RevenueCat Dashboard -> Project Settings -> API Keys). Getrennte Keys fuer
 // Android/iOS. Ohne gueltigen Key schlaegt configure() fehl und Kaeufe sind
 // deaktiviert (kein Fallback auf "gratis freischalten" mehr!).
-const REVENUECAT_API_KEY_ANDROID = 'REPLACE_ME_ANDROID_KEY';
+const REVENUECAT_API_KEY_ANDROID = 'goog_AsprjTqhXEnNZvoqgTDOmCnLGZR';
 const REVENUECAT_API_KEY_IOS     = 'REPLACE_ME_IOS_KEY';
 const RC_ENTITLEMENT_PREMIUM = 'premium';        // Entitlement-ID im RevenueCat Dashboard
 const RC_PACKAGE_PREMIUM     = 'iq_premium_v1';  // Package/Product-ID im RevenueCat Dashboard
@@ -18,6 +38,7 @@ function rcPlugin(){
 var rcConfigured = false;
 // Store-Ziel: 'play' = Google Play (RevenueCat). 'galaxy' = Samsung IAP, derzeit NICHT aktiv
 // (Plugin liegt in extras/samsung-iap/, siehe dortige README).
+// 'free' = Gratis-Ausgabe (z. B. Galaxy Store ohne IAP): alles freigeschaltet, keine Kaeufe.
 const STORE_TARGET = 'play';
 const SAMSUNG_ITEM_PREMIUM   = '';
 const SAMSUNG_ITEM_JOKERPACK = '';
@@ -27,6 +48,7 @@ function samsungIapPlugin(){
 }
 async function initPurchases(){
   if(!isNativeApp())return; // Web-Vorschau: keine echten Käufe möglich
+  if(STORE_TARGET === 'free')return; // Gratis-Ausgabe: keine Käufe
   var Purchases = rcPlugin();
   if(!Purchases)return;
   var platform = (window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || 'android';
@@ -99,17 +121,69 @@ function setMode(mode,btn){
   if(btn)btn.classList.add('active');
 }
 
-const LANG={
-  de:{title:'IQ Test',sub:'Das IQ-Quiz · 15 Fragen · 3 Joker',placeholder:'Dein Name...',start:'Jetzt starten',highscores:'Highscores',sekunden:'Sekunden',iqLabel:'Aktueller IQ',joker:'Joker',richtig:'Richtig!',falsch:'Falsch! Ausgeschieden!',zeit:'Zeit abgelaufen! Ausgeschieden!',naechste:'Nächste Frage',ergebnis:'Dein Ergebnis',speichern:'Speichern',gespeichert:'Gespeichert!',nochmal:'Nochmal starten',zurueck:'Zurück',perfekt:'Perfekt - alle Fragen richtig!',fehler:'FEHLERAUSWERTUNG',deine:'Deine Antwort',richtige:'Richtige Antwort',leiter:'IQ Leiter',schliessen:'Schließen',telefon:'Telefon-Joker',publikum:'Publikums-Joker',iqNach:'Dein IQ nach dieser Frage',teilen:'Ergebnis teilen'},
-  en:{title:'IQ Test',sub:'Test Your IQ · 15 Questions · 3 Lifelines',placeholder:'Your Name...',start:'Start Now',highscores:'Highscores',sekunden:'Seconds',iqLabel:'Current IQ',joker:'Lifelines',richtig:'Correct!',falsch:'Wrong! Game Over!',zeit:'Time Up! Game Over!',naechste:'Next Question',ergebnis:'Your Result',speichern:'Save',gespeichert:'Saved!',nochmal:'Play Again',zurueck:'Back',perfekt:'Perfect - all correct!',fehler:'ERROR ANALYSIS',deine:'Your Answer',richtige:'Correct Answer',leiter:'IQ Ladder',schliessen:'Close',telefon:'Phone Lifeline',publikum:'Audience Lifeline',iqNach:'Your IQ after this question',teilen:'Share Result'},
-  tr:{title:'IQ Testi',sub:'IQ\'nunu Test Et · 15 Soru · 3 Joker',placeholder:'Adiniz...',start:'Baslat',highscores:'Yuksek Skorlar',sekunden:'Saniye',iqLabel:'Guncel IQ',joker:'Jokerler',richtig:'Dogru!',falsch:'Yanlis! Elendil!',zeit:'Sure Doldu! Elendil!',naechste:'Sonraki Soru',ergebnis:'Sonucunuz',speichern:'Kaydet',gespeichert:'Kaydedildi!',nochmal:'Tekrar Oyna',zurueck:'Geri',perfekt:'Mukemmel!',fehler:'HATA ANALIZI',deine:'Cevabiniz',richtige:'Dogru Cevap',leiter:'IQ Merdiveni',schliessen:'Kapat',telefon:'Telefon Jokeri',publikum:'Seyirci Jokeri',iqNach:'Bu sorudan sonra IQ'},
-  fr:{title:'Test QI',sub:'Quiz QI · 15 Questions · 3 Jokers',placeholder:'Votre Nom...',start:'Commencer',highscores:'Meilleurs Scores',sekunden:'Secondes',iqLabel:'QI Actuel',joker:'Jokers',richtig:'Correct!',falsch:'Faux! Elimine!',zeit:'Temps Ecoule!',naechste:'Question Suivante',ergebnis:'Votre Resultat',speichern:'Sauvegarder',gespeichert:'Sauvegarde!',nochmal:'Rejouer',zurueck:'Retour',perfekt:'Parfait!',fehler:'ANALYSE ERREURS',deine:'Votre Reponse',richtige:'Bonne Reponse',leiter:'Echelle QI',schliessen:'Fermer',telefon:'Joker Telephone',publikum:'Joker Public',iqNach:'Votre QI apres'},
-  es:{title:'Test de IQ',sub:'Quiz de IQ · 15 Preguntas · 3 Comodines',placeholder:'Tu Nombre...',start:'Comenzar',highscores:'Mejores Puntuaciones',sekunden:'Segundos',iqLabel:'IQ Actual',joker:'Comodines',richtig:'Correcto!',falsch:'Incorrecto! Eliminado!',zeit:'Tiempo Agotado!',naechste:'Siguiente Pregunta',ergebnis:'Tu Resultado',speichern:'Guardar',gespeichert:'Guardado!',nochmal:'Jugar de Nuevo',zurueck:'Volver',perfekt:'Perfecto!',fehler:'ANALISIS ERRORES',deine:'Tu Respuesta',richtige:'Respuesta Correcta',leiter:'Escalera IQ',schliessen:'Cerrar',telefon:'Comodin Telefono',publikum:'Comodin Publico',iqNach:'Tu IQ despues'},
-  ar:{title:'اختبار الذكاء',sub:'اختبار ترفيهي · 15 سؤالًا · 3 نجدات',placeholder:'اسمك...',start:'ابدأ الآن',highscores:'أعلى النتائج',sekunden:'ثانية',iqLabel:'الذكاء الحالي',joker:'النجدات',richtig:'صحيح!',falsch:'خطأ! خرجت!',zeit:'انتهى الوقت!',naechste:'السؤال التالي',ergebnis:'نتيجتك',speichern:'حفظ',gespeichert:'تم الحفظ!',nochmal:'العب مجددا',zurueck:'رجوع',perfekt:'ممتاز!',fehler:'تحليل الأخطاء',deine:'إجابتك',richtige:'الإجابة الصحيحة',leiter:'سلم الذكاء',schliessen:'إغلاق',telefon:'نجدة الهاتف',publikum:'نجدة الجمهور',iqNach:'ذكاؤك بعد هذا السؤال'},
-  pt:{title:'Teste de QI',sub:'Teste seu QI · 15 Perguntas · 3 Ajudas',placeholder:'Seu Nome...',start:'Comecar',highscores:'Recordes',sekunden:'Segundos',iqLabel:'QI Atual',joker:'Ajudas',richtig:'Correto!',falsch:'Errado! Eliminado!',zeit:'Tempo Esgotado!',naechste:'Proxima Pergunta',ergebnis:'Seu Resultado',speichern:'Salvar',gespeichert:'Salvo!',nochmal:'Jogar Novamente',zurueck:'Voltar',perfekt:'Perfeito - todas corretas!',fehler:'ANALISE DE ERROS',deine:'Sua Resposta',richtige:'Resposta Correta',leiter:'Escada de QI',schliessen:'Fechar',telefon:'Ajuda Telefone',publikum:'Ajuda do Publico',iqNach:'Seu QI apos esta pergunta',teilen:'Compartilhar'},
-};
 
 function T(key){return LANG[currentLang][key]||LANG['de'][key]||key;}
+
+// ── Oberflächen-Texte des Startbildschirms (zusätzlich zu LANG) ─────────
+// Kategorie-Werte für die API bleiben deutsch, übersetzt wird nur die Beschriftung.
+
+// ── Texte im Spiel und im Ergebnis (zusätzlich zu LANG/UI) ─────────────────
+function katName(k){var i=KAT_DE.indexOf(k);return i>=0?((UI[currentLang]||UI.de).cats[i]||k):k;}
+function GT(k){return (G[currentLang]&&G[currentLang][k])||G.de[k];}
+function applyGameLang(){
+  setLabel(document.getElementById('j-zeit'),GT('zeit'));
+  setLabel(document.getElementById('j-skip'),GT('skip'));
+  setLabel(document.getElementById('j-doppel'),GT('doppel'));
+  var ct=document.querySelectorAll('.rv-ct');
+  [GT('cRichtig'),GT('cKat'),GT('cSchw'),GT('cZeit')].forEach(function(t,i){if(ct[i])ct[i].textContent=t;});
+  setLabel(document.querySelector('.cert-btn'),GT('cert'));
+  var sl=document.querySelector('.social-lbl');if(sl)sl.textContent=GT('teilen');
+  setLabel(document.querySelector('.chal-btn'),GT('chal'));
+  setLabel(document.querySelector('.share-btn'),GT('share'));
+  document.querySelectorAll('#rv .rbtn, .rbtn').forEach(function(b){if(/Nochmal|again|Tekrar|Rejouer|nuevo|novo|مجدد/i.test(b.textContent))b.textContent=GT('again');});
+  var at=document.getElementById('ach-toast');
+  if(at){var h=at.querySelector('div[style*="uppercase"]');if(h)setLabel(h,GT('ach'));}
+}
+function UT(k){return (UI[currentLang]&&UI[currentLang][k])||UI.de[k];}
+// Emoji am Anfang behalten, nur den Text dahinter ersetzen
+function setLabel(el,txt){if(!el)return;var jt=el.querySelector&&el.querySelector('.jt');if(jt){jt.textContent=txt;el.setAttribute('title',txt);el.setAttribute('aria-label',txt);return;}var m=el.textContent.match(/^[^\p{L}\p{N}]*/u);el.textContent=(m?m[0]:'')+txt;}
+function splitJokerLabels(){
+  document.querySelectorAll('.joker-btn').forEach(function(b){
+    if(b.querySelector('.jt'))return;
+    var t=b.textContent, m=t.match(/^[^\p{L}\p{N}+]*/u), ic=(m?m[0]:'').trim(), rest=t.slice(m?m[0].length:0).trim();
+    b.textContent='';
+    var i=document.createElement('span');i.className='ji';i.textContent=ic||'•';
+    var x=document.createElement('span');x.className='jt';x.textContent=rest;
+    b.appendChild(i);b.appendChild(document.createTextNode(' '));b.appendChild(x);
+    b.setAttribute('title',rest);b.setAttribute('aria-label',rest);
+  });
+}
+function applyUiLang(){
+  var u=UI[currentLang]||UI.de;
+  document.documentElement.lang=currentLang;
+  document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';
+  var sub=document.querySelector('.s-sub');
+  if(sub){sub.textContent=T('sub');var sp=document.createElement('span');sp.style.cssText='font-size:12px;color:var(--text2);';sp.textContent=u.hint;sub.appendChild(document.createElement('br'));sub.appendChild(sp);}
+  var kt=document.querySelectorAll('.kat-title');
+  if(kt[0])kt[0].textContent=u.kat; if(kt[1])kt[1].textContent=u.schw; if(kt[2])kt[2].textContent=u.mode;
+  var kb=document.querySelectorAll('.kat-btn');
+  kb.forEach(function(b,i){setLabel(b,i===0?u.alle:(u.cats[i-1]||b.textContent));});
+  var sb=document.querySelectorAll('.schw-btn');
+  [u.alle,u.leicht,u.mittel,u.schwer].forEach(function(t,i){setLabel(sb[i],t);});
+  setLabel(document.getElementById('mode-normal'),u.normal);
+  setLabel(document.getElementById('mode-time'),u.time);
+  setLabel(document.getElementById('mode-learn'),u.learn);
+  setLabel(document.getElementById('mode-endless'),u.endless);
+  setLabel(document.querySelector('.s-daily'),u.daily);
+  setLabel(document.querySelector('.s-stats'),u.stats);
+  setLabel(document.getElementById('s-donate-btn'),u.donate);
+  setLabel(document.getElementById('hs-tab-alle'),u.hsAll);
+  setLabel(document.getElementById('hs-tab-woche'),u.hsWeek);
+  var nb=document.getElementById('notif-btn');
+  if(nb)setLabel(nb,localStorage.getItem('notifications_enabled')==='1'?u.notifOn:u.notif);
+  var dl=document.querySelector('a[href="download.html"]');
+  if(dl)setLabel(dl,u.app);
+}
 
 // ── SOUND TOGGLE ───────────────────────────────────────────
 var soundEnabled=localStorage.getItem('sound_enabled')!=='0';
@@ -204,8 +278,8 @@ function setLang(lang,btn){
   if(q('.joker-title'))q('.joker-title').textContent=t.joker;
   qa('.leiter-lbl').forEach(function(el){el.textContent=t.leiter;});
   if(g('nb'))g('nb').textContent=t.naechste;
-  if(g('j-telefon'))g('j-telefon').innerHTML='&#128222; '+t.telefon;
-  if(g('j-publikum'))g('j-publikum').innerHTML='&#128101; '+t.publikum;
+  setLabel(g('j-telefon'),t.telefon);
+  setLabel(g('j-publikum'),t.publikum);
   // Joker Overlay
   if(q('.jo-close'))q('.jo-close').textContent=t.schliessen;
   if(q('.iq-fb-lbl'))q('.iq-fb-lbl').textContent=t.iqNach;
@@ -214,6 +288,9 @@ function setLang(lang,btn){
   if(q('.save-btn'))q('.save-btn').textContent=t.speichern;
   if(q('.save-in'))q('.save-in').placeholder=t.ergebnis+'...';
   if(q('.rbtn'))q('.rbtn').textContent=t.nochmal;
+  applyUiLang();
+  applyGameLang();
+  try{localStorage.setItem('iq_lang',lang);}catch(e){}
 }
 
 // ── SOUNDS ────────────────────────────────────────────────
@@ -359,20 +436,21 @@ setTimeout(function(){if(!_loaderDone)showLoader('Server startet...',60);},3000)
 fetch(API+'/health').then(function(){hideLoader();}).catch(function(){});
 
 function getBez(iq){
-  if(iq>=145)return 'Genie';
-  if(iq>=130)return 'Hochbegabt';
-  if(iq>=120)return 'Sehr intelligent';
-  if(iq>=116)return 'Überdurchschnittlich';
-  if(iq>=100)return 'Durchschnittlich';
-  if(iq>=94)return 'Leicht unterdurchschnittlich';
-  return 'Unterdurchschnittlich';
+  var b=GT('bez');
+  if(iq>=145)return b[0];
+  if(iq>=130)return b[1];
+  if(iq>=120)return b[2];
+  if(iq>=116)return b[3];
+  if(iq>=100)return b[4];
+  if(iq>=94)return b[5];
+  return b[6];
 }
 
 var sessionId='',qs=[],cur=0,sc=0,done=false,ti=null,tl=0,st=0;
 var cs={},cm={},times=[],errs=[];
 var playerName='',finalIQ=85,gesperrte=[];
 var ADS_ENABLED=false; // true = Werbung an, false = Werbung aus
-var isPremium=isNativeApp()&&localStorage.getItem('iq_premium')==='true'; // wird beim Start per RevenueCat geprüft
+var isPremium=(isNativeApp()&&STORE_TARGET==='free')||(isNativeApp()&&localStorage.getItem('iq_premium')==='true'); // Gratis-Ausgabe: alles frei, sonst beim Start per RevenueCat geprüft
 var jokerStatus={'5050':true,'telefon':true,'publikum':true,'zeit':true,'skip':true,'doppel':true};
 var selectedKat='alle',selectedSchw='alle';
 var isDailyMode=false,_dvTimer=null;
@@ -465,10 +543,12 @@ function updJoker(){
   if(extraBtn)extraBtn.style.display=(allUsed&&!extraJokerUsed)?'flex':'none';
 }
 
-function showHS(){
+function showHS(zeitraum){
+  zeitraum=zeitraum==='woche'?'woche':'alle';
   document.getElementById('sv').style.display='none';
   document.getElementById('hv').style.display='block';
-  fetch(API+'/api/highscores').then(function(r){return r.json();}).then(function(scores){
+  ['alle','woche'].forEach(function(z){var b=document.getElementById('hs-tab-'+z);if(b)b.classList.toggle('active',z===zeitraum);});
+  fetch(API+'/api/highscores'+(zeitraum==='woche'?'?zeitraum=woche':'')).then(function(r){return r.json();}).then(function(scores){
     var hl=document.getElementById('hl');hl.innerHTML='';
     if(!scores.length){
       var d=document.createElement('div');d.className='none';d.textContent='Noch keine Eintraege.';hl.appendChild(d);return;
@@ -511,6 +591,7 @@ function showHS(){
 }
 
 function startGame(){
+  logEvent('start',currentMode+' '+selectedKat+' '+currentLang);
   isDailyMode=false;isOfflineMode=false;extraJokerUsed=false;doppelChanceActive=false;
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   playerName=document.getElementById('ni').value||'Spieler';
@@ -529,7 +610,7 @@ function apiStartWithRetry(attempt){
   fetch(API+'/api/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw})
+    body:JSON.stringify({name:playerName,kategorie:selectedKat,schwierigkeit:selectedSchw,sprache:currentLang})
   }).then(function(r){
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
@@ -572,7 +653,7 @@ function apiStartWithRetry(attempt){
 
 function loadAndShowQ(level){
   if(currentMode==='timeattack'&&taLeft<=0){calcResult();return;}
-  if(currentMode!=='timeattack'&&level>MAX_FRAGEN){calcResult();return;}
+  if(level>MAX_FRAGEN){calcResult();return;}
   cur=level;done=false;gesperrte=[];doppelChanceActive=false;
   var dBadge=document.querySelector('.doppel-active-badge');if(dBadge)dBadge.remove();
   document.getElementById('iq-fb').style.display='none';
@@ -582,14 +663,14 @@ function loadAndShowQ(level){
   document.getElementById('joker-overlay').classList.remove('show');
   if(isOfflineMode&&qs[level]){showQuestion(qs[level]);return;}
   fetch(API+'/api/frage/'+sessionId+'/'+level)
-  .then(function(r){return r.json();})
+  .then(function(r){if(!r.ok)throw new Error(r.status===404?'Spiel-Sitzung abgelaufen – bitte neu starten.':'Fehler '+r.status);return r.json();})
   .then(function(q){qs[level]=q;showQuestion(q);})
-  .catch(function(e){alert('Fehler: '+e.message);});
+  .catch(function(e){alert(e.message||'Verbindung fehlgeschlagen');});
 }
 function showQuestion(q){
   var level=q.level;
   document.getElementById('qc').textContent=level+' / '+MAX_FRAGEN;
-  document.getElementById('pb').textContent=q.kategorie.toUpperCase();
+  document.getElementById('pb').textContent=katName(q.kategorie).toUpperCase();
   document.getElementById('preis').textContent=q.preis||getPreis(level);
   var col=COL[q.kategorie]||'#4a90e2';
   document.getElementById('pdot').style.background=col;
@@ -687,11 +768,17 @@ function pick(key){
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({session_id:sessionId,level:cur,antwort:key})
-  }).then(function(r){return r.json();}).then(function(d){handleAnswer(key,d,k);});
+  }).then(function(r){
+    return r.json().then(function(d){
+      if(!r.ok)throw new Error(r.status===404?'Spiel-Sitzung abgelaufen – bitte neu starten.':(d&&d.detail)||('Fehler '+r.status));
+      return d;
+    });
+  }).then(function(d){handleAnswer(key,d,k);})
+  .catch(function(e){done=false;showAchToast('⚠️','Verbindungsproblem',e.message||'Bitte erneut versuchen');});
 }
 function handleAnswer(key,d,k){
   // Doppel-Chance: bei falscher Antwort einen zweiten Versuch geben
-  if(!d.richtig&&doppelChanceActive){
+  if(d.zweiter_versuch||(!d.richtig&&doppelChanceActive&&isOfflineMode)){
     doppelChanceActive=false;
     done=false;
     times.pop();
@@ -703,7 +790,7 @@ function handleAnswer(key,d,k){
     // Badge entfernen
     var dBadge=document.querySelector('.doppel-active-badge');
     if(dBadge)dBadge.remove();
-    document.getElementById('fb').textContent='❌ Falsch! Noch ein Versuch!';
+    document.getElementById('fb').textContent=GT('retry');
     document.getElementById('fb').className='fb no';
     playSound('falsch');
     return;
@@ -793,8 +880,9 @@ function useJoker(typ){
     if(done)return;
     jokerStatus['skip']=false;updJoker();playSound('joker');
     done=true;clearInterval(ti);
+    if(!isOfflineMode)fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,level:cur,typ:'skip'})}).catch(function(){});
     var fb=document.getElementById('fb');
-    fb.textContent='⏭️ Frage übersprungen!';fb.className='fb ok';
+    fb.textContent=GT('skipped');fb.className='fb ok';
     setTimeout(function(){loadAndShowQ(cur+1);},800);
     return;
   }
@@ -802,13 +890,14 @@ function useJoker(typ){
     if(done)return;
     jokerStatus['doppel']=false;updJoker();playSound('joker');
     doppelChanceActive=true;
+    if(!isOfflineMode)fetch(API+'/api/joker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,level:cur,typ:'doppel'})}).catch(function(){});
     var dBtn=document.getElementById('j-doppel');
     if(dBtn){
       var badge=document.createElement('span');badge.className='doppel-active-badge';badge.textContent='AKTIV';
       dBtn.appendChild(badge);
     }
     var fb2=document.getElementById('fb');
-    fb2.textContent='🎯 Doppel-Chance aktiv! Du hast 2 Versuche.';fb2.className='fb ok';
+    fb2.textContent=GT('doppelOn');fb2.className='fb ok';
     setTimeout(function(){if(!done&&document.getElementById('fb').className==='fb ok')document.getElementById('fb').textContent='';},2200);
     return;
   }
@@ -865,6 +954,7 @@ function useJoker(typ){
 function closeJoker(){document.getElementById('joker-overlay').classList.remove('show');}
 
 function calcResult(){
+  logEvent('ende',currentMode+' Level '+cur+' IQ '+finalIQ);
   if(taTimer){clearInterval(taTimer);taTimer=null;}
   var taOv=document.getElementById('ta-overlay');
   if(taOv)taOv.style.display='none';
@@ -883,24 +973,24 @@ function _fillResult(){
   var emoji=iq>=145?'🧠':iq>=130?'✨':iq>=115?'⭐':iq>=100?'👍':'💪';
   document.getElementById('rv-emoji').textContent=emoji;
   animateCount(document.getElementById('rv-iq'),85,iq,1500);
-  document.getElementById('rv-sub').textContent=iq>=130?'Hervorragend!':iq>=115?'Sehr gut!':iq>=100?'Gut!':'Weiter ueben!';
+  document.getElementById('rv-sub').textContent=(function(r){return iq>=130?r[0]:iq>=115?r[1]:iq>=100?r[2]:r[3];})(GT('res'));
   var rb=document.getElementById('rank-badge');
   if(rb){var rank=getRankBadge(iq);rb.textContent=rank.text;rb.style.background=rank.bg;rb.style.color=rank.col;rb.style.borderColor=rank.border;rb.style.boxShadow='0 0 16px '+rank.border+'44';}
   var totalCm=0;Object.keys(cm).forEach(function(k){totalCm+=cm[k];});
   var totalCs=0;Object.keys(cs).forEach(function(k){totalCs+=cs[k];});
   document.getElementById('baw').textContent=totalCs+' / '+totalCm;
-  document.getElementById('blog').textContent=selectedKat==='alle'?'Alle':selectedKat;
-  document.getElementById('bkz').textContent=selectedSchw==='alle'?'Alle':selectedSchw==='1'?'Leicht':selectedSchw==='2'?'Mittel':'Schwer';
-  document.getElementById('bt').textContent=avg+' Sek.';
+  document.getElementById('blog').textContent=selectedKat==='alle'?UT('alle'):katName(selectedKat);
+  document.getElementById('bkz').textContent=selectedSchw==='alle'?UT('alle'):selectedSchw==='1'?UT('leicht'):selectedSchw==='2'?UT('mittel'):UT('schwer');
+  document.getElementById('bt').textContent=avg+' '+GT('sek');
   document.getElementById('sn').value=playerName;
   if(isDailyMode){
     var _today=new Date().toISOString().split('T')[0];
     localStorage.setItem('daily_'+_today,JSON.stringify({iq:finalIQ,level:sc}));
-    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc})});
+    fetch(API+'/api/daily/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:playerName,iq:finalIQ,level:sc,session_id:sessionId})});
     document.getElementById('rv-chip').textContent='📅 Challenge · '+sc+' / '+MAX_FRAGEN+' richtig';
     isDailyMode=false;
   } else if(currentMode==='timeattack'){
-    document.getElementById('rv-chip').textContent='⏱️ '+sc+' richtig in 60 Sek.';
+    document.getElementById('rv-chip').textContent='⏱️ '+sc+GT('taRes');
   } else if(currentMode==='learn'){
     document.getElementById('rv-chip').textContent='📚 Lern-Modus · '+sc+'/'+MAX_FRAGEN;
   } else if(currentMode==='endless'){
@@ -931,7 +1021,7 @@ function _fillResult(){
     for(var i=0;i<errs.length;i++){
       var e=errs[i];
       var card=document.createElement('div');card.className='err-card';
-      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=e.q.kategorie;card.appendChild(cat);
+      var cat=document.createElement('div');cat.className='err-cat';cat.textContent=katName(e.q.kategorie);card.appendChild(cat);
       if(e.to){var tob=document.createElement('span');tob.className='tob';tob.textContent=T('zeit');card.appendChild(tob);}
       var qd=document.createElement('div');qd.className='err-q';qd.textContent=e.q.frage;card.appendChild(qd);
       if(e.q.seq){var sd=document.createElement('div');sd.className='err-seq';sd.textContent=e.q.seq;card.appendChild(sd);}
@@ -968,17 +1058,17 @@ function _fillResult(){
       var bPct=Math.round((cs[best]||0)/cm[best]*100);
       var wPct=Math.round((cs[worst]||0)/cm[worst]*100);
       catSum.innerHTML=
-        '<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">Kategorie-Auswertung</div>'+
+        '<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">'+GT('katAus')+'</div>'+
         '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+
         '<div style="flex:1;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:.8rem;min-width:120px;">'+
-        '<div style="font-size:10px;color:var(--green);margin-bottom:4px;">⭐ STAERKE</div>'+
+        '<div style="font-size:10px;color:var(--green);margin-bottom:4px;">'+GT('st')+'</div>'+
         '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[best]||'')+'&nbsp;'+best+'</div>'+
-        '<div style="font-size:11px;color:var(--green);">'+bPct+'% richtig</div></div>'+
+        '<div style="font-size:11px;color:var(--green);">'+bPct+GT('pct')+'</div></div>'+
         (catKeys.length>1?
         '<div style="flex:1;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:.8rem;min-width:120px;">'+
-        '<div style="font-size:10px;color:var(--red);margin-bottom:4px;">📈 POTENTIAL</div>'+
+        '<div style="font-size:10px;color:var(--red);margin-bottom:4px;">'+GT('sw')+'</div>'+
         '<div style="font-size:13px;font-weight:700;color:var(--text);">'+(KAT_ICONS[worst]||'')+'&nbsp;'+worst+'</div>'+
-        '<div style="font-size:11px;color:var(--red);">'+wPct+'% richtig</div></div>':'')+
+        '<div style="font-size:11px;color:var(--red);">'+wPct+GT('pct')+'</div></div>':'')+
         '</div>';
     }
   }
@@ -992,8 +1082,12 @@ function saveHS(){
   fetch(API+'/api/highscores',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,iq:finalIQ,level:sc})
-  }).then(function(){
+    body:JSON.stringify({name:name,iq:finalIQ,level:sc,session_id:sessionId})
+  }).then(function(r){
+    if(!r.ok){return r.json().catch(function(){return {};}).then(function(d){
+      var m=(d&&d.detail&&(d.detail[0]&&d.detail[0].msg||d.detail))||'';
+      showAchToast('⚠️','Nicht gespeichert',/nicht erlaubt/i.test(m)?'Bitte einen anderen Namen wählen':'Nur Ergebnisse aus einem Online-Spiel können gespeichert werden');
+    });}
     var btn=document.querySelector('.save-btn');
     btn.textContent=T('gespeichert');
     setTimeout(function(){btn.textContent=T('speichern');},2000);
@@ -1279,13 +1373,13 @@ function toggleNotifications(){
   var btn=document.getElementById('notif-btn');
   if(localStorage.getItem('notifications_enabled')==='1'){
     localStorage.removeItem('notifications_enabled');
-    if(btn){btn.textContent='🔔 Tägl. Erinnerung';btn.classList.remove('active');}
+    if(btn){btn.textContent='🔔 '+UT('notif');btn.classList.remove('active');}
     return;
   }
   Notification.requestPermission().then(function(perm){
     if(perm==='granted'){
       localStorage.setItem('notifications_enabled','1');
-      if(btn){btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');}
+      if(btn){btn.textContent='✅ '+UT('notifOn');btn.classList.add('active');}
       new Notification('IQ Test',{body:'Du bekommst jetzt täglich eine Erinnerung für die Challenge!',icon:'favicon.ico'});
     }else{
       if(btn){btn.textContent='❌ Nicht erlaubt';setTimeout(function(){btn.textContent='🔔 Tägl. Erinnerung';},2000);}
@@ -1296,7 +1390,7 @@ function initNotifBtn(){
   var btn=document.getElementById('notif-btn');
   if(!btn)return;
   if(localStorage.getItem('notifications_enabled')==='1'){
-    btn.textContent='✅ Erinnerung aktiv';btn.classList.add('active');
+    btn.textContent='✅ '+UT('notifOn');btn.classList.add('active');
   }
 }
 function checkDailyNotification(){
@@ -1418,7 +1512,7 @@ function apiDailyStartWithRetry(attempt){
   fetch(API+'/api/daily/start',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:playerName})
+    body:JSON.stringify({name:playerName,sprache:currentLang})
   }).then(function(r){
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.json();
@@ -1444,7 +1538,7 @@ function setOfflineBadge(show){
 function loadOfflineCache(){
   var cached=localStorage.getItem('iq_offline_cache');
   if(cached){try{offlineQs=JSON.parse(cached);}catch(e){}}
-  fetch(API+'/api/offline')
+  fetch(API+'/api/offline?sprache='+encodeURIComponent(currentLang))
     .then(function(r){return r.json();})
     .then(function(fragen){
       localStorage.setItem('iq_offline_cache',JSON.stringify(fragen));
@@ -1512,12 +1606,12 @@ function initStarfield(){
 
 // ── RANG BADGE ─────────────────────────────────────────────
 function getRankBadge(iq){
-  if(iq>=145)return{text:'GENIE',bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
-  if(iq>=130)return{text:'HOCHBEGABT',bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
-  if(iq>=120)return{text:'SEHR INTELLIGENT',bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
-  if(iq>=115)return{text:'ÜBERDURCHSCHNITTLICH',bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
-  if(iq>=100)return{text:'DURCHSCHNITTLICH',bg:'transparent',col:'#94a3b8',border:'#475569'};
-  return{text:'WEITER ÜBEN',bg:'transparent',col:'#475569',border:'#1a2540'};
+  if(iq>=145)return{text:GT('bez')[0].toUpperCase(),bg:'linear-gradient(135deg,#ffd700,#ff6b35)',col:'#fff',border:'#ffd700'};
+  if(iq>=130)return{text:GT('bez')[1].toUpperCase(),bg:'linear-gradient(135deg,#7c5fff,#4a90e2)',col:'#fff',border:'#7c5fff'};
+  if(iq>=120)return{text:GT('bez')[2].toUpperCase(),bg:'linear-gradient(135deg,#4a90e2,#06b6d4)',col:'#fff',border:'#4a90e2'};
+  if(iq>=115)return{text:GT('bez')[3].toUpperCase(),bg:'linear-gradient(135deg,#22c55e,#4a90e2)',col:'#fff',border:'#22c55e'};
+  if(iq>=100)return{text:GT('bez')[4].toUpperCase(),bg:'transparent',col:'#94a3b8',border:'#475569'};
+  return{text:GT('res')[3].replace(/!$/,'').toUpperCase(),bg:'transparent',col:'#475569',border:'#1a2540'};
 }
 
 // ── ONBOARDING SLIDES ──────────────────────────────────────
@@ -1537,6 +1631,13 @@ function onbNext(){
 }
 
 // ── INIT ───────────────────────────────────────────────────
+splitJokerLabels();
+(function initLang(){
+  var saved='';try{saved=localStorage.getItem('iq_lang')||'';}catch(e){}
+  var guess=(navigator.language||'de').slice(0,2).toLowerCase();
+  var l=LANG[saved]?saved:(LANG[guess]?guess:'de');
+  if(l!=='de')setLang(l,document.getElementById('lopt-'+l));
+})();
 initStarfield();
 initSoundBtn();
 loadOfflineCache();
@@ -1549,6 +1650,10 @@ initPurchases();
 // ── MONETARISIERUNG ────────────────────────────────────────────────────────
 
 function updPremiumUI(){
+  var don=document.getElementById('s-donate-btn');
+  if(don)don.style.display=isNativeApp()?'none':'block';
+  var shopBtn=document.getElementById('j-shop');
+  if(shopBtn&&STORE_TARGET==='free'&&isNativeApp())shopBtn.style.display='none';
   var showAds=ADS_ENABLED&&!isPremium;
   var banner=document.getElementById('ad-banner');
   if(banner)banner.style.display=showAds?'flex':'none';

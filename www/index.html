@@ -390,6 +390,32 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 .opts{grid-template-columns:1fr;}
 .rv-grid{grid-template-columns:1fr 1fr;}
 }
+@media(max-width:800px){
+/* Handy: kompakte Kopfzeile, damit Frage und Antworten ohne Scrollen sichtbar sind */
+#qv{padding:.6rem;gap:.5rem;}
+.ql{display:grid!important;grid-template-columns:64px 1fr;gap:.4rem .6rem;align-items:center;width:100%;}
+.ql .timer-ring{width:64px;height:64px;grid-row:span 2;}
+.ql .timer-ring svg{width:64px;height:64px;}
+.ql .t-num{font-size:22px;}
+.ql .t-lbl{display:none;}
+.ql .iq-live{padding:.35rem .6rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;text-align:left;border-radius:12px;}
+.ql .iq-live-lbl{margin:0;font-size:9px;}
+.ql .iq-live-num{font-size:22px;}
+.ql .iq-live-txt{margin:0;font-size:10px;}
+.ql .phase-row{margin:0;}
+.ql .joker-section{grid-column:1/-1;margin:0;display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem;}
+.ql .joker-section>div:first-child{justify-content:center!important;margin:0!important;}
+.ql .joker-title{display:none;}
+.ql .iq-live{margin-right:52px;width:auto;}
+.ql .iq-live-lbl{display:none;}
+.ql .joker-btn{margin:0;padding:.45rem 0;font-size:18px;border-radius:10px;min-height:40px;}
+.ql .joker-btn .jt{display:none;}
+.ql #extra-joker-btn,.ql #j-shop{grid-column:span 3;font-size:12px;}
+.ql #extra-joker-btn .jt,.ql #j-shop .jt{display:inline;}
+.qm .preis{font-size:20px;margin:.3rem 0;}
+.qm .fbox{padding:1rem;}
+.qm .qtext{font-size:17px;}
+}
 </style>
 </head>
 <body>
@@ -460,7 +486,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <div id="sv" style="position:relative;padding-bottom:3.5rem;">
   <div class="s-brain">&#129504;</div>
   <div class="s-title">IQ Test</div>
-  <div class="s-sub">Das IQ-Quiz &middot; 15 Fragen &middot; 3 Joker<br><span style="font-size:12px;color:var(--text2);">Unterhaltung &ndash; kein wissenschaftlicher IQ-Test</span></div>
+  <div class="s-sub">Das IQ-Quiz &middot; 15 Fragen &middot; 6 Joker<br><span style="font-size:12px;color:var(--text2);">Unterhaltung &ndash; kein wissenschaftlicher IQ-Test</span></div>
   <input class="s-input" id="ni" type="text" placeholder="Dein Name..." maxlength="20"/>
   <div class="kat-section">
     <div class="kat-title">Kategorie w&auml;hlen</div>
@@ -509,6 +535,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="s-stats" onclick="showStats()">&#128202; Statistiken</button>
   <button class="s-notif" id="notif-btn" onclick="toggleNotifications()">&#128276; T&auml;gl. Erinnerung</button>
   <button class="s-upgrade" id="s-upgrade-btn" onclick="showPremium()">&#128081; Premium &middot; einmalig 2,99 &euro;</button>
+  <a class="s-daily" id="s-donate-btn" href="https://enes89.itch.io/iq-quiz/purchase" target="_blank" rel="noopener" style="display:none;text-align:center;text-decoration:none;border-color:#f472b6;color:#f472b6;box-sizing:border-box;">&#128155; Spiel unterst&uuml;tzen (Spende)</a>
 </div>
 <!-- DAILY -->
 <div id="dv">
@@ -713,6 +740,10 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
 <!-- HIGHSCORES -->
 <div id="hv">
   <h2>&#127942; Highscores</h2>
+  <div class="mode-row" id="hs-tabs" style="justify-content:center;margin-bottom:1rem;">
+    <button class="mode-btn active" id="hs-tab-alle" onclick="showHS('alle')">Allzeit</button>
+    <button class="mode-btn" id="hs-tab-woche" onclick="showHS('woche')">Diese Woche</button>
+  </div>
   <div id="hl"></div>
   <button class="rbtn" onclick="showStart()">Zur&uuml;ck</button>
 </div>
@@ -797,6 +828,7 @@ body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-hei
   <button class="prem-later" onclick="closeShop()">Schlie&szlig;en</button>
 </div>
 <canvas id="cc" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none;"></canvas>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

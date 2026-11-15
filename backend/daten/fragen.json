@@ -1,0 +1,7716 @@
+[
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Land hat die längste Küstenlinie?",
+  "antworten": {
+   "A": "Russland",
+   "B": "Kanada",
+   "C": "Norwegen",
+   "D": "Australien"
+  },
+  "richtig": "B",
+  "erklaerung": "Kanada hat mit über 200.000 km die längste Küstenlinie aller Länder.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Was ist das schwerste natürlich vorkommende Element?",
+  "antworten": {
+   "A": "Uran",
+   "B": "Blei",
+   "C": "Osmium",
+   "D": "Plutonium"
+  },
+  "richtig": "C",
+  "erklaerung": "Osmium ist mit 22,59 g/cm³ das dichteste und schwerste natürlich vorkommende Element.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Knochen hat ein erwachsener Mensch?",
+  "antworten": {
+   "A": "196",
+   "B": "206",
+   "C": "216",
+   "D": "226"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein erwachsener Mensch hat 206 Knochen. Babys haben sogar 270, die zusammenwachsen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier hat das grösste Herz?",
+  "antworten": {
+   "A": "Elefant",
+   "B": "Blauwal",
+   "C": "Nilpferd",
+   "D": "Giraffe"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Blauwal hat das grösste Herz – es wiegt bis zu 180 kg.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land liegt der Kilimandscharo?",
+  "antworten": {
+   "A": "Kenia",
+   "B": "Uganda",
+   "C": "Tansania",
+   "D": "Äthiopien"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Kilimandscharo liegt in Tansania und ist mit 5.895 m der höchste Berg Afrikas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wer malte die Mona Lisa?",
+  "antworten": {
+   "A": "Michelangelo",
+   "B": "Raffael",
+   "C": "Da Vinci",
+   "D": "Donatello"
+  },
+  "richtig": "C",
+  "erklaerung": "Leonardo da Vinci malte die Mona Lisa zwischen 1503 und 1519.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Planeten hat unser Sonnensystem?",
+  "antworten": {
+   "A": "7",
+   "B": "8",
+   "C": "9",
+   "D": "10"
+  },
+  "richtig": "B",
+  "erklaerung": "Seit 2006 gilt Pluto nicht mehr als Planet – es gibt 8 Planeten im Sonnensystem.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Australien?",
+  "antworten": {
+   "A": "Sydney",
+   "B": "Melbourne",
+   "C": "Brisbane",
+   "D": "Canberra"
+  },
+  "richtig": "D",
+  "erklaerung": "Canberra ist die Hauptstadt Australiens – viele verwechseln es mit Sydney.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welche Sprache wird in Brasilien gesprochen?",
+  "antworten": {
+   "A": "Spanisch",
+   "B": "Englisch",
+   "C": "Portugiesisch",
+   "D": "Französisch"
+  },
+  "richtig": "C",
+  "erklaerung": "Brasilien ist die einzige portugiesischsprachige Nation in Südamerika.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Farben hat ein Regenbogen?",
+  "antworten": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "8"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Regenbogen hat 7 Farben: Rot, Orange, Gelb, Grün, Blau, Indigo, Violett.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Element hat das Symbol Au?",
+  "antworten": {
+   "A": "Silber",
+   "B": "Kupfer",
+   "C": "Gold",
+   "D": "Aluminium"
+  },
+  "richtig": "C",
+  "erklaerung": "Au kommt vom lateinischen Wort 'Aurum' für Gold.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wer schrieb Romeo und Julia?",
+  "antworten": {
+   "A": "Goethe",
+   "B": "Shakespeare",
+   "C": "Schiller",
+   "D": "Dickens"
+  },
+  "richtig": "B",
+  "erklaerung": "William Shakespeare schrieb Romeo und Julia um 1594-1596.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr fiel die Berliner Mauer?",
+  "antworten": {
+   "A": "1987",
+   "B": "1988",
+   "C": "1989",
+   "D": "1990"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Berliner Mauer fiel am 9. November 1989.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches ist das grösste Land der Welt?",
+  "antworten": {
+   "A": "China",
+   "B": "USA",
+   "C": "Kanada",
+   "D": "Russland"
+  },
+  "richtig": "D",
+  "erklaerung": "Russland ist mit 17,1 Millionen km² das grösste Land der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Was ist H2O?",
+  "antworten": {
+   "A": "Sauerstoff",
+   "B": "Salz",
+   "C": "Wasser",
+   "D": "Zucker"
+  },
+  "richtig": "C",
+  "erklaerung": "H2O ist die chemische Formel für Wasser: 2 Wasserstoff-Atome + 1 Sauerstoff-Atom.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier ist das schnellste Landtier?",
+  "antworten": {
+   "A": "Löwe",
+   "B": "Gepard",
+   "C": "Pferd",
+   "D": "Antilope"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Gepard erreicht Spitzengeschwindigkeiten von bis zu 120 km/h.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Kontinente gibt es?",
+  "antworten": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "8"
+  },
+  "richtig": "C",
+  "erklaerung": "Es gibt 7 Kontinente: Afrika, Antarktika, Asien, Australien, Europa, Nordamerika, Südamerika.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Japan?",
+  "antworten": {
+   "A": "Osaka",
+   "B": "Kyoto",
+   "C": "Tokio",
+   "D": "Hiroshima"
+  },
+  "richtig": "C",
+  "erklaerung": "Tokio ist seit 1869 die Hauptstadt Japans mit über 37 Millionen Einwohnern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welcher Planet ist der grösste im Sonnensystem?",
+  "antworten": {
+   "A": "Saturn",
+   "B": "Jupiter",
+   "C": "Neptun",
+   "D": "Uranus"
+  },
+  "richtig": "B",
+  "erklaerung": "Jupiter ist so gross, dass alle anderen Planeten zusammen hineinpassen würden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Seiten hat ein Würfel?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "8"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Würfel hat 6 Seiten (Quadrate), 8 Ecken und 12 Kanten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wer erfand das Telefon?",
+  "antworten": {
+   "A": "Edison",
+   "B": "Tesla",
+   "C": "Bell",
+   "D": "Marconi"
+  },
+  "richtig": "C",
+  "erklaerung": "Alexander Graham Bell meldete am 7. März 1876 das erste Telefon-Patent an.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Kanada?",
+  "antworten": {
+   "A": "Toronto",
+   "B": "Vancouver",
+   "C": "Montreal",
+   "D": "Ottawa"
+  },
+  "richtig": "D",
+  "erklaerung": "Ottawa ist die Hauptstadt Kanadas – Toronto ist zwar grösser, aber nicht die Hauptstadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Beine hat eine Spinne?",
+  "antworten": {
+   "A": "6",
+   "B": "8",
+   "C": "10",
+   "D": "12"
+  },
+  "richtig": "B",
+  "erklaerung": "Spinnen haben 8 Beine – das unterscheidet sie von Insekten, die 6 Beine haben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Instrument hat 88 Tasten?",
+  "antworten": {
+   "A": "Orgel",
+   "B": "Akkordeon",
+   "C": "Klavier",
+   "D": "Synthesizer"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Standardklavier hat 88 Tasten: 52 weisse und 36 schwarze.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land liegt der Amazonas?",
+  "antworten": {
+   "A": "Peru",
+   "B": "Kolumbien",
+   "C": "Brasilien",
+   "D": "Venezuela"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Amazonas fliesst durch Brasilien und mündet in den Atlantik.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die kleinste Primzahl?",
+  "antworten": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "3"
+  },
+  "richtig": "C",
+  "erklaerung": "2 ist die kleinste und einzige gerade Primzahl – 1 gilt per Definition nicht als Primzahl.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Saiten hat eine Gitarre?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "C",
+  "erklaerung": "Eine Standard-Gitarre hat 6 Saiten: E, A, D, G, H, E.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Welches ist das kleinste Land der Welt?",
+  "antworten": {
+   "A": "Monaco",
+   "B": "San Marino",
+   "C": "Liechtenstein",
+   "D": "Vatikan"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Vatikan ist mit 0,44 km² der kleinste Staat der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Ägypten?",
+  "antworten": {
+   "A": "Alexandria",
+   "B": "Kairo",
+   "C": "Luxor",
+   "D": "Gizeh"
+  },
+  "richtig": "B",
+  "erklaerung": "Kairo ist die Hauptstadt Ägyptens und mit 10 Millionen Einwohnern grösste Stadt Afrikas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Herzkammern hat der Mensch?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "C",
+  "erklaerung": "Das menschliche Herz hat 4 Kammern: linker/rechter Vorhof und linke/rechte Herzkammer.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welcher Ozean ist der grösste?",
+  "antworten": {
+   "A": "Atlantik",
+   "B": "Indik",
+   "C": "Arktis",
+   "D": "Pazifik"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Pazifik ist grösser als alle Landmassen der Erde zusammen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die chemische Formel für Kochsalz?",
+  "antworten": {
+   "A": "KCl",
+   "B": "NaCl",
+   "C": "CaCl",
+   "D": "MgCl"
+  },
+  "richtig": "B",
+  "erklaerung": "Kochsalz (NaCl) besteht aus Natrium (Na) und Chlor (Cl).",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wer schrieb Faust?",
+  "antworten": {
+   "A": "Schiller",
+   "B": "Kafka",
+   "C": "Goethe",
+   "D": "Brecht"
+  },
+  "richtig": "C",
+  "erklaerung": "Johann Wolfgang von Goethe schrieb Faust – Teil 1 erschien 1808, Teil 2 posthum 1832.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Nullen hat eine Million?",
+  "antworten": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "8"
+  },
+  "richtig": "B",
+  "erklaerung": "Eine Million = 1.000.000 – das sind 6 Nullen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Argentinien?",
+  "antworten": {
+   "A": "Santiago",
+   "B": "Lima",
+   "C": "Buenos Aires",
+   "D": "Bogota"
+  },
+  "richtig": "C",
+  "erklaerung": "Buenos Aires ist die Hauptstadt und grösste Stadt Argentiniens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr begann der Erste Weltkrieg?",
+  "antworten": {
+   "A": "1912",
+   "B": "1914",
+   "C": "1916",
+   "D": "1918"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Erste Weltkrieg begann am 28. Juli 1914 mit der Kriegserklärung Österreich-Ungarns.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt der Schweiz?",
+  "antworten": {
+   "A": "Zürich",
+   "B": "Genf",
+   "C": "Basel",
+   "D": "Bern"
+  },
+  "richtig": "D",
+  "erklaerung": "Bern ist die Bundesstadt der Schweiz – Zürich ist zwar grösser, aber nicht die Hauptstadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Wochen hat ein Jahr?",
+  "antworten": {
+   "A": "50",
+   "B": "52",
+   "C": "54",
+   "D": "56"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein Jahr hat 52 Wochen und 1 Tag (bzw. 2 Tage im Schaltjahr).",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Welches Element ist am häufigsten in der Erdatmosphäre?",
+  "antworten": {
+   "A": "Sauerstoff",
+   "B": "Kohlendioxid",
+   "C": "Stickstoff",
+   "D": "Argon"
+  },
+  "richtig": "C",
+  "erklaerung": "Stickstoff macht 78% der Erdatmosphäre aus – Sauerstoff nur 21%.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie heisst der höchste Berg der Welt?",
+  "antworten": {
+   "A": "K2",
+   "B": "Kangchendzoenga",
+   "C": "Mount Everest",
+   "D": "Lhotse"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Mount Everest ist mit 8.849 m der höchste Berg der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wer war der erste Mensch auf dem Mond?",
+  "antworten": {
+   "A": "Buzz Aldrin",
+   "B": "Yuri Gagarin",
+   "C": "Neil Armstrong",
+   "D": "John Glenn"
+  },
+  "richtig": "C",
+  "erklaerung": "Neil Armstrong betrat am 21. Juli 1969 als erster Mensch den Mond (Apollo 11).",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Zähne hat ein erwachsener Mensch?",
+  "antworten": {
+   "A": "28",
+   "B": "30",
+   "C": "32",
+   "D": "34"
+  },
+  "richtig": "C",
+  "erklaerung": "Erwachsene haben 32 Zähne inkl. Weisheitszähne (die oft entfernt werden).",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Indien?",
+  "antworten": {
+   "A": "Mumbai",
+   "B": "Kolkata",
+   "C": "Chennai",
+   "D": "Neu-Delhi"
+  },
+  "richtig": "D",
+  "erklaerung": "Neu-Delhi ist die Hauptstadt Indiens – Mumbai ist grösser, aber nicht die Hauptstadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Wer erfand das World Wide Web?",
+  "antworten": {
+   "A": "Bill Gates",
+   "B": "Steve Jobs",
+   "C": "Tim Berners-Lee",
+   "D": "Mark Zuckerberg"
+  },
+  "richtig": "C",
+  "erklaerung": "Tim Berners-Lee erfand 1989 am CERN das World Wide Web.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welches ist das dichteste Metall?",
+  "antworten": {
+   "A": "Blei",
+   "B": "Gold",
+   "C": "Osmium",
+   "D": "Platin"
+  },
+  "richtig": "C",
+  "erklaerung": "Osmium ist mit 22,59 g/cm³ das dichteste aller Metalle.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Südkorea?",
+  "antworten": {
+   "A": "Busan",
+   "B": "Seoul",
+   "C": "Incheon",
+   "D": "Daegu"
+  },
+  "richtig": "B",
+  "erklaerung": "Seoul ist die Hauptstadt Südkoreas mit über 10 Millionen Einwohnern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Wie heisst die Hauptstadt von Mexiko?",
+  "antworten": {
+   "A": "Guadalajara",
+   "B": "Monterrey",
+   "C": "Tijuana",
+   "D": "Mexiko-Stadt"
+  },
+  "richtig": "D",
+  "erklaerung": "Mexiko-Stadt (Ciudad de Mexico) ist mit 9 Millionen Einwohnern eine der grössten Städte der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb Die Verwandlung?",
+  "antworten": {
+   "A": "Goethe",
+   "B": "Kafka",
+   "C": "Mann",
+   "D": "Hesse"
+  },
+  "richtig": "B",
+  "erklaerung": "Franz Kafka schrieb Die Verwandlung 1912 – die Geschichte von Gregor Samsa.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr entdeckte Kolumbus Amerika?",
+  "antworten": {
+   "A": "1488",
+   "B": "1490",
+   "C": "1492",
+   "D": "1495"
+  },
+  "richtig": "C",
+  "erklaerung": "Kolumbus landete am 12. Oktober 1492 in der Karibik – er dachte, er hätte Asien erreicht.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wer war der erste Kaiser Frankreichs?",
+  "antworten": {
+   "A": "Ludwig XIV",
+   "B": "Napoleon Bonaparte",
+   "C": "Karl der Grosse",
+   "D": "Heinrich IV"
+  },
+  "richtig": "B",
+  "erklaerung": "Napoleon Bonaparte krönete sich 1804 selbst zum Kaiser der Franzosen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wann endete der Zweite Weltkrieg in Europa?",
+  "antworten": {
+   "A": "1944",
+   "B": "1945",
+   "C": "1946",
+   "D": "1947"
+  },
+  "richtig": "B",
+  "erklaerung": "Deutschland kapitulierte am 8. Mai 1945 – seitdem wird der Tag als Tag der Befreiung gefeiert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Welche Stadt war die Hauptstadt des Römischen Reiches?",
+  "antworten": {
+   "A": "Athen",
+   "B": "Karthago",
+   "C": "Alexandria",
+   "D": "Rom"
+  },
+  "richtig": "D",
+  "erklaerung": "Rom war die Hauptstadt des Römischen Reiches und gab ihm seinen Namen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr begann der Zweite Weltkrieg?",
+  "antworten": {
+   "A": "1937",
+   "B": "1938",
+   "C": "1939",
+   "D": "1940"
+  },
+  "richtig": "C",
+  "erklaerung": "Deutschland überfiel am 1. September 1939 Polen – das gilt als Beginn des Zweiten Weltkriegs.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Was war die Titanic?",
+  "antworten": {
+   "A": "Kriegsschiff",
+   "B": "Passagierschiff",
+   "C": "Frachtschiff",
+   "D": "U-Boot"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Titanic war ein britisches Passagierschiff, das 1912 auf seiner Jungfernfahrt versank.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr wurde die USA unabhängig?",
+  "antworten": {
+   "A": "1774",
+   "B": "1776",
+   "C": "1778",
+   "D": "1780"
+  },
+  "richtig": "B",
+  "erklaerung": "Die USA erklärten am 4. Juli 1776 ihre Unabhängigkeit von Grossbritannien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wann fand die Französische Revolution statt?",
+  "antworten": {
+   "A": "1779",
+   "B": "1789",
+   "C": "1799",
+   "D": "1809"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Französische Revolution begann 1789 mit dem Sturm auf die Bastille am 14. Juli.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr landeten Menschen auf dem Mond?",
+  "antworten": {
+   "A": "1967",
+   "B": "1968",
+   "C": "1969",
+   "D": "1970"
+  },
+  "richtig": "C",
+  "erklaerung": "Apollo 11 landete am 20. Juli 1969 auf dem Mond – Neil Armstrong war der erste Mensch dort.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wer war Winston Churchill?",
+  "antworten": {
+   "A": "US-Präsident",
+   "B": "Französischer General",
+   "C": "Britischer Premierminister",
+   "D": "Kanadischer Premier"
+  },
+  "richtig": "C",
+  "erklaerung": "Winston Churchill war britischer Premierminister im Zweiten Weltkrieg (1940-1945).",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "In welchem Jahr wurde Deutschland wiedervereinigt?",
+  "antworten": {
+   "A": "1989",
+   "B": "1990",
+   "C": "1991",
+   "D": "1992"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Wiedervereinigung Deutschlands erfolgte offiziell am 3. Oktober 1990.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "Was war die Magna Carta?",
+  "antworten": {
+   "A": "Römisches Gesetz",
+   "B": "Französische Verfassung",
+   "C": "Englisches Rechtsdokument",
+   "D": "Deutsches Grundgesetz"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Magna Carta von 1215 war ein englisches Rechtsdokument, das König Johann ohne Land unterzeichnen musste.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer baute die Chinesische Mauer?",
+  "antworten": {
+   "A": "Kaiser Qin Shi Huang",
+   "B": "Kaiser Yongle",
+   "C": "Dschingis Khan",
+   "D": "Kublai Khan"
+  },
+  "richtig": "A",
+  "erklaerung": "Kaiser Qin Shi Huang begann den Bau der Mauer im 3. Jahrhundert v.Chr. zum Schutz vor Nomaden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer war Julius Caesar?",
+  "antworten": {
+   "A": "Römischer Kaiser",
+   "B": "Römischer Feldherr",
+   "C": "Griechischer Philosoph",
+   "D": "Ägyptischer Pharao"
+  },
+  "richtig": "B",
+  "erklaerung": "Julius Caesar war römischer Feldherr und Politiker – er war kein Kaiser, sondern Diktator.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Welche Mauer trennte Berlin von 1961 bis 1989?",
+  "antworten": {
+   "A": "Eiserner Vorhang",
+   "B": "Berliner Mauer",
+   "C": "Maginot-Linie",
+   "D": "Oder-Neisse-Linie"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Berliner Mauer wurde am 13. August 1961 errichtet und am 9. November 1989 geöffnet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr wurde das Römische Reich geteilt?",
+  "antworten": {
+   "A": "285 n.Chr.",
+   "B": "305 n.Chr.",
+   "C": "395 n.Chr.",
+   "D": "476 n.Chr."
+  },
+  "richtig": "C",
+  "erklaerung": "Das Römische Reich wurde 395 n.Chr. nach dem Tod von Kaiser Theodosius I. endgültig geteilt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer war Cleopatra?",
+  "antworten": {
+   "A": "Römische Kaiserin",
+   "B": "Griechische Göttin",
+   "C": "Ägyptische Pharaonin",
+   "D": "Persische Königin"
+  },
+  "richtig": "C",
+  "erklaerung": "Kleopatra VII. war die letzte Pharaonin Ägyptens und herrschte von 51 bis 30 v.Chr.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Was war das Dritte Reich?",
+  "antworten": {
+   "A": "Das Heilige Römische Reich",
+   "B": "Das Deutsche Kaiserreich",
+   "C": "NS-Deutschland 1933-1945",
+   "D": "Die Weimarer Republik"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Dritte Reich bezeichnet Deutschland unter der NS-Herrschaft von 1933 bis 1945.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Lichtgeschwindigkeit?",
+  "antworten": {
+   "A": "200.000 km/s",
+   "B": "300.000 km/s",
+   "C": "400.000 km/s",
+   "D": "500.000 km/s"
+  },
+  "richtig": "B",
+  "erklaerung": "Licht bewegt sich mit ca. 299.792 km/s – die höchste Geschwindigkeit im Universum.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist DNA?",
+  "antworten": {
+   "A": "Ein Protein",
+   "B": "Ein Enzym",
+   "C": "Erbgut",
+   "D": "Ein Virus"
+  },
+  "richtig": "C",
+  "erklaerung": "DNA (Desoxyribonukleinsäure) trägt die genetische Information aller Lebewesen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Wer entwickelte die Relativitätstheorie?",
+  "antworten": {
+   "A": "Newton",
+   "B": "Einstein",
+   "C": "Bohr",
+   "D": "Curie"
+  },
+  "richtig": "B",
+  "erklaerung": "Albert Einstein veröffentlichte 1905 die spezielle und 1915 die allgemeine Relativitätstheorie.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist Photosynthese?",
+  "antworten": {
+   "A": "Zellteilung",
+   "B": "Atmung von Tieren",
+   "C": "Energiegewinnung durch Licht",
+   "D": "Wasseraufnahme"
+  },
+  "richtig": "C",
+  "erklaerung": "Pflanzen wandeln bei der Photosynthese Licht, CO2 und Wasser in Zucker und Sauerstoff um.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist der Siedepunkt von Wasser?",
+  "antworten": {
+   "A": "90 Grad",
+   "B": "95 Grad",
+   "C": "100 Grad",
+   "D": "105 Grad"
+  },
+  "richtig": "C",
+  "erklaerung": "Wasser siedet bei 100°C (auf Meereshöhe) – in grösserer Höhe sinkt der Siedepunkt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Schwerkraft?",
+  "antworten": {
+   "A": "Magnetische Kraft",
+   "B": "Anziehungskraft zwischen Massen",
+   "C": "Elektrische Kraft",
+   "D": "Kernkraft"
+  },
+  "richtig": "B",
+  "erklaerung": "Gravitation ist die Anziehungskraft zwischen allen Massen – beschrieben von Newton und Einstein.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Was ist ein schwarzes Loch?",
+  "antworten": {
+   "A": "Ein toter Stern",
+   "B": "Ein Objekt mit extremer Schwerkraft",
+   "C": "Eine leere Region im All",
+   "D": "Ein Nebel"
+  },
+  "richtig": "B",
+  "erklaerung": "Schwarze Löcher haben so starke Schwerkraft, dass nicht einmal Licht entweichen kann.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Wer entdeckte die Schwerkraft?",
+  "antworten": {
+   "A": "Einstein",
+   "B": "Galilei",
+   "C": "Newton",
+   "D": "Kepler"
+  },
+  "richtig": "C",
+  "erklaerung": "Isaac Newton formulierte 1687 das Gravitationsgesetz – inspiriert (laut Legende) durch einen fallenden Apfel.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Chromosomen hat der Mensch?",
+  "antworten": {
+   "A": "42",
+   "B": "44",
+   "C": "46",
+   "D": "48"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Mensch hat 46 Chromosomen – 23 Paare. Schimpansen haben 48.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Welches ist das leichteste Element?",
+  "antworten": {
+   "A": "Helium",
+   "B": "Lithium",
+   "C": "Wasserstoff",
+   "D": "Beryllium"
+  },
+  "richtig": "C",
+  "erklaerung": "Wasserstoff ist das leichteste und häufigste Element im Universum.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Wie alt ist die Erde?",
+  "antworten": {
+   "A": "2 Milliarden Jahre",
+   "B": "3 Milliarden Jahre",
+   "C": "4.5 Milliarden Jahre",
+   "D": "6 Milliarden Jahre"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Erde ist etwa 4,5 Milliarden Jahre alt – ermittelt durch Radiodatierung von Gesteinen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Wer entdeckte das Penicillin?",
+  "antworten": {
+   "A": "Pasteur",
+   "B": "Koch",
+   "C": "Fleming",
+   "D": "Lister"
+  },
+  "richtig": "C",
+  "erklaerung": "Alexander Fleming entdeckte Penicillin 1928 zufällig durch eine verunreinigte Bakterienkultur.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Was beschreibt E=mc²?",
+  "antworten": {
+   "A": "Schwerkraft",
+   "B": "Äquivalenz von Masse und Energie",
+   "C": "Lichtbrechung",
+   "D": "Elektrischer Widerstand"
+  },
+  "richtig": "B",
+  "erklaerung": "Einsteins berühmteste Formel zeigt: Masse und Energie sind austauschbar (c = Lichtgeschwindigkeit).",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Kammern hat das menschliche Herz?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Herz hat 4 Kammern: 2 Vorhöfe und 2 Herzkammern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Was ist ein Neutrino?",
+  "antworten": {
+   "A": "Ein Atom",
+   "B": "Ein Elektron",
+   "C": "Ein massearmes Elementarteilchen",
+   "D": "Ein Photon"
+  },
+  "richtig": "C",
+  "erklaerung": "Neutrinos sind Elementarteilchen mit sehr kleiner Masse, die kaum mit Materie wechselwirken.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Welches Gas nehmen Pflanzen bei der Photosynthese auf?",
+  "antworten": {
+   "A": "Sauerstoff",
+   "B": "Stickstoff",
+   "C": "Kohlendioxid",
+   "D": "Wasserstoff"
+  },
+  "richtig": "C",
+  "erklaerung": "Pflanzen nehmen CO2 auf und geben Sauerstoff ab – das Gegenteil von Tieren.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Spieler hat eine Fussballmannschaft?",
+  "antworten": {
+   "A": "9",
+   "B": "10",
+   "C": "11",
+   "D": "12"
+  },
+  "richtig": "C",
+  "erklaerung": "Eine Fussballmannschaft besteht aus 11 Spielern: 1 Torwart und 10 Feldspieler.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Ringe hat das Olympische Symbol?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "B",
+  "erklaerung": "Die 5 Olympischen Ringe stehen für die 5 Kontinente der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wer hat die meisten WM-Titel im Fussball?",
+  "antworten": {
+   "A": "Deutschland",
+   "B": "Argentinien",
+   "C": "Brasilien",
+   "D": "Italien"
+  },
+  "richtig": "C",
+  "erklaerung": "Brasilien hat 5 WM-Titel (1958, 1962, 1970, 1994, 2002) – mehr als jedes andere Land.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie lange dauert ein Fussballspiel?",
+  "antworten": {
+   "A": "80 Minuten",
+   "B": "90 Minuten",
+   "C": "100 Minuten",
+   "D": "120 Minuten"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein reguläres Fussballspiel dauert 2 x 45 Minuten = 90 Minuten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "In welchem Jahr fanden die ersten modernen Olympischen Spiele statt?",
+  "antworten": {
+   "A": "1892",
+   "B": "1894",
+   "C": "1896",
+   "D": "1898"
+  },
+  "richtig": "C",
+  "erklaerung": "Die ersten modernen Olympischen Spiele fanden 1896 in Athen statt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Spieler hat eine Basketballmannschaft?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "B",
+  "erklaerung": "Basketball wird 5 gegen 5 gespielt – insgesamt 10 Spieler auf dem Feld.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "In welchem Land liegt Wimbledon?",
+  "antworten": {
+   "A": "USA",
+   "B": "Australien",
+   "C": "Frankreich",
+   "D": "England"
+  },
+  "richtig": "D",
+  "erklaerung": "Wimbledon ist ein Stadtteil von London und beherbergt das älteste Tennisturnier der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Meter ist ein Marathon lang?",
+  "antworten": {
+   "A": "40.195 m",
+   "B": "41.195 m",
+   "C": "42.195 m",
+   "D": "43.195 m"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Marathon ist exakt 42,195 km lang – die Distanz wurde 1921 standardisiert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wo fand die erste Fussball-WM statt?",
+  "antworten": {
+   "A": "Brasilien",
+   "B": "Uruguay",
+   "C": "Argentinien",
+   "D": "Chile"
+  },
+  "richtig": "B",
+  "erklaerung": "Die erste Fussball-Weltmeisterschaft fand 1930 in Uruguay statt – Uruguay gewann sie auch.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Was ist ein Hat-Trick?",
+  "antworten": {
+   "A": "2 Tore",
+   "B": "3 Tore",
+   "C": "4 Tore",
+   "D": "5 Tore"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein Hat-Trick bedeutet 3 Tore eines Spielers in einem Spiel.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Spieler stehen beim Volleyball auf dem Feld?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "C",
+  "erklaerung": "Volleyball wird 6 gegen 6 gespielt – insgesamt 12 Spieler auf dem Feld.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wer gewann die Fussball-WM 2022?",
+  "antworten": {
+   "A": "Frankreich",
+   "B": "Brasilien",
+   "C": "Argentinien",
+   "D": "Deutschland"
+  },
+  "richtig": "C",
+  "erklaerung": "Argentinien gewann die WM 2022 in Katar im Finale gegen Frankreich im Elfmeterschiessen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Grand-Slam-Titel hat Roger Federer gewonnen?",
+  "antworten": {
+   "A": "17",
+   "B": "18",
+   "C": "20",
+   "D": "22"
+  },
+  "richtig": "C",
+  "erklaerung": "Roger Federer gewann 20 Grand-Slam-Titel – bis 2023 ein Rekord, dann von Djokovic übertroffen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "In welcher Sportart gibt es den Begriff Slalom?",
+  "antworten": {
+   "A": "Radsport",
+   "B": "Schwimmen",
+   "C": "Skisport",
+   "D": "Turnen"
+  },
+  "richtig": "C",
+  "erklaerung": "Slalom ist eine Skidisziplin, bei der Tore passiert werden müssen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist Pi gerundet auf 2 Dezimalstellen?",
+  "antworten": {
+   "A": "3.12",
+   "B": "3.14",
+   "C": "3.16",
+   "D": "3.18"
+  },
+  "richtig": "B",
+  "erklaerung": "Pi = 3,14159... Die Kreiszahl Pi ist irrational und hat unendlich viele Nachkommastellen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Quadratwurzel von 144?",
+  "antworten": {
+   "A": "10",
+   "B": "11",
+   "C": "12",
+   "D": "13"
+  },
+  "richtig": "C",
+  "erklaerung": "12 x 12 = 144, also ist die Quadratwurzel von 144 gleich 12.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 15% von 200?",
+  "antworten": {
+   "A": "20",
+   "B": "25",
+   "C": "30",
+   "D": "35"
+  },
+  "richtig": "C",
+  "erklaerung": "15% von 200 = 0,15 x 200 = 30.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 2 hoch 8?",
+  "antworten": {
+   "A": "128",
+   "B": "256",
+   "C": "512",
+   "D": "1024"
+  },
+  "richtig": "B",
+  "erklaerung": "2^8 = 2x2x2x2x2x2x2x2 = 256.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Summe der Winkel in einem Dreieck?",
+  "antworten": {
+   "A": "90 Grad",
+   "B": "120 Grad",
+   "C": "180 Grad",
+   "D": "360 Grad"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Winkelsumme in jedem Dreieck beträgt immer 180 Grad.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 12 x 13?",
+  "antworten": {
+   "A": "144",
+   "B": "152",
+   "C": "156",
+   "D": "162"
+  },
+  "richtig": "C",
+  "erklaerung": "12 x 13 = 12 x 10 + 12 x 3 = 120 + 36 = 156.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Primzahlen gibt es zwischen 1 und 10?",
+  "antworten": {
+   "A": "3",
+   "B": "4",
+   "C": "5",
+   "D": "6"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Primzahlen zwischen 1 und 10 sind: 2, 3, 5, 7 – also 4 Stück.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 3 hoch 4?",
+  "antworten": {
+   "A": "64",
+   "B": "81",
+   "C": "96",
+   "D": "108"
+  },
+  "richtig": "B",
+  "erklaerung": "3^4 = 3x3x3x3 = 9x9 = 81.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 144 / 12?",
+  "antworten": {
+   "A": "10",
+   "B": "11",
+   "C": "12",
+   "D": "13"
+  },
+  "richtig": "C",
+  "erklaerung": "144 / 12 = 12, denn 12 x 12 = 144.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 25 hoch 2?",
+  "antworten": {
+   "A": "525",
+   "B": "600",
+   "C": "625",
+   "D": "650"
+  },
+  "richtig": "C",
+  "erklaerung": "25^2 = 25 x 25 = 625.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Seiten hat ein Hexagon?",
+  "antworten": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "8"
+  },
+  "richtig": "B",
+  "erklaerung": "Hexagon kommt vom griechischen 'hex' (sechs) – ein Sechseck hat 6 Seiten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Quadratwurzel von 225?",
+  "antworten": {
+   "A": "13",
+   "B": "14",
+   "C": "15",
+   "D": "16"
+  },
+  "richtig": "C",
+  "erklaerung": "15 x 15 = 225, also ist die Quadratwurzel von 225 gleich 15.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 40% von 150?",
+  "antworten": {
+   "A": "50",
+   "B": "55",
+   "C": "60",
+   "D": "65"
+  },
+  "richtig": "C",
+  "erklaerung": "40% von 150 = 0,4 x 150 = 60.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Was ist der Logarithmus von 1000 zur Basis 10?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "B",
+  "erklaerung": "log10(1000) = 3, weil 10^3 = 1000.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Was ist die Fläche eines Kreises mit Radius 5?",
+  "antworten": {
+   "A": "25 Pi",
+   "B": "10 Pi",
+   "C": "50 Pi",
+   "D": "5 Pi"
+  },
+  "richtig": "A",
+  "erklaerung": "Kreisfläche = Pi x r² = Pi x 5² = 25 Pi ≈ 78,54.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Welche Zahl fehlt?\n5 - 10 - 20 - 40 - ?",
+  "antworten": {
+   "A": "60",
+   "B": "70",
+   "C": "80",
+   "D": "90"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird mit 2 multipliziert: 5x2=10, 10x2=20, 20x2=40, 40x2=80.",
+  "seq": "5  -  10  -  20  -  40  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Fibonacci:\n1 - 1 - 2 - 3 - 5 - 8 - ?",
+  "antworten": {
+   "A": "11",
+   "B": "12",
+   "C": "13",
+   "D": "14"
+  },
+  "richtig": "C",
+  "erklaerung": "Bei Fibonacci addiert man immer die zwei vorherigen Zahlen: 5+8=13.",
+  "seq": "1  1  2  3  5  8  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n81 - 27 - 9 - 3 - ?",
+  "antworten": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "3"
+  },
+  "richtig": "B",
+  "erklaerung": "Jede Zahl wird durch 3 geteilt: 81/3=27, 27/3=9, 9/3=3, 3/3=1.",
+  "seq": "81  -  27  -  9  -  3  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl kommt als nächstes?\n2 - 5 - 10 - 17 - 26 - ?",
+  "antworten": {
+   "A": "33",
+   "B": "35",
+   "C": "37",
+   "D": "39"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Differenzen sind 3, 5, 7, 9, 11 – also immer +2 mehr: 26+11=37.",
+  "seq": "2  5  10  17  26  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Welche Zahl fehlt?\n3 - 6 - 12 - 24 - ?",
+  "antworten": {
+   "A": "36",
+   "B": "40",
+   "C": "48",
+   "D": "52"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird verdoppelt: 3x2=6, 6x2=12, 12x2=24, 24x2=48.",
+  "seq": "3  -  6  -  12  -  24  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Quadratzahlen:\n1 - 4 - 9 - 16 - 25 - ?",
+  "antworten": {
+   "A": "30",
+   "B": "35",
+   "C": "36",
+   "D": "49"
+  },
+  "richtig": "C",
+  "erklaerung": "Quadratzahlen: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25, 6²=36.",
+  "seq": "1  4  9  16  25  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Analogie: Arzt zu Krankenhaus wie Lehrer zu?",
+  "antworten": {
+   "A": "Buch",
+   "B": "Schüler",
+   "C": "Schule",
+   "D": "Unterricht"
+  },
+  "richtig": "C",
+  "erklaerung": "Arzt arbeitet im Krankenhaus – Lehrer arbeitet in der Schule.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n2 - 6 - 18 - 54 - ?",
+  "antworten": {
+   "A": "108",
+   "B": "126",
+   "C": "162",
+   "D": "180"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird mit 3 multipliziert: 2x3=6, 6x3=18, 18x3=54, 54x3=162.",
+  "seq": "2  -  6  -  18  -  54  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Welches passt nicht?\nRose - Tulpe - Eiche - Lilie",
+  "antworten": {
+   "A": "Rose",
+   "B": "Tulpe",
+   "C": "Eiche",
+   "D": "Lilie"
+  },
+  "richtig": "C",
+  "erklaerung": "Eiche ist ein Baum – Rose, Tulpe und Lilie sind Blumen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n256 - 64 - 16 - 4 - ?",
+  "antworten": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "3"
+  },
+  "richtig": "B",
+  "erklaerung": "Jede Zahl wird durch 4 geteilt: 256/4=64, 64/4=16, 16/4=4, 4/4=1.",
+  "seq": "256  -  64  -  16  -  4  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Primzahlen:\n2 - 3 - 5 - 7 - 11 - 13 - ?",
+  "antworten": {
+   "A": "15",
+   "B": "16",
+   "C": "17",
+   "D": "19"
+  },
+  "richtig": "C",
+  "erklaerung": "Die nächste Primzahl nach 13 ist 17 (15=3x5, 16=2^4 sind keine Primzahlen).",
+  "seq": "2  3  5  7  11  13  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n1000 - 100 - 10 - ?",
+  "antworten": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "5"
+  },
+  "richtig": "B",
+  "erklaerung": "Jede Zahl wird durch 10 geteilt: 1000/10=100, 100/10=10, 10/10=1.",
+  "seq": "1000  -  100  -  10  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Analogie: Tag zu Nacht wie Sommer zu?",
+  "antworten": {
+   "A": "Herbst",
+   "B": "Frühling",
+   "C": "Winter",
+   "D": "Jahreszeit"
+  },
+  "richtig": "C",
+  "erklaerung": "Tag und Nacht sind Gegensätze – Sommer und Winter sind auch Gegensätze.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Welche Zahl kommt als nächstes?\n1 - 2 - 4 - 8 - 16 - ?",
+  "antworten": {
+   "A": "24",
+   "B": "28",
+   "C": "32",
+   "D": "36"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird verdoppelt: 1, 2, 4, 8, 16, 32.",
+  "seq": "1  2  4  8  16  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl fehlt?\n5 - 11 - 23 - 47 - ?",
+  "antworten": {
+   "A": "89",
+   "B": "93",
+   "C": "95",
+   "D": "97"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird verdoppelt und 1 addiert: 5x2+1=11, 11x2+1=23, 23x2+1=47, 47x2+1=95.",
+  "seq": "5  -  11  -  23  -  47  -  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n0 - 1 - 3 - 6 - 10 - ?",
+  "antworten": {
+   "A": "13",
+   "B": "14",
+   "C": "15",
+   "D": "16"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Differenzen sind 1, 2, 3, 4, 5 – also: 10+5=15.",
+  "seq": "0  1  3  6  10  ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "Wie viele gerade Zahlen liegen zwischen 14 und 26 (beide ausgeschlossen)?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "B",
+  "erklaerung": "Die geraden Zahlen zwischen 14 und 26 sind 16, 18, 20, 22 und 24 – also 5.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "Ein Zug fährt 90 km/h. Wie weit in 40 Minuten?",
+  "antworten": {
+   "A": "50 km",
+   "B": "55 km",
+   "C": "60 km",
+   "D": "65 km"
+  },
+  "richtig": "C",
+  "erklaerung": "40 Minuten = 2/3 Stunde. 90 km/h x 2/3 = 60 km.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "15 x 4 - 18 / 3 = ?",
+  "antworten": {
+   "A": "52",
+   "B": "54",
+   "C": "56",
+   "D": "58"
+  },
+  "richtig": "B",
+  "erklaerung": "Punkt vor Strich: 15x4=60, 18/3=6, dann 60-6=54.",
+  "seq": "15 x 4  -  18 / 3  =  ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Umfang eines Quadrats mit Seite 7 cm?",
+  "antworten": {
+   "A": "21 cm",
+   "B": "28 cm",
+   "C": "35 cm",
+   "D": "49 cm"
+  },
+  "richtig": "B",
+  "erklaerung": "Umfang Quadrat = 4 x Seite = 4 x 7 = 28 cm.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Monate haben 31 Tage?",
+  "antworten": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "8"
+  },
+  "richtig": "C",
+  "erklaerung": "Januar, März, Mai, Juli, August, Oktober, Dezember – das sind 7 Monate mit 31 Tagen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "8 x 7 + 6 - 5 = ?",
+  "antworten": {
+   "A": "55",
+   "B": "57",
+   "C": "59",
+   "D": "61"
+  },
+  "richtig": "B",
+  "erklaerung": "Punkt vor Strich: 8x7=56, dann 56+6=62, 62-5=57.",
+  "seq": "8 x 7 + 6 - 5 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Sekunden hat eine Stunde?",
+  "antworten": {
+   "A": "1200",
+   "B": "2400",
+   "C": "3600",
+   "D": "4800"
+  },
+  "richtig": "C",
+  "erklaerung": "1 Stunde = 60 Minuten x 60 Sekunden = 3.600 Sekunden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "25% von 200 = ?",
+  "antworten": {
+   "A": "25",
+   "B": "40",
+   "C": "50",
+   "D": "75"
+  },
+  "richtig": "C",
+  "erklaerung": "25% = ein Viertel. 200 / 4 = 50.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Fläche eines Rechtecks 8 x 6 = ?",
+  "antworten": {
+   "A": "42",
+   "B": "46",
+   "C": "48",
+   "D": "52"
+  },
+  "richtig": "C",
+  "erklaerung": "Fläche Rechteck = Länge x Breite = 8 x 6 = 48.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Minuten hat ein Tag?",
+  "antworten": {
+   "A": "720",
+   "B": "1440",
+   "C": "2880",
+   "D": "360"
+  },
+  "richtig": "B",
+  "erklaerung": "1 Tag = 24 Stunden x 60 Minuten = 1.440 Minuten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "33 + 47 - 15 = ?",
+  "antworten": {
+   "A": "55",
+   "B": "60",
+   "C": "65",
+   "D": "70"
+  },
+  "richtig": "C",
+  "erklaerung": "33+47=80, 80-15=65.",
+  "seq": "33 + 47 - 15 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viel ist 12 hoch 2?",
+  "antworten": {
+   "A": "124",
+   "B": "134",
+   "C": "144",
+   "D": "154"
+  },
+  "richtig": "C",
+  "erklaerung": "12² = 12 x 12 = 144.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Ein Rechteck Länge 12, Breite 5. Umfang?",
+  "antworten": {
+   "A": "30",
+   "B": "34",
+   "C": "38",
+   "D": "60"
+  },
+  "richtig": "B",
+  "erklaerung": "Umfang Rechteck = 2x(Länge+Breite) = 2x(12+5) = 2x17 = 34.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Stunden hat eine Woche?",
+  "antworten": {
+   "A": "148",
+   "B": "158",
+   "C": "168",
+   "D": "178"
+  },
+  "richtig": "C",
+  "erklaerung": "1 Woche = 7 Tage x 24 Stunden = 168 Stunden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 3,
+  "frage": "9 x 9 - 9 / 9 = ?",
+  "antworten": {
+   "A": "72",
+   "B": "78",
+   "C": "80",
+   "D": "81"
+  },
+  "richtig": "C",
+  "erklaerung": "Punkt vor Strich: 9x9=81, 9/9=1, dann 81-1=80.",
+  "seq": "9 x 9 - 9 / 9 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "75% von 80 = ?",
+  "antworten": {
+   "A": "55",
+   "B": "60",
+   "C": "65",
+   "D": "70"
+  },
+  "richtig": "B",
+  "erklaerung": "75% = 3/4. 80 x 3/4 = 60.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Tage hat ein Schaltjahr?",
+  "antworten": {
+   "A": "364",
+   "B": "365",
+   "C": "366",
+   "D": "367"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Schaltjahr hat 366 Tage – der Schalttag ist der 29. Februar.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "3 hoch 5 = ?",
+  "antworten": {
+   "A": "125",
+   "B": "215",
+   "C": "243",
+   "D": "315"
+  },
+  "richtig": "C",
+  "erklaerung": "3^5 = 3x3x3x3x3 = 9x27 = 243.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "120 / 8 + 5 = ?",
+  "antworten": {
+   "A": "18",
+   "B": "20",
+   "C": "22",
+   "D": "24"
+  },
+  "richtig": "B",
+  "erklaerung": "Punkt vor Strich: 120/8=15, dann 15+5=20.",
+  "seq": "120 / 8 + 5 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "17 x 3 - 11 = ?",
+  "antworten": {
+   "A": "38",
+   "B": "40",
+   "C": "42",
+   "D": "44"
+  },
+  "richtig": "B",
+  "erklaerung": "17x3=51, 51-11=40.",
+  "seq": "17 x 3 - 11 = ?"
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wer sang 'Thriller'?",
+  "antworten": {
+   "A": "Prince",
+   "B": "Michael Jackson",
+   "C": "Madonna",
+   "D": "Whitney Houston"
+  },
+  "richtig": "B",
+  "erklaerung": "'Thriller' von Michael Jackson (1982) ist das meistverkaufte Album aller Zeiten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Noten gibt es im westlichen Tonsystem?",
+  "antworten": {
+   "A": "7",
+   "B": "10",
+   "C": "12",
+   "D": "15"
+  },
+  "richtig": "C",
+  "erklaerung": "Das westliche Tonsystem hat 12 Halbtöne: C, C#, D, D#, E, F, F#, G, G#, A, A#, H.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Von wem stammt die Sinfonie Nr. 9 mit dem 'Ode an die Freude'?",
+  "antworten": {
+   "A": "Mozart",
+   "B": "Bach",
+   "C": "Beethoven",
+   "D": "Schubert"
+  },
+  "richtig": "C",
+  "erklaerung": "Beethovens 9. Sinfonie mit dem Schlusschor 'Ode an die Freude' ist heute die Europahymne.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welche Band sang 'Bohemian Rhapsody'?",
+  "antworten": {
+   "A": "The Beatles",
+   "B": "Led Zeppelin",
+   "C": "Queen",
+   "D": "Rolling Stones"
+  },
+  "richtig": "C",
+  "erklaerung": "'Bohemian Rhapsody' von Queen wurde 1975 veröffentlicht und von Freddie Mercury geschrieben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land wurde Mozart geboren?",
+  "antworten": {
+   "A": "Deutschland",
+   "B": "Österreich",
+   "C": "Italien",
+   "D": "Tschechien"
+  },
+  "richtig": "B",
+  "erklaerung": "Wolfgang Amadeus Mozart wurde 1756 in Salzburg (Österreich) geboren.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Stammtöne umfasst eine Oktave (von C bis zum nächsten C)?",
+  "antworten": {
+   "A": "5 Töne",
+   "B": "7 Töne",
+   "C": "8 Töne",
+   "D": "12 Töne"
+  },
+  "richtig": "C",
+  "erklaerung": "Eine Oktave umfasst 8 Stammtöne (C bis zum nächsten C).",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Welches Instrument spielt man mit dem Mund?",
+  "antworten": {
+   "A": "Geige",
+   "B": "Trompete",
+   "C": "Harfe",
+   "D": "Xylophon"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Trompete ist ein Blasinstrument – man spielt sie durch Lippenvibration.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Mitglieder hatten die Beatles?",
+  "antworten": {
+   "A": "3",
+   "B": "4",
+   "C": "5",
+   "D": "6"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Beatles bestanden aus 4 Mitgliedern: John Lennon, Paul McCartney, George Harrison, Ringo Starr.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was bedeutet 'Forte' in der Musik?",
+  "antworten": {
+   "A": "Langsam",
+   "B": "Laut",
+   "C": "Leise",
+   "D": "Schnell"
+  },
+  "richtig": "B",
+  "erklaerung": "'Forte' (f) bedeutet laut – 'Piano' (p) bedeutet leise.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welches Land ist Heimat des Flamenco?",
+  "antworten": {
+   "A": "Italien",
+   "B": "Portugal",
+   "C": "Spanien",
+   "D": "Argentinien"
+  },
+  "richtig": "C",
+  "erklaerung": "Flamenco stammt aus Andalusien (Südspanien) und ist seit 2010 UNESCO-Kulturerbe.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Wer komponierte die Brandenburgischen Konzerte?",
+  "antworten": {
+   "A": "Händel",
+   "B": "Bach",
+   "C": "Vivaldi",
+   "D": "Haydn"
+  },
+  "richtig": "B",
+  "erklaerung": "Johann Sebastian Bach schrieb die 6 Brandenburgischen Konzerte um 1721.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welcher Gitarrist spielte 1969 in Woodstock die US-Nationalhymne auf der E-Gitarre?",
+  "antworten": {
+   "A": "Eric Clapton",
+   "B": "Jimmy Page",
+   "C": "Jimi Hendrix",
+   "D": "Carlos Santana"
+  },
+  "richtig": "C",
+  "erklaerung": "Jimi Hendrix spielte am 18. August 1969 in Woodstock eine legendäre Version von „The Star-Spangled Banner“.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was ist ein Metronom?",
+  "antworten": {
+   "A": "Ein Instrument",
+   "B": "Ein Taktmesser",
+   "C": "Eine Notenschrift",
+   "D": "Ein Akkord"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Metronom gibt einen gleichmässigen Takt vor – unverzichtbar beim Üben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welche Sängerin ist als 'Queen of Pop' bekannt?",
+  "antworten": {
+   "A": "Beyonce",
+   "B": "Lady Gaga",
+   "C": "Madonna",
+   "D": "Rihanna"
+  },
+  "richtig": "C",
+  "erklaerung": "Madonna wird seit den 1980ern als 'Queen of Pop' bezeichnet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 3,
+  "frage": "Was ist ein Arpeggio?",
+  "antworten": {
+   "A": "Ein schnelles Stück",
+   "B": "Gebrochener Akkord",
+   "C": "Ein Rhythmus",
+   "D": "Ein Tongeschlecht"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein Arpeggio ist ein 'gebrochener Akkord' – die Töne werden nacheinander statt gleichzeitig gespielt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "In welcher Musikrichtung ist Eminem bekannt?",
+  "antworten": {
+   "A": "Rock",
+   "B": "Jazz",
+   "C": "Hip-Hop",
+   "D": "R&B"
+  },
+  "richtig": "C",
+  "erklaerung": "Eminem ist einer der meistverkauften Hip-Hop-Künstler aller Zeiten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Saiten hat eine Geige?",
+  "antworten": {
+   "A": "3",
+   "B": "4",
+   "C": "5",
+   "D": "6"
+  },
+  "richtig": "B",
+  "erklaerung": "Eine Geige hat 4 Saiten: G, D, A, E (von tief nach hoch).",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was ist Reggae?",
+  "antworten": {
+   "A": "Brasilianische Tanzmusik",
+   "B": "Jamaikanische Musikrichtung",
+   "C": "Afrikanische Trommelmusik",
+   "D": "US-amerikanischer Folk"
+  },
+  "richtig": "B",
+  "erklaerung": "Reggae entstand in den 1960ern in Jamaika – Bob Marley ist der bekannteste Vertreter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Symphonien schrieb Beethoven?",
+  "antworten": {
+   "A": "7",
+   "B": "8",
+   "C": "9",
+   "D": "10"
+  },
+  "richtig": "C",
+  "erklaerung": "Beethoven schrieb 9 Symphonien – die 9. mit dem berühmten Finale 'Ode an die Freude'.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was ist der Unterschied zwischen Dur und Moll?",
+  "antworten": {
+   "A": "Tempo",
+   "B": "Lautstärke",
+   "C": "Klangcharakter hell/dunkel",
+   "D": "Anzahl der Instrumente"
+  },
+  "richtig": "C",
+  "erklaerung": "Dur klingt hell/freudig, Moll klingt dunkel/traurig – es geht um die Abstufung der Töne.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welches Instrument gehört zur Streichergruppe?",
+  "antworten": {
+   "A": "Klarinette",
+   "B": "Cello",
+   "C": "Posaune",
+   "D": "Oboe"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Cello ist ein Streichinstrument – Klarinette, Posaune und Oboe sind Blasinstrumente.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welcher Fluss ist der längste der Welt?",
+  "antworten": {
+   "A": "Amazonas",
+   "B": "Nil",
+   "C": "Jangtse",
+   "D": "Mississippi"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Nil ist mit ca. 6.650 km der längste Fluss der Welt (je nach Messmethode).",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welches ist der grösste Kontinent?",
+  "antworten": {
+   "A": "Afrika",
+   "B": "Amerika",
+   "C": "Asien",
+   "D": "Europa"
+  },
+  "richtig": "C",
+  "erklaerung": "Asien ist mit 44 Millionen km² der grösste und bevölkerungsreichste Kontinent.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Welcher See ist der grösste der Welt?",
+  "antworten": {
+   "A": "Titicacasee",
+   "B": "Viktoriasee",
+   "C": "Kaspisches Meer",
+   "D": "Baikalsee"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Kaspische Meer ist mit 371.000 km² technisch gesehen der grösste See der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welcher Kontinent ist am dünnsten besiedelt?",
+  "antworten": {
+   "A": "Australien",
+   "B": "Südamerika",
+   "C": "Antarktika",
+   "D": "Afrika"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Antarktika hat keine permanente zivile Bevölkerung – nur Wissenschaftler leben dort zeitweise.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land liegt das Matterhorn?",
+  "antworten": {
+   "A": "Österreich",
+   "B": "Frankreich",
+   "C": "Schweiz/Italien",
+   "D": "Deutschland"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Matterhorn liegt an der Grenze zwischen der Schweiz und Italien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welcher Ozean ist der kleinste?",
+  "antworten": {
+   "A": "Atlantik",
+   "B": "Indik",
+   "C": "Südlicher Ozean",
+   "D": "Arktischer Ozean"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Arktische Ozean (Nordpolarmeer) ist mit 14,06 Millionen km² der kleinste Ozean.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land liegt der Grand Canyon?",
+  "antworten": {
+   "A": "Kanada",
+   "B": "Mexiko",
+   "C": "USA",
+   "D": "Brasilien"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Grand Canyon liegt im US-Bundesstaat Arizona und ist bis zu 1.800 m tief.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Frankreich?",
+  "antworten": {
+   "A": "Lyon",
+   "B": "Marseille",
+   "C": "Paris",
+   "D": "Bordeaux"
+  },
+  "richtig": "C",
+  "erklaerung": "Paris ist die Hauptstadt Frankreichs und mit 2,1 Millionen Einwohnern die grösste Stadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Welcher Berg ist der höchste Europas (ohne Kaukasus)?",
+  "antworten": {
+   "A": "Mont Blanc",
+   "B": "Monte Rosa",
+   "C": "Matterhorn",
+   "D": "Zugspitze"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Mont Blanc ist mit 4.808 m der höchste Berg der Alpen und Westeuropas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Durch wie viele Länder fliesst der Nil?",
+  "antworten": {
+   "A": "5",
+   "B": "7",
+   "C": "11",
+   "D": "14"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Nil fliesst durch 11 Länder in Nordostafrika.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Spanien?",
+  "antworten": {
+   "A": "Barcelona",
+   "B": "Sevilla",
+   "C": "Valencia",
+   "D": "Madrid"
+  },
+  "richtig": "D",
+  "erklaerung": "Madrid ist die Hauptstadt Spaniens und mit 3,3 Millionen Einwohnern die grösste Stadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 3,
+  "frage": "Welcher Fluss mündet in den Persischen Golf?",
+  "antworten": {
+   "A": "Tigris",
+   "B": "Euphrat",
+   "C": "Schatt al-Arab",
+   "D": "Indus"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Schatt al-Arab entsteht aus dem Zusammenfluss von Tigris und Euphrat und mündet in den Persischen Golf.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welches Land liegt zwischen Deutschland und Frankreich?",
+  "antworten": {
+   "A": "Niederlande",
+   "B": "Belgien",
+   "C": "Luxemburg",
+   "D": "Schweiz"
+  },
+  "richtig": "C",
+  "erklaerung": "Luxemburg grenzt an Deutschland im Osten und Frankreich im Süden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "In welchem Ozean liegt Hawaii?",
+  "antworten": {
+   "A": "Atlantik",
+   "B": "Indik",
+   "C": "Pazifik",
+   "D": "Arktik"
+  },
+  "richtig": "C",
+  "erklaerung": "Hawaii liegt im Nordpazifik und ist der 50. Bundesstaat der USA.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Wie heisst die Hauptstadt von Russland?",
+  "antworten": {
+   "A": "St. Petersburg",
+   "B": "Moskau",
+   "C": "Kiew",
+   "D": "Minsk"
+  },
+  "richtig": "B",
+  "erklaerung": "Moskau ist die Hauptstadt Russlands und mit 12 Millionen Einwohnern die grösste Stadt Europas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 3,
+  "frage": "Welcher See ist der tiefste der Welt?",
+  "antworten": {
+   "A": "Kaspisches Meer",
+   "B": "Tanganjikasee",
+   "C": "Baikalsee",
+   "D": "Titicacasee"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Baikalsee in Sibirien ist mit 1.642 m der tiefste See der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Wie heisst der Wasserfall der grössten Wassermenge nach?",
+  "antworten": {
+   "A": "Niagarafall",
+   "B": "Victoria-Fall",
+   "C": "Angel Falls",
+   "D": "Iguazu-Fälle"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Iguazu-Fälle an der Grenze zwischen Argentinien und Brasilien führen die meiste Wassermenge.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt der Türkei?",
+  "antworten": {
+   "A": "Istanbul",
+   "B": "Izmir",
+   "C": "Ankara",
+   "D": "Antalya"
+  },
+  "richtig": "C",
+  "erklaerung": "Ankara ist die Hauptstadt der Türkei – Istanbul ist grösser, aber nicht die Hauptstadt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "In welchem Land liegt das Amazonas-Regenwald zum grössten Teil?",
+  "antworten": {
+   "A": "Kolumbien",
+   "B": "Venezuela",
+   "C": "Peru",
+   "D": "Brasilien"
+  },
+  "richtig": "D",
+  "erklaerung": "60% des Amazonas-Regenwalds liegen in Brasilien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Welcher Kontinent hat die meisten Länder?",
+  "antworten": {
+   "A": "Asien",
+   "B": "Amerika",
+   "C": "Afrika",
+   "D": "Europa"
+  },
+  "richtig": "C",
+  "erklaerung": "Afrika hat 54 anerkannte Länder – mehr als jeder andere Kontinent.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Italien?",
+  "antworten": {
+   "A": "Mailand",
+   "B": "Venedig",
+   "C": "Florenz",
+   "D": "Rom"
+  },
+  "richtig": "D",
+  "erklaerung": "Rom ist die Hauptstadt Italiens und war Zentrum des Römischen Reiches.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Minuten hat eine Stunde?",
+  "antworten": {
+   "A": "30",
+   "B": "45",
+   "C": "60",
+   "D": "90"
+  },
+  "richtig": "C",
+  "erklaerung": "Eine Stunde hat 60 Minuten – jede Minute hat 60 Sekunden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Schweden?",
+  "antworten": {
+   "A": "Kopenhagen",
+   "B": "Helsinki",
+   "C": "Oslo",
+   "D": "Stockholm"
+  },
+  "richtig": "D",
+  "erklaerung": "Stockholm ist die Hauptstadt Schwedens mit ca. 1 Million Einwohnern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier ist das grösste Landtier?",
+  "antworten": {
+   "A": "Nilpferd",
+   "B": "Nashorn",
+   "C": "Elefant",
+   "D": "Giraffe"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Afrikanische Elefant ist das grösste Landtier – bis zu 7.500 kg schwer.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Welches Land hat die grösste Bevölkerung?",
+  "antworten": {
+   "A": "China",
+   "B": "Indien",
+   "C": "USA",
+   "D": "Indonesien"
+  },
+  "richtig": "B",
+  "erklaerung": "Indien hat China 2023 überholt – mit über 1,4 Milliarden Einwohnern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Jahreszeiten gibt es?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "C",
+  "erklaerung": "Es gibt 4 Jahreszeiten: Frühling, Sommer, Herbst und Winter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Norwegen?",
+  "antworten": {
+   "A": "Bergen",
+   "B": "Oslo",
+   "C": "Stavanger",
+   "D": "Trondheim"
+  },
+  "richtig": "B",
+  "erklaerung": "Oslo ist die Hauptstadt Norwegens und liegt am Oslofjord.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Wie heisst die Hauptstadt von Neuseeland?",
+  "antworten": {
+   "A": "Auckland",
+   "B": "Christchurch",
+   "C": "Wellington",
+   "D": "Hamilton"
+  },
+  "richtig": "C",
+  "erklaerung": "Wellington ist die Hauptstadt Neuseelands – viele denken fälschlicherweise Auckland.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist der Aggregatzustand von Wasser bei -10 Grad?",
+  "antworten": {
+   "A": "Flüssig",
+   "B": "Gasförmig",
+   "C": "Fest",
+   "D": "Plasma"
+  },
+  "richtig": "C",
+  "erklaerung": "Wasser gefriert bei 0°C – bei -10°C ist es fest (Eis).",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Welches Organ pumpt das Blut durch den Körper?",
+  "antworten": {
+   "A": "Lunge",
+   "B": "Leber",
+   "C": "Niere",
+   "D": "Herz"
+  },
+  "richtig": "D",
+  "erklaerung": "Das Herz pumpt ca. 5 Liter Blut pro Minute durch den Körper.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Was ist der pH-Wert von reinem Wasser?",
+  "antworten": {
+   "A": "5",
+   "B": "7",
+   "C": "9",
+   "D": "14"
+  },
+  "richtig": "B",
+  "erklaerung": "Reines Wasser hat einen pH-Wert von 7 – das ist neutral.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Welches Element hat die Ordnungszahl 1?",
+  "antworten": {
+   "A": "Helium",
+   "B": "Lithium",
+   "C": "Kohlenstoff",
+   "D": "Wasserstoff"
+  },
+  "richtig": "D",
+  "erklaerung": "Wasserstoff (H) hat die Ordnungszahl 1 – es ist das leichteste Element.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Wie schnell fällt ein Objekt im freien Fall (ca.)?",
+  "antworten": {
+   "A": "5 m/s²",
+   "B": "10 m/s²",
+   "C": "15 m/s²",
+   "D": "20 m/s²"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Erdbeschleunigung beträgt ca. 9,81 m/s² – aufgerundet ca. 10 m/s².",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Was ist ein Quasar?",
+  "antworten": {
+   "A": "Ein Stern",
+   "B": "Ein Planet",
+   "C": "Aktiver Galaxienkern",
+   "D": "Ein Asteroid"
+  },
+  "richtig": "C",
+  "erklaerung": "Quasare sind extrem helle aktive Galaxienkerne – die leuchtkräftigsten Objekte im Universum.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 7 x 8?",
+  "antworten": {
+   "A": "54",
+   "B": "56",
+   "C": "58",
+   "D": "64"
+  },
+  "richtig": "B",
+  "erklaerung": "7 x 8 = 56 – ein klassisches Einmaleins-Ergebnis.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist der Umfang eines Kreises mit Radius 10?",
+  "antworten": {
+   "A": "10 Pi",
+   "B": "20 Pi",
+   "C": "100 Pi",
+   "D": "40 Pi"
+  },
+  "richtig": "B",
+  "erklaerung": "Umfang = 2 x Pi x r = 2 x Pi x 10 = 20 Pi ≈ 62,83.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Grad hat ein rechter Winkel?",
+  "antworten": {
+   "A": "45°",
+   "B": "90°",
+   "C": "120°",
+   "D": "180°"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein rechter Winkel beträgt genau 90 Grad.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 15 hoch 2 minus 100?",
+  "antworten": {
+   "A": "115",
+   "B": "125",
+   "C": "225",
+   "D": "200"
+  },
+  "richtig": "B",
+  "erklaerung": "15² = 225, dann 225 - 100 = 125.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Was ergibt sin(90°)?",
+  "antworten": {
+   "A": "0",
+   "B": "0,5",
+   "C": "1",
+   "D": "-1"
+  },
+  "richtig": "C",
+  "erklaerung": "sin(90°) = 1 – das Maximum der Sinusfunktion.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 100 / 4 + 5?",
+  "antworten": {
+   "A": "25",
+   "B": "28",
+   "C": "30",
+   "D": "35"
+  },
+  "richtig": "C",
+  "erklaerung": "Punkt vor Strich: 100/4 = 25, dann 25+5 = 30.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Welche Zahl kommt als nächstes?\n10 - 20 - 30 - 40 - ?",
+  "antworten": {
+   "A": "45",
+   "B": "50",
+   "C": "55",
+   "D": "60"
+  },
+  "richtig": "B",
+  "erklaerung": "Es wird immer 10 addiert: 40 + 10 = 50.",
+  "seq": "10  20  30  40  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n3 - 9 - 27 - 81 - ?",
+  "antworten": {
+   "A": "162",
+   "B": "216",
+   "C": "243",
+   "D": "324"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird mit 3 multipliziert: 81 x 3 = 243.",
+  "seq": "3  9  27  81  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Analogie: Hund zu Welpe wie Katze zu?",
+  "antworten": {
+   "A": "Mieze",
+   "B": "Kätzchen",
+   "C": "Kater",
+   "D": "Haustier"
+  },
+  "richtig": "B",
+  "erklaerung": "Welpe ist das Junge des Hundes – Kätzchen ist das Junge der Katze.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welches passt nicht dazu?\nHammer – Schraubenzieher – Zange – Pinsel – Sägemesser",
+  "antworten": {
+   "A": "Hammer",
+   "B": "Zange",
+   "C": "Pinsel",
+   "D": "Sägemesser"
+  },
+  "richtig": "C",
+  "erklaerung": "Alle anderen sind Werkzeuge zum Bauen/Reparieren – der Pinsel ist ein Malinstrument.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl fehlt?\n2 - 3 - 5 - 8 - 13 - ?",
+  "antworten": {
+   "A": "18",
+   "B": "19",
+   "C": "20",
+   "D": "21"
+  },
+  "richtig": "D",
+  "erklaerung": "Jede Zahl ist die Summe der zwei vorherigen (Fibonacci): 8+13=21.",
+  "seq": "2  3  5  8  13  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Wenn alle Enten Vögel sind und alle Vögel atmen, dann...?",
+  "antworten": {
+   "A": "Enten fliegen alle",
+   "B": "Alle Enten atmen",
+   "C": "Alle Vögel sind Enten",
+   "D": "Enten sind Säugetiere"
+  },
+  "richtig": "B",
+  "erklaerung": "Logischer Schluss: Enten → Vögel → atmen, also atmen alle Enten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Buchstaben hat das Wort MATHEMATIK?",
+  "antworten": {
+   "A": "9",
+   "B": "10",
+   "C": "11",
+   "D": "12"
+  },
+  "richtig": "B",
+  "erklaerung": "M-A-T-H-E-M-A-T-I-K = 10 Buchstaben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "100 - 37 + 14 = ?",
+  "antworten": {
+   "A": "73",
+   "B": "75",
+   "C": "77",
+   "D": "79"
+  },
+  "richtig": "C",
+  "erklaerung": "100 - 37 = 63, dann 63 + 14 = 77.",
+  "seq": "100 - 37 + 14 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "Ein Auto fährt 120 km/h. Wie weit in 90 Minuten?",
+  "antworten": {
+   "A": "150 km",
+   "B": "160 km",
+   "C": "170 km",
+   "D": "180 km"
+  },
+  "richtig": "D",
+  "erklaerung": "90 Minuten = 1,5 Stunden. 120 x 1,5 = 180 km.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele gerade Zahlen gibt es zwischen 1 und 10?",
+  "antworten": {
+   "A": "4",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "B",
+  "erklaerung": "2, 4, 6, 8, 10 – das sind 5 gerade Zahlen zwischen 1 und 10.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 3,
+  "frage": "4² + 3³ = ?",
+  "antworten": {
+   "A": "41",
+   "B": "43",
+   "C": "45",
+   "D": "47"
+  },
+  "richtig": "B",
+  "erklaerung": "4² = 16, 3³ = 27, dann 16 + 27 = 43.",
+  "seq": "4² + 3³ = ?"
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wer war der erste Präsident der USA?",
+  "antworten": {
+   "A": "Abraham Lincoln",
+   "B": "Thomas Jefferson",
+   "C": "George Washington",
+   "D": "Benjamin Franklin"
+  },
+  "richtig": "C",
+  "erklaerung": "George Washington war von 1789 bis 1797 der erste Präsident der USA.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "In welchem Jahr wurde die Titanic gebaut (Stapellauf)?",
+  "antworten": {
+   "A": "1909",
+   "B": "1910",
+   "C": "1911",
+   "D": "1912"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Titanic lief am 31. Mai 1911 vom Stapel – gesunken ist sie 1912.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Welches Land schickte den ersten Menschen ins All?",
+  "antworten": {
+   "A": "USA",
+   "B": "Deutschland",
+   "C": "China",
+   "D": "Sowjetunion"
+  },
+  "richtig": "D",
+  "erklaerung": "Juri Gagarin aus der Sowjetunion flog am 12. April 1961 als erster Mensch ins All.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "Welcher Vertrag beendete den Ersten Weltkrieg offiziell?",
+  "antworten": {
+   "A": "Versailler Vertrag",
+   "B": "Pariser Vertrag",
+   "C": "Berliner Vertrag",
+   "D": "Genfer Vertrag"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Versailler Vertrag wurde am 28. Juni 1919 unterzeichnet und beendete den WWI.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 1,
+  "frage": "Wie hiess der Pharao, der die grösste Pyramide baute?",
+  "antworten": {
+   "A": "Ramses II",
+   "B": "Tutanchamun",
+   "C": "Cheops",
+   "D": "Cleopatra"
+  },
+  "richtig": "C",
+  "erklaerung": "Pharao Cheops liess die Grosse Pyramide von Gizeh um 2560 v.Chr. erbauen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Spieler hat eine Rugby-Mannschaft?",
+  "antworten": {
+   "A": "11",
+   "B": "13",
+   "C": "15",
+   "D": "18"
+  },
+  "richtig": "C",
+  "erklaerung": "Rugby Union wird mit 15 Spielern pro Mannschaft gespielt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "In welcher Stadt fanden die Olympischen Spiele 2020 statt?",
+  "antworten": {
+   "A": "Paris",
+   "B": "Tokio",
+   "C": "Seoul",
+   "D": "Peking"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Olympischen Spiele 2020 fanden 2021 in Tokio statt (wegen COVID verschoben).",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Punkte gibt ein Tor beim Fussball?",
+  "antworten": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "5"
+  },
+  "richtig": "A",
+  "erklaerung": "Jedes Tor zählt 1 Punkt (Tor). Die Punkte für die Tabelle sind 3/1/0.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Welcher Schwimmer hat die meisten Olympischen Goldmedaillen?",
+  "antworten": {
+   "A": "Ian Thorpe",
+   "B": "Mark Spitz",
+   "C": "Michael Phelps",
+   "D": "Ryan Lochte"
+  },
+  "richtig": "C",
+  "erklaerung": "Michael Phelps hat 23 Olympische Goldmedaillen – ein weltweiter Rekord.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr gewann Deutschland seine erste Fussball-WM?",
+  "antworten": {
+   "A": "1950",
+   "B": "1954",
+   "C": "1958",
+   "D": "1962"
+  },
+  "richtig": "B",
+  "erklaerung": "Deutschland gewann 1954 die WM in der Schweiz – das Wunder von Bern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Tasten hat ein Standard-Piano?",
+  "antworten": {
+   "A": "76",
+   "B": "80",
+   "C": "88",
+   "D": "96"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Standard-Piano hat 88 Tasten: 52 weisse und 36 schwarze.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Welcher Künstler ist als 'The King of Rock and Roll' bekannt?",
+  "antworten": {
+   "A": "Chuck Berry",
+   "B": "Elvis Presley",
+   "C": "Jerry Lee Lewis",
+   "D": "Little Richard"
+  },
+  "richtig": "B",
+  "erklaerung": "Elvis Presley wird als 'The King of Rock and Roll' bezeichnet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was ist BPM in der Musik?",
+  "antworten": {
+   "A": "Bass Pro Minute",
+   "B": "Beats Per Measure",
+   "C": "Beats Per Minute",
+   "D": "Base Pitch Mode"
+  },
+  "richtig": "C",
+  "erklaerung": "BPM steht für 'Beats Per Minute' – ein Mass für das Tempo eines Stücks.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welches Instrument spielt man mit einem Bogen?",
+  "antworten": {
+   "A": "Gitarre",
+   "B": "Harfe",
+   "C": "Geige",
+   "D": "Banjo"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Geige (Violine) wird mit einem Bogen gespielt – einem Haarbogen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 3,
+  "frage": "Welcher Komponist war taubstumm, schrieb aber die 9. Symphonie?",
+  "antworten": {
+   "A": "Mozart",
+   "B": "Bach",
+   "C": "Schubert",
+   "D": "Beethoven"
+  },
+  "richtig": "D",
+  "erklaerung": "Beethoven schrieb die 9. Symphonie, als er bereits völlig taub war.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welches Gebirge trennt Europa von Asien?",
+  "antworten": {
+   "A": "Alpen",
+   "B": "Himalaya",
+   "C": "Ural",
+   "D": "Kaukasus"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Ural gilt als natürliche Grenze zwischen Europa und Asien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Welches ist das kleinste Land in Asien?",
+  "antworten": {
+   "A": "Singapur",
+   "B": "Malediven",
+   "C": "Brunei",
+   "D": "Bhutan"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Malediven sind mit 298 km² das flächenmässig kleinste Land Asiens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Polen?",
+  "antworten": {
+   "A": "Krakau",
+   "B": "Danzig",
+   "C": "Warschau",
+   "D": "Lodz"
+  },
+  "richtig": "C",
+  "erklaerung": "Warschau ist die Hauptstadt und grösste Stadt Polens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "An welchem Meer liegt Barcelona?",
+  "antworten": {
+   "A": "Atlantik",
+   "B": "Schwarzes Meer",
+   "C": "Nordsee",
+   "D": "Mittelmeer"
+  },
+  "richtig": "D",
+  "erklaerung": "Barcelona liegt am Mittelmeer an der Nordostküste Spaniens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 3,
+  "frage": "Welcher Fluss fliesst durch Budapest?",
+  "antworten": {
+   "A": "Elbe",
+   "B": "Donau",
+   "C": "Rhein",
+   "D": "Weichsel"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Donau teilt Budapest in Buda (West) und Pest (Ost).",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Tage hat der Monat Februar in einem Normaljahr?",
+  "antworten": {
+   "A": "27",
+   "B": "28",
+   "C": "29",
+   "D": "30"
+  },
+  "richtig": "B",
+  "erklaerung": "Februar hat 28 Tage – in einem Schaltjahr 29.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Welcher Planet ist der Erde am nächsten?",
+  "antworten": {
+   "A": "Mars",
+   "B": "Venus",
+   "C": "Jupiter",
+   "D": "Merkur"
+  },
+  "richtig": "B",
+  "erklaerung": "Venus ist im Durchschnitt der Erde am nächsten – ca. 40 Millionen km.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptstadt von Saudi-Arabien?",
+  "antworten": {
+   "A": "Mekka",
+   "B": "Medina",
+   "C": "Riad",
+   "D": "Dschidda"
+  },
+  "richtig": "C",
+  "erklaerung": "Riad (Riyadh) ist die Hauptstadt Saudi-Arabiens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welches chemische Element ist flüssig bei Raumtemperatur ausser Quecksilber?",
+  "antworten": {
+   "A": "Gallium",
+   "B": "Zinn",
+   "C": "Blei",
+   "D": "Brom"
+  },
+  "richtig": "D",
+  "erklaerung": "Brom ist neben Quecksilber das einzige Element, das bei Raumtemperatur flüssig ist.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 1,
+  "frage": "Was ist Wasser in gasförmigem Zustand?",
+  "antworten": {
+   "A": "Eis",
+   "B": "Dampf",
+   "C": "Nebel",
+   "D": "Wolke"
+  },
+  "richtig": "B",
+  "erklaerung": "Wasser wird bei 100°C zu Dampf (Wasserdampf).",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Was misst ein Seismograph?",
+  "antworten": {
+   "A": "Windstärke",
+   "B": "Erdbeben",
+   "C": "Luftdruck",
+   "D": "Temperatur"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein Seismograph misst Erdbebenwellen und deren Stärke.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 2,
+  "frage": "Was ist Osmose?",
+  "antworten": {
+   "A": "Lichtbrechung",
+   "B": "Wasserbewegung durch Membran",
+   "C": "Zellteilung",
+   "D": "Gaswechsel"
+  },
+  "richtig": "B",
+  "erklaerung": "Osmose ist die Bewegung von Wasser durch eine semipermeable Membran von niedriger zu hoher Konzentration.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Welche Teilchen hat ein Neutron?",
+  "antworten": {
+   "A": "Keine",
+   "B": "1 Quark",
+   "C": "2 Quarks",
+   "D": "3 Quarks"
+  },
+  "richtig": "D",
+  "erklaerung": "Ein Neutron besteht aus 3 Quarks: 2 Down-Quarks und 1 Up-Quark.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 50% von 80?",
+  "antworten": {
+   "A": "30",
+   "B": "35",
+   "C": "40",
+   "D": "45"
+  },
+  "richtig": "C",
+  "erklaerung": "50% = die Hälfte. 80 / 2 = 40.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist der grösste gemeinsame Teiler von 12 und 18?",
+  "antworten": {
+   "A": "3",
+   "B": "4",
+   "C": "6",
+   "D": "9"
+  },
+  "richtig": "C",
+  "erklaerung": "Teiler von 12: 1,2,3,4,6,12. Teiler von 18: 1,2,3,6,9,18. GGT = 6.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Was ergibt 7! (7 Fakultät)?",
+  "antworten": {
+   "A": "2520",
+   "B": "4320",
+   "C": "5040",
+   "D": "5400"
+  },
+  "richtig": "C",
+  "erklaerung": "7! = 7×6×5×4×3×2×1 = 5040.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 1,
+  "frage": "Was ist 9 x 9?",
+  "antworten": {
+   "A": "72",
+   "B": "80",
+   "C": "81",
+   "D": "90"
+  },
+  "richtig": "C",
+  "erklaerung": "9 × 9 = 81.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welche Zahl fehlt?\n4 - 8 - 16 - 32 - ?",
+  "antworten": {
+   "A": "48",
+   "B": "56",
+   "C": "60",
+   "D": "64"
+  },
+  "richtig": "D",
+  "erklaerung": "Jede Zahl wird verdoppelt: 32 × 2 = 64.",
+  "seq": "4  8  16  32  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 1,
+  "frage": "Analogie: Auge zu Sehen wie Ohr zu?",
+  "antworten": {
+   "A": "Sprechen",
+   "B": "Riechen",
+   "C": "Hören",
+   "D": "Fühlen"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Auge dient zum Sehen – das Ohr dient zum Hören.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl kommt als nächstes?\n1 - 4 - 9 - 16 - 25 - 36 - ?",
+  "antworten": {
+   "A": "42",
+   "B": "45",
+   "C": "49",
+   "D": "54"
+  },
+  "richtig": "C",
+  "erklaerung": "Das sind Quadratzahlen: 7² = 49.",
+  "seq": "1  4  9  16  25  36  ?"
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welches Wort passt nicht?\nRot – Blau – Grün – Gross – Gelb",
+  "antworten": {
+   "A": "Rot",
+   "B": "Blau",
+   "C": "Gross",
+   "D": "Gelb"
+  },
+  "richtig": "C",
+  "erklaerung": "Alle anderen sind Farben – 'Gross' ist eine Grössenangabe.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Buchstaben hat das Alphabet?",
+  "antworten": {
+   "A": "24",
+   "B": "25",
+   "C": "26",
+   "D": "27"
+  },
+  "richtig": "C",
+  "erklaerung": "Das deutsche/englische Alphabet hat 26 Buchstaben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "56 / 7 + 3 x 4 = ?",
+  "antworten": {
+   "A": "18",
+   "B": "20",
+   "C": "22",
+   "D": "24"
+  },
+  "richtig": "B",
+  "erklaerung": "Punkt vor Strich: 56/7=8, 3×4=12, dann 8+12=20.",
+  "seq": "56 / 7 + 3 x 4 = ?"
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 1,
+  "frage": "Ein Dutzend Eier kostet 2 Euro. Was kosten 3 Dutzend?",
+  "antworten": {
+   "A": "4 Euro",
+   "B": "5 Euro",
+   "C": "6 Euro",
+   "D": "8 Euro"
+  },
+  "richtig": "C",
+  "erklaerung": "3 Dutzend × 2 Euro = 6 Euro.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Sekunden hat ein Tag?",
+  "antworten": {
+   "A": "72.000",
+   "B": "86.400",
+   "C": "96.000",
+   "D": "100.000"
+  },
+  "richtig": "B",
+  "erklaerung": "24 × 60 × 60 = 86.400 Sekunden pro Tag.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Welcher Kaiser gründete das Römische Kaiserreich?",
+  "antworten": {
+   "A": "Julius Caesar",
+   "B": "Octavian Augustus",
+   "C": "Nero",
+   "D": "Caligula"
+  },
+  "richtig": "B",
+  "erklaerung": "Octavian (Augustus) wurde 27 v.Chr. erster römischer Kaiser.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wann begann der Kalte Krieg?",
+  "antworten": {
+   "A": "1943",
+   "B": "1945",
+   "C": "1947",
+   "D": "1950"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Kalte Krieg begann ca. 1947 mit der Truman-Doktrin und endete 1991.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "Welche Zivilisation baute Machu Picchu?",
+  "antworten": {
+   "A": "Azteken",
+   "B": "Maya",
+   "C": "Inka",
+   "D": "Olmeken"
+  },
+  "richtig": "C",
+  "erklaerung": "Machu Picchu wurde im 15. Jahrhundert von den Inka erbaut.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Welcher Läufer brach zuerst die 10-Sekunden-Marke auf 100m?",
+  "antworten": {
+   "A": "Carl Lewis",
+   "B": "Usain Bolt",
+   "C": "Jim Hines",
+   "D": "Maurice Greene"
+  },
+  "richtig": "C",
+  "erklaerung": "Jim Hines lief 1968 als erster Mensch die 100m in unter 10 Sekunden (9,95s).",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Spieler sind in einer Baseball-Mannschaft auf dem Feld?",
+  "antworten": {
+   "A": "7",
+   "B": "9",
+   "C": "11",
+   "D": "13"
+  },
+  "richtig": "B",
+  "erklaerung": "Baseball wird mit 9 Spielern pro Mannschaft gespielt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "In welchem Jahr wurden die ersten Paralympischen Spiele ausgetragen?",
+  "antworten": {
+   "A": "1948",
+   "B": "1952",
+   "C": "1960",
+   "D": "1964"
+  },
+  "richtig": "C",
+  "erklaerung": "Die ersten offiziellen Paralympischen Spiele fanden 1960 in Rom statt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Welche Band sang 'We Will Rock You'?",
+  "antworten": {
+   "A": "The Beatles",
+   "B": "Led Zeppelin",
+   "C": "Queen",
+   "D": "AC/DC"
+  },
+  "richtig": "C",
+  "erklaerung": "'We Will Rock You' ist ein Song von Queen aus dem Album 'News of the World' (1977).",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 2,
+  "frage": "Was ist ein Tremolo in der Musik?",
+  "antworten": {
+   "A": "Schnelles Tempo",
+   "B": "Schnelles Wiederholen eines Tons",
+   "C": "Lautes Spielen",
+   "D": "Ein Rhythmus"
+  },
+  "richtig": "B",
+  "erklaerung": "Tremolo ist das schnelle Wiederholen eines Tones oder Akkords.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Stimmlagen hat ein klassischer Chor (SATB)?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "C",
+  "erklaerung": "SATB = Sopran, Alt, Tenor, Bass – 4 Stimmlagen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Musik",
+  "schwierigkeit": 3,
+  "frage": "Wer schrieb die Oper 'Der Ring des Nibelungen'?",
+  "antworten": {
+   "A": "Verdi",
+   "B": "Puccini",
+   "C": "Wagner",
+   "D": "Mozart"
+  },
+  "richtig": "C",
+  "erklaerung": "Richard Wagner schrieb den Ring-Zyklus zwischen 1848 und 1874.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Welches Meer liegt zwischen Europa und Afrika?",
+  "antworten": {
+   "A": "Rotes Meer",
+   "B": "Schwarzes Meer",
+   "C": "Mittelmeer",
+   "D": "Nordsee"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Mittelmeer trennt Europa im Norden von Afrika im Süden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Welcher Fluss ist der längste in Europa?",
+  "antworten": {
+   "A": "Donau",
+   "B": "Rhein",
+   "C": "Wolga",
+   "D": "Elbe"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Wolga ist mit 3.690 km der längste Fluss Europas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 1,
+  "frage": "Was ist die Hauptstadt von Brasilien?",
+  "antworten": {
+   "A": "Sao Paulo",
+   "B": "Rio de Janeiro",
+   "C": "Salvador",
+   "D": "Brasilia"
+  },
+  "richtig": "D",
+  "erklaerung": "Brasilia ist seit 1960 die Hauptstadt Brasiliens – viele denken Rio de Janeiro.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 3,
+  "frage": "Welches ist das flächengrösste Land Südamerikas?",
+  "antworten": {
+   "A": "Argentinien",
+   "B": "Peru",
+   "C": "Kolumbien",
+   "D": "Brasilien"
+  },
+  "richtig": "D",
+  "erklaerung": "Brasilien ist mit 8,5 Millionen km² das grösste Land Südamerikas.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geographie",
+  "schwierigkeit": 2,
+  "frage": "Wie heisst die Strasse zwischen Europa und Afrika?",
+  "antworten": {
+   "A": "Strasse von Dover",
+   "B": "Strasse von Gibraltar",
+   "C": "Strasse von Messina",
+   "D": "Strasse von Hormus"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Strasse von Gibraltar verbindet das Mittelmeer mit dem Atlantik.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Welcher Regisseur drehte den Film „Titanic“ (1997)?",
+  "antworten": {
+   "A": "James Cameron",
+   "B": "Christopher Nolan",
+   "C": "Steven Spielberg",
+   "D": "Ridley Scott"
+  },
+  "richtig": "A",
+  "erklaerung": "James Cameron führte Regie bei „Titanic“, der elf Oscars gewann.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt der kleine grüne Jedi-Meister aus „Star Wars“?",
+  "antworten": {
+   "A": "Jabba",
+   "B": "Yoda",
+   "C": "Chewbacca",
+   "D": "Obi-Wan"
+  },
+  "richtig": "B",
+  "erklaerung": "Yoda ist ein sehr alter und weiser Jedi-Meister.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Welcher Film gewann 2020 als erster nicht-englischsprachiger Film den Oscar als Bester Film?",
+  "antworten": {
+   "A": "Joker",
+   "B": "1917",
+   "C": "Parasite",
+   "D": "Roma"
+  },
+  "richtig": "C",
+  "erklaerung": "„Parasite“ von Bong Joon-ho aus Südkorea schrieb 2020 Oscar-Geschichte.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wer führte Regie bei „Pulp Fiction“ (1994)?",
+  "antworten": {
+   "A": "Martin Scorsese",
+   "B": "Quentin Tarantino",
+   "C": "Guy Ritchie",
+   "D": "David Fincher"
+  },
+  "richtig": "B",
+  "erklaerung": "Quentin Tarantino gewann für „Pulp Fiction“ den Oscar für das beste Originaldrehbuch.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "In welcher Stadt spielt die Serie „Friends“?",
+  "antworten": {
+   "A": "New York",
+   "B": "Los Angeles",
+   "C": "Chicago",
+   "D": "Boston"
+  },
+  "richtig": "A",
+  "erklaerung": "Die sechs Freunde leben in Manhattan, New York.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wer spielte im Film „Forrest Gump“ die Hauptrolle?",
+  "antworten": {
+   "A": "Kevin Costner",
+   "B": "Bill Murray",
+   "C": "Tom Cruise",
+   "D": "Tom Hanks"
+  },
+  "richtig": "D",
+  "erklaerung": "Tom Hanks gewann für die Rolle 1995 seinen zweiten Oscar.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "Welcher Film gilt als erster abendfüllender Tonfilm?",
+  "antworten": {
+   "A": "Metropolis",
+   "B": "Der Jazzsänger",
+   "C": "Moderne Zeiten",
+   "D": "Citizen Kane"
+  },
+  "richtig": "B",
+  "erklaerung": "„Der Jazzsänger“ (1927) gilt als erster langer Spielfilm mit synchronisiertem Ton.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Aus welchem Land stammt die Mysteryserie „Dark“?",
+  "antworten": {
+   "A": "Dänemark",
+   "B": "Österreich",
+   "C": "Deutschland",
+   "D": "Schweden"
+  },
+  "richtig": "C",
+  "erklaerung": "„Dark“ wurde von Baran bo Odar und Jantje Friese für Netflix in Deutschland produziert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Welcher Schauspieler verkörperte den Joker in „The Dark Knight“ (2008)?",
+  "antworten": {
+   "A": "Jared Leto",
+   "B": "Joaquin Phoenix",
+   "C": "Jack Nicholson",
+   "D": "Heath Ledger"
+  },
+  "richtig": "D",
+  "erklaerung": "Heath Ledger erhielt für diese Rolle posthum den Oscar als bester Nebendarsteller.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Welcher Film erhielt 2004 elf Oscars und wurde bester Film?",
+  "antworten": {
+   "A": "Der Herr der Ringe: Die Rückkehr des Königs",
+   "B": "Master & Commander",
+   "C": "Mystic River",
+   "D": "Chicago"
+  },
+  "richtig": "A",
+  "erklaerung": "„Die Rückkehr des Königs“ gewann alle elf Kategorien, in denen er nominiert war.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt Harry Potters bester Freund mit den roten Haaren?",
+  "antworten": {
+   "A": "Neville Longbottom",
+   "B": "Draco Malfoy",
+   "C": "Ron Weasley",
+   "D": "Seamus Finnigan"
+  },
+  "richtig": "C",
+  "erklaerung": "Ron Weasley ist Harrys bester Freund und Mitglied der Familie Weasley.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "Welcher Regisseur drehte „2001: Odyssee im Weltraum“?",
+  "antworten": {
+   "A": "Steven Spielberg",
+   "B": "Stanley Kubrick",
+   "C": "Ridley Scott",
+   "D": "George Lucas"
+  },
+  "richtig": "B",
+  "erklaerung": "Stanley Kubrick drehte den Science-Fiction-Klassiker 1968.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "In welcher fiktiven Stadt spielt die Zeichentrickserie „Die Simpsons“?",
+  "antworten": {
+   "A": "Bedrock",
+   "B": "South Park",
+   "C": "Quahog",
+   "D": "Springfield"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Familie Simpson lebt in Springfield.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "Welcher deutsche Film gewann 2007 den Oscar für den besten fremdsprachigen Film?",
+  "antworten": {
+   "A": "Das Boot",
+   "B": "Die Fälscher",
+   "C": "Das Leben der Anderen",
+   "D": "Good Bye, Lenin!"
+  },
+  "richtig": "C",
+  "erklaerung": "„Das Leben der Anderen“ von Florian Henckel von Donnersmarck gewann 2007.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Welche Fantasy-Serie basiert auf den Büchern von George R. R. Martin?",
+  "antworten": {
+   "A": "The Witcher",
+   "B": "Vikings",
+   "C": "Game of Thrones",
+   "D": "Shadow and Bone"
+  },
+  "richtig": "C",
+  "erklaerung": "„Game of Thrones“ basiert auf der Buchreihe „Das Lied von Eis und Feuer“.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier ist Simba im Animationsfilm „Der König der Löwen“?",
+  "antworten": {
+   "A": "Tiger",
+   "B": "Gepard",
+   "C": "Leopard",
+   "D": "Löwe"
+  },
+  "richtig": "D",
+  "erklaerung": "Simba ist ein junger Löwe und Sohn von König Mufasa.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr kam der erste „Star Wars“-Film in die Kinos?",
+  "antworten": {
+   "A": "1975",
+   "B": "1977",
+   "C": "1980",
+   "D": "1983"
+  },
+  "richtig": "B",
+  "erklaerung": "„Krieg der Sterne“ startete im Mai 1977 in den USA.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wer spielte Jack Dawson in „Titanic“?",
+  "antworten": {
+   "A": "Matt Damon",
+   "B": "Leonardo DiCaprio",
+   "C": "Brad Pitt",
+   "D": "Johnny Depp"
+  },
+  "richtig": "B",
+  "erklaerung": "Leonardo DiCaprio spielte den mittellosen Künstler Jack.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "In welcher Stadt findet das Filmfestival mit der „Goldenen Palme“ statt?",
+  "antworten": {
+   "A": "Berlin",
+   "B": "Venedig",
+   "C": "Locarno",
+   "D": "Cannes"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Goldene Palme ist der Hauptpreis der Internationalen Filmfestspiele von Cannes.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt der Hauptpreis der Berlinale?",
+  "antworten": {
+   "A": "Goldene Palme",
+   "B": "Goldener Bär",
+   "C": "Goldener Leopard",
+   "D": "Goldener Löwe"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Goldene Bär ist der Hauptpreis der Internationalen Filmfestspiele Berlin.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt der graue Zauberer, der Frodo in „Der Herr der Ringe“ begleitet?",
+  "antworten": {
+   "A": "Dumbledore",
+   "B": "Merlin",
+   "C": "Radagast",
+   "D": "Gandalf"
+  },
+  "richtig": "D",
+  "erklaerung": "Gandalf der Graue führt die Gefährten auf ihrer Reise.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "Welche Schauspielerin gewann vier Oscars als beste Hauptdarstellerin?",
+  "antworten": {
+   "A": "Meryl Streep",
+   "B": "Ingrid Bergman",
+   "C": "Bette Davis",
+   "D": "Katharine Hepburn"
+  },
+  "richtig": "D",
+  "erklaerung": "Katharine Hepburn ist mit vier Hauptdarstellerinnen-Oscars Rekordhalterin.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt die südkoreanische Netflix-Serie über tödliche Kinderspiele um ein Preisgeld?",
+  "antworten": {
+   "A": "Sweet Home",
+   "B": "Kingdom",
+   "C": "Alice in Borderland",
+   "D": "Squid Game"
+  },
+  "richtig": "D",
+  "erklaerung": "„Squid Game“ wurde 2021 zu einer der meistgesehenen Serien der Welt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Welche Pille nimmt Neo in „Matrix“, um die Wahrheit zu erfahren?",
+  "antworten": {
+   "A": "Die blaue",
+   "B": "Die grüne",
+   "C": "Die gelbe",
+   "D": "Die rote"
+  },
+  "richtig": "D",
+  "erklaerung": "Die rote Pille führt Neo aus der Matrix in die Realität.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wer komponierte die Musik zu „Star Wars“ und „Indiana Jones“?",
+  "antworten": {
+   "A": "Ennio Morricone",
+   "B": "John Williams",
+   "C": "Hans Zimmer",
+   "D": "Howard Shore"
+  },
+  "richtig": "B",
+  "erklaerung": "John Williams schrieb die Musik zu vielen bekannten Kinofilmen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "In welcher Stadt wird die Oscar-Verleihung abgehalten?",
+  "antworten": {
+   "A": "San Francisco",
+   "B": "Los Angeles",
+   "C": "New York",
+   "D": "Las Vegas"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Oscars werden traditionell in Los Angeles verliehen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "Welcher Animationsfilm von Hayao Miyazaki gewann 2003 den Oscar?",
+  "antworten": {
+   "A": "Chihiros Reise ins Zauberland",
+   "B": "Mein Nachbar Totoro",
+   "C": "Das wandelnde Schloss",
+   "D": "Prinzessin Mononoke"
+  },
+  "richtig": "A",
+  "erklaerung": "„Chihiros Reise ins Zauberland“ gewann den Oscar als bester Animationsfilm.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Filme umfasst die Hauptreihe von „Der Pate“?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Trilogie von Francis Ford Coppola besteht aus drei Teilen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt die bekannte ARD-Krimireihe, die seit 1970 sonntags läuft?",
+  "antworten": {
+   "A": "Polizeiruf 110",
+   "B": "Der Alte",
+   "C": "SOKO",
+   "D": "Tatort"
+  },
+  "richtig": "D",
+  "erklaerung": "Der erste „Tatort“ lief am 29. November 1970.",
+  "seq": null
+ },
+ {
+  "kategorie": "Film & TV",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr wurde der Film „Metropolis“ von Fritz Lang uraufgeführt?",
+  "antworten": {
+   "A": "1919",
+   "B": "1927",
+   "C": "1931",
+   "D": "1933"
+  },
+  "richtig": "B",
+  "erklaerung": "„Metropolis“ feierte im Januar 1927 in Berlin Premiere.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Aus welchem Land stammt die Pizza ursprünglich?",
+  "antworten": {
+   "A": "Griechenland",
+   "B": "Italien",
+   "C": "Spanien",
+   "D": "Frankreich"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Pizza hat ihren Ursprung in Neapel, Italien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Woraus wird Sauerkraut hergestellt?",
+  "antworten": {
+   "A": "Rotkohl",
+   "B": "Wirsing",
+   "C": "Weißkohl",
+   "D": "Spitzkohl"
+  },
+  "richtig": "C",
+  "erklaerung": "Sauerkraut ist fermentierter, fein geschnittener Weißkohl.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Welches Gewürz verleiht Curry seine typische gelbe Farbe?",
+  "antworten": {
+   "A": "Ingwer",
+   "B": "Safran",
+   "C": "Paprika",
+   "D": "Kurkuma"
+  },
+  "richtig": "D",
+  "erklaerung": "Kurkuma färbt viele Currymischungen gelb.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Welche Alge wird traditionell zum Einwickeln von Maki-Sushi verwendet?",
+  "antworten": {
+   "A": "Nori",
+   "B": "Wakame",
+   "C": "Kombu",
+   "D": "Dulse"
+  },
+  "richtig": "A",
+  "erklaerung": "Nori sind getrocknete, geröstete Algenblätter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Aus welcher Frucht wird Wein hergestellt?",
+  "antworten": {
+   "A": "Kirschen",
+   "B": "Äpfeln",
+   "C": "Pflaumen",
+   "D": "Trauben"
+  },
+  "richtig": "D",
+  "erklaerung": "Wein entsteht durch die Gärung von Traubensaft.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Welches Land ist der größte Kaffeeproduzent der Welt?",
+  "antworten": {
+   "A": "Brasilien",
+   "B": "Äthiopien",
+   "C": "Vietnam",
+   "D": "Kolumbien"
+  },
+  "richtig": "A",
+  "erklaerung": "Brasilien liefert seit über 150 Jahren den meisten Kaffee.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptzutat von Guacamole?",
+  "antworten": {
+   "A": "Tomate",
+   "B": "Gurke",
+   "C": "Avocado",
+   "D": "Zucchini"
+  },
+  "richtig": "C",
+  "erklaerung": "Guacamole wird aus zerdrückten Avocados zubereitet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Welches Gewürz gehört nach Gewicht zu den teuersten der Welt?",
+  "antworten": {
+   "A": "Kümmel",
+   "B": "Zimt",
+   "C": "Safran",
+   "D": "Paprika"
+  },
+  "richtig": "C",
+  "erklaerung": "Safran besteht aus den Stempelfäden der Krokusblüte und wird von Hand geerntet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Aus welchem Land stammt die Paella?",
+  "antworten": {
+   "A": "Spanien",
+   "B": "Portugal",
+   "C": "Italien",
+   "D": "Mexiko"
+  },
+  "richtig": "A",
+  "erklaerung": "Die Paella stammt aus Valencia in Spanien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Woraus wird schottischer Single Malt Whisky hergestellt?",
+  "antworten": {
+   "A": "Mais",
+   "B": "Gemälzter Gerste",
+   "C": "Reis",
+   "D": "Kartoffeln"
+  },
+  "richtig": "B",
+  "erklaerung": "Single Malt wird aus gemälzter Gerste gebrannt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Aus welchem Land stammt Feta-Käse?",
+  "antworten": {
+   "A": "Bulgarien",
+   "B": "Griechenland",
+   "C": "Italien",
+   "D": "Türkei"
+  },
+  "richtig": "B",
+  "erklaerung": "Feta ist ein Salzlakenkäse und in der EU für Griechenland geschützt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 3,
+  "frage": "Welche dieser Früchte ist botanisch eine Beere?",
+  "antworten": {
+   "A": "Kirsche",
+   "B": "Himbeere",
+   "C": "Erdbeere",
+   "D": "Banane"
+  },
+  "richtig": "D",
+  "erklaerung": "Botanisch zählt die Banane zu den Beeren, Erdbeere und Himbeere nicht.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Aus welcher Pflanze wird Tofu hergestellt?",
+  "antworten": {
+   "A": "Erbsen",
+   "B": "Soja",
+   "C": "Mais",
+   "D": "Linsen"
+  },
+  "richtig": "B",
+  "erklaerung": "Tofu entsteht aus geronnener Sojamilch.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptzutat von Hummus?",
+  "antworten": {
+   "A": "Erbsen",
+   "B": "Linsen",
+   "C": "Kichererbsen",
+   "D": "Bohnen"
+  },
+  "richtig": "C",
+  "erklaerung": "Hummus wird aus pürierten Kichererbsen und Sesampaste hergestellt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Welches Getränk wird aus Hopfen, Malz, Hefe und Wasser gebraut?",
+  "antworten": {
+   "A": "Cidre",
+   "B": "Met",
+   "C": "Wein",
+   "D": "Bier"
+  },
+  "richtig": "D",
+  "erklaerung": "Das sind die klassischen Zutaten des deutschen Reinheitsgebots.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt das italienische Dessert mit Mascarpone und Löffelbiskuits?",
+  "antworten": {
+   "A": "Tiramisu",
+   "B": "Zabaione",
+   "C": "Panna Cotta",
+   "D": "Cannoli"
+  },
+  "richtig": "A",
+  "erklaerung": "Tiramisu bedeutet übersetzt „zieh mich hoch“.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr wurde das bayerische Reinheitsgebot für Bier erlassen?",
+  "antworten": {
+   "A": "1415",
+   "B": "1516",
+   "C": "1618",
+   "D": "1871"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Reinheitsgebot wurde 1516 in Ingolstadt verkündet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Welche Käsesorte ist für ihre großen Löcher bekannt?",
+  "antworten": {
+   "A": "Parmesan",
+   "B": "Gouda",
+   "C": "Camembert",
+   "D": "Emmentaler"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Löcher entstehen durch Gase bei der Reifung.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Was ist die Hauptzutat von Marzipan?",
+  "antworten": {
+   "A": "Haselnüsse",
+   "B": "Mandeln",
+   "C": "Kokos",
+   "D": "Erdnüsse"
+  },
+  "richtig": "B",
+  "erklaerung": "Marzipan besteht aus Mandeln und Zucker.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Woraus wird Schokolade hergestellt?",
+  "antworten": {
+   "A": "Kaffeebohnen",
+   "B": "Kakaobohnen",
+   "C": "Sojabohnen",
+   "D": "Haselnüssen"
+  },
+  "richtig": "B",
+  "erklaerung": "Kakaobohnen wachsen an Kakaobäumen in den Tropen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Aus welcher Region stammt die Kartoffel ursprünglich?",
+  "antworten": {
+   "A": "Deutschland",
+   "B": "Anden in Südamerika",
+   "C": "Irland",
+   "D": "Indien"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Kartoffel wurde in den Anden domestiziert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt das japanische alkoholische Getränk aus Reis?",
+  "antworten": {
+   "A": "Soju",
+   "B": "Baijiu",
+   "C": "Matcha",
+   "D": "Sake"
+  },
+  "richtig": "D",
+  "erklaerung": "Sake wird aus vergorenem Reis hergestellt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 3,
+  "frage": "Aus welcher Milch wird Roquefort-Käse hergestellt?",
+  "antworten": {
+   "A": "Büffelmilch",
+   "B": "Schafsmilch",
+   "C": "Kuhmilch",
+   "D": "Ziegenmilch"
+  },
+  "richtig": "B",
+  "erklaerung": "Roquefort reift in Höhlen und wird aus Schafsmilch gemacht.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Welches Gemüse bringt beim Schneiden oft zum Weinen?",
+  "antworten": {
+   "A": "Gurke",
+   "B": "Zwiebel",
+   "C": "Karotte",
+   "D": "Paprika"
+  },
+  "richtig": "B",
+  "erklaerung": "Beim Schneiden werden Stoffe frei, die die Augen reizen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt die kalte spanische Suppe aus Tomaten und Gemüse?",
+  "antworten": {
+   "A": "Gazpacho",
+   "B": "Minestrone",
+   "C": "Borschtsch",
+   "D": "Ratatouille"
+  },
+  "richtig": "A",
+  "erklaerung": "Gazpacho kommt aus Andalusien und wird kalt serviert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 3,
+  "frage": "Aus welcher Teigart besteht Baklava hauptsächlich?",
+  "antworten": {
+   "A": "Hefeteig",
+   "B": "Filoteig",
+   "C": "Blätterteig",
+   "D": "Mürbeteig"
+  },
+  "richtig": "B",
+  "erklaerung": "Baklava besteht aus vielen hauchdünnen Teigschichten mit Nüssen und Sirup.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Welche Beere gibt Gin seinen typischen Geschmack?",
+  "antworten": {
+   "A": "Preiselbeere",
+   "B": "Brombeere",
+   "C": "Wacholderbeere",
+   "D": "Johannisbeere"
+  },
+  "richtig": "C",
+  "erklaerung": "Wacholder ist die wichtigste Zutat im Gin.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 1,
+  "frage": "Welches Gemüse wird zu Halloween traditionell ausgehöhlt und beleuchtet?",
+  "antworten": {
+   "A": "Rübe",
+   "B": "Kürbis",
+   "C": "Kartoffel",
+   "D": "Kohl"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Kürbis ersetzte die ursprünglich verwendeten Rüben.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Aus welchem Land stammt Kimchi?",
+  "antworten": {
+   "A": "Korea",
+   "B": "Japan",
+   "C": "China",
+   "D": "Thailand"
+  },
+  "richtig": "A",
+  "erklaerung": "Kimchi ist fermentierter Kohl und ein koreanisches Nationalgericht.",
+  "seq": null
+ },
+ {
+  "kategorie": "Essen & Trinken",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die fünfte Geschmacksrichtung neben süß, sauer, salzig und bitter?",
+  "antworten": {
+   "A": "Fettig",
+   "B": "Scharf",
+   "C": "Umami",
+   "D": "Herb"
+  },
+  "richtig": "C",
+  "erklaerung": "Umami bedeutet auf Japanisch „herzhaft“.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Wofür steht die Abkürzung „WLAN“?",
+  "antworten": {
+   "A": "Wireless Local Area Network",
+   "B": "Wired Local Access Node",
+   "C": "Wide Link Access Network",
+   "D": "World Large Area Net"
+  },
+  "richtig": "A",
+  "erklaerung": "WLAN bezeichnet ein drahtloses lokales Netzwerk.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Welches Unternehmen stellte 2007 das erste iPhone vor?",
+  "antworten": {
+   "A": "Samsung",
+   "B": "Apple",
+   "C": "Microsoft",
+   "D": "Nokia"
+  },
+  "richtig": "B",
+  "erklaerung": "Steve Jobs präsentierte das iPhone im Januar 2007.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wer gilt als Erfinder des World Wide Web?",
+  "antworten": {
+   "A": "Steve Jobs",
+   "B": "Tim Berners-Lee",
+   "C": "Vint Cerf",
+   "D": "Bill Gates"
+  },
+  "richtig": "B",
+  "erklaerung": "Tim Berners-Lee entwickelte das Web 1989 am CERN.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wofür steht die Abkürzung „USB“?",
+  "antworten": {
+   "A": "Universal Storage Block",
+   "B": "Ultra Speed Byte",
+   "C": "Universal Serial Bus",
+   "D": "Unified System Board"
+  },
+  "richtig": "C",
+  "erklaerung": "USB ist ein Standard zum Anschluss von Geräten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Welche Programmiersprache trägt einen Kaffee-Begriff im Namen und stammt ursprünglich von Sun Microsystems?",
+  "antworten": {
+   "A": "Swift",
+   "B": "Ruby",
+   "C": "Java",
+   "D": "Python"
+  },
+  "richtig": "C",
+  "erklaerung": "Java wurde in den 1990er-Jahren bei Sun Microsystems entwickelt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Bit hat ein Byte?",
+  "antworten": {
+   "A": "4",
+   "B": "8",
+   "C": "16",
+   "D": "32"
+  },
+  "richtig": "B",
+  "erklaerung": "Ein Byte besteht aus acht Bit.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wofür steht die Abkürzung „CPU“?",
+  "antworten": {
+   "A": "Core Program Utility",
+   "B": "Central Processing Unit",
+   "C": "Central Power Unit",
+   "D": "Computer Personal Unit"
+  },
+  "richtig": "B",
+  "erklaerung": "Die CPU ist der Hauptprozessor eines Computers.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Welche Taste löscht Zeichen links vom Cursor?",
+  "antworten": {
+   "A": "Esc",
+   "B": "Tab",
+   "C": "Entf",
+   "D": "Rücktaste"
+  },
+  "richtig": "D",
+  "erklaerung": "Mit der Rücktaste (Backspace) löscht man nach links.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr wurde Google gegründet?",
+  "antworten": {
+   "A": "1995",
+   "B": "1998",
+   "C": "2001",
+   "D": "2004"
+  },
+  "richtig": "B",
+  "erklaerung": "Larry Page und Sergey Brin gründeten Google 1998.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Welches Betriebssystem wurde von Linus Torvalds begonnen?",
+  "antworten": {
+   "A": "Unix",
+   "B": "Windows",
+   "C": "macOS",
+   "D": "Linux"
+  },
+  "richtig": "D",
+  "erklaerung": "Linus Torvalds startete Linux 1991 als Student.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wofür steht „HTML“?",
+  "antworten": {
+   "A": "Home Tool Markup Language",
+   "B": "HyperText Markup Language",
+   "C": "High Tech Machine Language",
+   "D": "Hyper Transfer Media Link"
+  },
+  "richtig": "B",
+  "erklaerung": "HTML beschreibt die Struktur von Webseiten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "Welche Dezimalzahl entspricht der Binärzahl 1010?",
+  "antworten": {
+   "A": "8",
+   "B": "10",
+   "C": "12",
+   "D": "14"
+  },
+  "richtig": "B",
+  "erklaerung": "1010 bedeutet 8 + 2 = 10.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man Schadsoftware, die Daten verschlüsselt und Lösegeld verlangt?",
+  "antworten": {
+   "A": "Spyware",
+   "B": "Adware",
+   "C": "Phishing",
+   "D": "Ransomware"
+  },
+  "richtig": "D",
+  "erklaerung": "Ransomware sperrt Daten bis zur Zahlung.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Welches Gerät verbindet dein Heimnetzwerk mit dem Internet?",
+  "antworten": {
+   "A": "Router",
+   "B": "Monitor",
+   "C": "Drucker",
+   "D": "Scanner"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Router vermittelt zwischen Heimnetz und Internet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wer gründete Microsoft zusammen mit Paul Allen?",
+  "antworten": {
+   "A": "Larry Page",
+   "B": "Elon Musk",
+   "C": "Bill Gates",
+   "D": "Steve Jobs"
+  },
+  "richtig": "C",
+  "erklaerung": "Gates und Allen gründeten Microsoft 1975.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wer gründete Apple zusammen mit Steve Wozniak?",
+  "antworten": {
+   "A": "Steve Jobs",
+   "B": "Larry Ellison",
+   "C": "Bill Gates",
+   "D": "Tim Cook"
+  },
+  "richtig": "A",
+  "erklaerung": "Jobs und Wozniak gründeten Apple 1976 in einer Garage.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Welche Firma entwickelt das Betriebssystem Android weiter?",
+  "antworten": {
+   "A": "Microsoft",
+   "B": "Google",
+   "C": "Samsung",
+   "D": "Nokia"
+  },
+  "richtig": "B",
+  "erklaerung": "Android gehört seit 2005 zu Google.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "Was gibt die Einheit Hertz bei einem Prozessor an?",
+  "antworten": {
+   "A": "Die Speichergröße",
+   "B": "Den Stromverbrauch",
+   "C": "Die Temperatur",
+   "D": "Die Taktfrequenz"
+  },
+  "richtig": "D",
+  "erklaerung": "Hertz misst Schwingungen pro Sekunde.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Wofür steht „KI“ in der Technik?",
+  "antworten": {
+   "A": "Kabellose Internetverbindung",
+   "B": "Künstliche Intelligenz",
+   "C": "Kurze Information",
+   "D": "Kontrollierte Instanz"
+  },
+  "richtig": "B",
+  "erklaerung": "KI bezeichnet Computersysteme, die lernen und Aufgaben lösen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man den Betrug, bei dem gefälschte Nachrichten Zugangsdaten abgreifen sollen?",
+  "antworten": {
+   "A": "Hosting",
+   "B": "Streaming",
+   "C": "Tracking",
+   "D": "Phishing"
+  },
+  "richtig": "D",
+  "erklaerung": "Phishing ist das „Angeln“ nach Passwörtern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Welches Zeichen trennt in einer E-Mail-Adresse den Namen vom Anbieter?",
+  "antworten": {
+   "A": "#",
+   "B": "%",
+   "C": "@",
+   "D": "&"
+  },
+  "richtig": "C",
+  "erklaerung": "Das @-Zeichen wird „At“ oder „Klammeraffe“ genannt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "Welches Element ist der wichtigste Grundstoff für Computerchips?",
+  "antworten": {
+   "A": "Kupfer",
+   "B": "Silizium",
+   "C": "Eisen",
+   "D": "Kohlenstoff"
+  },
+  "richtig": "B",
+  "erklaerung": "Silizium ist ein Halbleiter und Grundlage der Chipherstellung.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wofür steht die Abkürzung „GPS“?",
+  "antworten": {
+   "A": "Global Positioning System",
+   "B": "Global Phone Service",
+   "C": "General Path Signal",
+   "D": "Geo Planning System"
+  },
+  "richtig": "A",
+  "erklaerung": "GPS bestimmt Positionen über Satelliten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Welchem Unternehmen gehört die Videoplattform YouTube?",
+  "antworten": {
+   "A": "Meta",
+   "B": "Microsoft",
+   "C": "Amazon",
+   "D": "Google"
+  },
+  "richtig": "D",
+  "erklaerung": "Google kaufte YouTube 2006.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wofür steht „PDF“?",
+  "antworten": {
+   "A": "Portable Document Format",
+   "B": "Public Digital Format",
+   "C": "Printed Document Form",
+   "D": "Personal Data File"
+  },
+  "richtig": "A",
+  "erklaerung": "PDF-Dateien sehen auf allen Geräten gleich aus.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man ein Programm, das Webseiten anzeigt?",
+  "antworten": {
+   "A": "Compiler",
+   "B": "Server",
+   "C": "Browser",
+   "D": "Treiber"
+  },
+  "richtig": "C",
+  "erklaerung": "Beispiele für Browser sind Firefox, Chrome und Safari.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "Welche Spielkonsole brachte Nintendo 2017 auf den Markt?",
+  "antworten": {
+   "A": "Wii U",
+   "B": "Wii",
+   "C": "GameCube",
+   "D": "Nintendo Switch"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Switch ist eine Hybrid-Konsole für Fernseher und unterwegs.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die kleinste Einheit eines digitalen Bildes?",
+  "antworten": {
+   "A": "Vektor",
+   "B": "Voxel",
+   "C": "Pixel",
+   "D": "Byte"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Bild besteht aus vielen einzelnen Pixeln.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 1,
+  "frage": "Woraus bestehen Glasfaserkabel?",
+  "antworten": {
+   "A": "Aluminium",
+   "B": "Stahl",
+   "C": "Kupfer",
+   "D": "Glas"
+  },
+  "richtig": "D",
+  "erklaerung": "Glasfasern übertragen Daten mit Lichtimpulsen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Technik & Computer",
+  "schwierigkeit": 3,
+  "frage": "Welcher Wissenschaftler entwickelte das Modell der Turing-Maschine?",
+  "antworten": {
+   "A": "Konrad Zuse",
+   "B": "Charles Babbage",
+   "C": "John von Neumann",
+   "D": "Alan Turing"
+  },
+  "richtig": "D",
+  "erklaerung": "Alan Turing legte 1936 die Grundlagen der theoretischen Informatik.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Beine hat ein Insekt?",
+  "antworten": {
+   "A": "4",
+   "B": "6",
+   "C": "8",
+   "D": "10"
+  },
+  "richtig": "B",
+  "erklaerung": "Insekten haben sechs Beine.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Welches ist das größte Tier der Welt?",
+  "antworten": {
+   "A": "Walhai",
+   "B": "Blauwal",
+   "C": "Elefant",
+   "D": "Giraffe"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Blauwal wird bis zu 30 Meter lang.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man ein junges Pferd?",
+  "antworten": {
+   "A": "Kitz",
+   "B": "Lamm",
+   "C": "Fohlen",
+   "D": "Kalb"
+  },
+  "richtig": "C",
+  "erklaerung": "Junge Pferde heißen Fohlen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welches dieser Tiere ist ein Säugetier, das Eier legt?",
+  "antworten": {
+   "A": "Igel",
+   "B": "Schnabeltier",
+   "C": "Fledermaus",
+   "D": "Delfin"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Schnabeltier gehört zu den eierlegenden Säugetieren.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Welcher flugunfähige Vogel lebt in der Antarktis?",
+  "antworten": {
+   "A": "Kiwi",
+   "B": "Pinguin",
+   "C": "Strauß",
+   "D": "Emu"
+  },
+  "richtig": "B",
+  "erklaerung": "Pinguine leben auf der Südhalbkugel.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Herzen hat ein Oktopus?",
+  "antworten": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "4"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Oktopus hat drei Herzen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier hält bei uns im Winter Winterschlaf?",
+  "antworten": {
+   "A": "Fuchs",
+   "B": "Igel",
+   "C": "Hase",
+   "D": "Reh"
+  },
+  "richtig": "B",
+  "erklaerung": "Igel schlafen von Herbst bis Frühling.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man Tiere, die Pflanzen und Fleisch fressen?",
+  "antworten": {
+   "A": "Aasfresser",
+   "B": "Pflanzenfresser",
+   "C": "Allesfresser",
+   "D": "Fleischfresser"
+  },
+  "richtig": "C",
+  "erklaerung": "Allesfresser sind zum Beispiel Menschen und Bären.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man eine Gruppe von Wölfen?",
+  "antworten": {
+   "A": "Schar",
+   "B": "Rudel",
+   "C": "Schwarm",
+   "D": "Herde"
+  },
+  "richtig": "B",
+  "erklaerung": "Wölfe leben in Rudeln.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "In welchem Regenwald lebt das größte zusammenhängende tropische Waldgebiet der Erde?",
+  "antworten": {
+   "A": "Daintree-Regenwald",
+   "B": "Kongo-Regenwald",
+   "C": "Amazonas-Regenwald",
+   "D": "Borneo-Regenwald"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Amazonas-Regenwald ist der größte tropische Regenwald.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Welches Tier hat den längsten Hals?",
+  "antworten": {
+   "A": "Kamel",
+   "B": "Elefant",
+   "C": "Strauß",
+   "D": "Giraffe"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Hals einer Giraffe misst bis zu 2 Meter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welches dieser Tiere ist ein Wirbeltier?",
+  "antworten": {
+   "A": "Qualle",
+   "B": "Schnecke",
+   "C": "Frosch",
+   "D": "Spinne"
+  },
+  "richtig": "C",
+  "erklaerung": "Frösche haben eine Wirbelsäule.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Von welchem Baum stammt Kork?",
+  "antworten": {
+   "A": "Kastanie",
+   "B": "Korkeiche",
+   "C": "Buche",
+   "D": "Birke"
+  },
+  "richtig": "B",
+  "erklaerung": "Kork wird aus der Rinde der Korkeiche gewonnen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welche Pflanze gehört zu den am schnellsten wachsenden Gräsern?",
+  "antworten": {
+   "A": "Mais",
+   "B": "Schilf",
+   "C": "Bambus",
+   "D": "Weizen"
+  },
+  "richtig": "C",
+  "erklaerung": "Bambus kann an einem Tag fast einen Meter wachsen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Was stellen Bienen aus Nektar her?",
+  "antworten": {
+   "A": "Sirup",
+   "B": "Zucker",
+   "C": "Wachs",
+   "D": "Honig"
+  },
+  "richtig": "D",
+  "erklaerung": "Bienen verwandeln Nektar in Honig.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die Verwandlung einer Raupe in einen Schmetterling?",
+  "antworten": {
+   "A": "Evolution",
+   "B": "Metamorphose",
+   "C": "Mutation",
+   "D": "Migration"
+  },
+  "richtig": "B",
+  "erklaerung": "Dabei durchläuft sie das Puppenstadium.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man den Vorgang, mit dem Pflanzen aus Licht Energie gewinnen?",
+  "antworten": {
+   "A": "Zellatmung",
+   "B": "Gärung",
+   "C": "Verdauung",
+   "D": "Fotosynthese"
+  },
+  "richtig": "D",
+  "erklaerung": "Dabei entstehen Zucker und Sauerstoff.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Welches Gas nehmen Pflanzen bei der Fotosynthese auf?",
+  "antworten": {
+   "A": "Kohlendioxid",
+   "B": "Stickstoff",
+   "C": "Wasserstoff",
+   "D": "Sauerstoff"
+  },
+  "richtig": "A",
+  "erklaerung": "Pflanzen binden Kohlendioxid und geben Sauerstoff ab.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Welches Säugetier kann aktiv fliegen?",
+  "antworten": {
+   "A": "Flughörnchen",
+   "B": "Gleitbeutler",
+   "C": "Fledermaus",
+   "D": "Riesengleiter"
+  },
+  "richtig": "C",
+  "erklaerung": "Nur Fledermäuse beherrschen den Flug mit Flügelschlag.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man Tiere, die vorwiegend nachts aktiv sind?",
+  "antworten": {
+   "A": "Winteraktiv",
+   "B": "Nachtaktiv",
+   "C": "Tagaktiv",
+   "D": "Standorttreu"
+  },
+  "richtig": "B",
+  "erklaerung": "Eulen und Fledermäuse sind nachtaktiv.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Welcher Vogel legt das größte Ei?",
+  "antworten": {
+   "A": "Emu",
+   "B": "Kondor",
+   "C": "Albatros",
+   "D": "Strauß"
+  },
+  "richtig": "D",
+  "erklaerung": "Das Straußenei ist das größte Vogelei.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Wie lange dauert die Tragzeit eines Elefanten ungefähr?",
+  "antworten": {
+   "A": "9 Monate",
+   "B": "12 Monate",
+   "C": "22 Monate",
+   "D": "36 Monate"
+  },
+  "richtig": "C",
+  "erklaerung": "Elefanten tragen fast zwei Jahre lang.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welches Tier kann seine Hautfarbe zur Tarnung und Verständigung verändern?",
+  "antworten": {
+   "A": "Gecko",
+   "B": "Leguan",
+   "C": "Salamander",
+   "D": "Chamäleon"
+  },
+  "richtig": "D",
+  "erklaerung": "Chamäleons ändern ihre Farbe auch je nach Stimmung.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der größte Fisch der Welt?",
+  "antworten": {
+   "A": "Walhai",
+   "B": "Weißer Hai",
+   "C": "Mantarochen",
+   "D": "Hammerhai"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Walhai wird bis zu 12 Meter lang und frisst Plankton.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welches Tier ziert das deutsche Bundeswappen?",
+  "antworten": {
+   "A": "Adler",
+   "B": "Bär",
+   "C": "Löwe",
+   "D": "Falke"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Bundesadler ist das Wappentier Deutschlands.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welche Farbe hat der Pflanzenfarbstoff Chlorophyll?",
+  "antworten": {
+   "A": "Blau",
+   "B": "Grün",
+   "C": "Rot",
+   "D": "Gelb"
+  },
+  "richtig": "B",
+  "erklaerung": "Chlorophyll färbt Blätter grün.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 2,
+  "frage": "Welches Gas ist am häufigsten in der Erdatmosphäre?",
+  "antworten": {
+   "A": "Sauerstoff",
+   "B": "Stickstoff",
+   "C": "Argon",
+   "D": "Kohlendioxid"
+  },
+  "richtig": "B",
+  "erklaerung": "Etwa 78 % der Luft bestehen aus Stickstoff.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 3,
+  "frage": "Woraus besteht Honig überwiegend?",
+  "antworten": {
+   "A": "Eiweiß",
+   "B": "Fett",
+   "C": "Wasser",
+   "D": "Zucker"
+  },
+  "richtig": "D",
+  "erklaerung": "Honig besteht zu etwa 80 % aus Fruchtzucker und Traubenzucker.",
+  "seq": null
+ },
+ {
+  "kategorie": "Tiere & Natur",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man ein junges Schaf?",
+  "antworten": {
+   "A": "Lamm",
+   "B": "Ferkel",
+   "C": "Kitz",
+   "D": "Kalb"
+  },
+  "richtig": "A",
+  "erklaerung": "Junge Schafe heißen Lämmer.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Wer malte „Die Sternennacht“?",
+  "antworten": {
+   "A": "Vincent van Gogh",
+   "B": "Paul Cézanne",
+   "C": "Pablo Picasso",
+   "D": "Claude Monet"
+  },
+  "richtig": "A",
+  "erklaerung": "Van Gogh malte das Bild 1889.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb „Die Verwandlung“?",
+  "antworten": {
+   "A": "Thomas Mann",
+   "B": "Franz Kafka",
+   "C": "Bertolt Brecht",
+   "D": "Hermann Hesse"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Erzählung erschien 1915.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer malte die Decke der Sixtinischen Kapelle?",
+  "antworten": {
+   "A": "Leonardo da Vinci",
+   "B": "Tizian",
+   "C": "Michelangelo",
+   "D": "Raffael"
+  },
+  "richtig": "C",
+  "erklaerung": "Michelangelo malte sie zwischen 1508 und 1512.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb „Die Leiden des jungen Werthers“?",
+  "antworten": {
+   "A": "Johann Wolfgang von Goethe",
+   "B": "Friedrich Schiller",
+   "C": "Heinrich Heine",
+   "D": "Theodor Fontane"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Briefroman erschien 1774.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher Künstler gilt als Mitbegründer des Kubismus?",
+  "antworten": {
+   "A": "Paul Klee",
+   "B": "Pablo Picasso",
+   "C": "Henri Matisse",
+   "D": "Salvador Dalí"
+  },
+  "richtig": "B",
+  "erklaerung": "Picasso begründete den Kubismus gemeinsam mit Georges Braque.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Wer schrieb die „Harry Potter“-Romane?",
+  "antworten": {
+   "A": "J. K. Rowling",
+   "B": "Roald Dahl",
+   "C": "Astrid Lindgren",
+   "D": "Cornelia Funke"
+  },
+  "richtig": "A",
+  "erklaerung": "Der erste Band erschien 1997.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb „Der kleine Prinz“?",
+  "antworten": {
+   "A": "Victor Hugo",
+   "B": "Jules Verne",
+   "C": "Antoine de Saint-Exupéry",
+   "D": "Albert Camus"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Buch erschien 1943.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt das berühmte Gemälde von Edvard Munch mit der verzweifelten Gestalt?",
+  "antworten": {
+   "A": "Der Schrei",
+   "B": "Die Nacht",
+   "C": "Die Angst",
+   "D": "Der Ruf"
+  },
+  "richtig": "A",
+  "erklaerung": "„Der Schrei“ entstand 1893 und ist ein Hauptwerk des Expressionismus.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "In welchem Museum hängt die Mona Lisa?",
+  "antworten": {
+   "A": "Prado",
+   "B": "Louvre",
+   "C": "Uffizien",
+   "D": "British Museum"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Mona Lisa hängt im Louvre in Paris.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb „Die Glocke“?",
+  "antworten": {
+   "A": "Friedrich Schiller",
+   "B": "Lessing",
+   "C": "Goethe",
+   "D": "Heine"
+  },
+  "richtig": "A",
+  "erklaerung": "Das „Lied von der Glocke“ stammt von Schiller.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wer schrieb „Die Blechtrommel“?",
+  "antworten": {
+   "A": "Heinrich Böll",
+   "B": "Siegfried Lenz",
+   "C": "Martin Walser",
+   "D": "Günter Grass"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Roman erschien 1959.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher Autor schrieb das Drama „Hamlet“?",
+  "antworten": {
+   "A": "Oscar Wilde",
+   "B": "Christopher Marlowe",
+   "C": "William Shakespeare",
+   "D": "Charles Dickens"
+  },
+  "richtig": "C",
+  "erklaerung": "„Hamlet“ entstand um 1600.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher Maler schuf „Das Mädchen mit dem Perlenohrring“?",
+  "antworten": {
+   "A": "Rubens",
+   "B": "Jan Vermeer",
+   "C": "Rembrandt",
+   "D": "Frans Hals"
+  },
+  "richtig": "B",
+  "erklaerung": "Vermeer malte das Bild um 1665.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der Kunststil, der nach einem Gemälde von Claude Monet benannt wurde?",
+  "antworten": {
+   "A": "Realismus",
+   "B": "Surrealismus",
+   "C": "Expressionismus",
+   "D": "Impressionismus"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Name geht auf Monets „Impression, soleil levant“ zurück.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb den Roman „1984“?",
+  "antworten": {
+   "A": "Aldous Huxley",
+   "B": "H. G. Wells",
+   "C": "George Orwell",
+   "D": "Ray Bradbury"
+  },
+  "richtig": "C",
+  "erklaerung": "„1984“ erschien 1949.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Wer schrieb „Der Herr der Ringe“?",
+  "antworten": {
+   "A": "J. K. Rowling",
+   "B": "George R. R. Martin",
+   "C": "J. R. R. Tolkien",
+   "D": "C. S. Lewis"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Buch erschien 1954 und 1955.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Welcher Autor schrieb „Krieg und Frieden“?",
+  "antworten": {
+   "A": "Anton Tschechow",
+   "B": "Leo Tolstoi",
+   "C": "Maxim Gorki",
+   "D": "Fjodor Dostojewski"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Roman erschien 1869.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Welche Brüder sammelten deutsche Märchen?",
+  "antworten": {
+   "A": "Brüder Mann",
+   "B": "Brüder Wright",
+   "C": "Brüder Humboldt",
+   "D": "Brüder Grimm"
+  },
+  "richtig": "D",
+  "erklaerung": "Jacob und Wilhelm Grimm gaben die „Kinder- und Hausmärchen“ heraus.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Welcher Architekt entwarf die Sagrada Família in Barcelona?",
+  "antworten": {
+   "A": "Antoni Gaudí",
+   "B": "Frank Lloyd Wright",
+   "C": "Le Corbusier",
+   "D": "Norman Foster"
+  },
+  "richtig": "A",
+  "erklaerung": "Gaudí widmete ihr die letzten Jahrzehnte seines Lebens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher Künstler ist für seine Pop-Art-Bilder mit Suppendosen bekannt?",
+  "antworten": {
+   "A": "Jackson Pollock",
+   "B": "Andy Warhol",
+   "C": "Keith Haring",
+   "D": "Roy Lichtenstein"
+  },
+  "richtig": "B",
+  "erklaerung": "Warhol war ein Hauptvertreter der Pop-Art.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wer schrieb die „Buddenbrooks“?",
+  "antworten": {
+   "A": "Thomas Mann",
+   "B": "Robert Musil",
+   "C": "Hermann Hesse",
+   "D": "Alfred Döblin"
+  },
+  "richtig": "A",
+  "erklaerung": "Mann erhielt 1929 den Nobelpreis für Literatur für dieses Werk.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Zeilen hat ein klassisches Sonett?",
+  "antworten": {
+   "A": "8",
+   "B": "12",
+   "C": "14",
+   "D": "16"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Sonett besteht aus zwei Quartetten und zwei Terzetten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher deutsche Maler schuf „Der Wanderer über dem Nebelmeer“?",
+  "antworten": {
+   "A": "Max Liebermann",
+   "B": "Albrecht Dürer",
+   "C": "Caspar David Friedrich",
+   "D": "Franz Marc"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Bild ist ein Hauptwerk der Romantik.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wer schrieb „Don Quijote“?",
+  "antworten": {
+   "A": "Gabriel García Márquez",
+   "B": "Federico García Lorca",
+   "C": "Lope de Vega",
+   "D": "Miguel de Cervantes"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Roman erschien in zwei Teilen 1605 und 1615.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Aus welchen zwei Farben mischt man Grün?",
+  "antworten": {
+   "A": "Rot und Blau",
+   "B": "Rot und Gelb",
+   "C": "Rot und Weiß",
+   "D": "Gelb und Blau"
+  },
+  "richtig": "D",
+  "erklaerung": "Gelb und Blau ergeben zusammen Grün.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Welcher niederländische Maler schuf „Die Nachtwache“?",
+  "antworten": {
+   "A": "Rubens",
+   "B": "Van Gogh",
+   "C": "Rembrandt",
+   "D": "Vermeer"
+  },
+  "richtig": "C",
+  "erklaerung": "Rembrandt malte das Gemälde 1642.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Welcher Maler schuf „Die Beständigkeit der Erinnerung“ mit den zerfließenden Uhren?",
+  "antworten": {
+   "A": "Max Ernst",
+   "B": "Salvador Dalí",
+   "C": "Joan Miró",
+   "D": "René Magritte"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Gemälde von 1931 ist ein Hauptwerk des Surrealismus.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 1,
+  "frage": "Welche Autorin schrieb „Pippi Langstrumpf“?",
+  "antworten": {
+   "A": "Astrid Lindgren",
+   "B": "Michael Ende",
+   "C": "Selma Lagerlöf",
+   "D": "Erich Kästner"
+  },
+  "richtig": "A",
+  "erklaerung": "Das Buch erschien 1945.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 3,
+  "frage": "Wer schrieb den Roman „Im Westen nichts Neues“?",
+  "antworten": {
+   "A": "Stefan Zweig",
+   "B": "Ernst Jünger",
+   "C": "Carl Zuckmayer",
+   "D": "Erich Maria Remarque"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Antikriegsroman erschien 1929.",
+  "seq": null
+ },
+ {
+  "kategorie": "Kunst & Literatur",
+  "schwierigkeit": 2,
+  "frage": "Wer schrieb den „Struwwelpeter“?",
+  "antworten": {
+   "A": "Wilhelm Busch",
+   "B": "Heinrich Hoffmann",
+   "C": "Erich Kästner",
+   "D": "Otfried Preußler"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Frankfurter Arzt Heinrich Hoffmann veröffentlichte das Buch 1845.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Welcher Planet ist der Sonne am nächsten?",
+  "antworten": {
+   "A": "Mars",
+   "B": "Erde",
+   "C": "Merkur",
+   "D": "Venus"
+  },
+  "richtig": "C",
+  "erklaerung": "Merkur ist der kleinste und sonnennächste Planet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Welcher Planet wird „Roter Planet“ genannt?",
+  "antworten": {
+   "A": "Merkur",
+   "B": "Venus",
+   "C": "Jupiter",
+   "D": "Mars"
+  },
+  "richtig": "D",
+  "erklaerung": "Eisenoxid im Boden färbt den Mars rot.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Wer betrat 1969 als erster Mensch den Mond?",
+  "antworten": {
+   "A": "Juri Gagarin",
+   "B": "Buzz Aldrin",
+   "C": "Neil Armstrong",
+   "D": "Michael Collins"
+  },
+  "richtig": "C",
+  "erklaerung": "Neil Armstrong betrat den Mond im Juli 1969 bei der Mission Apollo 11.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt die Galaxie, in der unser Sonnensystem liegt?",
+  "antworten": {
+   "A": "Sombrero",
+   "B": "Whirlpool",
+   "C": "Milchstraße",
+   "D": "Andromeda"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Milchstraße ist eine Balkenspiralgalaxie.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Wie viele natürliche Monde hat die Erde?",
+  "antworten": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "3"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Erde hat nur den Mond.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Welcher Planet hat die auffälligsten Ringe?",
+  "antworten": {
+   "A": "Saturn",
+   "B": "Venus",
+   "C": "Jupiter",
+   "D": "Mars"
+  },
+  "richtig": "A",
+  "erklaerung": "Saturns Ringe bestehen aus Eis und Gestein.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wie lange braucht das Licht von der Sonne zur Erde ungefähr?",
+  "antworten": {
+   "A": "8 Minuten",
+   "B": "1 Stunde",
+   "C": "8 Sekunden",
+   "D": "1 Tag"
+  },
+  "richtig": "A",
+  "erklaerung": "Das Sonnenlicht ist etwa acht Minuten unterwegs.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der größte Mond des Saturn?",
+  "antworten": {
+   "A": "Europa",
+   "B": "Ganymed",
+   "C": "Io",
+   "D": "Titan"
+  },
+  "richtig": "D",
+  "erklaerung": "Titan hat eine dichte Atmosphäre.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die Explosion eines massereichen Sterns am Ende seines Lebens?",
+  "antworten": {
+   "A": "Supernova",
+   "B": "Pulsar",
+   "C": "Nova",
+   "D": "Quasar"
+  },
+  "richtig": "A",
+  "erklaerung": "Eine Supernova kann kurzzeitig so hell leuchten wie eine ganze Galaxie.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Welcher Stern ist der Sonne am nächsten?",
+  "antworten": {
+   "A": "Proxima Centauri",
+   "B": "Betelgeuse",
+   "C": "Sirius",
+   "D": "Polarstern"
+  },
+  "richtig": "A",
+  "erklaerung": "Proxima Centauri ist etwa 4,2 Lichtjahre entfernt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Welcher Himmelskörper verlor 2006 seinen Planetenstatus?",
+  "antworten": {
+   "A": "Pluto",
+   "B": "Makemake",
+   "C": "Ceres",
+   "D": "Eris"
+  },
+  "richtig": "A",
+  "erklaerung": "Pluto gilt seit 2006 als Zwergplanet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Wie hieß der erste künstliche Erdsatellit (1957)?",
+  "antworten": {
+   "A": "Vostok 1",
+   "B": "Apollo 1",
+   "C": "Sputnik 1",
+   "D": "Explorer 1"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Sowjetunion startete Sputnik 1 am 4. Oktober 1957.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Welche Raumsonde verließ 2012 als erste den Einflussbereich der Sonne?",
+  "antworten": {
+   "A": "Pioneer 10",
+   "B": "Voyager 1",
+   "C": "New Horizons",
+   "D": "Voyager 2"
+  },
+  "richtig": "B",
+  "erklaerung": "Voyager 1 erreichte 2012 den interstellaren Raum.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Was ist eine Sternschnuppe?",
+  "antworten": {
+   "A": "Ein kleiner Komet",
+   "B": "Ein verglühendes Staubkorn in der Atmosphäre",
+   "C": "Ein Satellit",
+   "D": "Ein sterbender Stern"
+  },
+  "richtig": "B",
+  "erklaerung": "Winzige Teilchen verglühen beim Eintritt in die Erdatmosphäre.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Welcher Planet dreht sich fast auf der Seite liegend um die Sonne?",
+  "antworten": {
+   "A": "Neptun",
+   "B": "Merkur",
+   "C": "Uranus",
+   "D": "Saturn"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Achse des Uranus ist um etwa 98 Grad geneigt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr wurde das Weltraumteleskop Hubble gestartet?",
+  "antworten": {
+   "A": "1980",
+   "B": "1990",
+   "C": "1995",
+   "D": "2000"
+  },
+  "richtig": "B",
+  "erklaerung": "Hubble startete im April 1990.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wie hieß die Mondlandefähre von Apollo 11?",
+  "antworten": {
+   "A": "Challenger",
+   "B": "Columbia",
+   "C": "Eagle",
+   "D": "Odyssey"
+  },
+  "richtig": "C",
+  "erklaerung": "„Eagle“ landete am 20. Juli 1969 im Meer der Ruhe.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man eine Region im All, aus der selbst Licht nicht entkommen kann?",
+  "antworten": {
+   "A": "Komet",
+   "B": "Weißer Zwerg",
+   "C": "Schwarzes Loch",
+   "D": "Nebel"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Gravitation ist dort extrem stark.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt der Stern im Zentrum unseres Sonnensystems?",
+  "antworten": {
+   "A": "Mond",
+   "B": "Sonne",
+   "C": "Polarstern",
+   "D": "Sirius"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Sonne enthält fast die gesamte Masse des Sonnensystems.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Welcher Planet hat den „Großen Roten Fleck“?",
+  "antworten": {
+   "A": "Mars",
+   "B": "Neptun",
+   "C": "Jupiter",
+   "D": "Saturn"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Fleck ist ein riesiger Wirbelsturm.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wer formulierte die drei Gesetze der Planetenbewegung?",
+  "antworten": {
+   "A": "Johannes Kepler",
+   "B": "Galileo Galilei",
+   "C": "Isaac Newton",
+   "D": "Nikolaus Kopernikus"
+  },
+  "richtig": "A",
+  "erklaerung": "Kepler beschrieb 1609 und 1619 die Bahnen der Planeten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die Strecke, die das Licht in einem Jahr zurücklegt?",
+  "antworten": {
+   "A": "Astronomische Einheit",
+   "B": "Lichtsekunde",
+   "C": "Parsec",
+   "D": "Lichtjahr"
+  },
+  "richtig": "D",
+  "erklaerung": "Ein Lichtjahr entspricht rund 9,46 Billionen Kilometern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Welche Weltraumorganisation ist die europäische?",
+  "antworten": {
+   "A": "NASA",
+   "B": "Roskosmos",
+   "C": "ESA",
+   "D": "JAXA"
+  },
+  "richtig": "C",
+  "erklaerung": "Die ESA hat ihren Hauptsitz in Paris.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der Rover, der 2021 auf dem Mars landete?",
+  "antworten": {
+   "A": "Spirit",
+   "B": "Curiosity",
+   "C": "Opportunity",
+   "D": "Perseverance"
+  },
+  "richtig": "D",
+  "erklaerung": "Perseverance landete im Februar 2021 im Krater Jezero.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wer war der erste Deutsche im Weltall (1978)?",
+  "antworten": {
+   "A": "Ulf Merbold",
+   "B": "Alexander Gerst",
+   "C": "Thomas Reiter",
+   "D": "Sigmund Jähn"
+  },
+  "richtig": "D",
+  "erklaerung": "Der DDR-Bürger Sigmund Jähn flog 1978 mit Sojus 31.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Welcher Planet ist der heißeste im Sonnensystem?",
+  "antworten": {
+   "A": "Venus",
+   "B": "Merkur",
+   "C": "Jupiter",
+   "D": "Mars"
+  },
+  "richtig": "A",
+  "erklaerung": "Die dichte Atmosphäre der Venus erzeugt einen extremen Treibhauseffekt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man den Mond, wenn man von der Erde aus seine ganze beleuchtete Seite sieht?",
+  "antworten": {
+   "A": "Vollmond",
+   "B": "Sichelmond",
+   "C": "Halbmond",
+   "D": "Neumond"
+  },
+  "richtig": "A",
+  "erklaerung": "Beim Vollmond steht die Erde zwischen Sonne und Mond.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 2,
+  "frage": "Was verursacht hauptsächlich Ebbe und Flut?",
+  "antworten": {
+   "A": "Die Sonnenwärme",
+   "B": "Die Erdrotation allein",
+   "C": "Die Anziehungskraft des Mondes",
+   "D": "Der Wind"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Gravitation des Mondes zieht das Wasser der Meere an.",
+  "seq": null
+ },
+ {
+  "kategorie": "Weltraum",
+  "schwierigkeit": 3,
+  "frage": "Wie hieß die erste Frau im Weltall (1963)?",
+  "antworten": {
+   "A": "Jelena Kondakowa",
+   "B": "Walentina Tereschkowa",
+   "C": "Sally Ride",
+   "D": "Swetlana Sawizkaja"
+  },
+  "richtig": "B",
+  "erklaerung": "Walentina Tereschkowa flog 1963 mit Wostok 6.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Bundesländer hat Deutschland?",
+  "antworten": {
+   "A": "14",
+   "B": "15",
+   "C": "16",
+   "D": "17"
+  },
+  "richtig": "C",
+  "erklaerung": "Deutschland besteht aus 16 Bundesländern.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welches ist das flächenmäßig größte Bundesland?",
+  "antworten": {
+   "A": "Bayern",
+   "B": "Baden-Württemberg",
+   "C": "Niedersachsen",
+   "D": "Nordrhein-Westfalen"
+  },
+  "richtig": "A",
+  "erklaerung": "Bayern ist mit rund 70.500 km² das größte Bundesland.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welcher Fluss ist in Deutschland am längsten?",
+  "antworten": {
+   "A": "Rhein",
+   "B": "Donau",
+   "C": "Main",
+   "D": "Elbe"
+  },
+  "richtig": "A",
+  "erklaerung": "Der Rhein hat in Deutschland etwa 865 Kilometer Länge.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt der höchste Berg Deutschlands?",
+  "antworten": {
+   "A": "Watzmann",
+   "B": "Brocken",
+   "C": "Feldberg",
+   "D": "Zugspitze"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Zugspitze misst 2.962 Meter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt die Hauptstadt von Bayern?",
+  "antworten": {
+   "A": "Nürnberg",
+   "B": "Augsburg",
+   "C": "München",
+   "D": "Würzburg"
+  },
+  "richtig": "C",
+  "erklaerung": "München ist die Landeshauptstadt Bayerns.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wann wurde Deutschland wiedervereinigt?",
+  "antworten": {
+   "A": "1985",
+   "B": "1989",
+   "C": "1990",
+   "D": "1991"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Wiedervereinigung erfolgte am 3. Oktober 1990.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wie hieß die deutsche Währung vor dem Euro?",
+  "antworten": {
+   "A": "Reichsmark",
+   "B": "D-Mark",
+   "C": "Taler",
+   "D": "Gulden"
+  },
+  "richtig": "B",
+  "erklaerung": "Die D-Mark galt von 1948 bis 2001 als Bargeld.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "Wer wählt in Deutschland den Bundeskanzler?",
+  "antworten": {
+   "A": "Der Bundespräsident",
+   "B": "Das Volk direkt",
+   "C": "Der Bundestag",
+   "D": "Der Bundesrat"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Bundestag wählt den Kanzler auf Vorschlag des Bundespräsidenten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Welche Farben hat die deutsche Flagge von oben nach unten?",
+  "antworten": {
+   "A": "Schwarz, Weiß, Rot",
+   "B": "Rot, Weiß, Schwarz",
+   "C": "Schwarz, Rot, Gold",
+   "D": "Rot, Gold, Schwarz"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Bundesflagge ist Schwarz-Rot-Gold.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welcher See liegt vollständig in Deutschland und ist dort der größte?",
+  "antworten": {
+   "A": "Müritz",
+   "B": "Bodensee",
+   "C": "Chiemsee",
+   "D": "Starnberger See"
+  },
+  "richtig": "A",
+  "erklaerung": "Die Müritz in Mecklenburg-Vorpommern ist der größte Binnensee Deutschlands.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "In welcher Stadt hat das Bundesverfassungsgericht seinen Sitz?",
+  "antworten": {
+   "A": "Karlsruhe",
+   "B": "Leipzig",
+   "C": "Frankfurt",
+   "D": "Berlin"
+  },
+  "richtig": "A",
+  "erklaerung": "Das Gericht sitzt seit 1951 in Karlsruhe.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr trat das Grundgesetz in Kraft?",
+  "antworten": {
+   "A": "1945",
+   "B": "1949",
+   "C": "1955",
+   "D": "1990"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Grundgesetz wurde am 23. Mai 1949 verkündet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welche Stadt ist die Hauptstadt von Sachsen?",
+  "antworten": {
+   "A": "Chemnitz",
+   "B": "Leipzig",
+   "C": "Erfurt",
+   "D": "Dresden"
+  },
+  "richtig": "D",
+  "erklaerung": "Dresden ist die Landeshauptstadt Sachsens.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Welche Stadt hat in Deutschland die meisten Einwohner?",
+  "antworten": {
+   "A": "Berlin",
+   "B": "Köln",
+   "C": "Hamburg",
+   "D": "München"
+  },
+  "richtig": "A",
+  "erklaerung": "Berlin hat rund 3,7 Millionen Einwohner.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Welches dieser Länder grenzt nicht an Deutschland?",
+  "antworten": {
+   "A": "Spanien",
+   "B": "Dänemark",
+   "C": "Polen",
+   "D": "Österreich"
+  },
+  "richtig": "A",
+  "erklaerung": "Spanien hat keine gemeinsame Grenze mit Deutschland.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Nachbarländer hat Deutschland?",
+  "antworten": {
+   "A": "7",
+   "B": "8",
+   "C": "9",
+   "D": "10"
+  },
+  "richtig": "C",
+  "erklaerung": "Deutschland grenzt an neun Staaten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "In welchem Jahr wurde die Berliner Mauer gebaut?",
+  "antworten": {
+   "A": "1949",
+   "B": "1953",
+   "C": "1961",
+   "D": "1968"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Mauerbau begann am 13. August 1961.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt das berühmte Münchner Volksfest?",
+  "antworten": {
+   "A": "Oktoberfest",
+   "B": "Kölner Karneval",
+   "C": "Cannstatter Wasen",
+   "D": "Kieler Woche"
+  },
+  "richtig": "A",
+  "erklaerung": "Das Oktoberfest findet seit 1810 auf der Theresienwiese statt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wer war der erste Bundeskanzler der Bundesrepublik Deutschland?",
+  "antworten": {
+   "A": "Konrad Adenauer",
+   "B": "Ludwig Erhard",
+   "C": "Willy Brandt",
+   "D": "Helmut Schmidt"
+  },
+  "richtig": "A",
+  "erklaerung": "Adenauer war von 1949 bis 1963 Kanzler.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welcher Kanzler führte Deutschland 1990 in die Einheit?",
+  "antworten": {
+   "A": "Helmut Schmidt",
+   "B": "Helmut Kohl",
+   "C": "Willy Brandt",
+   "D": "Gerhard Schröder"
+  },
+  "richtig": "B",
+  "erklaerung": "Helmut Kohl war von 1982 bis 1998 Kanzler.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wer war von 2005 bis 2021 Bundeskanzlerin?",
+  "antworten": {
+   "A": "Ursula von der Leyen",
+   "B": "Andrea Nahles",
+   "C": "Angela Merkel",
+   "D": "Annalena Baerbock"
+  },
+  "richtig": "C",
+  "erklaerung": "Angela Merkel war 16 Jahre im Amt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt das Staatsoberhaupt Deutschlands?",
+  "antworten": {
+   "A": "Bundeskanzler",
+   "B": "Bundespräsident",
+   "C": "Bundestagspräsident",
+   "D": "Ministerpräsident"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Bundespräsident repräsentiert Deutschland.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welche Stadt nennt man das „Tor zur Welt“?",
+  "antworten": {
+   "A": "Bremen",
+   "B": "Rostock",
+   "C": "Lübeck",
+   "D": "Hamburg"
+  },
+  "richtig": "D",
+  "erklaerung": "Hamburg besitzt den größten deutschen Seehafen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "Welche Stadt war von 1949 bis 1990 Hauptstadt der Bundesrepublik?",
+  "antworten": {
+   "A": "Hannover",
+   "B": "Köln",
+   "C": "Frankfurt",
+   "D": "Bonn"
+  },
+  "richtig": "D",
+  "erklaerung": "Bonn war Regierungssitz der alten Bundesrepublik.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Wie heißt die größte deutsche Insel?",
+  "antworten": {
+   "A": "Fehmarn",
+   "B": "Rügen",
+   "C": "Sylt",
+   "D": "Usedom"
+  },
+  "richtig": "B",
+  "erklaerung": "Rügen in der Ostsee hat eine Fläche von rund 926 km².",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Sterne zeigt die Flagge der Europäischen Union?",
+  "antworten": {
+   "A": "10",
+   "B": "12",
+   "C": "15",
+   "D": "27"
+  },
+  "richtig": "B",
+  "erklaerung": "Die zwölf Sterne stehen für Einheit und Harmonie.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "In welcher Stadt hat die Europäische Zentralbank ihren Sitz?",
+  "antworten": {
+   "A": "Straßburg",
+   "B": "Luxemburg",
+   "C": "Brüssel",
+   "D": "Frankfurt am Main"
+  },
+  "richtig": "D",
+  "erklaerung": "Die EZB sitzt seit 1998 in Frankfurt am Main.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "Mit welchen Verträgen wurde 1957 die Europäische Wirtschaftsgemeinschaft gegründet?",
+  "antworten": {
+   "A": "Pariser Verträge",
+   "B": "Römische Verträge",
+   "C": "Maastrichter Verträge",
+   "D": "Lissabonner Vertrag"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Römischen Verträge wurden am 25. März 1957 unterzeichnet.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 1,
+  "frage": "Wie heißt die Währung, die in vielen EU-Ländern gilt?",
+  "antworten": {
+   "A": "Pfund",
+   "B": "Franken",
+   "C": "Kronen",
+   "D": "Euro"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Euro wurde 1999 als Buchgeld und 2002 als Bargeld eingeführt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt das Parlament der Europäischen Union?",
+  "antworten": {
+   "A": "Europarat",
+   "B": "Rat der EU",
+   "C": "Europäisches Parlament",
+   "D": "Europäische Kommission"
+  },
+  "richtig": "C",
+  "erklaerung": "Das Parlament wird alle fünf Jahre direkt gewählt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Deutschland & Europa",
+  "schwierigkeit": 2,
+  "frage": "Welche Stadt ist die Hauptstadt von Nordrhein-Westfalen?",
+  "antworten": {
+   "A": "Essen",
+   "B": "Köln",
+   "C": "Dortmund",
+   "D": "Düsseldorf"
+  },
+  "richtig": "D",
+  "erklaerung": "Düsseldorf ist die Landeshauptstadt von Nordrhein-Westfalen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 1,
+  "frage": "Wie viele Zähne hat ein Erwachsener mit Weisheitszähnen?",
+  "antworten": {
+   "A": "28",
+   "B": "30",
+   "C": "32",
+   "D": "34"
+  },
+  "richtig": "C",
+  "erklaerung": "Das vollständige Erwachsenengebiss hat 32 Zähne.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welches ist das größte Organ des Menschen?",
+  "antworten": {
+   "A": "Darm",
+   "B": "Leber",
+   "C": "Haut",
+   "D": "Lunge"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Haut bedeckt etwa 1,8 Quadratmeter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welches Vitamin bildet der Körper mit Hilfe von Sonnenlicht?",
+  "antworten": {
+   "A": "Vitamin D",
+   "B": "Vitamin A",
+   "C": "Vitamin C",
+   "D": "Vitamin K"
+  },
+  "richtig": "A",
+  "erklaerung": "Die Haut bildet Vitamin D unter UV-Strahlung.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Chromosomen hat ein Mensch normalerweise?",
+  "antworten": {
+   "A": "23",
+   "B": "44",
+   "C": "46",
+   "D": "48"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Mensch hat 23 Chromosomenpaare.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welches Organ filtert das Blut und bildet den Urin?",
+  "antworten": {
+   "A": "Milz",
+   "B": "Bauchspeicheldrüse",
+   "C": "Niere",
+   "D": "Leber"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Nieren reinigen täglich etwa 180 Liter Blutplasma.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Welches ist der längste Knochen im menschlichen Körper?",
+  "antworten": {
+   "A": "Schienbein",
+   "B": "Oberschenkelknochen",
+   "C": "Wadenbein",
+   "D": "Oberarmknochen"
+  },
+  "richtig": "B",
+  "erklaerung": "Der Oberschenkelknochen (Femur) ist der längste und stärkste Knochen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wie nennt man die Zuckerkrankheit medizinisch?",
+  "antworten": {
+   "A": "Anämie",
+   "B": "Asthma",
+   "C": "Arthritis",
+   "D": "Diabetes mellitus"
+  },
+  "richtig": "D",
+  "erklaerung": "Beim Diabetes ist der Blutzuckerspiegel dauerhaft erhöht.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 1,
+  "frage": "Mit welchem Sinnesorgan hören wir?",
+  "antworten": {
+   "A": "Ohr",
+   "B": "Auge",
+   "C": "Zunge",
+   "D": "Nase"
+  },
+  "richtig": "A",
+  "erklaerung": "Das Ohr nimmt Schallwellen auf.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Welche Blutgruppe gilt als Universalspender für rote Blutkörperchen?",
+  "antworten": {
+   "A": "B negativ",
+   "B": "0 negativ",
+   "C": "A positiv",
+   "D": "AB positiv"
+  },
+  "richtig": "B",
+  "erklaerung": "Blutgruppe 0 negativ ist für alle Blutgruppen verträglich.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 1,
+  "frage": "Welches Vitamin ist in Zitrusfrüchten besonders reichlich enthalten?",
+  "antworten": {
+   "A": "Vitamin B12",
+   "B": "Vitamin D",
+   "C": "Vitamin C",
+   "D": "Vitamin K"
+  },
+  "richtig": "C",
+  "erklaerung": "Orangen und Zitronen enthalten viel Vitamin C.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welche Blutzellen transportieren den Sauerstoff?",
+  "antworten": {
+   "A": "Rote Blutkörperchen",
+   "B": "Blutplasma",
+   "C": "Blutplättchen",
+   "D": "Weiße Blutkörperchen"
+  },
+  "richtig": "A",
+  "erklaerung": "Der rote Blutfarbstoff Hämoglobin bindet den Sauerstoff.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welcher Teil des Auges steuert die Größe der Pupille?",
+  "antworten": {
+   "A": "Linse",
+   "B": "Netzhaut",
+   "C": "Iris",
+   "D": "Hornhaut"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Iris regelt den Lichteinfall.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Rippen hat ein Mensch normalerweise?",
+  "antworten": {
+   "A": "12",
+   "B": "20",
+   "C": "24",
+   "D": "28"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Mensch hat zwölf Rippenpaare.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welches Hormon der Bauchspeicheldrüse senkt den Blutzucker?",
+  "antworten": {
+   "A": "Insulin",
+   "B": "Cortisol",
+   "C": "Adrenalin",
+   "D": "Östrogen"
+  },
+  "richtig": "A",
+  "erklaerung": "Insulin schleust Zucker aus dem Blut in die Zellen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der größte Muskel des menschlichen Körpers?",
+  "antworten": {
+   "A": "Zwerchfell",
+   "B": "Bizeps",
+   "C": "Großer Gesäßmuskel",
+   "D": "Oberschenkelmuskel"
+  },
+  "richtig": "C",
+  "erklaerung": "Der große Gesäßmuskel (Gluteus maximus) ist der größte Muskel.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "In welchem Teil des Ohres liegen Hammer, Amboss und Steigbügel?",
+  "antworten": {
+   "A": "Mittelohr",
+   "B": "Innenohr",
+   "C": "Außenohr",
+   "D": "Gehörgang"
+  },
+  "richtig": "A",
+  "erklaerung": "Die drei Gehörknöchelchen übertragen den Schall.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 1,
+  "frage": "Welches Organ ist für die Atmung zuständig?",
+  "antworten": {
+   "A": "Leber",
+   "B": "Magen",
+   "C": "Herz",
+   "D": "Lunge"
+  },
+  "richtig": "D",
+  "erklaerung": "In der Lunge gelangt Sauerstoff ins Blut.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Welcher Nährstoff liefert pro Gramm die meiste Energie?",
+  "antworten": {
+   "A": "Ballaststoffe",
+   "B": "Kohlenhydrate",
+   "C": "Eiweiß",
+   "D": "Fett"
+  },
+  "richtig": "D",
+  "erklaerung": "Ein Gramm Fett liefert etwa 9 Kilokalorien.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Wie hoch ist der Wasseranteil im Körper eines Erwachsenen ungefähr?",
+  "antworten": {
+   "A": "20 %",
+   "B": "40 %",
+   "C": "60 %",
+   "D": "90 %"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Körper eines Erwachsenen besteht zu etwa 55 bis 60 % aus Wasser.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Wer entwickelte 1796 die erste Pockenimpfung?",
+  "antworten": {
+   "A": "Robert Koch",
+   "B": "Edward Jenner",
+   "C": "Louis Pasteur",
+   "D": "Alexander Fleming"
+  },
+  "richtig": "B",
+  "erklaerung": "Der englische Arzt Edward Jenner impfte mit Kuhpocken.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wer entdeckte 1928 das Penicillin?",
+  "antworten": {
+   "A": "Wilhelm Röntgen",
+   "B": "Louis Pasteur",
+   "C": "Alexander Fleming",
+   "D": "Robert Koch"
+  },
+  "richtig": "C",
+  "erklaerung": "Fleming entdeckte das erste Antibiotikum zufällig.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Welches Organ produziert die Gallenflüssigkeit?",
+  "antworten": {
+   "A": "Gallenblase",
+   "B": "Leber",
+   "C": "Magen",
+   "D": "Bauchspeicheldrüse"
+  },
+  "richtig": "B",
+  "erklaerung": "Die Galle wird in der Leber gebildet und in der Gallenblase gespeichert.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wie viel Blut hat ein Erwachsener ungefähr?",
+  "antworten": {
+   "A": "2 Liter",
+   "B": "5 Liter",
+   "C": "8 Liter",
+   "D": "12 Liter"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Blutvolumen beträgt etwa 4 bis 6 Liter.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 1,
+  "frage": "Wie nennt man die Anzahl der Herzschläge pro Minute?",
+  "antworten": {
+   "A": "Atemfrequenz",
+   "B": "Blutdruck",
+   "C": "Temperatur",
+   "D": "Puls"
+  },
+  "richtig": "D",
+  "erklaerung": "Der Puls lässt sich am Handgelenk fühlen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Welcher Hirnteil steuert vor allem Gleichgewicht und Bewegungskoordination?",
+  "antworten": {
+   "A": "Stammhirn",
+   "B": "Kleinhirn",
+   "C": "Großhirn",
+   "D": "Zwischenhirn"
+  },
+  "richtig": "B",
+  "erklaerung": "Das Kleinhirn koordiniert Bewegungen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Ab welcher Körpertemperatur spricht man ungefähr von Fieber?",
+  "antworten": {
+   "A": "36 °C",
+   "B": "37 °C",
+   "C": "38 °C",
+   "D": "40 °C"
+  },
+  "richtig": "C",
+  "erklaerung": "Ab 38,0 °C spricht man von Fieber.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "Welches Eiweiß macht Haare und Nägel fest?",
+  "antworten": {
+   "A": "Hämoglobin",
+   "B": "Insulin",
+   "C": "Keratin",
+   "D": "Kollagen"
+  },
+  "richtig": "C",
+  "erklaerung": "Keratin ist der Hauptbestandteil von Haaren und Nägeln.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 3,
+  "frage": "In welchem Organ befinden sich die Lungenbläschen (Alveolen)?",
+  "antworten": {
+   "A": "Lunge",
+   "B": "Niere",
+   "C": "Herz",
+   "D": "Leber"
+  },
+  "richtig": "A",
+  "erklaerung": "In den Alveolen findet der Gasaustausch statt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Körper & Gesundheit",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Stunden Schlaf werden Erwachsenen im Durchschnitt empfohlen?",
+  "antworten": {
+   "A": "7 bis 9 Stunden",
+   "B": "12 bis 14 Stunden",
+   "C": "10 bis 12 Stunden",
+   "D": "4 bis 5 Stunden"
+  },
+  "richtig": "A",
+  "erklaerung": "Die meisten Erwachsenen brauchen sieben bis neun Stunden Schlaf.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "In welcher Sportart gibt es einen „Slam Dunk“?",
+  "antworten": {
+   "A": "Handball",
+   "B": "Tennis",
+   "C": "Volleyball",
+   "D": "Basketball"
+  },
+  "richtig": "D",
+  "erklaerung": "Beim Slam Dunk wird der Ball von oben in den Korb gestopft.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 1,
+  "frage": "Mit welchem Gerät spielt man Badminton?",
+  "antworten": {
+   "A": "Scheibe und Stock",
+   "B": "Federball und Schläger",
+   "C": "Puck und Schläger",
+   "D": "Ball und Keule"
+  },
+  "richtig": "B",
+  "erklaerung": "Badminton wird mit Schläger und Federball gespielt.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Punkte zählt ein Touchdown im American Football?",
+  "antworten": {
+   "A": "3",
+   "B": "5",
+   "C": "6",
+   "D": "7"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Touchdown bringt sechs Punkte, danach folgt ein Zusatzversuch.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Welches Land gewann die Fußball-WM 2014?",
+  "antworten": {
+   "A": "Deutschland",
+   "B": "Argentinien",
+   "C": "Spanien",
+   "D": "Brasilien"
+  },
+  "richtig": "A",
+  "erklaerung": "Deutschland besiegte im Finale von Rio Argentinien mit 1:0.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Felder hat ein Schachbrett?",
+  "antworten": {
+   "A": "36",
+   "B": "49",
+   "C": "64",
+   "D": "81"
+  },
+  "richtig": "C",
+  "erklaerung": "Ein Schachbrett hat 8 × 8 = 64 Felder.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "In welcher Stadt fanden die Olympischen Sommerspiele 1972 statt?",
+  "antworten": {
+   "A": "Berlin",
+   "B": "München",
+   "C": "Montreal",
+   "D": "Rom"
+  },
+  "richtig": "B",
+  "erklaerung": "1972 war München Gastgeber der Olympischen Sommerspiele.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 2,
+  "frage": "Wie hoch hängt ein Basketballkorb (Ringoberkante)?",
+  "antworten": {
+   "A": "2,75 m",
+   "B": "2,90 m",
+   "C": "3,05 m",
+   "D": "3,25 m"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Ring hängt 3,05 Meter (10 Fuß) über dem Boden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 3,
+  "frage": "Wer hält den Weltrekord über 100 Meter der Männer (9,58 s)?",
+  "antworten": {
+   "A": "Yohan Blake",
+   "B": "Tyson Gay",
+   "C": "Carl Lewis",
+   "D": "Usain Bolt"
+  },
+  "richtig": "D",
+  "erklaerung": "Usain Bolt lief 2009 in Berlin 9,58 Sekunden.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Grand-Slam-Turniere gibt es im Tennis pro Jahr?",
+  "antworten": {
+   "A": "3",
+   "B": "4",
+   "C": "5",
+   "D": "6"
+  },
+  "richtig": "B",
+  "erklaerung": "Australian Open, French Open, Wimbledon und US Open.",
+  "seq": null
+ },
+ {
+  "kategorie": "Sport",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt der höchste Wurf beim Darts mit drei Pfeilen?",
+  "antworten": {
+   "A": "150",
+   "B": "170",
+   "C": "180",
+   "D": "200"
+  },
+  "richtig": "C",
+  "erklaerung": "Dreimal Triple-20 ergibt 180 Punkte.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welches chemische Element hat das Symbol „W“?",
+  "antworten": {
+   "A": "Wismut",
+   "B": "Wasserstoff",
+   "C": "Vanadium",
+   "D": "Wolfram"
+  },
+  "richtig": "D",
+  "erklaerung": "„W“ kommt vom Namen „Wolfram“; englisch heißt es Tungsten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welches Land hat die meisten Zeitzonen (inklusive Überseegebiete)?",
+  "antworten": {
+   "A": "USA",
+   "B": "Frankreich",
+   "C": "Russland",
+   "D": "China"
+  },
+  "richtig": "B",
+  "erklaerung": "Durch seine Überseegebiete hat Frankreich 12 Zeitzonen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Wer formulierte die drei Gesetze der Bewegung?",
+  "antworten": {
+   "A": "Galileo Galilei",
+   "B": "Isaac Newton",
+   "C": "Albert Einstein",
+   "D": "Johannes Kepler"
+  },
+  "richtig": "B",
+  "erklaerung": "Newton veröffentlichte sie 1687 in den „Principia“.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Wie heißt die Lehre von den Pilzen?",
+  "antworten": {
+   "A": "Phykologie",
+   "B": "Mykonose",
+   "C": "Ornithologie",
+   "D": "Mykologie"
+  },
+  "richtig": "D",
+  "erklaerung": "Die Mykologie beschäftigt sich mit Pilzen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welcher Komponist schrieb die Oper „Die Zauberflöte“?",
+  "antworten": {
+   "A": "Wolfgang Amadeus Mozart",
+   "B": "Ludwig van Beethoven",
+   "C": "Richard Wagner",
+   "D": "Giuseppe Verdi"
+  },
+  "richtig": "A",
+  "erklaerung": "Mozart komponierte sie 1791, kurz vor seinem Tod.",
+  "seq": null
+ },
+ {
+  "kategorie": "Allgemeinwissen",
+  "schwierigkeit": 3,
+  "frage": "Welche Programmiersprache wurde von Guido van Rossum entwickelt?",
+  "antworten": {
+   "A": "Ruby",
+   "B": "Python",
+   "C": "Java",
+   "D": "C++"
+  },
+  "richtig": "B",
+  "erklaerung": "Python erschien erstmals 1991.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer war der erste Kaiser von China?",
+  "antworten": {
+   "A": "Kublai Khan",
+   "B": "Puyi",
+   "C": "Konfuzius",
+   "D": "Qin Shihuangdi"
+  },
+  "richtig": "D",
+  "erklaerung": "Qin Shihuangdi einte China 221 v. Chr. und ließ die Terrakotta-Armee bauen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "In welchem Jahr eroberten die Osmanen Konstantinopel?",
+  "antworten": {
+   "A": "1389",
+   "B": "1453",
+   "C": "1492",
+   "D": "1517"
+  },
+  "richtig": "B",
+  "erklaerung": "Sultan Mehmed II. eroberte die Stadt am 29. Mai 1453.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "Welches Reich wurde von Dschingis Khan gegründet?",
+  "antworten": {
+   "A": "Mongolisches Reich",
+   "B": "Osmanisches Reich",
+   "C": "Mogulreich",
+   "D": "Perserreich"
+  },
+  "richtig": "A",
+  "erklaerung": "Dschingis Khan gründete 1206 das Mongolische Reich, später das größte zusammenhängende Landreich der Geschichte.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer schlug 1517 seine 95 Thesen an?",
+  "antworten": {
+   "A": "Johannes Calvin",
+   "B": "Martin Luther",
+   "C": "Ulrich Zwingli",
+   "D": "Jan Hus"
+  },
+  "richtig": "B",
+  "erklaerung": "Luthers Thesen gelten als Beginn der Reformation.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 3,
+  "frage": "Welche Stadt wurde 79 n. Chr. vom Vesuv verschüttet?",
+  "antworten": {
+   "A": "Syrakus",
+   "B": "Neapel",
+   "C": "Pompeji",
+   "D": "Ostia"
+  },
+  "richtig": "C",
+  "erklaerung": "Der Ausbruch begrub Pompeji unter Asche – dadurch blieb die Stadt erhalten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Geschichte",
+  "schwierigkeit": 2,
+  "frage": "Wer gründete 1923 die Republik Türkei?",
+  "antworten": {
+   "A": "İsmet İnönü",
+   "B": "Enver Pascha",
+   "C": "Mustafa Kemal Atatürk",
+   "D": "Sultan Mehmed VI."
+  },
+  "richtig": "C",
+  "erklaerung": "Atatürk wurde am 29. Oktober 1923 erster Präsident der Türkei.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Welches Teilchen hat eine negative elektrische Ladung?",
+  "antworten": {
+   "A": "Neutron",
+   "B": "Proton",
+   "C": "Photon",
+   "D": "Elektron"
+  },
+  "richtig": "D",
+  "erklaerung": "Elektronen sind negativ, Protonen positiv, Neutronen neutral geladen.",
+  "seq": null
+ },
+ {
+  "kategorie": "Wissenschaft",
+  "schwierigkeit": 3,
+  "frage": "Welches Metall ist bei Raumtemperatur flüssig?",
+  "antworten": {
+   "A": "Quecksilber",
+   "B": "Zinn",
+   "C": "Natrium",
+   "D": "Blei"
+  },
+  "richtig": "A",
+  "erklaerung": "Quecksilber (Hg) schmilzt bereits bei −39 °C.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 25 % von 360?",
+  "antworten": {
+   "A": "75",
+   "B": "80",
+   "C": "90",
+   "D": "120"
+  },
+  "richtig": "C",
+  "erklaerung": "25 % ist ein Viertel: 360 ÷ 4 = 90.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Diagonalen hat ein Sechseck?",
+  "antworten": {
+   "A": "6",
+   "B": "8",
+   "C": "9",
+   "D": "12"
+  },
+  "richtig": "C",
+  "erklaerung": "Formel n·(n−3)/2 = 6·3/2 = 9.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Was ist die Summe der Zahlen von 1 bis 100?",
+  "antworten": {
+   "A": "5000",
+   "B": "5050",
+   "C": "5100",
+   "D": "10100"
+  },
+  "richtig": "B",
+  "erklaerung": "Gauß-Formel: 100 · 101 / 2 = 5050.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 2,
+  "frage": "Was ist 0,5 × 0,5?",
+  "antworten": {
+   "A": "0,1",
+   "B": "0,25",
+   "C": "1",
+   "D": "2,5"
+  },
+  "richtig": "B",
+  "erklaerung": "0,5 × 0,5 = 1/2 × 1/2 = 1/4 = 0,25.",
+  "seq": null
+ },
+ {
+  "kategorie": "Mathematik",
+  "schwierigkeit": 3,
+  "frage": "Ein Preis steigt um 10 % und sinkt dann um 10 %. Wie ändert er sich insgesamt?",
+  "antworten": {
+   "A": "Gleich",
+   "B": "2 % billiger",
+   "C": "1 % teurer",
+   "D": "1 % billiger"
+  },
+  "richtig": "D",
+  "erklaerung": "1,1 × 0,9 = 0,99 – also 1 % weniger als vorher.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl kommt als nächstes?\n1 - 3 - 7 - 15 - 31 - ?",
+  "antworten": {
+   "A": "47",
+   "B": "62",
+   "C": "63",
+   "D": "64"
+  },
+  "richtig": "C",
+  "erklaerung": "Jede Zahl wird verdoppelt plus 1: 31 × 2 + 1 = 63.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Welche Zahl fehlt?\n2 - 6 - 12 - 20 - 30 - ?",
+  "antworten": {
+   "A": "36",
+   "B": "40",
+   "C": "42",
+   "D": "44"
+  },
+  "richtig": "C",
+  "erklaerung": "Die Abstände wachsen um 2 (4, 6, 8, 10, 12): 30 + 12 = 42.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Anna ist größer als Ben, Ben ist größer als Clara. Wer ist am kleinsten?",
+  "antworten": {
+   "A": "Clara",
+   "B": "Nicht bestimmbar",
+   "C": "Anna",
+   "D": "Ben"
+  },
+  "richtig": "A",
+  "erklaerung": "Anna > Ben > Clara – also ist Clara am kleinsten.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 2,
+  "frage": "Welcher Buchstabe kommt als nächstes?\nA - C - E - G - ?",
+  "antworten": {
+   "A": "J",
+   "B": "I",
+   "C": "H",
+   "D": "K"
+  },
+  "richtig": "B",
+  "erklaerung": "Es wird immer ein Buchstabe übersprungen: G, (H), I.",
+  "seq": null
+ },
+ {
+  "kategorie": "Logik & Zahlenfolgen",
+  "schwierigkeit": 3,
+  "frage": "Ein Schläger und ein Ball kosten zusammen 1,10 €. Der Schläger kostet 1 € mehr als der Ball. Was kostet der Ball?",
+  "antworten": {
+   "A": "0,01 €",
+   "B": "0,05 €",
+   "C": "0,10 €",
+   "D": "0,15 €"
+  },
+  "richtig": "B",
+  "erklaerung": "Ball = x, Schläger = x + 1. 2x + 1 = 1,10 → x = 0,05 €.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "Wie oft kommt der Buchstabe E im Wort ERDBEERE vor?",
+  "antworten": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "richtig": "C",
+  "erklaerung": "E-R-D-B-E-E-R-E: das E kommt viermal vor.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "17 + 28 − 9 = ?",
+  "antworten": {
+   "A": "34",
+   "B": "35",
+   "C": "36",
+   "D": "38"
+  },
+  "richtig": "C",
+  "erklaerung": "17 + 28 = 45, 45 − 9 = 36.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 3,
+  "frage": "Wie viele Dreiecke hat ein Quadrat, wenn man beide Diagonalen einzeichnet?",
+  "antworten": {
+   "A": "4",
+   "B": "6",
+   "C": "8",
+   "D": "10"
+  },
+  "richtig": "C",
+  "erklaerung": "4 kleine Dreiecke + 4 große (je zwei kleine zusammen) = 8.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 3,
+  "frage": "Es ist 14:45 Uhr. Wie spät ist es in 2 Stunden und 30 Minuten?",
+  "antworten": {
+   "A": "16:15",
+   "B": "17:00",
+   "C": "17:15",
+   "D": "17:45"
+  },
+  "richtig": "C",
+  "erklaerung": "14:45 + 2:00 = 16:45, + 0:30 = 17:15.",
+  "seq": null
+ },
+ {
+  "kategorie": "Konzentration",
+  "schwierigkeit": 2,
+  "frage": "Wie viele Monate haben 28 Tage?",
+  "antworten": {
+   "A": "1",
+   "B": "2",
+   "C": "6",
+   "D": "12"
+  },
+  "richtig": "D",
+  "erklaerung": "Jeder Monat hat mindestens 28 Tage – also alle 12.",
+  "seq": null
+ }
+]

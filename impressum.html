@@ -13,6 +13,13 @@ p{color:#94a3b8;margin-bottom:.8rem;}
 a{color:#4a90e2;}
 .back{display:inline-block;margin-bottom:2rem;padding:10px 20px;border-radius:10px;border:1px solid #1a2540;color:#94a3b8;text-decoration:none;}
 .date{margin-top:2rem;font-size:12px;color:#475569;}
+.kontakt{display:flex;flex-direction:column;gap:.8rem;margin-top:.5rem;}
+.kontakt label{display:flex;flex-direction:column;gap:.3rem;color:#94a3b8;font-size:14px;}
+.kontakt input,.kontakt textarea{padding:10px;border-radius:10px;border:1px solid #1a2540;background:#0d1326;color:#f1f5f9;font:inherit;}
+.kontakt button{align-self:flex-start;padding:10px 20px;border:0;border-radius:10px;background:linear-gradient(135deg,#4a90e2,#7c5fff);color:#fff;font-weight:700;cursor:pointer;}
+.kontakt button:disabled{opacity:.6;}
+.kontakt .hp{position:absolute;left:-9999px;}
+.kontakt .hinweis{font-size:12px;}
 </style>
 </head>
 <body>
@@ -28,8 +35,35 @@ Deutschland</p>
 
 <h2>Kontakt</h2>
 <p>E-Mail: <a href="mailto:enesdoudouzi@googlemail.com">enesdoudouzi@googlemail.com</a></p>
-<!-- TODO (Betreiber): § 5 DDG verlangt eine schnelle, unmittelbare Kontaktmöglichkeit. Eine E-Mail-Adresse allein gilt teils als nicht ausreichend;
-     ergänzen Sie ein Kontaktformular oder eine Telefonnummer. Bei Gewerbeanmeldung außerdem ggf. Umsatzsteuer-ID bzw. Hinweis nach § 19 UStG ergänzen. -->
+<p>Oder schreiben Sie uns direkt über das Kontaktformular. Wir antworten in der Regel innerhalb von 1–2 Werktagen.</p>
+<form id="kontakt" class="kontakt" novalidate>
+  <label>Name<input name="name" maxlength="100" required></label>
+  <label>E-Mail<input name="email" type="email" maxlength="200" required></label>
+  <label>Nachricht<textarea name="nachricht" rows="5" maxlength="3000" required></textarea></label>
+  <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p class="hinweis">Ihre Angaben verwenden wir nur zur Beantwortung Ihrer Anfrage, siehe <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+  <button type="submit">Nachricht senden</button>
+  <p id="kontakt-status" role="status"></p>
+</form>
+<script>
+document.getElementById('kontakt').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var f = e.target, st = document.getElementById('kontakt-status'), btn = f.querySelector('button');
+  var data = { name: f.name.value, email: f.email.value, nachricht: f.nachricht.value, website: f.website.value };
+  if (!data.name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email.trim()) || data.nachricht.trim().length < 5) {
+    st.textContent = 'Bitte Name, gültige E-Mail und Nachricht (mind. 5 Zeichen) angeben.'; return;
+  }
+  btn.disabled = true; st.textContent = 'Wird gesendet …';
+  fetch('https://iq-quiz-v2.onrender.com/api/kontakt', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+  }).then(function (r) {
+    if (!r.ok) throw new Error(r.status);
+    f.reset(); st.textContent = 'Danke! Ihre Nachricht wurde gesendet.';
+  }).catch(function () {
+    st.textContent = 'Senden fehlgeschlagen. Bitte versuchen Sie es später erneut oder schreiben Sie eine E-Mail.';
+  }).then(function () { btn.disabled = false; });
+});
+</script>
 
 <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
 <p>Enes Doudouzi (Anschrift wie oben)</p>

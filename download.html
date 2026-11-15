@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQ Quiz – App gratis installieren</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<meta name="theme-color" content="#060614">
+<meta name="description" content="IQ Quiz gratis als App – für Android, iPhone, iPad, Windows und Mac. 540 Fragen, Joker, tägliche Challenge. Ohne Werbung, ohne Käufe.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#060614;color:#f1f5f9;line-height:1.6;padding:2rem 1rem}
+.wrap{max-width:640px;margin:0 auto}
+.back{display:inline-block;margin-bottom:1.5rem;padding:8px 16px;border-radius:10px;border:1px solid #1a2540;color:#94a3b8;text-decoration:none}
+.hero{text-align:center;margin-bottom:1.6rem}
+.hero img{width:96px;height:96px;border-radius:22px;box-shadow:0 8px 30px rgba(124,95,255,.35)}
+h1{font-size:27px;font-weight:800;margin:.8rem 0 .3rem;background:linear-gradient(135deg,#4a90e2,#7c5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#94a3b8}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1.2rem 0}
+.tab{padding:12px 8px;border-radius:12px;border:1px solid #1a2540;background:#0d1326;color:#cbd5e1;font-size:14px;font-weight:700;cursor:pointer;text-align:center}
+.tab.on{border-color:#7c5fff;background:linear-gradient(135deg,rgba(74,144,226,.18),rgba(124,95,255,.22));color:#fff}
+.pane{display:none}.pane.on{display:block}
+.card{background:#0d1326;border:1px solid #1a2540;border-radius:14px;padding:1.2rem 1.3rem;margin-top:1rem}
+.btn{display:block;text-align:center;margin:.4rem 0 .6rem;padding:15px;border-radius:14px;color:#fff;font-size:17px;font-weight:800;text-decoration:none;border:0;width:100%;cursor:pointer}
+.g{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 6px 20px rgba(34,197,94,.3)}
+.v{background:linear-gradient(135deg,#4a90e2,#7c5fff);box-shadow:0 6px 20px rgba(124,95,255,.3)}
+.meta{text-align:center;font-size:12px;color:#64748b}
+h2{font-size:17px;color:#4a90e2;margin-bottom:.6rem}
+ol{padding-left:1.2rem;color:#cbd5e1}li{margin-bottom:.4rem}
+.note{font-size:13px;color:#94a3b8;margin-top:.6rem}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;color:#cbd5e1;font-size:14px}
+code{font-size:11px;word-break:break-all;color:#94a3b8}
+a{color:#4a90e2}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a href="index.html" class="back">← Direkt im Browser spielen</a>
+<div class="hero">
+  <img src="assets/icon-512.png" alt="IQ Quiz App-Symbol">
+  <h1>IQ Quiz als App – gratis</h1>
+  <p class="sub">Für Android, iPhone, iPad und PC · keine Werbung · keine Käufe</p>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" data-p="android">🤖 Android</button>
+  <button class="tab" data-p="ios">🍎 iPhone / iPad</button>
+  <button class="tab" data-p="pc">💻 PC / Mac</button>
+</div>
+
+<div class="pane" id="p-android">
+  <div class="card">
+    <a class="btn g" href="downloads/IQ-Test.apk" download="IQ-Test.apk">📥 Android-App herunterladen (7 MB)</a>
+    <p class="meta">Version 1.9 · Android 7.0 oder neuer</p>
+    <h2 style="margin-top:1rem">So installierst du sie</h2>
+    <ol>
+      <li>Auf <b>„Android-App herunterladen“</b> tippen.</li>
+      <li>Nach dem Download auf <b>IQ-Test.apk</b> tippen (Benachrichtigung oder Ordner „Downloads“).</li>
+      <li>Fragt Android nach „Unbekannte Apps installieren“: für den Browser <b>„Zulassen“</b> aktivieren und zurückgehen.</li>
+      <li>Auf <b>„Installieren“</b> tippen – fertig.</li>
+    </ol>
+    <p class="note">Die Warnung kommt bei jeder App außerhalb des Play Stores. Die App ist von Enes Doudouzi signiert und nutzt nur den Internetzugang (Fragen &amp; Bestenliste) – kein Zugriff auf Kontakte, Fotos, Kamera oder Standort.</p>
+    <p class="note">Ohne Datei-Download: <a href="#" class="pwa-link">als Web-App installieren</a>.</p>
+  </div>
+</div>
+
+<div class="pane" id="p-ios">
+  <div class="card">
+    <h2>In 3 Schritten auf dem Home-Bildschirm</h2>
+    <ol>
+      <li>Diese Seite in <b>Safari</b> öffnen.</li>
+      <li>Unten auf <b>Teilen</b> tippen (Quadrat mit Pfeil nach oben ⬆️).</li>
+      <li><b>„Zum Home-Bildschirm“</b> wählen → <b>„Hinzufügen“</b>.</li>
+    </ol>
+    <p class="note">Das Quiz startet dann wie eine normale App im Vollbild – ohne App Store, ohne Konto.</p>
+  </div>
+</div>
+
+<div class="pane" id="p-pc">
+  <div class="card">
+    <button class="btn v pwa-btn" type="button">💻 Als App installieren</button>
+    <ol>
+      <li>Mit <b>Chrome</b> oder <b>Edge</b> öffnen und oben auf „Als App installieren“ klicken – oder rechts in der Adresszeile auf das Symbol <b>⊕ / „Installieren“</b>.</li>
+      <li>Das Quiz erscheint im Menü bzw. Dock und öffnet sich im eigenen Fenster.</li>
+    </ol>
+    <p class="note">Mac mit Safari: Menü <b>Ablage → „Zum Dock hinzufügen“</b>. Firefox: einfach <a href="index.html">im Browser spielen</a>.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Das steckt drin</h2>
+  <div class="feat">
+    <div>🧠 540 Fragen, 17 Kategorien</div><div>🃏 Joker: 50:50, Telefon, Publikum</div>
+    <div>📅 Tägliche Challenge</div><div>🏆 Bestenliste</div>
+    <div>🌍 7 Sprachen</div><div>🆓 Komplett gratis</div>
+  </div>
+  <p class="note">Unterhaltung, kein wissenschaftlicher IQ-Test.</p>
+</div>
+
+<p class="note" style="text-align:center;margin-top:1.5rem">
+  Android-APK SHA-256: <code>2dbdb07f2a6714c04ef428fb6fc3cff9f96f73fb99398c05f5f054e47eadb533</code><br>
+  <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+</p>
+</div>
+<script>
+(function(){
+  var ua=navigator.userAgent||'';
+  var def=/android/i.test(ua)?'android':(/iphone|ipad|ipod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))?'ios':'pc';
+  function show(p){
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.getAttribute('data-p')===p);});
+    document.querySelectorAll('.pane').forEach(function(x){x.classList.toggle('on',x.id==='p-'+p);});
+  }
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('data-p'));});});
+  show(def);
+  var promptEv=null;
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();promptEv=e;});
+  function install(ev){
+    if(ev)ev.preventDefault();
+    if(promptEv){promptEv.prompt();promptEv=null;}
+    else alert('Dein Browser bietet die Installation über das Menü an: Chrome/Edge → ⋮ bzw. ⊕ in der Adresszeile → „App installieren“. Safari → Teilen → „Zum Home-Bildschirm“.');}
+  document.querySelectorAll('.pwa-btn,.pwa-link').forEach(function(b){b.addEventListener('click',install);});
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('service-worker.js').catch(function(){});
+})();
+</script>
+</body>
+</html>
