@@ -11,6 +11,7 @@ import os, random, uuid, time, re, hmac
 
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
 from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Ereignis
+from session_store import SessionStore
 from datetime import date as dt_date, datetime, timedelta
 
 import ipaddress as _ip
@@ -65,15 +66,23 @@ if os.path.exists(FRONTEND):
     app.mount("/static", StaticFiles(directory=FRONTEND), name="static")
 
 create_tables()
-sessions = {}
 
 SESSION_TTL = 3 * 3600  # 3 Stunden
+# Laufende Spiele liegen in der Datenbank (überleben Neustarts/Deploys),
+# mit Zwischenspeicher im Arbeitsspeicher. Siehe session_store.py.
+sessions = SessionStore(SESSION_TTL)
+
+@app.middleware("http")
+async def sessions_speichern(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith("/api/"):
+        sessions.flush()
+    return response
 
 def cleanup_sessions():
-    now = time.time()
-    expired = [k for k, v in sessions.items() if now - v.get("erstellt", now) > SESSION_TTL]
-    for k in expired:
-        del sessions[k]
+    # gelegentlich reicht: abgelaufene Spiele löschen, Speicher begrenzen
+    if random.random() < 0.05:
+        sessions.aufraeumen()
 
 # Namen in der öffentlichen Bestenliste: nur druckbare Zeichen, Länge 1-20,
 # einfacher Filter gegen Beleidigungen (Google-Play-Richtlinie für Nutzerinhalte).
@@ -215,10 +224,6 @@ def health():
 @limiter.limit("10/minute")
 def start_game(request: Request, req: StartRequest):
     cleanup_sessions()
-    if len(sessions) > 1000:
-        oldest = list(sessions.keys())[:100]
-        for k in oldest:
-            del sessions[k]
     session_id = str(uuid.uuid4())
     fragen = get_random_fragen(15, req.kategorie, req.schwierigkeit, req.sprache)
     sessions[session_id] = {
@@ -337,10 +342,6 @@ def joker(request: Request, req: JokerRequest):
 @limiter.limit("5/minute")
 def start_daily(request: Request, req: StartRequest):
     cleanup_sessions()
-    if len(sessions) > 1000:
-        oldest = list(sessions.keys())[:100]
-        for k in oldest:
-            del sessions[k]
     today = dt_date.today().isoformat()
     session_id = str(uuid.uuid4())
     fragen = get_daily_fragen(today, 15, req.sprache)

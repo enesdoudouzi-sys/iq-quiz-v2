@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
@@ -72,3 +72,11 @@ def get_db():
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
+
+class SpielSession(Base):
+    """Laufende Spiele. Liegen in der Datenbank, damit sie einen Neustart
+    oder Deploy des Servers überleben und mehrere Server-Instanzen sie teilen."""
+    __tablename__ = "spiel_sessions"
+    id           = Column(String, primary_key=True)
+    daten        = Column(Text)                       # Spielstand als JSON
+    aktualisiert = Column(DateTime, default=datetime.now, index=True)
