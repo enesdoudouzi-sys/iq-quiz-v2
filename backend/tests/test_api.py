@@ -214,3 +214,15 @@ def test_abgelaufene_session_wird_abgelehnt(client):
     main.sessions._cache.clear()
     main.sessions.ttl = -1  # alles gilt als abgelaufen
     assert c.get(f"/api/frage/{sid}/1").status_code == 404
+
+
+def test_fragen_json_format():
+    """Jede Frage in daten/fragen.json muss vollständig und gültig sein."""
+    import fragen as F
+    pflicht = {"kategorie", "schwierigkeit", "frage", "antworten", "richtig", "erklaerung"}
+    for i, f in enumerate(F.ALLE_FRAGEN):
+        fehlt = pflicht - set(f)
+        assert not fehlt, f"Frage {i} ({f.get('frage', '?')[:40]}): fehlt {fehlt}"
+        assert f["schwierigkeit"] in (1, 2, 3), f"Frage {i}: schwierigkeit muss 1, 2 oder 3 sein"
+        assert len(set(f["antworten"].values())) == 4, f"Frage {i}: Antworten nicht eindeutig"
+        assert f["frage"].strip() and f["erklaerung"].strip(), f"Frage {i}: leerer Text"

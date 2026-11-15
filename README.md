@@ -55,8 +55,9 @@ iq-quiz-v2/
 ├── android/                   → Android-Projekt (Capacitor), daraus entsteht das AAB
 ├── backend/                   → Server (Python)
 │   ├── main.py                → API-Endpunkte (/api/start, /api/antwort, /api/joker …)
-│   ├── fragen.py              → Fragen, Mischen, Schwierigkeit, Übersetzung
-│   ├── fragen_extra.py        → Weitere Fragen-Kategorien
+│   ├── daten/fragen.json      → alle 551 Fragen (hier neue Fragen eintragen)
+│   ├── fragen.py              → Fragen laden, Mischen, Schwierigkeit, Übersetzung
+│   ├── session_store.py       → laufende Spiele in der Datenbank
 │   ├── database.py            → Datenbank-Tabellen (SQLAlchemy)
 │   ├── uebersetzungen/        → en.json, tr.json
 │   └── tests/                 → Automatische Tests (pytest)
