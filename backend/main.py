@@ -12,6 +12,8 @@ import os, random, uuid, time, re, hmac
 from fragen import ALLE_FRAGEN, IQ_TABELLE, PREISSTUFEN, SICHERHEITSSTUFEN, IQ_BEZEICHNUNG, get_random_fragen, get_daily_fragen
 from database import get_db, create_tables, Highscore, DailyScore, Kontakt, Ereignis
 from session_store import SessionStore
+import observability as obs
+from fastapi.responses import Response
 from datetime import date as dt_date, datetime, timedelta
 
 import ipaddress as _ip
@@ -74,12 +76,38 @@ SESSION_TTL = 3 * 3600  # 3 Stunden
 # mit Zwischenspeicher im Arbeitsspeicher. Siehe session_store.py.
 sessions = SessionStore(SESSION_TTL)
 
+obs.logging_einrichten(os.environ.get("LOG_LEVEL", "INFO"))
+
 @app.middleware("http")
 async def sessions_speichern(request: Request, call_next):
-    response = await call_next(request)
+    start = time.perf_counter()
+    try:
+        response = await call_next(request)
+    except Exception:
+        obs.log.exception("unbehandelter Fehler", extra={"felder": {"route": obs.route_von(request)}})
+        obs.anfrage_erfassen(request, 500, start)
+        raise
     if request.url.path.startswith("/api/"):
         sessions.flush()
+    if request.url.path != "/metrics":
+        obs.anfrage_erfassen(request, response.status_code, start)
     return response
+
+@app.get("/metrics", include_in_schema=False)
+def metrics(request: Request):
+    # Prometheus-Metriken. Öffentlich nur, wenn METRICS_OFFEN=true (z. B. in Kubernetes,
+    # wo der Dienst nur intern erreichbar ist); sonst Header "Authorization: Bearer <ADMIN_TOKEN>".
+    if os.environ.get("METRICS_OFFEN", "").lower() != "true":
+        token = os.environ.get("ADMIN_TOKEN", "")
+        if not token or not hmac.compare_digest(request.headers.get("Authorization", ""), f"Bearer {token}"):
+            raise HTTPException(status_code=403, detail="Kein Zugriff")
+    obs.SESSIONS_IM_SPEICHER.set(len(sessions))
+    inhalt, typ = obs.metriken_text()
+    return Response(content=inhalt, media_type=typ)
+
+def _sprach_label(sprache: str) -> str:
+    # feste Werte für Metrik-Labels (beliebige Eingaben würden unendlich viele Reihen erzeugen)
+    return sprache if sprache in ("de", "en", "tr") else "andere"
 
 def cleanup_sessions():
     # gelegentlich reicht: abgelaufene Spiele löschen, Speicher begrenzen
@@ -251,6 +279,7 @@ def start_game(request: Request, req: StartRequest):
         "final_iq":        85,
         "final_level":     0,
     }
+    obs.SPIELE.labels("normal", _sprach_label(req.sprache)).inc()
     return {"session_id": session_id, "total": len(fragen)}
 
 @app.get("/api/frage/{session_id}/{level}")
@@ -283,6 +312,7 @@ def pruefe_antwort(request: Request, req: AntwortRequest):
     if not frage:
         raise HTTPException(404, "Frage nicht gefunden")
     richtig = req.antwort == frage["richtig"]
+    obs.ANTWORTEN.labels(str(richtig).lower()).inc()
     if not richtig and session.get("doppel_level") == req.level:
         # Doppel-Chance: zweiter Versuch, Level bleibt, Lösung wird nicht verraten
         session.pop("doppel_level", None)
@@ -326,6 +356,7 @@ def joker(request: Request, req: JokerRequest):
     if req.typ in ("skip", "doppel") and req.level != session.get("aktuelles_level", 1):
         raise HTTPException(400, "Ungueltige Level-Reihenfolge")
     session["joker"][req.typ] = False
+    obs.JOKER.labels(req.typ).inc()
     if req.typ == "skip":
         # Frage überspringen: weiter zum nächsten Level, IQ bleibt unverändert
         session["aktuelles_level"] = req.level + 1
@@ -373,6 +404,7 @@ def start_daily(request: Request, req: StartRequest):
         "final_iq":        85,
         "final_level":     0,
     }
+    obs.SPIELE.labels("daily", _sprach_label(req.sprache)).inc()
     return {"session_id": session_id, "total": 15, "datum": today}
 
 @app.get("/api/daily/highscores")
