@@ -193,3 +193,24 @@ def test_ip_hinter_cloudflare(client):
     assert main.client_ip(R({"x-forwarded-for": "5.5.5.5, 104.16.1.1", "cf-connecting-ip": "5.5.5.5"})) == "5.5.5.5"
     # direkter Angriff mit gefaelschtem Header wird ignoriert
     assert main.client_ip(R({"x-forwarded-for": "9.9.9.9", "cf-connecting-ip": "1.1.1.1"})) == "9.9.9.9"
+
+
+def test_spiel_ueberlebt_neustart(client):
+    c, main = client
+    sid = neues_spiel(c)
+    r = c.post("/api/antwort", json={"session_id": sid, "level": 1, "antwort": richtig(main, sid, 1)})
+    assert r.json()["richtig"] is True
+    # Neustart simulieren: Arbeitsspeicher leeren, nur die Datenbank bleibt
+    main.sessions._cache.clear()
+    # Spiel läuft mit Level 2 weiter, der Fortschritt ist erhalten
+    assert c.get(f"/api/frage/{sid}/2").status_code == 200
+    r = c.post("/api/antwort", json={"session_id": sid, "level": 2, "antwort": richtig(main, sid, 2)})
+    assert r.status_code == 200 and r.json()["richtig"] is True
+
+
+def test_abgelaufene_session_wird_abgelehnt(client):
+    c, main = client
+    sid = neues_spiel(c)
+    main.sessions._cache.clear()
+    main.sessions.ttl = -1  # alles gilt als abgelaufen
+    assert c.get(f"/api/frage/{sid}/1").status_code == 404

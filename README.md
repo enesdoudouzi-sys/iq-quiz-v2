@@ -102,7 +102,7 @@ Jede Frage hat eine feste ID, einen SHA-1-Hash des Fragetexts. Die Übersetzung 
 | Admin-Endpunkte | `X-Admin-Token`, Vergleich mit `hmac.compare_digest` (Schutz vor Timing-Angriffen) |
 | CORS | Nur die eigenen Domains dürfen die API aufrufen |
 | Spam | Honeypot-Feld im Kontaktformular |
-| Server-Speicher | Sessions laufen nach 3 Stunden ab, höchstens 1.000 gleichzeitig |
+| Laufende Spiele | In der Datenbank gespeichert (überleben Neustarts und Deploys), laufen nach 3 Stunden ab |
 | Fehler-Statistik | Anonym; Einträge werden nach 90 Tagen gelöscht |
 
 ## 🚀 Lokal starten
