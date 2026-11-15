@@ -17,13 +17,13 @@ Alles hier braucht deine Konten oder Entscheidungen. Der Code ist dafür vorbere
 4. Offering „current" mit zwei Packages anlegen: eines mit `iq_premium_v1`, eines mit `joker_pack_5`.
 5. Unter *Project Settings → API Keys* den **Android Public SDK Key** (beginnt mit `goog_`) kopieren.
 6. ✅ Android-Key ist in `app.js` eingetragen (Version 1.4).
-7. `www/` neu befüllen: `cp app.js www/app.js && npx cap sync android`.
+7. `www/` neu erzeugen und ins Android-Projekt kopieren: `npm run cap:sync`.
 
 ## 2. Bauen und testen (Android Studio, JDK 21)
 
 ```
 npm install
-npx cap sync android
+npm run cap:sync
 npx cap open android
 ```
 Build → Generate Signed Bundle (AAB). Auf einem echten Gerät testen: Quiz, Kauf (Testkonto unter *Play Console → Lizenztests*), „Käufe wiederherstellen", Urkunde als PDF (nutzt `window.print()`, funktioniert in WebViews oft nicht).

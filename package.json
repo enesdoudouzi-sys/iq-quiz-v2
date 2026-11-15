@@ -4,7 +4,9 @@
   "description": "> Ein vollständiges Full-Stack Web-Projekt von **Enes Doudouzi**",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:www": "node scripts/build-www.mjs",
+    "cap:sync": "npm run build:www && npx cap sync android",
+    "check:www": "npm run build:www && git diff --exit-code -- www"
   },
   "keywords": [],
   "author": "Enes Doudouzi",

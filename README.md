@@ -50,7 +50,8 @@ iq-quiz-v2/
 ├── app.js                     → Website: Logik (JavaScript, Spielablauf)
 ├── i18n.js                    → Oberflächentexte in DE / EN / TR
 ├── datenschutz.html …         → Rechtliche Seiten
-├── www/                       → Kopie der Website für die Android-App
+├── www/                       → Android-App-Inhalt, automatisch erzeugt (npm run build:www)
+├── scripts/build-www.mjs      → erzeugt www/ aus den Website-Dateien
 ├── android/                   → Android-Projekt (Capacitor), daraus entsteht das AAB
 ├── backend/                   → Server (Python)
 │   ├── main.py                → API-Endpunkte (/api/start, /api/antwort, /api/joker …)
@@ -134,9 +135,11 @@ npm run build      # fertige Dateien in dist/
 
 **Android-App bauen:**
 ```bash
-npx cap sync android
+npm run cap:sync          # erzeugt www/ aus den Website-Dateien und kopiert es ins Android-Projekt
 cd android && ./gradlew bundleRelease
 ```
+`www/` wird **nicht von Hand bearbeitet**: Änderungen immer in `index.html`, `app.js` usw. im Hauptordner machen.
+Blöcke, die nur auf die Website gehören, stehen in `index.html` zwischen `<!-- nur-web -->` und `<!-- /nur-web -->`.
 
 ## 📚 Lernplan (Weg zum KI-Softwareentwickler)
 
